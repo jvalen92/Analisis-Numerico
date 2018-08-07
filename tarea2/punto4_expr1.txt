@@ -1,0 +1,10 @@
+Funcion cos(x) + exp(x) para x = 0.4
+En la iteracion: 1, resultado: 2.32
+En la iteracion: 2, resultado: 2.4010666666666665
+En la iteracion: 3, resultado: 2.4117276444444444
+En la iteracion: 4, resultado: 2.4127943273650794
+En la iteracion: 5, resultado: 2.4128796606695166
+En la iteracion: 6, resultado: 2.4128853495584406
+En la iteracion: 7, resultado: 2.4128856746378053
+En la iteracion: 8, resultado: 2.4128856908917737
+Resultado final: 2.4128856908917737
