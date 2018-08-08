@@ -35,7 +35,7 @@ def taylorSen0(x):
         f.write("En la iteracion: %d, resultado: " % n)
         f.write(str(resultado))
         error = abs(error)
-        f.write("Error %s"%error)
+        f.write(" Error %s"%error)
         f.write('\n')
         n += 1
     f.write("Resultado final: ")
@@ -56,7 +56,7 @@ def taylorExp0(x):
         f.write("En la iteracion: %d, resultado: " % n)
         f.write(str(resultado))
         error = abs(error)
-        f.write("Error %s"%error)
+        f.write(" Error %s"%error)
         f.write('\n')
         n += 1
     f.write("Resultado final: ")

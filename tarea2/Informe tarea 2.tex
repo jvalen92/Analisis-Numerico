@@ -10,9 +10,6 @@
 \begin{document}
     
     \maketitle
-
-    
-    
     \section{Series de Taylor para aproximar funciones}
     Una técnica de aproximación es de poco valor sin alguna idea de su precisión.
     Para medir la precisión de una aproximación al valor de una función $f(x)$ mediante 
@@ -26,12 +23,11 @@
 
     Siendo $f(x)$ el valor exacto, $P_{n}(x)$ el valor aproximado y $R_{n}(x)$ el resto. El teorema
     de Taylor es un procedimiento general para estimar el residuo de un polinomio de Taylor. El residuo
-    dado en el teorema se llama fórmula del residuo de Lagrange.
+    dado en el teorema se llama fórmula del residuo de Lagrange. Ver figura 1.
     Los polinomios de Taylor y de Maclaurin pueden usarse para aproximar el valor de una función en un
     punto específico. Al aplicar el teorema de Taylor no se debe esperar encontrar el valor exacto de $z$.
     (Si se pudiera hacer esto no sería necesaria una aproximación) Más bien, se trata de encontrar límite
     para $f^{(n+1)}(z)$ a partir de los cuales se puede decir que tan grande es el residuo $R_{n}(x)$.
-
     \begin {figure}[h!] 
       \includegraphics[width=\linewidth]{teorema_taylor.png}
       \caption {Teorema de Taylor}
@@ -39,8 +35,10 @@
     \end{figure}
     
     
+    
+
     \section{Incidencia del centro en las aproximaciones}
-        \subsection{procedimiento}
+        \subsection{Procedimiento}
         Se tomo la funcion exponencial como funcion de prueba, para demostrar que entre mas 
         cerca se encuentren el centro y el resultado se necesitaran menos iteraciones para 
         hallar un valor mas preciso.
@@ -57,7 +55,7 @@
             f(x) = \sum_{i=0}^{n} \frac{e^{c}(x-c)^{i}}{i!}
         \end{math}
         \end{center}
-        donde c equivale al valor del centro, en este ejemplo se toman 3 centros diferentes los
+        Donde $c$ equivale al valor del centro, en este ejemplo se toman 3 centros diferentes los
         cuales son 0, $\frac{\pi}{2}$ y 5 trayendo con sigo las siguientes formulas.
         
         \begin{equation}
@@ -98,7 +96,41 @@
             \hline
             \end{tabular}
         \end{center}
-        \section {Ejemplos para aproximar valores de diferentes funciones}
+    
+    \section {Ejemplos para aproximar valores de diferentes funciones}
+    Para $cos(x)$ para $x = 1.0471975511965976$
+        \begin{center}
+            \begin{tabular}{|l|l|l|l|} \hline
+            $n$ & $x_{n}$ & $f(x)_{n}$ & Error \\
+            \hline \hline
+            $0$ & $1.0$ &  $0.5403023059$ & $1$    \\
+            \hline 
+            $1$ & $0.45168864438392464$ & $0.899$ & $0.5483113556160754$\\
+            \hline 
+            $2$ & $0.501796201500181$ & $0.877$ & $0.05010755711625637$\\
+            \hline 
+            $3$ & $0.4999645653289127$ & $0.8775$ & $0.001831636171268297$\\
+            \hline 
+            $4$ & $0.500000433432915$ & $0.8775823701$ & $3.586810400226993 * 10^{-5}$\\
+            \hline 
+            $5$ & $0.4999999963909432$ & $0.8775825636$ & $4.370419717525111 * 10^{-7}$\\
+            \hline 
+            $6$ & $0.5000000000217777$ & $0.8775825619$ & $ 3.6308344847385137 * 10^{-9}$\\
+            \hline 
+            $7$ & $0.49999999999990047$ & $0.8775825619$ & $2.1877228333456802 * 10^{-11}$\\
+            \hline 
+            $8$ & $0.5000000000000004$ & $0.8775825619$ & $9.996277270533428 * 10^{-14}$\\
+            \hline 
+            $9$ & $0.5000000000000001$ & $0.8775825619$ & $3.582400223085193 * 10^{-16}$\\
+            \hline 
+            $10$ & $0.5000000000000001$ & $0.8775825619$ & $1.0338266961469332 * 10^{-18}$\\
+            \hline
+            \end{tabular}
+        \end{center}
+
+
+    El output especifico de cada funcion puede encontrarse en el directorio en el que se ejecuto este codigo.
+
 
         \section {Aproximaciones para combinaciones aritméticas de las funciones escogidas en el numeral 3}
 
