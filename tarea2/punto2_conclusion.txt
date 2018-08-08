@@ -1,0 +1,36 @@
+Aproximacion funcion exp(x) para x = 0.01 y centros: 
+ 1) 0 
+ 2) 1.5707963267948966
+ 3) 5
+Resultado 5 iteraciones centro 1:  1.0100501670833335
+Resultado 5 iteraciones centro 2: 1.3027354117394767
+Resultado 5 iteraciones centro 3: 2016.2557431208552
+ 
+Resultado con toleracia 10**-18 y centro 1 al valor x= 0.01 en 9 iteraciones Resultado: 1.0100501670841682
+Resultado con toleracia 10**-18 y centro 2 al valor x= 0.01 en 25 iteraciones Resultado: 1.0100501670841684
+Resultado con toleracia 10**-18 y centro 3 al valor x= 0.01 en 42 iteraciones Resultado: 1.0100501670839717
+ 
+Aproximacion funcion exp(x) para x = 1.0471975511965976 y centros: 
+ 1) 0 
+ 2) 1.5707963267948966
+ 3) 5
+Resultado 5 iteraciones centro 1:  2.8370132335604095
+Resultado 5 iteraciones centro 2: 2.851103508222917
+Resultado 5 iteraciones centro 3: 703.1910269619758
+ 
+Resultado con toleracia 10**-18 y centro 1 al valor x= 1.0471975511965976 en 22 iteraciones Resultado: 2.849653908226361
+Resultado con toleracia 10**-18 y centro 2 al valor x= 1.0471975511965976 en 18 iteraciones Resultado: 2.8496539082263608
+Resultado con toleracia 10**-18 y centro 3 al valor x= 1.0471975511965976 en 38 iteraciones Resultado: 2.849653908226324
+ 
+Aproximacion funcion exp(x) para x = 5.4 y centros: 
+ 1) 0 
+ 2) 1.5707963267948966
+ 3) 5
+Resultado 5 iteraciones centro 1:  82.6534
+Resultado 5 iteraciones centro 2: 146.60724071195668
+Resultado 5 iteraciones centro 3: 221.392856538617
+ 
+Resultado con toleracia 10**-18 y centro 1 al valor x= 5.4 en 41 iteraciones Resultado: 221.40641620418717
+Resultado con toleracia 10**-18 y centro 2 al valor x= 5.4 en 36 iteraciones Resultado: 221.40641620418722
+Resultado con toleracia 10**-18 y centro 3 al valor x= 5.4 en 18 iteraciones Resultado: 221.40641620418717
+ 

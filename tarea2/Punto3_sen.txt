@@ -1,0 +1,12 @@
+Funcion sen(x) para x = 1.0471975511965976
+En la iteracion: 0, resultado: 1.0471975511965976
+En la iteracion: 1, resultado: 0.8558007815651173
+En la iteracion: 2, resultado: 0.8662952837868347
+En la iteracion: 3, resultado: 0.8660212716563725
+En la iteracion: 4, resultado: 0.8660254450997811
+En la iteracion: 5, resultado: 0.8660254034934827
+En la iteracion: 6, resultado: 0.8660254037859597
+En la iteracion: 7, resultado: 0.8660254037844324
+En la iteracion: 8, resultado: 0.8660254037844385
+En la iteracion: 9, resultado: 0.8660254037844385
+Resultado final: 0.8660254037844385

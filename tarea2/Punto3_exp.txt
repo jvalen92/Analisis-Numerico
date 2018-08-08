@@ -1,0 +1,22 @@
+Funcion exp(x) para x = 1.0471975511965976
+En la iteracion: 0, resultado: 1.0
+En la iteracion: 1, resultado: 2.0471975511965974
+En la iteracion: 2, resultado: 2.5955089068126727
+En la iteracion: 3, resultado: 2.786905676444153
+En la iteracion: 4, resultado: 2.8370132335604095
+En la iteracion: 5, resultado: 2.847507735782127
+En la iteracion: 6, resultado: 2.8493393719533953
+En la iteracion: 7, resultado: 2.8496133840838573
+En la iteracion: 8, resultado: 2.84964925218786
+En la iteracion: 9, resultado: 2.8496534256312684
+En la iteracion: 10, resultado: 2.8496538626732404
+En la iteracion: 11, resultado: 2.849653904279539
+En la iteracion: 12, resultado: 2.849653907910373
+En la iteracion: 13, resultado: 2.8496539082028502
+En la iteracion: 14, resultado: 2.8496539082247274
+En la iteracion: 15, resultado: 2.8496539082262546
+En la iteracion: 16, resultado: 2.8496539082263546
+En la iteracion: 17, resultado: 2.8496539082263608
+En la iteracion: 18, resultado: 2.849653908226361
+En la iteracion: 19, resultado: 2.849653908226361
+Resultado final: 2.849653908226361
