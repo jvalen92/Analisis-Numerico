@@ -50,10 +50,54 @@
         analiza el numero de iteraciones requeridas para encontrar una aproximacion con cierta
         tolerancia.
 
-        \subsubsection{polinomio de Taylor}
-        La derivada
+        Al saber que $\frac{d}{dx} e^{x} = e^{x}$ se deduce que el polinomio de Taylor 
+        correspondiende a la funcion $f(x) = e^{x}$ es igual a.
+        \begin{center}
+        \begin{math}
+            f(x) = \sum_{i=0}^{n} \frac{e^{c}(x-c)^{i}}{i!}
+        \end{math}
+        \end{center}
+        donde c equivale al valor del centro, en este ejemplo se toman 3 centros diferentes los
+        cuales son 0, $\frac{\pi}{2}$ y 5 trayendo con sigo las siguientes formulas.
+        
+        \begin{equation}
+            f_{c1}(x) = \sum_{i=0}^{n} \frac{e^{0}(x)^{i}}{i!}
+        \end{equation}
+        \begin{equation}
+            f_{c2}(x) = \sum_{i=0}^{n} \frac{e^{\frac{\pi}{2}}(x-\frac{\pi}{2})^{i}}{i!}
+        \end{equation}
+        \begin{equation}
+            f_{c3}(x) = \sum_{i=0}^{n} \frac{e^{5}(x-5)^{i}}{i!}
+        \end{equation}
 
-
+        para mostrar la incidencia del centro se programaron los polinomios en python se pueden
+        encontrar en el archivo punto2.py y se ejecutaron 3 pruebas dando como resultado lo 
+        mostrado en la siguiente tabla.
+        
+        \begin{center}
+            \begin{tabular}{|l|l|l|l|} \hline
+            centro & x & Valor en 5 iteracion & Iteraciones requeridas(tolerancia $0.5*10^{-16}$)\\
+            \hline \hline
+            0 & 0.01 &  1.0100501670833335 & 9 \\
+            \hline 
+            $\frac{\pi}{2}$ & 0.01 & 1.3027354117394767 & 25 \\
+            \hline
+            5 & 0.01 & 2016.2557431208552 & 42 \\
+            \hline
+            0 &$\frac{\pi}{3}$ &  2.8370132335604095 & 22 \\
+            \hline 
+            $\frac{\pi}{2}$ & $\frac{\pi}{3}$ & 2.851103508222917 & 18 \\
+            \hline
+            5 & $\frac{\pi}{3}$ & 703.1910269619758 & 38 \\
+            \hline
+            0 & 5.4 &  82.6534  & 41 \\
+            \hline 
+            $\frac{\pi}{2}$ & 5.4 & 146.60724071195668 & 36 \\
+            \hline
+            5 & 5.4 & 221.392856538617 & 18 \\
+            \hline
+            \end{tabular}
+        \end{center}
         \section {Ejemplos para aproximar valores de diferentes funciones}
 
         \section {Aproximaciones para combinaciones aritméticas de las funciones escogidas en el numeral 3}
