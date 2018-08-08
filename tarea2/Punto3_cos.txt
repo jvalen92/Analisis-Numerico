@@ -1,13 +1,13 @@
 Funcion cos(x) para x = 1.0471975511965976
-En la iteracion: 0, resultado: 1.0
-En la iteracion: 1, resultado: 0.45168864438392464
-En la iteracion: 2, resultado: 0.501796201500181
-En la iteracion: 3, resultado: 0.4999645653289127
-En la iteracion: 4, resultado: 0.500000433432915
-En la iteracion: 5, resultado: 0.4999999963909432
-En la iteracion: 6, resultado: 0.5000000000217777
-En la iteracion: 7, resultado: 0.49999999999990047
-En la iteracion: 8, resultado: 0.5000000000000004
-En la iteracion: 9, resultado: 0.5000000000000001
-En la iteracion: 10, resultado: 0.5000000000000001
+En la iteracion: 0, resultado:1.0 Error 1.0
+En la iteracion: 1, resultado:0.45168864438392464 Error 0.5483113556160754
+En la iteracion: 2, resultado:0.501796201500181 Error 0.05010755711625637
+En la iteracion: 3, resultado:0.4999645653289127 Error 0.001831636171268297
+En la iteracion: 4, resultado:0.500000433432915 Error 3.586810400226993e-05
+En la iteracion: 5, resultado:0.4999999963909432 Error 4.370419717525111e-07
+En la iteracion: 6, resultado:0.5000000000217777 Error 3.6308344847385137e-09
+En la iteracion: 7, resultado:0.49999999999990047 Error 2.1877228333456802e-11
+En la iteracion: 8, resultado:0.5000000000000004 Error 9.996277270533428e-14
+En la iteracion: 9, resultado:0.5000000000000001 Error 3.582400223085193e-16
+En la iteracion: 10, resultado:0.5000000000000001 Error 1.0338266961469332e-18
 Resultado final: 0.5000000000000001
