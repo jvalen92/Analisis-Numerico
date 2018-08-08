@@ -70,34 +70,50 @@
 
         para mostrar la incidencia del centro se programaron los polinomios en python se pueden
         encontrar en el archivo punto2.py y se ejecutaron 3 pruebas dando como resultado lo 
-        mostrado en la siguiente tabla.
-        
+        mostrado en la siguiente tabla, con una tolerancia $0.5*10^{-16}$.
         \begin{center}
-            \begin{tabular}{|l|l|l|l|} \hline
-            centro & x & Valor en 5 iteracion & Iteraciones requeridas(tolerancia $0.5*10^{-16}$)\\
+            \begin{tabular}{|l|l|l|l|l|} \hline
+            centro & x & Valor en 5 iteracion & Iteraciones & Valor real\\
             \hline \hline
-            0 & 0.01 &  1.0100501670833335 & 9 \\
+            0 & 0.01 &  1.0100501670833335 & 9  & 1.0100501670841682\\
             \hline 
-            $\frac{\pi}{2}$ & 0.01 & 1.3027354117394767 & 25 \\
+            $\frac{\pi}{2}$ & 0.01 & 1.3027354117394767 & 25 & 1.0100501670841682\\
             \hline
-            5 & 0.01 & 2016.2557431208552 & 42 \\
+            5 & 0.01 & 2016.2557431208552 & 42 & 1.0100501670841682\\
             \hline
-            0 &$\frac{\pi}{3}$ &  2.8370132335604095 & 22 \\
+            0 &$\frac{\pi}{3}$ &  2.8370132335604095 & 22 & 2.849653908226361\\
             \hline 
-            $\frac{\pi}{2}$ & $\frac{\pi}{3}$ & 2.851103508222917 & 18 \\
+            $\frac{\pi}{2}$ & $\frac{\pi}{3}$ & 2.851103508222917 & 18 & 2.849653908226361\\
             \hline
-            5 & $\frac{\pi}{3}$ & 703.1910269619758 & 38 \\
+            5 & $\frac{\pi}{3}$ & 703.1910269619758 & 38 & 2.849653908226361\\
             \hline
-            0 & 5.4 &  82.6534  & 41 \\
+            0 & 5.4 &  82.6534  & 41 & 221.40641620418717\\
             \hline 
-            $\frac{\pi}{2}$ & 5.4 & 146.60724071195668 & 36 \\
+            $\frac{\pi}{2}$ & 5.4 & 146.60724071195668 & 36 & 221.40641620418717 \\
             \hline
-            5 & 5.4 & 221.392856538617 & 18 \\
+            5 & 5.4 & 221.392856538617 & 18 & 221.40641620418717\\
             \hline
             \end{tabular}
         \end{center}
+
+        Se puede concluir que entre mas cercano este el centro del valor real, menos iteraciones van a ser necesarias
+        para alcanzar un buen nivel de tolerancia, que nos permita confiar en la aproximacion.
     
     \section {Ejemplos para aproximar valores de diferentes funciones}
+    Para los tres casos $cos(x), sen(x), e^{x}$ se tomo $c = 0$
+    
+        \begin{equation}
+            sen(x) = \sum_{i=0}^{n} \frac{(-1)^{n} * x^{2n + 1}}{(2n + 1)!}
+        \end{equation}
+        
+        \begin{equation}
+            cos(x) = \sum_{i=0}^{n} \frac{(-1)^{n} * x^{2n}}{2n!}
+        \end{equation}
+
+        \begin{equation}
+            exp(x) = \sum_{i=0}^{n} \frac{(x^{i})} {i!}
+        \end{equation}
+
     Para $cos(x)$ y $x = 1.0471975511965976$
         \begin{center}
             \begin{tabular}{|l|l|l|l|} \hline
@@ -206,6 +222,64 @@
 
 
         \section {Aproximaciones para combinaciones aritméticas de las funciones escogidas en el numeral 3}
+
+        \begin{equation}
+            cos(x) + sen(x) = \sum_{i=0}^{n} \frac{(-1)^{n} * x^{2n}}{2n!} + \sum_{i=0}^{n} \frac{(-1)^{n} * x^{2n + 1}}{(2n + 1)!}
+        \end{equation}
+        
+        \begin{equation}
+            cos(x) + exp(x) = \sum_{i=0}^{n} \frac{(-1)^{n} * x^{2n}}{2n!} + \sum_{i=0}^{n} \frac{(x^{i})} {i!}
+        \end{equation}
+
+Funcion cos(x) + sen(x) para x = 0.4
+        \begin{center}
+            \begin{tabular}{|l|l|} \hline
+            $n$ & $x_{n}$  \\
+            \hline \hline
+            $0$ & $1.3093333333333332$    \\
+            \hline 
+            $1$ & $1.3104853333333333$ \\
+            \hline 
+            $2$ & $1.3104793193650792$ \\
+            \hline 
+            $3$ & $1.3104793363414462$ \\
+            \hline 
+            $4$ & $1.3104793363114995$ \\
+            \hline 
+            $5$ & $1.3104793363115355$ \\
+            \hline 
+            $6$ & $1.3104793363115355$ \\
+            \hline 
+            $7$ & $1.3104793363115355$ \\
+            \hline
+            \end{tabular}
+        \end{center}
+
+Funcion cos(x) + exp(x) para x = 0.4
+        \begin{center}
+            \begin{tabular}{|l|l|} \hline
+            $n$ & $x_{n}$  \\
+            \hline \hline
+            $0$ & $2.32$    \\
+            \hline 
+            $1$ & $2.4010666666666665$ \\
+            \hline 
+            $2$ & $2.4117276444444444$ \\
+            \hline 
+            $3$ & $2.4127943273650794$ \\
+            \hline 
+            $4$ & $2.4128796606695166$ \\
+            \hline 
+            $5$ & $2.4128853495584406$ \\
+            \hline 
+            $6$ & $2.4128856746378053$ \\
+            \hline 
+            $7$ & $2.4128856908917737$ \\
+            \hline
+            \end{tabular}
+        \end{center}
+
+
 
         \section {Referencias}
 

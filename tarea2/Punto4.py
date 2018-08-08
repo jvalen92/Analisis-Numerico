@@ -17,9 +17,12 @@ def cosPlusExp0(x):
         resultado2 += error2
         f.write("En la iteracion: %d, resultado: " % n)
         f.write(str(resultado1 + resultado2))
-        f.write('\n')
         error1 = abs(error1)
         error2 = abs(error2)
+        f.write(" Error 1 %s " %error1)
+        f.write(" Error 2 %s" %error2)
+        f.write(" Fx %s" %(math.cos(resultado1) + math.exp(resultado2)))
+        f.write('\n')
         n = n + 1
     f.write("Resultado final: ")
     f.write(str(resultado1 + resultado2))
@@ -44,10 +47,14 @@ def cosPlusSen0(x):
         resultado2 += error2
         f.write("En la iteracion: %d, resultado: " % n)
         f.write(str(resultado1 + resultado2))
-        f.write('\n')
         error1 = abs(error1)
         error2 = abs(error2)
+        f.write(" Error 1 %d " %error1)
+        f.write(" Error 2 %d" %error2)
+        f.write(" Fx %s" %(math.cos(resultado1) + math.sin(resultado2)))
+        f.write('\n')
         n = n + 1
+    
     f.write("Resultado final: ")
     f.write(str(resultado1 + resultado2))
     f.close()
@@ -56,3 +63,4 @@ if __name__ == "__main__":
     # Punto 4
     cosPlusExp0(0.4)
     cosPlusSen0(0.4)
+
