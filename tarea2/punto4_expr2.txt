@@ -1,10 +1,10 @@
 Funcion cos(x) + sen(x) para x = 0.4
-En la iteracion: 1, resultado: 1.3093333333333332
-En la iteracion: 2, resultado: 1.3104853333333333
-En la iteracion: 3, resultado: 1.3104793193650792
-En la iteracion: 4, resultado: 1.3104793363414462
-En la iteracion: 5, resultado: 1.3104793363114995
-En la iteracion: 6, resultado: 1.3104793363115355
-En la iteracion: 7, resultado: 1.3104793363115355
-En la iteracion: 8, resultado: 1.3104793363115355
+En la iteracion: 1, resultado: 1.3093333333333332 Error 1 0  Error 2 0 Fx 0.9853918812860827
+En la iteracion: 2, resultado: 1.3104853333333333 Error 1 0  Error 2 0 Fx 0.9846218408766378
+En la iteracion: 3, resultado: 1.3104793193650792 Error 1 0  Error 2 0 Fx 0.9846260698890283
+En la iteracion: 4, resultado: 1.3104793363414462 Error 1 0  Error 2 0 Fx 0.9846260576152173
+En la iteracion: 5, resultado: 1.3104793363114995 Error 1 0  Error 2 0 Fx 0.9846260576372534
+En la iteracion: 6, resultado: 1.3104793363115355 Error 1 0  Error 2 0 Fx 0.9846260576372265
+En la iteracion: 7, resultado: 1.3104793363115355 Error 1 0  Error 2 0 Fx 0.9846260576372265
+En la iteracion: 8, resultado: 1.3104793363115355 Error 1 0  Error 2 0 Fx 0.9846260576372265
 Resultado final: 1.3104793363115355

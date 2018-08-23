@@ -10,10 +10,11 @@ def taylorCos0(x):
     while error > 0.5 * 10 ** -16 and n <= 1000:
         error = ((-1)**(n)* x**(2*n) )/ math.factorial(2*n)
         resultado += error
-        f.write("En la iteracion: %d, resultado: " % n)
+        f.write("En la iteracion: %d, resultado:" %n)
         f.write(str(resultado))
-        f.write('\n')
         error = abs(error)
+        f.write(" Error %s" %error)
+        f.write('\n')
         n += 1
     f.write("Resultado final: ")
     f.write(str(resultado))
@@ -33,8 +34,9 @@ def taylorSen0(x):
         resultado += error
         f.write("En la iteracion: %d, resultado: " % n)
         f.write(str(resultado))
-        f.write('\n')
         error = abs(error)
+        f.write(" Error %s"%error)
+        f.write('\n')
         n += 1
     f.write("Resultado final: ")
     f.write(str(resultado))
@@ -53,8 +55,9 @@ def taylorExp0(x):
         resultado += error
         f.write("En la iteracion: %d, resultado: " % n)
         f.write(str(resultado))
-        f.write('\n')
         error = abs(error)
+        f.write(" Error %s"%error)
+        f.write('\n')
         n += 1
     f.write("Resultado final: ")
     f.write(str(resultado))
