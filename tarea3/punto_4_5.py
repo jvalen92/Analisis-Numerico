@@ -24,6 +24,16 @@ def DectoBin(num,a,b):
         while len(exp)<b:
             exp='0'+exp
         #pasar la parte decimal a binario
+        mh = dec
+        new_bi = bi
+        iter = 0
+        while mh > (1*10**-16) and iter < len(new_bi) <= a:
+            new_bi += str(int(2*mh))
+            mh = 2 * mh - int(2 * mh)
+            iter+=1
+        while len(new_bi) <= a:
+            new_bi += '0'
+        """
         while len(bi)<=a:
             dec=dec*2  
             if dec > 1:
@@ -34,8 +44,10 @@ def DectoBin(num,a,b):
                 dec=float(tmp[0]+tmp[1])
             else:
                 bi=bi+'0'
+        """
         #formato de numero de maquina con bit implicito
-        maquina=sig+bi[1:]+exp
+        #maquina=sig+bi[1:]+exp
+        maquina = ig+new_bi[1:]+exp
         print(maquina)
         print("signos %s mantiza %s exp %s " % (sig,bi[1:],exp))
     #En caso de que sea un numero entero
