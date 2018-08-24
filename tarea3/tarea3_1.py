@@ -1,3 +1,4 @@
+from decimal import Decimal 
 def asignar_datos():
     print("Ingrese el valor de n: ")
     numero_posiciones_mantisa = int(input())
@@ -14,7 +15,7 @@ def overflow(k, n):
     sum = (1/2)*(((1/2)**n-1)/(1/2-1))
     #print("igual: " + str(sum-sum1))
     print(f"El numero mas grande de una maquina con una mantisa de {k} bits y un exponente de {n} bits es: {sum} * 2e{(2**n)-1}")
-    print(f"Es decir {int(sum * ((2**n)-1))}") 
+    print(f"Es decir {'%.8E' % Decimal(sum * ((2**((2**n)-1))))}")
 
 def epsilon(k,n):
     print(f"El epsilon de la maquina con una mantisa de {k} y un exponente de {n} bit es:{2**(-n)}")
@@ -35,3 +36,5 @@ if __name__ == "__main__":
     print("Esta maquina trabaja con bit implicito")
     (k, n) = asignar_datos() 
     underflow(k,n)
+    overflow(k, n)
+    epsilon(k, n)

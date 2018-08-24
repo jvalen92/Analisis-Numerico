@@ -24,11 +24,7 @@ def binario(a):
     return resultado
 
 
-# k - Numero de bits de la mantisa
-# n - Numero de bits del exponente
-def overflow(k, n): 
-    print(f"El numero mas grande de una maquina con una mantisa de {k} bits y un exponente de {n} bits es: {(2**k)-1} * 2e{(2**n)-1}")
-    print(f"Es decir {((2**k)-1)*(2**(n))-1}")
+
 
 def __binario__():
     (mantisa_numero, exponente_numero) = asignar_datos()
