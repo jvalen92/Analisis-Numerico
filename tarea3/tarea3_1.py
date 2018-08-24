@@ -1,3 +1,4 @@
+import math 
 from decimal import Decimal 
 def asignar_datos():
     print("Ingrese el valor de n: ")
@@ -18,10 +19,10 @@ def overflow(k, n):
     print(f"Es decir {'%.8E' % Decimal(sum * ((2**((2**n)-1))))}")
 
 def epsilon(k,n):
-    print(f"El epsilon de la maquina con una mantisa de {k} y un exponente de {n} bit es:{2**(-n)}")
+    print(f"El epsilon de la maquina con una mantisa de {k} y un exponente de {n} bit es:{2**(-(2**n)-1)}") 
 
 def underflow(k,n):
-    print(f"El underflow de la maquina con una mantisa de {k} y un exponente de {n} bit es:{2**(-k)}")
+    print(f"El underflow de la maquina con una mantisa de {k} y un exponente de {n} bit es:{(2.0**(-(2.0**k)))}") 
 
 if __name__ == "__main__":
     print("El numero de maquina se escribe como d1d2d3d4...dne1e2e3..ek")
