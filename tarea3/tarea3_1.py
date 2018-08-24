@@ -7,13 +7,20 @@ def asignar_datos():
     
 # k - Numero de bits de la mantisa
 # n - Numero de bits del exponente
-def overflow(k, n): 
-    print(f"El numero mas grande de una maquina con una mantisa de {k} bits y un exponente de {n} bits es: {(2**k)-1} * 2e{(2**n)-1}")
-    sum = 0
-    for(i in range(1, n+1)): 
-        sum += 1/(2**i)
-print(f"Es decir {sum * (2**(n))-1}") 
+def overflow(k, n):
+    """sum1 = 0
+    for i in range(1, n+1): 
+        sum1 += 1/(2**i)"""
+    sum = (1/2)*(((1/2)**n-1)/(1/2-1))
+    #print("igual: " + str(sum-sum1))
+    print(f"El numero mas grande de una maquina con una mantisa de {k} bits y un exponente de {n} bits es: {sum} * 2e{(2**n)-1}")
+    print(f"Es decir {int(sum * ((2**n)-1))}") 
 
+def epsilon(k,n):
+    print(f"El epsilon de la maquina con una mantisa de {k} y un exponente de {n} bit es:{2**(-n)}")
+
+def underflow(k,n):
+    print(f"El underflow de la maquina con una mantisa de {k} y un exponente de {n} bit es:{2**(-k)}")
 
 if __name__ == "__main__":
     print("El numero de maquina se escribe como d1d2d3d4...dne1e2e3..ek")
@@ -27,4 +34,4 @@ if __name__ == "__main__":
     print("Ayuda: Siempre se cumple que k >= 0")
     print("Esta maquina trabaja con bit implicito")
     (k, n) = asignar_datos() 
-    overflow(k, n)
+    underflow(k,n)
