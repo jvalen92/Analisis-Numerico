@@ -19,7 +19,7 @@ def overflow(k, n):
     print(f"Es decir {'%.8E' % Decimal(sum * ((2**((2**n)-1))))}")
 
 def epsilon(k,n):
-    print(f"El epsilon de la maquina con una mantisa de {k} y un exponente de {n} bit es:{2**(-(2**n)-1)}") 
+    print(f"El epsilon de la maquina con una mantisa de {k} y un exponente de {n} bit es:{(2**((n * -1)+1))}") 
 
 def underflow(k,n):
     print(f"El underflow de la maquina con una mantisa de {k} y un exponente de {n} bit es:{(2.0**(-(2.0**k)))}") 
