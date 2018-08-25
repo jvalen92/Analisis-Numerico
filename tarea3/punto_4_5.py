@@ -1,9 +1,10 @@
+from decimal import Decimal
 """Los argumentos son:
         numero decimal a convertir
         numero de bits reservados para la mantisa
         numero de bits reservados para el exponente
 """
-def DectoBin(num,a,b):
+def DectoBin(num,a,b, registro):
     #Si es un numero decimal
     if str(num).find('.') != -1:
         if(num <0):
@@ -47,7 +48,7 @@ def DectoBin(num,a,b):
         """
         #formato de numero de maquina con bit implicito
         #maquina=sig+bi[1:]+exp
-        maquina = ig+new_bi[1:]+exp
+        maquina = sig+new_bi[1:]+exp
         print(maquina)
         print("signos %s mantiza %s exp %s " % (sig,bi[1:],exp))
     #En caso de que sea un numero entero
@@ -70,9 +71,10 @@ def DectoBin(num,a,b):
         #formato del numero maquina con bit implicito
         maquina=sig+bi[1:]+exp
         print(maquina)
+        registro.write(f"Binario: {maquina}\n")
         print("signos %s mantiza %s exp %s " % (sig,bi[1:],exp))
     
-def BintoDec(mac,a,b):
+def BintoDec(mac,a,b, registro):
     
     #descomponer el formato del numero maquina
     sigE=mac[0]
@@ -94,8 +96,61 @@ def BintoDec(mac,a,b):
     #validar si es negativo
     if sigM is '0':
         num=num*-1
+    registro.write(f"Decimal: {num}\n")
     print(num)
+def overflow(k, n, registro):
+    """sum1 = 0
+    for i in range(1, n+1): 
+        sum1 += 1/(2**i)"""
+    sum = (1/2)*(((1/2)**n-1)/(1/2-1))
+    #print("igual: " + str(sum-sum1))
+    registro.write(f"Overflow: {'%.8E' % Decimal(sum * ((2**((2**n)-1))))}\n")
+    print(f"El numero mas grande de una maquina con una mantisa de {k} bits y un exponente de {n} bits es: {sum} * 2e{(2**n)-1}")
+    print(f"Es decir {'%.8E' % Decimal(sum * ((2**((2**n)-1))))}")
 
-#BintoDec("100101001100110",a,b)
-#DectoBin(-42.375)
+def epsilon(k,n, registro):
+    registro.write(f"Epsilon: {(2**((n * -1)+1))}\n")
+    print(f"El epsilon de la maquina con una mantisa de {k} y un exponente de {n} bit es:{(2**((n * -1)+1))}") 
 
+def underflow(k,n, registro):
+    registro.write(f"Underflow: {(2.0**(-(2.0**k)))}\n")
+    print(f"El underflow de la maquina con una mantisa de {k} y un exponente de {n} bit es:{(2.0**(-(2.0**k)))}")
+def programa(registro):
+    print("Primero lo primero, dame el numero de bits de la mantisa k y el numero de bits del exponente n. Asegurate de que n+k <= 30")
+    print("Valor de k: ")
+    k = int(input())
+    registro.write(f"Mantisa: {k} \n")    
+    print("Valor de n: ")
+    n = int(input())
+    registro.write(f"Exponente: {n}\n")
+    registro.write(f"Consultas:\n")
+    while True:
+        print("¿Que quieres hacer?")
+        print("1. Dame el numero mas grande de la maquina.")
+        print("2. Dame el epsilon de la maquina")
+        print("3. Quiero saber del underflow")
+        print("4. Convierte un numero en binario, te lo doy en decimal")
+        print("5. Convierte un numero en decimal, te lo doy en binario")
+        print("0. Esto no me gusta, dejame salir")
+        valor = int(input())
+        if valor == 0:
+            break
+        if valor == 1:
+            overflow(k, n, registro)
+        if valor == 2:
+            epsilon(k, n, registro)
+        if valor == 3:
+            underflow(k, n, registro)
+        if valor == 4:
+            print("Dame el valor decimal: ")
+            dato = float(input())
+            DectoBin(dato, k, n, registro)
+        if valor == 5:
+            print("Dame el valor binario: ")
+            dato = input()
+            BintoDec(dato, k, n, registro)
+if __name__ == "__main__":
+    registro = open("registro.txt", "w")
+    programa(registro)
+    registro.close()
+    
