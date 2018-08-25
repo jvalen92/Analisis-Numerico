@@ -50,7 +50,7 @@ def DectoBin(num,a,b, registro):
         #maquina=sig+bi[1:]+exp
         maquina = sig+new_bi[1:]+exp
         print(maquina)
-        registro.write(f"Binario: {maquina}\n")
+        registro.write(f"El numero {num} en binario: {maquina}\n")
         print("signos %s mantiza %s exp %s " % (sig,bi[1:],exp))
     #En caso de que sea un numero entero
     else:
@@ -72,7 +72,7 @@ def DectoBin(num,a,b, registro):
         #formato del numero maquina con bit implicito
         maquina=sig+bi[1:]+exp
         print(maquina)
-        registro.write(f"Binario: {maquina}\n")
+        registro.write(f"El numero {num} en binario: {maquina}\n")
         print("signos %s mantiza %s exp %s " % (sig,bi[1:],exp))
     
 def BintoDec(mac,a,b, registro):
@@ -97,7 +97,7 @@ def BintoDec(mac,a,b, registro):
     #validar si es negativo
     if sigM is '0':
         num=num*-1
-    registro.write(f"Decimal: {num}\n")
+    registro.write(f"El numero {mac} en decimal: {num}\n")
     print(num)
 def overflow(k, n, registro):
     """sum1 = 0
@@ -130,8 +130,8 @@ def programa(registro):
         print("1. Dame el numero mas grande de la maquina.")
         print("2. Dame el epsilon de la maquina")
         print("3. Quiero saber del underflow")
-        print("4. Convierte un numero en binario, te lo doy en decimal")
-        print("5. Convierte un numero en decimal, te lo doy en binario")
+        print("4. Convertir numero decimal en binario")
+        print("5. Convertir numero binario en decimal")
         print("0. Esto no me gusta, dejame salir")
         valor = int(input())
         if valor == 0:
