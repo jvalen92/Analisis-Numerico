@@ -1,8 +1,8 @@
-Mantisa: 10 
-Exponente: 3
+Mantisa: 23 
+Exponente: 7
 Consultas:
-Overflow: 1.12000000E+02
-Epsilon: 0.25
-Underflow: 5.562684646268003e-309
-El numero 127.9375 en binario: 111111111111111
-El numero 111111111111111 en decimal: 127.9375
+Overflow: 1.68811955E+38
+Epsilon: 0.015625
+Underflow: 0.0
+El numero 3456.0 en binario: 11101100000000000000000000001100
+El numero 101010101010101 en decimal: -3.2036534219787673e+25
