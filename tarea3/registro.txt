@@ -4,4 +4,5 @@ Consultas:
 Overflow: 1.12000000E+02
 Epsilon: 0.25
 Underflow: 5.562684646268003e-309
+Binario: 111110111111111
 Decimal: 127.9375

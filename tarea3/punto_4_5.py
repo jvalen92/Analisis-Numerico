@@ -50,6 +50,7 @@ def DectoBin(num,a,b, registro):
         #maquina=sig+bi[1:]+exp
         maquina = sig+new_bi[1:]+exp
         print(maquina)
+        registro.write(f"Binario: {maquina}\n")
         print("signos %s mantiza %s exp %s " % (sig,bi[1:],exp))
     #En caso de que sea un numero entero
     else:
