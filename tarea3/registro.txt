@@ -1,6 +1,6 @@
-Mantisa: 24 
+Mantisa: 7 
 Exponente: 7
 Consultas:
-El numero 7.0 en binario: 111100000000000000000000000000011
-El numero 111100000000000000000000000000011 en decimal: 7.0
-Underflow : 2.938735877055719e-39
+Epsilon: 0.015625
+Underflow : 2.938735877055719e-39El numero 233.645 en binario: 1111010010001000
+El numero 1111010010001000 en decimal: 233.0

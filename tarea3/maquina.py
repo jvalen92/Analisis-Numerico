@@ -108,8 +108,9 @@ def overflow(k, n, registro):
     #registro.write(f"Overflow: {'%.8E' % Decimal(sum * ((2**((2**n)-1))))}\n")
     #print(f"El numero mas grande de una maquina con una mantisa de {k} bits y un exponente de {n} bits es: {sum} * 2e{(2**n)-1}")
     #print(f"Es decir {'%.8E' % Decimal(sum * ((2**((2**n)-1))))}")
-    exp=float (2**n -1)
+    exp=float (2 ** n) - 1
     man= float( 0.5*( (0.5**k -1) / (0.5-1) ))
+    man=float(0.5)*(((0.5**(k+1))-1)/(0.5-1))
     #print(man * 2**exp)
     print(f"El numero mas grande de una maquina con una mantisa de {k} bits y un exponente de {n} bits es: {man * 2**(exp)}")
 
