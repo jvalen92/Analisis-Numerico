@@ -1,0 +1,6 @@
+Mantisa: 7
+Exponente: 7
+Consultas:
+Epsilon: 0.015625
+Underflow : 2.938735877055719e-39El numero 233.645 en binario: 1111010010001000
+El numero 1111010010001000 en decimal: 233.0

@@ -105,17 +105,28 @@ def overflow(k, n, registro):
         sum1 += 1/(2**i)"""
     sum = (1/2)*(((1/2)**n-1)/(1/2-1))
     #print("igual: " + str(sum-sum1))
-    registro.write(f"Overflow: {'%.8E' % Decimal(sum * ((2**((2**n)-1))))}\n")
-    print(f"El numero mas grande de una maquina con una mantisa de {k} bits y un exponente de {n} bits es: {sum} * 2e{(2**n)-1}")
-    print(f"Es decir {'%.8E' % Decimal(sum * ((2**((2**n)-1))))}")
+    #registro.write(f"Overflow: {'%.8E' % Decimal(sum * ((2**((2**n)-1))))}\n")
+    #print(f"El numero mas grande de una maquina con una mantisa de {k} bits y un exponente de {n} bits es: {sum} * 2e{(2**n)-1}")
+    #print(f"Es decir {'%.8E' % Decimal(sum * ((2**((2**n)-1))))}")
+    exp=float (2 ** n) - 1
+    man= float( 0.5*( (0.5**k -1) / (0.5-1) ))
+    man=float(0.5)*(((0.5**(k+1))-1)/(0.5-1))
+    #print(man * 2**exp)
+    print(f"El numero mas grande de una maquina con una mantisa de {k} bits y un exponente de {n} bits es: {man * 2**(exp)}")
 
 def epsilon(k,n, registro):
-    registro.write(f"Epsilon: {(2**((n * -1)+1))}\n")
-    print(f"El epsilon de la maquina con una mantisa de {k} y un exponente de {n} bit es:{(2**((n * -1)+1))}") 
+    #registro.write(f"Epsilon: {(2**((n * -1)+1))}\n")
+    #2 a la mantisa -1
+    registro.write(f"Epsilon: {2**(-k+1)}\n")
+    print(f"El epsilon de la maquina con una mantisa de {k} y un exponente de {n} bit es:{2**(-k+1)}")
 
 def underflow(k,n, registro):
-    registro.write(f"Underflow: {(2.0**(-(2.0**k)))}\n")
-    print(f"El underflow de la maquina con una mantisa de {k} y un exponente de {n} bit es:{(2.0**(-(2.0**k)))}")
+    #registro.write(f"Underflow: {(2.0**(-(2.0**k)))}\n")
+    #print(f"El underflow de la maquina con una mantisa de {k} y un exponente de {n} bit es:{(2.0**(-(2.0**k)))}")
+    #el underflow es 2**-1 * 2**-(n-1)
+    exp=2**n -1
+    registro.write(f"Underflow : {2**-1 * 2**(-exp)}")
+    print(f"El underflow de la maquina con una mantisa de {k} y un exponente de {n} bit es:{2**-1 * 2**(-exp)}")
 def programa(registro):
     print("Primero lo primero, dame el numero de bits de la mantisa k y el numero de bits del exponente n. Asegurate de que n+k <= 30")
     print("Valor de k: ")
@@ -154,4 +165,4 @@ if __name__ == "__main__":
     registro = open("registro.txt", "w")
     programa(registro)
     registro.close()
-    
+     

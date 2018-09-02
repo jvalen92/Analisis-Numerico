@@ -1,0 +1,4 @@
+Uso: 
+$ python3 maquina.py
+
+En el archivo de logs registro.py, se encuentran todas las consultas que el usuario realizo al programa
