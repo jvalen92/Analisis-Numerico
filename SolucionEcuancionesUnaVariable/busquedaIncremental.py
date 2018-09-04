@@ -3,7 +3,8 @@ sympy.init_printing(use_unicode=True)
 
 def busquedaIncremental(x0, delta, niter):
     x = sympy.symbols('x')
-    fx = sympy.exp((3*x) - 12) + x * sympy.cos(3 * x) - (x ** 2) + 4 
+    #fx = sympy.exp((3*x) - 12) + x * sympy.cos(3 * x) - (x ** 2) + 4 
+    fx = x**3 + 4*x**2 - 10
     fx0 = fx.evalf(subs={x:x0})
     if(fx0 == 0): 
         print("Raiz en", x0)
