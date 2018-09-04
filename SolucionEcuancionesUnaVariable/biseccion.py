@@ -5,9 +5,12 @@ sympy.init_printing(use_unicode=True)
 def biseccion(xi, xs, tolerancia, niter):
     table = PrettyTable(['i', 'Xinf', 'Xsup', 'Xmi', 'f(Xmi)', 'Error'])
     x = sympy.symbols('x')
-    fx = sympy.exp((3*x) - 12) + x * sympy.cos(3 * x) - (x ** 2) + 4 
+    ##fx = sympy.exp((3*x) - 12) + x * sympy.cos(3 * x) - (x ** 2) + 4
+    fx = x**3 + 4*(x**2) - 10
+    ##fx = ((x + 4)**(-5/2))
     fxi = fx.evalf(subs={x:xi})
     fxs = fx.evalf(subs={x:xs})
+    print(fxi, fxs)
     if(fxi == 0): 
         print("Raiz en", xi)
     elif(fxs == 0): 
@@ -41,4 +44,4 @@ def biseccion(xi, xs, tolerancia, niter):
         print("El intervalo es inadecuado")
     print(table)
 
-biseccion(2, 3, 0.5e-3, 30)
+biseccion(1, 2, 0.5e-6, 100)

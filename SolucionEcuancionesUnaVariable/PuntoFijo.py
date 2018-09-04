@@ -5,8 +5,8 @@ sympy.init_printing(use_unicode=True)
 def puntoFijo(tolerancia,xa,niter):
     table = PrettyTable(['Iteracion', 'Xn', 'f(x)', 'Error'])
     x = sympy.symbols('x')
-    f = sympy.exp((3*x) - 12) + x * sympy.cos(3 * x) - (x ** 2) + 4 
-    g = -sympy.sqrt(x*sympy.exp(x)-5*x-3)
+    f = x**3 + 4*(x**2) - 10 
+    g = (10/(4+x))**0.5
     fx = f.evalf(subs={x:xa})
     contador = 0
     error = tolerancia + 1 
@@ -27,4 +27,4 @@ def puntoFijo(tolerancia,xa,niter):
         print("El metodo fracaso con ",niter," iteraciones")
     print(table)
 
-puntoFijo(0.0005,-4,30)
+puntoFijo(0.5e-6,1.5,100)
