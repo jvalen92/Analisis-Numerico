@@ -1,0 +1,68 @@
+\documentclass[12pt]{article}
+
+\title{Informe Tarea 5}
+
+\author {Ronald Cardona
+\and Anderson Grajales
+\and Sebastian Valencia
+\and Julian Sanchez}
+
+% Packages
+\usepackage[spanish]{babel}
+\selectlanguage{spanish} 
+\usepackage[spanish, onelanguage]{algorithm2e} %for psuedo code
+\usepackage[utf8]{inputenc}
+
+
+\begin{document}
+
+\maketitle
+
+\section{Solución numérica de ecuaciones de una variable}
+
+En el presente documento se describen algunos de los algoritmos numéricos principales para resolver ecuaciones de una variable. Estos algoritmos nos permiten ya sea encontrar intervalos en los que existe una raíz de la ecuación $f(x) = 0$ ó encontrar propiamente la raíz.
+
+En algunos casos es necesario optimizar algunos métodos numéricos con la finalidad de alcanzar una tolerancia $\xi$ en el menor numero de iteraciones posible. Es por esto, que acá se presentan algunos algoritmos para obtener mejores resultados en el menor tiempo posible.
+
+\subsection{Método de Müller}
+
+\begin{algorithm}[H]
+	\caption{Método de Müller}
+	\SetAlgoLined
+	Leer $x_0$, $x_1$, $x_2$, $niter$, $tol$\\
+	$h_1 = x_1 - x_0$\\
+	$h_2 = x_2 - x_1$\\
+	$\psi_1 = \frac{f(x_1) - f(x_0)}{h_1}$\\
+	$\psi_2 = \frac{f(x_2) - f(x_1)}{h_2}$\\
+	$d = \frac{\psi_2 - \psi_1}{h_2 + h_1}$\\
+	$contador = 1$\\
+	$error = tol + 1$\\
+	$p = -\infty$\\
+	\While{$contador < niter$ \textbf{y} $error > tol$}
+	{
+		$b = \psi_2 + h_2*d$\\
+		$D = \sqrt{b^2 - 4*f(x_2)*d}$\\
+		$E = -\infty$\\
+		\eIf{$|b - D| < |b + d|$}
+		{$E = b + D$}
+		{$E = b - D$}
+		$h = -2 * \frac{f(x_2)}{E}$\\
+		$p = x_2 + h$\\
+		$x_0 = x_1$\\
+		$x_1 = x_2$\\
+		$x_2 = p$\\
+		$h_1 = x_1 - x_0$\\
+		$h_2 = x_2 - x_1$\\
+		$\psi_1 = \frac{f(x_1) - f(x_0)}{h_1}$\\
+		$\psi_2 = \frac{f(x_2) - f(x_1)}{h_2}$\\
+		$d = \frac{\psi_2 - \psi_1}{h_2 + h_1}$\\
+		$error = |h|$\\
+		$contador = contador + 1$
+	}
+	\eIf{$error \leq tol$}
+	{Hay una raíz en $p$}
+	{El método fracasó después de $niter$ iteraciones}
+\end{algorithm}
+
+
+\end{document}
