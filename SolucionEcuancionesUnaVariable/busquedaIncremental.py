@@ -3,7 +3,14 @@ sympy.init_printing(use_unicode=True)
 
 def busquedaIncremental(x0, delta, niter):
     x = sympy.symbols('x')
-    fx = sympy.exp((3*x) - 12) + x * sympy.cos(3 * x) - (x ** 2) + 4 
+<<<<<<< HEAD
+    #fx = sympy.exp((3*x) - 12) + x * sympy.cos(3 * x) - (x ** 2) + 4 
+    fx = x**3 + 4*x**2 - 10
+=======
+    fx = sympy.exp((3*x) - 12) + x * sympy.cos(3 * x) - (x ** 2) + 4
+    ##fx = sympy.exp(-1*x) - sympy.sen(4*x)
+    fx = (3*sympy.sqrt(10)/4)*((x+4)**(-5/2))
+>>>>>>> 5c12dd3da8bcea8cceda7bdbcff15fd985f6bfd2
     fx0 = fx.evalf(subs={x:x0})
     if(fx0 == 0): 
         print("Raiz en", x0)
@@ -25,4 +32,4 @@ def busquedaIncremental(x0, delta, niter):
         else: 
             print("Fracaso en ", niter, 'Iteraciones')
 
-busquedaIncremental(-10, 1, 30)
+busquedaIncremental(-6, 1, 30)
