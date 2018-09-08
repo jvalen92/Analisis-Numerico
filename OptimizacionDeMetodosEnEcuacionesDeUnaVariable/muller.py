@@ -1,0 +1,52 @@
+# Implementacion del Metodo de Muller
+# para la ubicacion de raices de una funcion
+# La descripcion detallada de la estructura
+# de este algoritmo se encuentra en el documento
+#Informe tarea5.pdf en este directorio
+
+import sys
+from prettytable import PrettyTable
+import sympy
+import math
+
+sympy.init_printing(use_unicode=True)
+x = sympy.symbols('x')
+fx = sympy.cos(x)
+
+def muller(x0, x1, x2, tolerancia, niter):
+    h1 = x1 - x0
+    h2 = x2 - x1
+    y1 = (fx.evalf(subs={x:x1}) - fx.evalf(subs={x:x0})) / h1
+    y2 = (fx.evalf(subs={x:x2}) - fx.evalf(subs={x:x1})) / h2
+    d = ((y2 - y1) / (h2 + h1))
+    contador = 1
+    error = tolerancia + 1
+    p = sys.maxsize * -1
+    while(contador < niter and error > tolerancia): 
+        b = y2 + (h2 * d)
+        D = math.sqrt(b**2 - 4*(fx.evalf(subs={x:x2}) * d))
+        E = sys.maxsize * -1
+        if(abs(b - D) < abs(b + d)): 
+            E = b + d 
+        else: 
+            E = b - D
+        
+        h = (-1 * 2) * (fx.evalf(subs={x:x2})) / E
+        p = x2 + h
+        x0 = x1
+        x1 = x2
+        x2 = p
+        h1 = x1 - x0
+        h2 = x2 - x1
+        y1 = (fx.evalf(subs={x:x1}) - fx.evalf(subs={x:x0})) / h1
+        y2 = (fx.evalf(subs={x:x2}) - fx.evalf(subs={x:x1})) / h2
+        d = ((y2 - y1) / (h2 + h1))
+        error = abs(h)
+        contador += 1
+    
+    if(error <= tolerancia): 
+        print("Hay una raiz en ", p)
+    else: 
+        print("Fracaso en ", niter, "Iteraciones")
+
+muller(0, 1, 2, 0.5e-7, 100)
