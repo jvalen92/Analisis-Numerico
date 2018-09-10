@@ -1,4 +1,4 @@
-import sympy
+import sympy 
 from prettytable import PrettyTable
 sympy.init_printing(use_unicode=True)
 

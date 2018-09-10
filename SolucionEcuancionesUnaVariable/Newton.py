@@ -2,7 +2,7 @@ import sympy
 from prettytable import PrettyTable
 sympy.init_printing(use_unicode=True)
 
-def newton(tol,x0,niter):
+def newton(tol,x0,niter): 
     table = PrettyTable(['Iteracion', 'Xn', 'f(x)', 'Error','Error rel'])
     x = sympy.symbols('x')
     #f = sympy.exp((3*x) - 12) + x * sympy.cos(3 * x) - (x ** 2) + 4 
@@ -37,4 +37,4 @@ def newton(tol,x0,niter):
     
 #newton(0.0005,-4,30)
 #newton(10e-4,2,30)
-newton(10e-8,1.5,30 )
+newton(0.5*10e-8,1.5,30 )

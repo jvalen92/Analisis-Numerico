@@ -19,7 +19,7 @@ def puntoFijo(tolerancia,xa,niter):
         xn = g.evalf(subs={x:xa})
         fx = f.evalf(subs={x:xn})
         error = abs(xn-xa)
-        error_rel = abs((xn-xa) / xn)
+        error_rel = abs((xn-xa) / xn) 
         xa = xn 
         contador = contador  + 1
         table.add_row([contador, xn, fx, error,error_rel])
