@@ -81,6 +81,7 @@ En algunos casos es necesario optimizar algunos métodos numéricos con la final
 	{
 		$x_1 = f(x_0)$\\
 		$x_2 = f(x_1)$\\
+		$f(x) = f(x_0)$\\
 		$p = x_0 - \frac{(x_1-x_2)^2}{x_2-2*x_1+x_0}$\\
 		$error = |x - x_0|$\\
 		$x_0 = p$\\
@@ -101,7 +102,7 @@ $f(x) = e^x - 5x + 2$ en el intervalo [0, 2] y con una tolerancia al error de $0
 Tabla resultante de la ejecución del método de la secante con los argumentos mencionados
 \begin{center}
 	\begin{tabular}{|l|l|l|l|} \hline
-	Iteracion & $x(n)$ & $f(x_{n})$ & Error \\
+	Iteracion & $x_n$ & $f(x_{n})$ & Error \\
 	\hline \hline
 	0 & 0 &  3.000000000000 &   \\
 	\hline 
@@ -130,7 +131,7 @@ Tabla resultante de la ejecución del método de la secante con los argumentos m
 Tabla resultante de la ejecución del método de Müller con los argumentos mencionados
 \begin{center}
 	\begin{tabular}{|l|l|l|l|} \hline
-	Iteracion & $x(n)$ & $f(x_{n})$ & Error \\
+	Iteracion & $x_n$ & $f(x_{n})$ & Error \\
 	\hline \hline
 	0 & -9223372036854775807 & 4.61168601842739e+19 &  \\
 	\hline 
@@ -176,7 +177,7 @@ $f(x) = x^3 + 4*x^2 - 10$, dada una aproximacion inicial de $1.5$ y con una tole
 Tabla resultante de la ejecución del método de Newton con los argumentos mencionados
 \begin{center}
 	\begin{tabular}{|l|l|l|l|l|} \hline
-	Iteracion & $x(n)$ & $f(x_{n})$ & Error \\
+	Iteracion & $x_n$ & $f(x_{n})$ & Error \\
 	\hline \hline
 	0 & 1.5 & 2.37500000000000 & \\
 	\hline 
@@ -194,13 +195,13 @@ Tabla resultante de la ejecución del método de Newton con los argumentos menci
 Tabla resultante de la ejecución del método de Steffensen con los argumentos mencionados
 \begin{center}
 	\begin{tabular}{|l|l|l|l|l|l|} \hline
-	Iteracion & $x(n)$ & $p$ & $f(x_{n})$ & Error \\
+		$i$ & $x_n$ & $x_{n+1}$ & $f(x_n)$ & Error \\
 	\hline \hline
-	0 & 1.5 & 1.36526522395726 & 0.000581455787873405 & \\ 
+	$0$ & $1.5$ & $1.36526522395726$ & $0.000581455787873405$ & \\ 
 	\hline 
-	1 & 1.36526522395726 & 1.36523001341659 & 4.10971949237575e-11 & 3.52105406746794e-5 \\
+	$1$ & $1.36526522395726$ & $1.36523001341659$ & $4.10971949237575e-11$ & $3.52105406746794e-5$ \\
 	\hline
-	2 & 1.36523001341659 & 1.36523001341410 & 6.96088026123474e-16  & 2.48867593199975e-12 \\
+	$2$ & $1.36523001341659$ & $1.36523001341410$ & $6.96088026123474e-16$  & $2.48867593199975e-12$ \\
 	\hline
 	\end{tabular}
 \end{center}
