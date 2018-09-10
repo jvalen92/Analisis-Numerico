@@ -4,6 +4,8 @@
 # de este algoritmo se encuentra en el documento
 #Informe tarea5.pdf en este directorio
 
+# Tomado de: http://kilyos.ee.bilkent.edu.tr/~microwave/programs/utilities/numeric1/infoMuller.htm
+
 import sys
 from prettytable import PrettyTable
 import sympy
