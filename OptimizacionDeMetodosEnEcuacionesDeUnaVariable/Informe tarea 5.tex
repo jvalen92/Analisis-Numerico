@@ -27,8 +27,11 @@ En algunos casos es necesario optimizar algunos métodos numéricos con la final
 \subsection{Método de Müller}
 
 \begin{algorithm}[H]
+	
 	\caption{Método de Müller}
 	\SetAlgoLined
+	\tcc{Tomado de:}
+	/* http://kilyos.ee.bilkent.edu.tr/~microwave/programs/utilities/numeric1/infoMuller.htm */ \\
 	Leer $x_0$, $x_1$, $x_2$, $niter$, $tol$\\
 	$h_1 = x_1 - x_0$\\
 	$h_2 = x_2 - x_1$\\
@@ -58,6 +61,28 @@ En algunos casos es necesario optimizar algunos métodos numéricos con la final
 		$d = \frac{\psi_2 - \psi_1}{h_2 + h_1}$\\
 		$error = |h|$\\
 		$contador = contador + 1$
+	}
+	\eIf{$error \leq tol$}
+	{Hay una raíz en $p$}
+	{El método fracasó después de $niter$ iteraciones}
+\end{algorithm}
+
+\subsection{Método de Steffensen}
+
+\begin{algorithm}[H]
+	\caption{Método de Steffensen}
+	\SetAlgoLined
+	\tcp{Tomado de: https://en.wikipedia.org/wiki/Steffensen\%27s\_method}
+	Leer $x_0$, $niter$, $tol$\\
+	$contador = 0$
+	\While{$contador < niter$ \textbf{y} $error > tol$}
+	{
+		$x_1 = f(x_0)$\\
+		$x_2 = f(x_1)$\\
+		$x = x_0 - \frac{(x_1-x_2)^2}{x_2-2*x_1+x_0}$\\
+		$error = |x - x_0|$\\
+		$x_0 = x$\\
+		$contador = contador + 1$\\
 	}
 	\eIf{$error \leq tol$}
 	{Hay una raíz en $p$}
