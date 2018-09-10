@@ -74,14 +74,16 @@ En algunos casos es necesario optimizar algunos métodos numéricos con la final
 	\SetAlgoLined
 	\tcp{Tomado de: https://en.wikipedia.org/wiki/Steffensen\%27s\_method}
 	Leer $x_0$, $niter$, $tol$\\
-	$contador = 0$
+
+	$error = 1 + $tol\\
+	$contador = 0$\\
 	\While{$contador < niter$ \textbf{y} $error > tol$}
 	{
 		$x_1 = f(x_0)$\\
 		$x_2 = f(x_1)$\\
-		$x = x_0 - \frac{(x_1-x_2)^2}{x_2-2*x_1+x_0}$\\
+		$p = x_0 - \frac{(x_1-x_2)^2}{x_2-2*x_1+x_0}$\\
 		$error = |x - x_0|$\\
-		$x_0 = x$\\
+		$x_0 = p$\\
 		$contador = contador + 1$\\
 	}
 	\eIf{$error \leq tol$}
@@ -160,11 +162,11 @@ Se puede concluir que para esta función los métodos convergen en igual numero 
 El método de Steffensen es una técnica para la búsqueda de raíces similar al método de Newton, este método alcanza convergencia cuadrática, pero con una optimización respecto al método de Newton, ya que no usa la derivada para calcular la siguiente aproximación, así: 
 \begin{center}
 	\begin{math}
-		x_{n+1} = x_{n} - (f(x_{n})/g(x_{n}))
+		x_{n+1} = x_{n} - \frac{f(x_{n})}{g(x_{n})}
 	\end{math}
 
 	\begin{math}
-		g(x_{n}) = (f(x_{n} + f(x_{n}))/f(x_{n})) - 1
+		g(x_{n}) = \frac{f(x_{n} + f(x_{n})}{f(x_{n})} - 1
 	\end{math}
 \end{center}
 
@@ -191,14 +193,14 @@ Tabla resultante de la ejecución del método de Newton con los argumentos menci
 
 Tabla resultante de la ejecución del método de Steffensen con los argumentos mencionados
 \begin{center}
-	\begin{tabular}{|l|l|l|l|} \hline
-	Iteracion & $x(n)$ & $f(x_{n})$ & Error \\
+	\begin{tabular}{|l|l|l|l|l|} \hline
+	Iteracion & $x(n)$ & p & $f(x_{n})$ & Error \\
 	\hline \hline
-	0 & 1.5 & 0.000581455787873405 &  \\
+	0 & 1.5 & 1.36526522395726 & 0.000581455787873405 & \\
 	\hline 
-	1 & 1.36526522395726 & 4.10971949237575e-11 & 3.52105406746794e-5 \\
+	1 & 1.36526522395726 & 1.36523001341659 & 4.10971949237575e-11 & 3.52105406746794e-5 \\
 	\hline
-	2 & 1.36523001341659 & 6.96088026123474e-16  & 2.48867593199975e-12 \\
+	2 & 1.36523001341659 & 1.36523001341410 & 6.96088026123474e-16  & 2.48867593199975e-12 \\
 	\hline
 
 	\end{tabular}
