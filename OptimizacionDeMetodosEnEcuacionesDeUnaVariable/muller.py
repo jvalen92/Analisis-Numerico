@@ -15,7 +15,7 @@ sympy.init_printing(use_unicode=True)
 
 def muller(x0, x1, x2, tolerancia, niter):
     x = sympy.symbols('x')
-    f = sympy.cos(x)
+    f = sympy.exp(x) - (5*x) + 2
     table = PrettyTable(['i', 'Pn', 'f(Pn)', 'Error'])
     h1 = x1 - x0
     h2 = x2 - x1

@@ -46,4 +46,4 @@ def secante(tol, x0, x1, niter):
 
         print(table)
 
-secante(0.0005, 0.5, 1, 30) 
+secante(0.5e-7, 0, 2, 100) 

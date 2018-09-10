@@ -89,5 +89,73 @@ En algunos casos es necesario optimizar algunos métodos numéricos con la final
 	{El método fracasó después de $niter$ iteraciones}
 \end{algorithm}
 
+\section{Ejemplos}
+\subsection{Método de Müller como extensión del Método de la Secante}
+Este método fue propuesto por D.E Müller en 1956. Esta técnica puede ser usada por cualquier programa de búsqueda de raíces, pero es particularmente útil para la aproximación de raíces de polinomios. El método de Müller es una extensión del método de la secante, que inicia con dos aproximaciones iniciales que determinan la siguiente aproximación como la intersección del eje $x$ con la línea a través de $(x_{0}, f(x_{0})) y (x_{1}, f(x_{1}))$.
+Pero el método de Müller hace uso de tres aproximaciones iniciales y determina la siguiente aproximación considerando la intersección del eje $x$ con la parábola $(x_{0}, f(x_{0})), (x_{1}, f(x_{1})) and (x_{2}, f(x_{2})) $.
+El siguiente ejemplo muestra que la convergencia del método de Müller es mucho mas rápida con respecto al método de la secante, debido a la optimización ya mencionada haciendo uso de 
+$f(x) = e^x - 5x + 2$ en el intervalo [0, 2] y con una tolerancia al error de $0.5 * 10^-7$
+
+Tabla resultante de la ejecución del método de la secante con los argumentos ya mencionados
+\begin{center}
+	\begin{tabular}{|l|l|l|l|} \hline
+	Iteracion & $x(n)$ & $f(x_{n})$ & Error \\
+	\hline \hline
+	0 & 0 &  3.000000000000 &   \\
+	\hline 
+	1 & 2 & -0.610943901069350 &    \\
+	\hline
+	2 & 1.66161540150850 & -1.04026339858352 & 0.819923424147482 \\
+	\hline
+	3 & 2.48153882565598 & 1.55195995923909 & 0.490886836614247
+	\hline
+	4 & 1.99065198904173 & -0.632954979834611 & 0.142206573909908 \\
+	\hline
+	5 & 2.13285856295164 & -0.225337163478609 & 0.0786138993612666 \\
+	\hline
+	6 & 2.21147246231290 & 0.0717865172704462 & 0.0189934980273785 \\
+	\hline
+	7 & 2.19247896428553 & -0.00500415521214353 & 0.00123773381685233 \\
+	\hline
+	8 & 2.19371669810238 & -9.90948323020544e-5 & 2.50054057477911e-5 \\ 
+	\hline
+	9 & 2.19374170350813 & 1.41534102600865e-7  & 3.56635152520823e-8 \\
+	\hline
+
+	\end{tabular}
+\end{center}
+
+Tabla resultante de la ejecución del método de Müller con los argumentos ya mencionados
+\begin{center}
+	\begin{tabular}{|l|l|l|l|} \hline
+	Iteracion & $x(n)$ & $f(x_{n})$ & Error \\
+	\hline \hline
+	0 & -9223372036854775807 & 4.61168601842739e+19 &  \\
+	\hline 
+	1 & 2.46578862771510 & 1.44381968047063 & 0.465788627715100   \\
+	\hline
+	2 & 2.15026705630200 & -0.164183937636073 & 0.315521571413104 \\
+	\hline
+	3 & 2.19023185069732 & -0.0138742632229052  & 0.0399647943953204
+	\hline
+	4 & 2.19338492210219 & -0.00141524916212999 & 0.00315307140487347 \\
+	\hline
+	5 & 2.19372270388581 & -7.52608127419234e-5 & 0.000337781783616939 \\
+	\hline
+	6 & 2.19374052323720 & -4.54261109412252e-6 & 1.78193513943864e-5 \\
+	\hline
+	7 & 2.19374159809482 & -2.76820541156754e-7 & 1.07485762153721e-6 \\
+	\hline
+	8 & 2.19374166359098 & -1.68854239354194e-8 & 6.54961557673982e-8 \\ 
+	\hline
+	9 & 2.19374166758608 & -1.03002576084185e-9 & 3.99510298946957e-9 \\
+	\hline
+
+	\end{tabular}
+\end{center}
+
+Se puede concluir que para esta función los métodos convergen en igual numero de iteraciones, mas sin embargo el método de Müller obtiene un resultado certero, mientras que el método de la secante solo puede entregar una aproximación
+
+
 
 \end{document}
