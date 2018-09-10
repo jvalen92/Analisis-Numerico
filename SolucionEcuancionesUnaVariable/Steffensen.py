@@ -9,6 +9,11 @@ def stefenssen(x0,niter,tol):
     g = sympy.sqrt(10/(4+x))
     contador = 0
     error = tol+1
+    x1 = g.evalf(subs={x:x0})
+    x2 = g.evalf(subs={x:x1})
+    p = x0 - ((x1-x0)**2/( x2 - 2*x1 + x0))
+    table.add_row([contador, x0, x1, x2,p,f.evalf(subs={x:p}), "no existe"])
+    x0=p
     while contador < niter and error > tol:
         x1 = g.evalf(subs={x:x0})
         x2 = g.evalf(subs={x:x1})
@@ -23,4 +28,4 @@ def stefenssen(x0,niter,tol):
         print("el metodo falló despues de ",niter, " iteraciones" )
     print (table)
 
-stefenssen(0.5*10e-8,1.5,30)
+stefenssen(1.5,30,0.5*10e-8)
