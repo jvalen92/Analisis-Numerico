@@ -8,7 +8,8 @@ def secante(tol, x0, x1, niter):
     #f = sympy.exp((3*x) - 12) + x * sympy.cos(3 * x) - (x ** 2) + 4 
     #f = sympy.sin(x+3) - sympy.ln(x+1) + x**2 - 3
     #f = sympy.exp(-x**2 +1) -4*x**3 + 25
-    f = sympy.exp(x) - (5*x) + 2
+    #f = sympy.exp(x) - (5*x) + 2
+    f = x**3 + 4*x**2 - 10
     fx0 = f.evalf(subs={x:x0})
     if (fx0 == 0): 
         print(x0, "Es raiz")
@@ -19,7 +20,8 @@ def secante(tol, x0, x1, niter):
         error = tol + 1
         error_rel = tol + 1
         den = fx1 - fx0
-        table.add_row([contador, x0, fx0, '',''])
+        table.add_row(['i', x0, fx1, '',''])
+        table.add_row(['u', x1, fx1, "", ""])
         while error > tol and fx1 != 0 and den != 0 and contador < niter:
             x2 = x1 - fx1 * (x1 - x0) / den
             error = abs(x2 - x1)
@@ -30,10 +32,7 @@ def secante(tol, x0, x1, niter):
             fx1 = f.evalf(subs={x:x1})
             den = fx1 - fx0
             contador = contador + 1
-            if (contador <= 1): 
-                table.add_row([contador, x0, fx0, "", ""])
-            else:
-                table.add_row([contador, x0, fx0, error, error_rel])
+            table.add_row([contador, x1, fx1, error, error_rel])
 
         if fx1 == 0:
             print(x1, " Es raiz")
@@ -46,4 +45,5 @@ def secante(tol, x0, x1, niter):
 
         print(table)
 
-secante(0.5e-7, 0, 2, 100) 
+#secante(0.5*10e-8, 1.8, 1.9, 30) 
+secante(0.5*10e-8,1.3,1.4,30)
