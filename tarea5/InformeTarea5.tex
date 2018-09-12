@@ -1,0 +1,50 @@
+\documentclass[12pt]{article}
+
+\title{Informe Tarea 5}
+
+\author {Ronald Cardona
+\and Anderson Grajales
+\and Sebastian Valencia
+\and Julian Sanchez}
+
+
+% Packages
+\usepackage[spanish]{babel}
+\selectlanguage{spanish} 
+\usepackage[utf8]{inputenc}
+\usepackage{amsthm}
+\usepackage{amsmath}
+
+\newtheorem{definition}{Definición}[section]
+\newtheorem{theorem}{Teorema}[section]
+
+
+
+\begin{document}
+	\maketitle
+	\section{Solución numérica de sistemas de ecuaciones lineales}
+	Muchos problemas del mundo real se formulan como sistemas de ecuaciones de $n$ variables y $m$ incógnitas que bajo condiciones ideales($n$ y $m$ no son valores muy grandes), se pueden resolver de manera analítica. Sin embargo, cuando $n$ y $m$ tienden a ser valores muy grandes la solución analítica a estos problemas es muy difícil de calcular ya que requiere de mucho tiempo y claramente no es la forma más eficiente hacerlo. Debido a esto, desde el campo del \textit{Análisis Numérico} se plantean diversas formas computacionales, ya sean algoritmos u otras técnicas que nos permitan resolver estos sistemas rápidamente, teniendo en cuenta que hay una \textit{\textbf{propagación de error}} en cada cálculo dependiendo de la capacidad de la computadora donde se ejecuten estos.
+	En este documento se presentan algunos algoritmos numéricos que son de gran ayuda a la hora de resolver sistemas de ecuaciones lineales.
+	\subsection{Determinantes}
+	\begin{definition}
+		Sea $A = [a_{ij}]$ una matriz de tamaño $n \times n$. El cofactor $C_{ij}$ de $a_{ij}$ se define como $(-1)^{i+j}\det {M_{ij}}$, donde $M_{ij}$ es la matriz de tamaño $(n - 1) \times (n - 1)$, que se obtiene al eliminar la fila $i$ y la columna $j$ de la matriz.
+	\end{definition}
+	\begin{theorem}
+		Sea $A=[a_{ij}]$ una matriz de tamaño $n \times n$.
+		\begin{itemize}
+			\item Para cada $1\leq i \leq n$ se cumple que:
+			$\det {A} = a_{i1}C_{i1} + a_{i2}C_{i2} + ... + a_{in}C_{in}$
+			\item Para cada $1\leq j \leq n$ se cumple que:
+			$\det {A} = a_{1j}C_{1j} + a_{2j}C_{2j} + ... + a_{nj}C_{nj}$
+		\end{itemize}
+	\end{theorem}
+	De acuerdo al teorema 1.1 se puede definir un algoritmo para encontrar el determinante de una matriz $A$ de la siguiente manera:
+	
+	\begin{equation}
+	det(A, n)_{1\leq i \leq n}=\begin{cases}
+	(A[1][1]*A[2][2]) - (A[1][2] * A[2][1]), & \text{if $n = 2$}.\\
+	(-1)^i \times A[1][i] \times det(A', n - 1) , & \text{if $n > 2$}.
+	\end{cases}
+	\end{equation}
+	Donde $A'$ es la matriz que se obtiene al eliminar la columna $i$ y la fila $n$ de $A$.
+\end{document}
