@@ -38,13 +38,14 @@
 			$\det {A} = a_{1j}C_{1j} + a_{2j}C_{2j} + ... + a_{nj}C_{nj}$
 		\end{itemize}
 	\end{theorem}
-	De acuerdo al teorema 1.1 se puede definir un algoritmo para encontrar el determinante de una matriz $A$ de la siguiente manera:
+	De acuerdo al teorema 1.1 se puede definir un algoritmo para encontrar el determinante de una matriz $A = [a_{ij}]$ de la siguiente manera:
 	
 	\begin{equation}
 	det(A, n)_{1\leq i \leq n}=\begin{cases}
-	(A[1][1]*A[2][2]) - (A[1][2] * A[2][1]), & \text{if $n = 2$}.\\
-	(-1)^i \times A[1][i] \times det(A', n - 1) , & \text{if $n > 2$}.
+	a_{11}, & \text{if $n = 1$}.\\
+	(-1)^{i+1} \times a_{1i} \times det(A', n - 1) , & \text{if $n > 1$}.
 	\end{cases}
 	\end{equation}
-	Donde $A'$ es la matriz que se obtiene al eliminar la columna $i$ y la fila $n$ de $A$.
+	Donde $A'$ es la matriz que se obtiene al eliminar la columna $i$ y la fila $n$ de $A$. De esta manera, para una matriz $B$ de $n \times n$, la solución se entrega de la forma:
+	$det(B, n)$.
 \end{document}
