@@ -8,7 +8,8 @@ def newton(tol,x0,niter):
     #f = sympy.exp((3*x) - 12) + x * sympy.cos(3 * x) - (x ** 2) + 4 
     #f = sympy.sin(x+3) - sympy.ln(x+1) + x**2 - 3
     #f = sympy.exp(-x**2 +1) -4*x**3 + 25
-    f = x**3 + 4*x**2 - 10
+    #f = x**3 + 4*x**2 - 10
+    f = x**3 - x**2 - x + 1 + sympy.sin(x-1)**2
     df = f.diff(x)
     fx = f.evalf(subs={x:x0})
     dfx = df.evalf(subs={x:x0})
@@ -37,4 +38,5 @@ def newton(tol,x0,niter):
     
 #newton(0.0005,-4,30)
 #newton(10e-4,2,30)
-newton(0.5*10e-8,1.5,30 )
+#newton(0.5*10e-8,1.5,30)
+newton(1e-7, -0.5, 100)

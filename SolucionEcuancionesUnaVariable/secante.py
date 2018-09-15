@@ -9,7 +9,10 @@ def secante(tol, x0, x1, niter):
     #f = sympy.sin(x+3) - sympy.ln(x+1) + x**2 - 3
     #f = sympy.exp(-x**2 +1) -4*x**3 + 25
     #f = sympy.exp(x) - (5*x) + 2
-    f = x**3 + 4*x**2 - 10
+    #f = x**3 + 4*x**2 - 10
+    #f = x**3 - x**2 - x + 1 + sp.sin(x-1)**2
+
+    f = sympy.exp(-x) + sympy.sqrt(x) * sympy.ln(x**2 + 1) - x**2
     fx0 = f.evalf(subs={x:x0})
     if (fx0 == 0): 
         print(x0, "Es raiz")
@@ -46,4 +49,5 @@ def secante(tol, x0, x1, niter):
         print(table)
 
 #secante(0.5*10e-8, 1.8, 1.9, 30) 
-secante(0.5*10e-8,1.3,1.4,30)
+#secante(0.5*10e-8,1.3,1.4,30)
+secante(1e-3, 1, 1.2, 100) 

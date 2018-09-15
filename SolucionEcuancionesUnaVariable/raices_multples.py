@@ -5,7 +5,8 @@ sp.init_printing(use_unicode=True)
 
 def raices_multiples(x0, tolerancia, niter):
     x = sp.symbols('x')
-    f = x**4 - 18*x**2+81
+    #f = x**4 - 18*x**2+81
+    f = x**3 - x**2 - x + 1 + sp.sin(x-1)**2
     tabla = PrettyTable(['i', 'xn', 'f(xn)', 'df(xn)', 'ddf(xn)', 'ErrorAbs', 'ErrorRel'])
     df = f.diff(x) # Primera derivada
     ddf = df.diff(x) # Segunda derivada
@@ -26,4 +27,4 @@ def raices_multiples(x0, tolerancia, niter):
         contador = contador + 1
         tabla.add_row([contador, xn, fx, dfx, ddfx, error, abs(error/xn)])
     print(tabla)
-raices_multiples(-2.5, 1e-7, 100)
+raices_multiples(0.5, 1e-5, 100)
