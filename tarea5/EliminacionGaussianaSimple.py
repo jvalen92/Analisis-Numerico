@@ -24,6 +24,11 @@ for i in range(n):
 for i in range(n):
     b[i]= np.float64(input("Ingrese el valor del termino independiente en la casilla "+str(i+1)+": "))     
 """
-A = [[14,6,-2,3],[3,15,2,-5],[-7,4,-23,2],[1,-3,-2,16]]
-b = [12,32,-24,14]
+#A = [[14,6,-2,3],[3,15,2,-5],[-7,4,-23,2],[1,-3,-2,16]]
+#b = [12,32,-24,14]
+A = [[2, -1, 0, 3],
+     [1, 0.5, 3, 8],
+     [0, 13, -2, 11],
+      [14, 5, -2, 3]]
+b = [1, 1, 1, 1]
 print(despeje(A,b))    
