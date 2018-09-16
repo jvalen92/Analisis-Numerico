@@ -12,6 +12,7 @@
 \usepackage[spanish]{babel}
 \selectlanguage{spanish} 
 \usepackage[utf8]{inputenc}
+\usepackage[spanish, onelanguage]{algorithm2e} %for psuedo code
 \usepackage{amsthm}
 \usepackage{amsmath}
 
@@ -38,7 +39,7 @@
 			$\det {A} = a_{1j}C_{1j} + a_{2j}C_{2j} + ... + a_{nj}C_{nj}$
 		\end{itemize}
 	\end{theorem}
-	De acuerdo al teorema 1.1 se puede definir un algoritmo para encontrar el determinante de una matriz $A = [a_{ij}]$ de la siguiente manera:
+	De acuerdo al teorema 1.1 se puede definir una ecuación de recurrencia para encontrar el determinante de una matriz $A = [a_{ij}]$ de la siguiente manera:
 	
 	\begin{equation}
 	det(A, n)_{1\leq i \leq n}=\begin{cases}
@@ -57,6 +58,53 @@
 		\]
 		con $i = 1, ..., m$ y $j = 1, ..., p$
 	\end{definition}
+	\subsection{Escalonamiento de matrices}
+	\begin{definition}
+		Sea $A = [a_{ij}]$ una matriz de $n \times n$. Decimos que $A$ está escalonada si $\forall{i,j}, 1\leq i \leq j \leq n$, $a_{ij} = 0$.
+	\end{definition}
+	\begin{algorithm}[H]
+		\caption{Algoritmo para escalonar matrices}
+		Leer $A$, $b$ \\
+		\uIf{$A \not \in \Re^{n\times n}$ \textbf{y} $b \not\in \Re^{n}$}
+		{$A$ debe ser cuadrada y $b$ debe ser un arreglo de $n$ posiciones}
+		\uElseIf{$\det{A} = 0$}
+		{$A$ debe ser invertible}
+		\Else
+		{
+			\For{$k = 1$ \KwTo $n-1$}
+			{
+				\If{$A_{kk} = 0$}
+				{
+					$j \leftarrow k + 1$\\
+					\While{$j < n$ \textbf{y} $A_{jk} = 0$}
+					{
+						$j \leftarrow j + 1$
+					}
+					\If{$j < n$}
+					{
+						\For{$l = k$ \KwTo $n$}
+						{
+							$A_{kl} \leftarrow A_{kl} + A_{jl}$
+						}
+						$b_k \leftarrow b_k + b_j$
+					}
+				}
+				\For{$i = k + 1$ \KwTo $n$}
+				{
+					\If{$A_{ki} \not = 0$}
+					{
+						$m \leftarrow \frac{A_{ik}}{A_{kk}}$\\
+						\For{$l = k$ \KwTo $n$}
+						{
+							$A_{il} \leftarrow A_{il} - m\times A_{kl}$
+						}
+						$b_i \leftarrow b_i - m \times b_k$
+					}
+				}
+			}
+		}
+		La solución $(A, b)$
+	\end{algorithm}
 	\begin{thebibliography}{9}
 		\bibitem{algebralineal}
 		Orlando García Jaimes, Jairo A. Villegas Gutiérrez, Jorge Iván. \textit{Álgebra Lineal}. Editorial EAFIT, Medellín 2012. 
