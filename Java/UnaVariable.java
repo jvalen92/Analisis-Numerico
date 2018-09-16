@@ -174,7 +174,7 @@ public class UnaVariable {
         if (fxi == 0 || fxs == 0) {
             System.out.printf("Hay raiz en %.15f\n", (fxi == 0 ? fxi : fxs));
         } else if (fxi * fxs < 0) {
-            double xm = (xi + xs) / 2;
+            double xm =  xi - ((fxi * (xs - xi))) / (fxs - fxi);;
             double fxm = Utilities.f(xm)[0];
             int contador = 1;
             tabla.addRow(Utilities.obtenerFila(contador, xi, xs, xm, fxm, "No existe", "No existe"));
