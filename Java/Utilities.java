@@ -51,7 +51,7 @@ public class Utilities {
     }
     public static double[] h(double a){
         DerivativeStructure x = new DerivativeStructure(MAX_VARIABLES, MAX_DERIVATES, STARTING_INDEX, a);
-        x = x.exp().subtract(x).subtract(1);
+        x = (x.exp()).subtract(x).subtract(1);
         return x.getAllDerivatives();
     }
 }

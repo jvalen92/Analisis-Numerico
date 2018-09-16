@@ -4,7 +4,7 @@ import java.io.PrintWriter;
 
 public class OptimizacionUnaVariable {
     public static void muller(double x0, double x1, double x2, double tolerancia, int niter){
-        Utilities.Par<PrettyTable, PrintWriter> par = Utilities.iniciarArchivo("muller", "i", "x0", "fx", "error_abs", "error_rel");
+        Utilities.Par<PrettyTable, PrintWriter> par = Utilities.iniciarArchivo("muller", "i", "x0", "fx", "error_abs");
         PrintWriter writer = par.getSegundo();
         PrettyTable tabla = par.getPrimero();
         double h1 = x1 - x0;
@@ -18,7 +18,7 @@ public class OptimizacionUnaVariable {
         tabla.addRow(Utilities.obtenerFila(contador, p, "", ""));
         while(contador < niter && error > tolerancia){
             double b = y2 + (h2 * d);
-            double D = Math.sqrt(Math.pow(b, 2)- 4 * Utilities.f(x2)[0]);
+            double D = Math.sqrt(Math.pow(b, 2)- 4 * Utilities.f(x2)[0]*d);
             double E = Double.MIN_VALUE;
             if(Math.abs(b - D) < Math.abs(b + d)){
                 E = b + d;

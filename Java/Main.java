@@ -11,7 +11,8 @@ public class Main {
         UnaVariable.secante(TOL, 0.5, 1, N);
         UnaVariable.raicesMultiples(1, TOL, N);
         OptimizacionUnaVariable.steffensen(-0.5, N, TOL);
-        //OptimizacionUnaVariable.muller(0.5, 0.7, 1.1, TOL, N);
+        OptimizacionUnaVariable.muller(0.5, 1, 1.5, TOL, N);
         SistemaDeEcuaciones.det(new double[][]{{2, -1, 0, 3}, {1, 0.5, 3, 8}, {0, 13, -2, 11}, {14, 5, -2, 3}});
+        Graficador.graficar();
     }
 }
