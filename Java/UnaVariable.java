@@ -151,7 +151,7 @@ public class UnaVariable {
         double error = tolerancia + 1.0;
         tabla.addRow(Utilities.obtenerFila(contador, xn, fx, dfx, ddfx, "No existe", "No existe"));
         while (contador < niter && error > tolerancia) {
-            double xnn = (fx * dfx) / (Math.pow(dfx, 2) - fx * ddfx);
+            double xnn = xn - ((fx * dfx) / (Math.pow(dfx, 2) - fx * ddfx));
             error = Math.abs(xn - xnn);
             xn = xnn;
             fx = Utilities.h(xn)[0];
@@ -166,7 +166,7 @@ public class UnaVariable {
     }
 
     public static void reglaFalsa(double xi, double xs, double tolerancia, int niter) {
-        Utilities.Par<PrettyTable, PrintWriter> par = Utilities.iniciarArchivo("regla_false", "i", "xi", "xs", "xm", "fxm", "error_abs", "error_rel");
+        Utilities.Par<PrettyTable, PrintWriter> par = Utilities.iniciarArchivo("regla_falsa", "i", "xi", "xs", "xm", "fxm", "error_abs", "error_rel");
         PrintWriter writer = par.getSegundo();
         PrettyTable tabla = par.getPrimero();
         double fxi = Utilities.f(xi)[0];
