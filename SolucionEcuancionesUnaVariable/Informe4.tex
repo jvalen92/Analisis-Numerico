@@ -1,0 +1,314 @@
+\documentclass[12pt]{article}
+
+\title{Informe Tarea 4}
+
+\author {Ronald Cardona
+\and Anderson Grajales
+\and Sebastian Valencia
+\and Julian Sanchez}
+
+% Packages
+\usepackage[spanish]{babel}
+\selectlanguage{spanish} 
+\usepackage[spanish, onelanguage]{algorithm2e} %for psuedo code
+\usepackage[utf8]{inputenc}
+
+
+\begin{document}
+
+\maketitle
+
+
+\section{Solución numérica de ecuaciones de una variable}
+
+En el presente documento se describen algunos de los algoritmos numéricos principales para resolver ecuaciones de una variable. Estos algoritmos nos permiten ya sea encontrar intervalos en los que existe una raíz de la ecuación $f(x) = 0$ ó encontrar propiamente la raíz.
+
+\subsection{Búsqueda Incremental}
+
+\begin{algorithm}[H]
+	\caption{Algoritmo de Búsqueda Incremental}
+	\SetAlgoLined
+	Leer $x_0$, $delta$, $niter$ \\
+	$fx0$ $\leftarrow$ $f(x_0)$ \\
+	\eIf{$fx0 = 0$}
+	{$x_0$ es raíz}
+	{
+		$x_1 \leftarrow x_0 + delta$ \\
+		$contador \leftarrow 1$ \\
+		$fx1 \leftarrow f(x_1)$ \\
+		\While{$fx0 * fx1 > 0$ \textbf{y} $contador < niter$ }
+		{
+			$x_0 \leftarrow x_1$ \\
+			$fx0 \leftarrow fx1$ \\
+			$x_1 \leftarrow x_0 + delta$ \\
+			$fx1 \leftarrow f(x_1)$ \\
+			$contador \leftarrow contador + 1$
+		}
+		\uIf{$fx1 = 0$}
+		{$x_1$ es raíz}
+		\uElseIf{$fx0 * fx1 < 0$}
+		{Hay raíz entre $x_0$ y $x_1$}
+		\Else{Fracasó en $niter$ iteraciones}
+	}
+\end{algorithm}
+
+\subsection{Método de la bisección}
+
+\begin{algorithm}[H]
+	
+	\caption{Método de la Bisección}
+	\SetAlgoLined
+	Leer $x_i$, $x_s$, $tolerancia$, $niter$ \\
+	$tabla \leftarrow $[i, x inf, x sup, x med, fxm, Error Abs, Error Rel] \\
+	$fxi \leftarrow f(x_i)$ \\
+	$fxs \leftarrow f(x_s)$ \\
+	\uIf{$fxi = 0$}
+	{$x_i$ es raíz}
+	\uElseIf{$fxs = 0$}
+	{$x_s$ es raíz}
+	\uElseIf{$fxi * fxs < 0$}
+	{
+		$x_m \leftarrow \frac{x_i + x_s}{2}$\\
+		$fxm = f(x_m)$\\
+		$contador \leftarrow 1$\\
+		$tabla \leftarrow $[$contador$, $x_i$, $x_s$, $x_m$, $fxm$, No existe, No existe]
+		$error \leftarrow tolerancia + 1$ \\
+		\While{$error > tolerancia$ \textbf{y} $fxm \neq 0$ \textbf{y} $contador < niter$}
+		{
+			\eIf{$fxi * fxm < 0$}
+			{$x_s \leftarrow x_m$\\
+			$fxs \leftarrow fxm$\\}
+			{$x_i \leftarrow x_m$\\
+			$fxi \leftarrow fxm$\\}
+			$x_{aux} \leftarrow x_m$\\
+			$x_m \leftarrow \frac{x_i + x_s}{2}$\\
+			$fxm \leftarrow f(x_m)$\\
+			$error \leftarrow |x_m - x_{aux}|$\\
+			$error Rel \leftarrow \frac{error}{x_m}$ \\
+			$tabla \leftarrow $[$contador$, $x_i$, $x_s$, $x_m$, $fxm$, $error$, $error Rel$] \\
+			$contador \leftarrow contador + 1$
+		}
+		\uIf{$fxm = 0$}
+		{$x_m$ es raíz}
+		\uElseIf{$error < tolerancia$}
+		{$x_m$ es aproximación a una raíz con una tolerancia = $tolerancia$}
+		\Else
+		{Fracasó en $niter$ iteraciones}
+	}
+	\Else
+	{El intervalo es inadecuado}
+	imprimir tabla
+
+\end{algorithm}
+\subsection{Método de la regla falsa}
+\begin{algorithm}[H]
+	\caption{Método de la Regla Falsa}
+	\SetAlgoLined
+	Leer $x_i$, $x_s$, $tolerancia$, $niter$ \\
+	$tabla \leftarrow $[i, x inf, x sup, x mi, fxm, Error Abs, Error Rel] \\
+	$fxi \leftarrow f(x_i)$ \\
+	$fxs \leftarrow f(x_s)$ \\
+	\uIf{$fxi = 0$}
+	{$x_i$ es raíz}
+	\uElseIf{$fxs = 0$}
+	{$x_s$ es raíz}
+	\uElseIf{$fxi * fxs < 0$}
+	{
+		$x_m \leftarrow x_i - \frac{f(x_i)*(x_s - x_i)}{f(x_s) - f(x_i)}$\\
+		$fxm = f(x_m)$\\
+		$contador \leftarrow 1$\\
+		$tabla \leftarrow $[$contador$, $x_i$, $x_s$, $x_m$, $fxm$, No existe, No existe]
+		$error \leftarrow tolerancia + 1$ \\
+		\While{$error > tolerancia$ \textbf{y} $fxm \neq 0$ \textbf{y} $contador < niter$}
+		{
+			\eIf{$fxi * fxm < 0$}
+			{$x_s \leftarrow x_m$\\
+				$fxs \leftarrow fxm$\\}
+			{$x_i \leftarrow x_m$\\
+				$fxi \leftarrow fxm$\\}
+			$x_{aux} \leftarrow x_m$\\
+			$x_m \leftarrow x_i - \frac{f(x_i)*(x_s - x_i)}{f(x_s) - f(x_i)}$\\
+			$fxm \leftarrow f(x_m)$\\
+			$error \leftarrow |x_m - x_{aux}|$\\
+			$error Rel \leftarrow \frac{error}{x_m}$\\
+			$tabla \leftarrow $[$contador$, $x_i$, $x_s$, $x_m$, $fxm$, $error$, $error Rel$] \\
+			$contador \leftarrow contador + 1$ 
+			
+			
+		}
+		\uIf{$fxm = 0$}
+		{$x_m$ es raíz}
+		\uElseIf{$error < tolerancia$}
+		{$x_m$ es aproximación a una raíz con una tolerancia = $tolerancia$}
+		\Else
+		{Fracasó en $niter$ iteraciones}
+	}
+	\Else
+	{El intervalo es inadecuado}
+	imprimir tabla
+\end{algorithm}
+\subsection{Método de Punto Fijo}
+\begin{algorithm}[H]
+	\caption{Método de Punto Fijo}
+	\SetAlgoLined
+	Leer $tolerancia$, $x_a$, $niter$\\
+	$tabla \leftarrow $[i, xn, fxn, Error Abs, Error Rel] \\
+	$fx \leftarrow f(x_a)$\\
+	$contador \leftarrow 0$ \\
+	$error \leftarrow tolerancia + 1$\\
+	$tabla \leftarrow $[$contador$, $x_n$, $fxn$, No existe, No existe] \\
+	\While{$fx \neq 0$ \textbf{y} $error > tolerancia$ \textbf{y} $contador < niter$}
+	{
+		$x_n \leftarrow g(x_a)$\\
+		$fx \leftarrow f(x_n)$\\
+		$error \leftarrow |x_n - x_a|$\\
+		$error Rel \Leftarrow \frac{error}{x_n}$
+		$x_a \leftarrow x_n$\\
+		$tabla \leftarrow $[$contador$, $x_n$,$fxn$, $error$, $error Rel$] \\
+		$contador \leftarrow contador + 1$\\
+	}
+	\uIf{$fx = 0$}
+	{$x_a$ es raíz}
+	\uElseIf{$error < tolerancia$}
+	{$x_a$ es aproximación con una tolerancia = $tolerancia$}
+	\Else
+	{El método fracasó en $niter$ iteraciones}
+	imprimir tabla
+\end{algorithm}
+\subsection{Método de Newton}
+\begin{algorithm}[H]
+	\caption{Método de Newton}
+	\SetAlgoLined
+	Leer $tol$, $x_0$, $niter$\\
+	$tabla \leftarrow $[i, xn, fxn, Error Abs, Error Rel] \\
+	$fx \leftarrow f(x_0)$\\
+	$dfx = f'(x_0)$\\
+	$contador \leftarrow 0$ \\
+	$error \leftarrow tol + 1$\\
+	$tabla \leftarrow $[$contador$, $x_i$, $fxn$, No existe, No existe]\\
+	\While{$fx \neq 0$ \textbf{y} $dfx \neq 0$ \textbf{y} $error > tol$ \textbf{y} $contador < niter$}
+	{
+		$x_1 \leftarrow x_0 - \frac{fx}{dfx}$ \\
+		$fx \leftarrow f(x_1)$ \\
+		$dfx \leftarrow f'(x_1)$ \\
+		$error \leftarrow |x_1 - x_0|$ \\
+		$error Rel \leftarrow \frac{error}{x_n}$ \\
+		$x_0 \leftarrow x_1$\\
+		$contador \leftarrow contador + 1$ \\
+		$tabla \leftarrow $[$contador$, $x_{1}$, $fxn$, $error$, $error Rel$]
+	}
+	\uIf{$fx = 0$}
+	{$x_a$ es raíz}
+	\uElseIf{$error < tol$}
+	{$x_a$ es aproximación con una tolerancia = $tolerancia$}
+	\uElseIf{$dfx = 0$}
+	{$x_1$ es una posible raíz múltiple}
+	\Else
+	{El método fracasó en $niter$ iteraciones}	
+	imprimir tabla
+\end{algorithm}
+
+\subsection{Método de la Secante}
+    \begin{algorithm}[H]
+        \caption{Método de la Secante}
+        \SetAlgoLined
+		Leer $x_0$, $x_1$, $niter$, $tol$\\
+		$tabla \leftarrow $[i, xn, fxn, Error Abs, Error Rel] \\
+        $fx_{0} \leftarrow f(x_{0})$ \\
+        \eIf{$fx_{0}$ = 0}
+            {$imprimir$ $x_{0}$ es raíz}
+            {
+            $fx_{1} \leftarrow f(x_{1})$ \\ 
+            $contador = 0$ \\
+            $error = tol + 1$ \\
+            $denominador \leftarrow fx_{1} - fx_{0}$ \\ 
+            \While{$error > tol$ \textbf{y} $fx_{1} \neq 0$ \textbf{y} $denominador \neq 0$ \textbf{y} $contador < niter$}
+            {
+                $x_{2} \leftarrow x_{1} - \frac{fx_{1} * (x_{1} - x_{0})}{denominador}$ \\
+				$error \leftarrow |\frac{x_{2} - x_{1}}{x_{2}}|$ \\
+				$error \Leftarrow \frac{error}{x_{2}}$ \\
+                $x_{0} \leftarrow x_{1}$ \\
+                $fx_{0} \leftarrow fx_{1}$ \\
+                $x_{1} \leftarrow x_{2}$ \\ 
+                $fx_{1} \leftarrow f(x_{1})$\\
+                $denominador \leftarrow fx_{1} - fx_{0}$\\
+				$contador \leftarrow contador + 1$\\
+				$tabla \leftarrow $[$contador$, $x_{1}$, $fx{1}$, $error$, $error Rel$]
+            }
+            \uIf{$fx_{1} = 0$}
+            {$imprimir$ $x_{1}$ es raíz}
+            \uElseIf{$error < tol$}
+            {$imprimir$ $x_{1}$ es una aproximación con tolerancia = $tol$}
+            \uElseIf{$denominador = 0$}
+            {$imprimir$ probablemente existe una raiz multiple}
+            \Else
+            {$imprimir$ fracasó en $niter$ iteraciones}
+			}
+			imprimir tabla
+	\end{algorithm}
+	
+	\subsection{Método de Raices Multiples}
+    \begin{algorithm}[H]
+        \caption{Método de Raices Multiples}
+        \SetAlgoLined
+		Leer $x_0$, $niter$, $tol$ \\
+		$tabla \Leftarrow $[i, xn, fx, dfx, ddfx, Error Abs, Error Rel] \\
+        $fx \leftarrow f(x_{0})$ \\
+        $dfx \leftarrow f'(x_{0})$ \\
+        $ddfx \leftarrow f''(x_{0})$ \\
+        $denominador \leftarrow dfx^2 - fx * ddfx$\\
+		$contador \leftarrow 0$ \\
+		$tabla \Leftarrow $[$contador$, $x_n$, $fx$, $dfx$, $ddfx$, No existe, No existe] \\
+        $error \leftarrow tol + 1$ \\
+        \While{$error > tol$ \textbf{y} $fx \neq 0$ \textbf{y} $denominador \neq 0$ \textbf{y} $contador < niter$}
+        {
+            $x_{1} \leftarrow x_{0} - \frac{fx * dfx}{denominador}$ \\ 
+            $fx \leftarrow f(x_{1})$ \\ 
+            $dfx \leftarrow f'(x_{1})$ \\
+            $ddfx \leftarrow f''(x_{1})$\\
+            $denominador \leftarrow dfx^2 - fx * ddfx$\\
+			$error \leftarrow |x_{1} - x_{0}|$\\
+			$x_{0} \leftarrow x_{1}$\\
+			$error Rel \leftarrow \frac{error}{x_{0}} $\\
+			$contador \leftarrow contador + 1$\\
+			$tabla \Leftarrow $[$contador$, $x_n$, $fx$, $dfx$, $ddfx$, $error$, $error Rel$] \\
+        }
+        \uIf{$fx = 0$}
+            {$imprimir$ $x_{0}$ es raíz}
+            \uElseIf{$error < tol$}
+            {$imprimir$ $x_{0}$ es una aproximación con tolerancia = $tol$}
+            \Else
+			{$imprimir$ fracasó en $niter$ iteraciones}
+			imprimir tabla
+	\end{algorithm}
+	
+	\section{Metodos de optimizacion para la solución numérica de ecuaciones de una variable}
+	En algunos casos es necesario optimizar algunos métodos numéricos con la finalidad de alcanzar una tolerancia en el menor numero de iteraciones posible. Es por esto, que acá se presenta un método de optimización a el método de Punto Fijo, que hace que la convergencia sea mucho mas rápida y exacta.
+	
+	\subsection{Método de Steffensen}
+    \begin{algorithm}[H]
+        \caption{Método de Steffensen}
+        \SetAlgoLined
+        \tcp{Tomado de: https://en.wikipedia.org/wiki/Steffensen\%27s\_method}
+		Leer $x_0$, $niter$, $tol$ \\
+		$tabla \Leftarrow $[i, x0, x1, x2, x, fx, Error] \\
+        $error = 1 + $tol\\
+		$contador = 0$\\
+		$tabla$ = [$contador$, $x_{0}$, $x_{1}$, $x_{2}$, $x$, $f_{(x)}$, No existe, No existe ]
+        \While{$contador < niter$ \textbf{y} $error > tol$}
+        {
+            $x_1 = f(x_0)$\\
+            $x_2 = f(x_1)$\\
+            $f(x) = f(x_0)$\\
+            $p = x_0 - \frac{(x_1-x_2)^2}{x_2-2*x_1+x_0}$\\
+			$error = |x - x_0|$\\
+            $x_0 = p$\\
+			$contador = contador + 1$\\
+			$tabla$ = [$contador$, $x_{0}$, $x_{1}$, $x_{2}$, $x$, $f_{(x)}$, $error$]
+        }
+        \eIf{$error \leq tol$}
+        {Hay una raíz en $p$}
+		{El método fracasó después de $niter$ iteraciones}
+		imprimir tabla
+	\end{algorithm}
+\end{document}
