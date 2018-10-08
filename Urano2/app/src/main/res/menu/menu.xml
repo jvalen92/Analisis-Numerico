@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<item
+    android:id="@+id/menu"
+    android:title="Biseccion"
+    app:showAsAction="never"
+    ></item>
+    <item
+        android:title="Regla Falsa"
+        app:showAsAction="never">
+    </item>
+    <item
+        android:title="Punto Fijo"
+        app:showAsAction="never">
+    </item>
+    <item
+        android:title="Newton"
+        app:showAsAction="never">
+    </item>
+    <item
+        android:title="Secante"
+        app:showAsAction="never">
+    </item>
+
+    <item
+        android:title="Raices multiples"
+        app:showAsAction="never">
+    </item>
+
+</menu>
