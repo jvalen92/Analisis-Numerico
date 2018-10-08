@@ -42,8 +42,8 @@ class SistemaDeEcuaciones:
         """
         eg = eliminacion_gaussiana.EliminacionGaussiana()
         eu = eliminacion_gaussiana.GaussUtilities()
-        (L, U, b_a) = eg.escalonar(A, b, pivot=0, l=True, u=True, b_a=True)
-        z = eu.solucionar_regr(L, b_a)
+        (L, U) = eg.escalonar(A, b, pivot=0, l=True, u=True)
+        z = eu.solucionar_prog(L, b)
         x = eu.solucionar_regr(U, z)
         return x
 
@@ -55,7 +55,6 @@ if __name__== "__main__":
     x2 = test.eliminacion_gaussiana_pivoteo_parcial(A, b)
     x3 = test.eliminacion_gaussiana_pivoteo_total(A, b)
     x4 = test.factorizacion_LU_gauss_simple(A, b)
-    
     # Testing Ax=B
     print(np.allclose(x1, x2))
     print(np.allclose(x2, x3))
