@@ -23,7 +23,7 @@ allprojects {
     repositories {
         jcenter()
         maven {
-            url "https://maven.google.com"
+            url "https://jitpack.io"
         }
     }
 }
@@ -36,4 +36,15 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.android.support:design:25.4.0'
+
+    //Anderson
+
+    // This dependency is found on compile classpath of this component and consumers.
+    implementation 'com.google.guava:guava:25.0-android'
+
+    // Use JUnit test framework
+    testImplementation 'junit:junit:4.12'
+    implementation group: 'org.apache.commons', name: 'commons-math3', version: '3.6.1'
+    implementation 'com.github.skebir:prettytable:v1.0'
+    implementation group: 'org.knowm.xchart', name: 'xchart', version: '3.5.2'
 }
