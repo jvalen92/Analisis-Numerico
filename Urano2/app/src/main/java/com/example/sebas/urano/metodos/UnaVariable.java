@@ -5,7 +5,10 @@ import java.io.PrintWriter;
 
 public class UnaVariable {
 
-    public static void newton(double tolerancia, double x0, int niter) {
+    public void UnaVariable(){
+
+    }
+    public void newton(double tolerancia, double x0, int niter) {
         Utilities.Par<PrettyTable, PrintWriter> par = Utilities.iniciarArchivo("newton", "i", "x0", "fx", "error_abs", "error_rel");
         PrintWriter writer = par.getSegundo();
         PrettyTable tabla = par.getPrimero();
@@ -35,7 +38,7 @@ public class UnaVariable {
         writer.println(tabla.toString());
         writer.close();
     }
-    public static void puntoFijo(double tolerancia, double xa, int niter) {
+    public void puntoFijo(double tolerancia, double xa, int niter) {
         Utilities.Par<PrettyTable, PrintWriter> par = Utilities.iniciarArchivo("punto_fijo", "i", "xn", "fx", "error_abs", "error_rel");
         PrintWriter writer = par.getSegundo();
         PrettyTable tabla = par.getPrimero();
@@ -64,7 +67,7 @@ public class UnaVariable {
         writer.close();
     }
 
-    public static void biseccion(double xi, double xs, double tolerancia, int niter) {
+    public String biseccion(double xi, double xs, double tolerancia, int niter) {
         Utilities.Par<PrettyTable, PrintWriter> par = Utilities.iniciarArchivo("biseccion", "i", "xi", "xs", "xm", "fxm", "error_abs", "error_rel");
         PrintWriter writer = par.getSegundo();
         PrettyTable tabla = par.getPrimero();
@@ -72,6 +75,7 @@ public class UnaVariable {
         double fxs = Utilities.f(xs)[0];
         if (fxi == 0 || fxs == 0) {
             System.out.printf("Hay raiz en %.15f\n", (fxi == 0 ? fxi : fxs));
+            return String.format ("Hay raiz en %.15f\n", (fxi == 0 ? fxi : fxs));
         } else if (fxi * fxs < 0) {
             double xm = (xi + xs) / 2;
             double fxm = Utilities.f(xm)[0];
@@ -96,19 +100,26 @@ public class UnaVariable {
             }
             if (fxm == 0) {
                 System.out.printf("Raiz en %.15f\n", xm);
+                return String.format("Raiz en %.15f\n", xm);
             } else if (error < tolerancia) {
                 System.out.printf(" %.15f es una aproximacion a una raiz con una tolerancia = %.15f\n", xm, tolerancia);
+                return String.format(" %.15f es una aproximacion a una raiz con una tolerancia = %.15f\n", xm, tolerancia);
             } else {
                 System.out.printf("Fracaso en %d iteraciones", niter);
+                return String.format("Fracaso en %d iteraciones", niter);
             }
+
         } else {
             System.out.println("El intervalo es inadecuado");
+            return String.format("El intervalo es inadecuado");
         }
+        /*
         writer.println(tabla.toString());
-        writer.close();
+        writer.close();*/
+
     }
 
-    public static void busquedaIncremental(double x0, double delta, int niter) {
+    public void busquedaIncremental(double x0, double delta, int niter) {
         Utilities.Par<PrettyTable, PrintWriter> par = Utilities.iniciarArchivo("busqueda_incremental", "i", "xi", "fx");
         PrintWriter writer = par.getSegundo();
         PrettyTable tabla = par.getPrimero();
@@ -141,7 +152,7 @@ public class UnaVariable {
         writer.close();
     }
 
-    public static void raicesMultiples(double x0, double tolerancia, int niter) {
+    public void raicesMultiples(double x0, double tolerancia, int niter) {
         Utilities.Par<PrettyTable, PrintWriter> par = Utilities.iniciarArchivo("raices_multiples", "i", "xn", "fx", "dfx","ddfx" ,"error_abs", "error_rel");
         PrintWriter writer = par.getSegundo();
         PrettyTable tabla = par.getPrimero();
@@ -167,7 +178,7 @@ public class UnaVariable {
         writer.close();
     }
 
-    public static void reglaFalsa(double xi, double xs, double tolerancia, int niter) {
+    public void reglaFalsa(double xi, double xs, double tolerancia, int niter) {
         Utilities.Par<PrettyTable, PrintWriter> par = Utilities.iniciarArchivo("regla_falsa", "i", "xi", "xs", "xm", "fxm", "error_abs", "error_rel");
         PrintWriter writer = par.getSegundo();
         PrettyTable tabla = par.getPrimero();
@@ -211,7 +222,7 @@ public class UnaVariable {
         writer.close();
     }
 
-    public static void secante(double tolerancia, double x0, double x1, int niter) {
+    public void secante(double tolerancia, double x0, double x1, int niter) {
         Utilities.Par<PrettyTable, PrintWriter> par = Utilities.iniciarArchivo("secante", "i", "x0", "fx0", "error_abs", "error_rel");
         PrintWriter writer = par.getSegundo();
         PrettyTable tabla = par.getPrimero();

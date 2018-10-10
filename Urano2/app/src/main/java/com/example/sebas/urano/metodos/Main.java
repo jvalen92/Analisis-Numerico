@@ -6,10 +6,14 @@ import java.io.PrintWriter;
 public class Main {
     private static final int N = 100;
     private static final double TOL = 1e-7;
+    UnaVariable p = new UnaVariable();
+    /*
 
     public static void main(String[] args) {
         UnaVariable.busquedaIncremental(-3, 0.5, N);
-        UnaVariable.biseccion(0, 1, TOL, N);
+        UnaVariable uv = new UnaVariable();
+        uv.biseccion(0, 1, TOL, N);
+
         UnaVariable.reglaFalsa(0, 1, TOL, N);
         UnaVariable.newton(TOL, 0.5, N);
         UnaVariable.puntoFijo(TOL, -0.5, N);
@@ -41,5 +45,5 @@ public class Main {
         writer.flush();
         writer.close();
         Graficador.graficar();
-    }
+    }*/
 }
