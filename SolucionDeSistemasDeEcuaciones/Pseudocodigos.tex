@@ -172,13 +172,13 @@
             $filaMayor \leftarrow k$\\
             \For{$s \leftarrow k + 1$ \KwTo $n$}
             {
-                \uIf{$|A_{sk}| \gt mayor $}
+                \uIf{$|A_{sk}| > mayor $}
                 {
                     $mayor \leftarrow |A_{sk}| $ \\
                     $filaMayor \leftarrow s$\\
                 }
             }
-            \uIf {$mayor \eqeq 0$}
+            \uIf {$mayor = 0$}
             {
                 El sistema no tiene solucion unica
             } \uElseIf {$filaMayor \neq k$}
@@ -193,6 +193,56 @@
             Retornar($A$, $b$)
         \end{algorithm}
 
+        \subsection{Eliminacion Gaussiana con Pivoteo Total}
+        
+        \begin{algorithm}[H]
+            \caption{Algoritmo de Pivoteo Total}
+            Leer $A$, $b$, $n$, $k$ \\
+            $mayor \leftarrow |A_{kk}|$\\
+            $filaMayor \leftarrow k$\\
+            $columnaMayor \leftarrow k$\\
+            \For{$r \leftarrow k$ \KwTo $n$}
+            {
+                \For{$s \leftarrow k$ \KwTo $n$}
+                {
+                    \uIf{$|A_{rs}| > mayor $}
+                    {
+                        $mayor \leftarrow |A_{rs}| $ \\
+                        $filaMayor \leftarrow r$\\
+                        $columnaMayor \leftarrow s$
+                    }
+                }
+            }
+            \uIf {$mayor = 0$}
+            {
+                El sistema no tiene solucion unica
+            } \uElse {
+                \uIf {$filaMayor \neq k$}
+                {
+                    $temp \leftarrow A_{k}$\\
+                    $A_{k} \leftarrow A_{filaMayor}$\\
+                    $A_{filaMayor} \leftarrow temp$\\
+                    $temp \leftarrow b_{k}$\\
+                    $b_{k} \leftarrow b_{filaMayor}$\\
+                    $b_{filaMayor} \leftarrow temp$\\
+                }
+                \uIf {$columnaMayor \neq k$}
+                {
+                    $temp \leftarrow A_{0 columnaMayor}$\\
+                    $A_{0 columnaMayor} \leftarrow A_{0k}$\\
+                    $A_{0k} \leftarrow temp$\\
+                    $temp \leftarrow b_{0 columnaMayor}$\\
+                    $b_{0 columnaMayor} \leftarrow b_{0k}$\\
+                    $b_{0k} \leftarrow temp$\\
+                    $temp \leftarrow marcas_{k}$\\
+                    $marcas_{k} \leftarrow marcas_{columnaMayor}$\\
+                    $marcas_{columnaMayor \leftarrow temp}$\\
+                }
+                Retornar($A$, $b$)\\
+            }
+            
+        \end{algorithm}
+
 
 
     
@@ -200,4 +250,4 @@
             \bibitem{algebralineal}
             Orlando García Jaimes, Jairo A. Villegas Gutiérrez, Jorge Iván. \textit{Álgebra Lineal}. Editorial EAFIT, Medellín 2012. 
         \end{thebibliography}
-    \end{document}
+    \end{document} 
