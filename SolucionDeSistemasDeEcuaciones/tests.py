@@ -46,18 +46,38 @@ class SistemaDeEcuaciones:
         z = eu.solucionar_prog(L, b)
         x = eu.solucionar_regr(U, z)
         return x
+    def factorizacion_LU_gauss_pivoteo_parcial(self, A, b):
+        """
+        Reliza la factorizacion A = LU,
+        Lb = z, Ux = b y devuelve x,
+        dado A y b
+        """
+        eg = eliminacion_gaussiana.EliminacionGaussiana()
+        eu = eliminacion_gaussiana.GaussUtilities()
+        (L, U) = eg.escalonar(A, b, pivot=1, l=True, u=True)
+        z = eu.solucionar_prog(L, b)
+        x = eu.solucionar_regr(U, z)
+        return x
+
 
 if __name__== "__main__":
-    A = [[2, -3, 4, 1], [-4, 2, 1, -2], [1, 3, -5, 3], [-3, 1, 1, -1]]
-    b = [10, -10, 32, -21]
+    #A = [[2, -3, 4, 1], [-4, 2, 1, -2], [1, 3, -5, 3], [-3, 1, 1, -1]]
+    #b = [10, -10, 32, -21]
+    A = [[-7, 2, -3, 4],
+         [5, -1, 14, -1],
+         [1, 9, -7, 5],
+         [-12, 13, -8, -4]]
+    b = [-12, 13, 31, -32]
     test = SistemaDeEcuaciones()
     x1 = test.eliminacion_gaussiana_simple(A, b)
     x2 = test.eliminacion_gaussiana_pivoteo_parcial(A, b)
     x3 = test.eliminacion_gaussiana_pivoteo_total(A, b)
     x4 = test.factorizacion_LU_gauss_simple(A, b)
+    x5 = test.factorizacion_LU_gauss_pivoteo_parcial(A, b)
     # Testing Ax=B
     print(np.allclose(x1, x2))
     print(np.allclose(x2, x3))
     print(np.allclose(x3, x4))
+    print(x5)
     #Testing det
     print(np.allclose(np.linalg.det(A), matriz.MatrizUtilities().det(A)))
