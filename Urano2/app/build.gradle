@@ -37,14 +37,15 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.android.support:design:25.4.0'
 
-    //Anderson
+    // Include all these libraries for expression evaluation and symbolic math
+    api project(':symjalib-release')
+    implementation 'io.github.kexanie.library:MathView:0.0.5'
+    // Include this library to graph
+    implementation 'com.jjoe64:graphview:4.2.0'
 
     // This dependency is found on compile classpath of this component and consumers.
     implementation 'com.google.guava:guava:25.0-android'
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
-    implementation group: 'org.apache.commons', name: 'commons-math3', version: '3.6.1'
-    implementation 'com.github.skebir:prettytable:v1.0'
-    implementation group: 'org.knowm.xchart', name: 'xchart', version: '3.5.2'
 }
