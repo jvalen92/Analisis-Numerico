@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
-import android.widget.Button;
 
 
 import com.example.sebas.urano.Adapters.P_Adapter;
@@ -89,5 +88,12 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void abrirFuncionesGrafico(View view){
+
+        Intent nuevaActividad = new Intent(MainActivity.this, Grafico.class);
+        startActivity(nuevaActividad);
+
     }
 }

@@ -27,9 +27,6 @@ public class Funciones extends AppCompatActivity {
 
         // Fill all the spaces whilst there are functions
         llenarFunciones();
-        String fun =getIntent().getExtras().getString("funcion");
-        EditText f1 = (EditText) findViewById(R.id.txtFuncion1);
-        f1.setText(fun);
 
     }
 

@@ -1,6 +1,7 @@
 package com.example.sebas.urano;
 
 import android.content.Intent;
+import android.content.UriMatcher;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,7 +12,7 @@ import android.support.v7.widget.Toolbar;
 
 import com.example.sebas.urano.Data.Funcion;
 import com.example.sebas.urano.Math.GraphUtilities;
-import com.example.sebas.urano.Math.NumericalUtilities;
+import com.example.sebas.urano.Math.Utilities;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
@@ -56,11 +57,11 @@ public class Grafico extends AppCompatActivity {
             double[] linspace = GraphUtilities.linspace(-10, 10, 100);
             LineGraphSeries<DataPoint> series;
             for(String s: funcs){
-                int[] colr = NumericalUtilities.ramdomColor();
+                int[] colr = Utilities.ramdomColor();
                 int red = colr[0];
                 int blue = colr[1];
                 int green = colr[2];
-                DataPoint[] points = NumericalUtilities.obtenerTodosLosPuntos(linspace, s);
+                DataPoint[] points = Utilities.obtenerTodosLosPuntos(linspace, s);
                 series = new LineGraphSeries<>(points);
                 series.setColor(Color.rgb(red, green, blue));
                 graphView.addSeries(series);
