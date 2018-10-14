@@ -1,14 +1,13 @@
 package com.example.sebas.urano;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.widget.EditText;
-import android.widget.Toast;
+import android.view.View;
 
 
 import com.example.sebas.urano.Adapters.P_Adapter;
@@ -65,5 +64,12 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu,menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    public void abrirFuncionesGrafico(View view){
+
+        Intent nuevaActividad = new Intent(MainActivity.this, Grafico.class);
+        startActivity(nuevaActividad);
+
     }
 }
