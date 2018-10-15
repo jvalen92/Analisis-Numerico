@@ -47,28 +47,6 @@ class SistemaDeEcuaciones:
         z = eu.solucionar_prog(L, b)
         x = eu.solucionar_regr(U, z)
         return x
-<<<<<<< HEAD
-    def factorizacion_LU_cholesky(self, A, b):
-        """
-        Realiza la factorizacion A = LU,
-        Lb = z, Ux = b y devuelve x,
-        dado A y b.
-        """
-
-        directo = lu_directo.LU_Directo()
-        eu = eliminacion_gaussiana.GaussUtilities()
-        (L, U) = directo.cholesky(A)
-        print(L)
-        print(U)
-        z = eu.solucionar_prog(L, b)
-        x = eu.solucionar_regr(U, z)
-        return x
-
-if __name__== "__main__":
-    #A = [[2, -3, 4, 1], [-4, 2, 1, -2], [1, 3, -5, 3], [-3, 1, 1, -1]]
-    b = [10, -10, 32, -21]
-    A = [[8, 2, 2, 5], [4, 5, 7, -8], [-4, 7, 12, 11], [8, -3, -11, 28]]
-=======
     def factorizacion_LU_gauss_pivoteo_parcial(self, A, b):
         """
         Reliza la factorizacion A = LU,
@@ -81,40 +59,36 @@ if __name__== "__main__":
         z = eu.solucionar_prog(L, b)
         x = eu.solucionar_regr(U, z)
         return x
-
+    def factorizacion_LU_cholesky(self, A, b):
+        directo = lu_directo.LU_Directo()
+        eu = eliminacion_gaussiana.GaussUtilities()
+        (L, U) = directo.cholesky(A)
+        z = eu.solucionar_prog(L, b)
+        x = eu.solucionar_regr(U, z)
+        return x
 
 if __name__== "__main__":
-    #A = [[2, -3, 4, 1], [-4, 2, 1, -2], [1, 3, -5, 3], [-3, 1, 1, -1]]
-    #b = [10, -10, 32, -21]
-    A = [[-7, 2, -3, 4],
-         [5, -1, 14, -1],
-         [1, 9, -7, 5],
-         [-12, 13, -8, -4]]
-    b = [-12, 13, 31, -32]
->>>>>>> c1fca3ab3fffb88ea6f8245591be71cf53590e55
+     #A = [[2, -3, 4, 1], [-4, 2, 1, -2], [1, 3, -5, 3], [-3, 1, 1, -1]]
+    b = [10, -10, 32, -21]
+    A = [[8, 2, 2, 5], [4, 5, 7, -8], [-4, 7, 12, 11], [8, -3, -11, 28]]
     test = SistemaDeEcuaciones()
     x1 = test.eliminacion_gaussiana_simple(A, b)
     x2 = test.eliminacion_gaussiana_pivoteo_parcial(A, b)
     x3 = test.eliminacion_gaussiana_pivoteo_total(A, b)
     x4 = test.factorizacion_LU_gauss_simple(A, b)
-<<<<<<< HEAD
     x5 = test.factorizacion_LU_cholesky(A, b)
-=======
-    x5 = test.factorizacion_LU_gauss_pivoteo_parcial(A, b)
->>>>>>> c1fca3ab3fffb88ea6f8245591be71cf53590e55
+    x6 = test.factorizacion_LU_gauss_pivoteo_parcial(A, b)
     # Testing Ax=B
     print(x1)
     print(x2)
     print(x3)
     print(x4)
     print(x5)
+    print(x6)
     print(np.allclose(x1, x2))
     print(np.allclose(x2, x3))
     print(np.allclose(x3, x4))
-<<<<<<< HEAD
     print(np.allclose(x4, x5))
-=======
-    print(x5)
->>>>>>> c1fca3ab3fffb88ea6f8245591be71cf53590e55
+    print(np.allclose(x5, x6))
     #Testing det
     print(np.allclose(np.linalg.det(A), matriz.MatrizUtilities().det(A)))
