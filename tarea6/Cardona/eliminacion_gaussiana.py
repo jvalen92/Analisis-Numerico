@@ -194,7 +194,7 @@ class GaussUtilities:
         k = n-1
         for i in range(0, n):
             L[i][i] = 1
-            L[i+1:, i] = _v[0:k]
-            _v = _v[k:]
+            L[i+1:, i] = v[0:k]
+            v = v[k:]
             k -= 1
         return L

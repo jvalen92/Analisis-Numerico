@@ -46,6 +46,7 @@ class SistemaDeEcuaciones:
         z = eu.solucionar_prog(L, b)
         x = eu.solucionar_regr(U, z)
         return x
+    
     def factorizacion_LU_gauss_pivoteo_parcial(self, A, b):
         """
         Reliza la factorizacion A = LU,
