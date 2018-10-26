@@ -1,0 +1,405 @@
+\documentclass[12pt]{article}
+
+    \title{Informe 4. Urano App} 
+    
+    \author {Ronald Cardona
+    \and Anderson Grajales
+    \and Sebastian Valencia
+    \and Julian Sanchez}
+    
+    
+    % Packages
+    \usepackage[spanish]{babel}
+    \selectlanguage{spanish} 
+    \usepackage[utf8]{inputenc}
+    \usepackage[spanish, onelanguage]{algorithm2e} %for psuedo code
+    \usepackage{amsthm}
+    \usepackage{amsmath}
+    
+    \newtheorem{definition}{Definición}[section]
+    \newtheorem{theorem}{Teorema}[section]
+    
+    \begin{document}
+        \maketitle
+        \section{Funciones de apoyo}
+        Esta seccion muestra algunas funciones que son necesarias para lograr una correcta implementacion de los metodos para la solucion numerica de sistemas de ecuaciones lineales.
+        \subsection{Determinantes}
+        \begin{definition}
+            Sea $A = [a_{ij}]$ una matriz de tamaño $n \times n$. El cofactor $C_{ij}$ de $a_{ij}$ se define como $(-1)^{i+j}\det {M_{ij}}$, donde $M_{ij}$ es la matriz de tamaño $(n - 1) \times (n - 1)$, que se obtiene al eliminar la fila $i$ y la columna $j$ de la matriz.\cite{algebralineal}
+        \end{definition}
+        \begin{theorem}
+            Sea $A=[a_{ij}]$ una matriz de tamaño $n \times n$. \cite{algebralineal}
+            \begin{itemize}
+                \item Para cada $1\leq i \leq n$ se cumple que:
+                $\det {A} = a_{i1}C_{i1} + a_{i2}C_{i2} + ... + a_{in}C_{in}$
+                \item Para cada $1\leq j \leq n$ se cumple que:
+                $\det {A} = a_{1j}C_{1j} + a_{2j}C_{2j} + ... + a_{nj}C_{nj}$
+            \end{itemize}
+        \end{theorem}
+        De acuerdo al teorema 1.1 se puede definir una ecuación de recurrencia para encontrar el determinante de una matriz $A = [a_{ij}]$ de la siguiente manera:
+        
+        \begin{equation}
+        det(A, n)_{1\leq i \leq n}=\begin{cases}
+        a_{11}, & \text{if $n = 1$}.\\
+        (-1)^{i+1} \times a_{1i} \times det(A', n - 1) , & \text{if $n > 1$}.
+        \end{cases}
+        \end{equation}
+        Donde $A'$ es la matriz que se obtiene al eliminar la columna $i$ y la fila $n$ de $A$. De esta manera, para una matriz $B$ de $n \times n$, la solución se entrega de la forma:
+        $det(B, n)$.
+        
+        \subsection{Multiplicación de matrices}
+        \begin{definition}
+            Dadas las matrices $A \in M_{m\times n}$ y $B \in M_{n\times p}$, entonces el producto de $A$ con $B$, denotado $AB$, es una matriz $C \in M_{m\times p}$, dada por: \cite{algebralineal}
+            \[
+                c_{ij} = a_{i1}b_{1j} + a_{i2}b_{2j} + a_{i3}b_{3j} + \dots + a_{in}b_{nj} = \sum_{k = 1}^{n}{a_{ik}b_{kj}}		
+            \]
+            con $i = 1, ..., m$ y $j = 1, ..., p$
+        \end{definition}
+
+        \subsection{Escalonamiento de matrices}
+        \begin{definition}
+            Sea $A = [a_{ij}]$ una matriz de $n \times n$. Decimos que $A$ está escalonada si $\forall{i,j}, 1\leq i \leq j \leq n$, $a_{ij} = 0$.
+        \end{definition}
+        \begin{algorithm}[H]
+            \caption{Algoritmo para escalonar matrices}
+            Leer $A$, $b$ \\
+            \uIf{$A \not \in \Re^{n\times n}$ \textbf{ó} $b \not\in \Re^{n}$}
+            {$A$ debe ser cuadrada y $b$ debe ser un arreglo de $n$ posiciones}
+            \uElseIf{$\det{A} = 0$}
+            {$A$ debe ser invertible}
+            \Else
+            {
+                \For{$k = 1$ \KwTo $n-1$}
+                {
+                    \If{$A_{kk} = 0$}
+                    {
+                        $j \leftarrow k + 1$\\
+                        \While{$j < n$ \textbf{y} $A_{jk} = 0$}
+                        {
+                            $j \leftarrow j + 1$
+                        }
+                        \If{$j < n$}
+                        {
+                            \For{$l = k$ \KwTo $n$}
+                            {
+                                $A_{kl} \leftarrow A_{kl} + A_{jl}$
+                            }
+                            $b_k \leftarrow b_k + b_j$
+                        }
+                    }
+                    \For{$i = k + 1$ \KwTo $n$}
+                    {
+                        \If{$A_{ki} \not = 0$}
+                        {
+                            $m \leftarrow \frac{A_{ik}}{A_{kk}}$\\
+                            \For{$l = k$ \KwTo $n$}
+                            {
+                                $A_{il} \leftarrow A_{il} - m\times A_{kl}$
+                            }
+                            $b_i \leftarrow b_i - m \times b_k$
+                        }
+                    }
+                }
+            }
+            La solución $(A, b)$
+        \end{algorithm}
+
+        \subsection{Sustitución Regresiva}
+        
+        \begin{algorithm}[H]
+            \caption{Algoritmo de Sustitución Regresiva}
+            Leer $A$, $b$ \\
+            $marks \leftarrow NULL$ \\
+            $n \leftarrow Len(A) - 1$ \\ 
+            $x \leftarrow 0$ \\
+            $x_{n} \leftarrow \frac{b_n}{A_{nn}}$ \\
+            \For{$i \leftarrow n - 1$ \KwTo $-1$}
+            {
+                $sumatoria \leftarrow 0$ \\
+                \For{$p \leftarrow i + 1$ \KwTo $n + 1$}
+                {
+                    $sumatoria \leftarrow sumatoria + A_{ip}*x_{p}$\\
+                }
+                $x_{i} \leftarrow b_{i}$\\
+            }
+            \uIf{$marks \neq NULL$}
+            {
+                $marcas[Len(A)] \leftarrow 0$\\
+                \For{$i \leftarrow 0$ \KwTo $Len(A)$}
+                {
+                    $marcas_{marks_{i}} \leftarrow x_{i}$\\
+                }
+                Retornar $marcas$\\
+            }
+            Retornar $x$\\
+        \end{algorithm}
+
+        \subsection{Sustitución Progresiva}
+        
+        \begin{algorithm}[H]
+            \caption{Algoritmo de Sustitución Progresiva}
+            Leer $A$, $b$ \\
+            $n \leftarrow Len(A) - 1$\\
+            $x \leftarrow 0$\\
+            $x_0 \leftarrow \frac{b_0}{A_00}$\\
+            \For{$i \leftarrow 1$ \KwTo $n + 1$}
+            {
+                $sumatoria \leftarrow 0$\\
+                \For{$p \leftarrow 0$ \KwTo $i$}
+                {
+                    $sumatoria \leftarrow sumatoria + A_{ip}*x_{p}$\\
+                }
+                $x_{i} \leftarrow \frac{b_{i} - sumatoria}{A_{ii}}$\\
+            }
+            Retornar $x$\\
+        \end{algorithm}
+
+        \section{Solucion Numerica de Sistemas de Ecuaciones Lineales}
+        Muchos problemas del mundo real se formulan como sistemas de ecuaciones de $n$ variables y $m$ incógnitas que bajo condiciones ideales($n$ y $m$ no son valores muy grandes), se pueden resolver de manera analítica. Sin embargo, cuando $n$ y $m$ tienden a ser valores muy grandes la solución analítica a estos problemas es muy difícil de calcular ya que requiere de mucho tiempo y claramente no es la forma más eficiente hacerlo. Debido a esto, desde el campo del \textit{Análisis Numérico} se plantean diversas formas computacionales, ya sean algoritmos u otras técnicas que nos permitan resolver estos sistemas rápidamente, teniendo en cuenta que hay una \textit{\textbf{propagación de error}} en cada cálculo dependiendo de la capacidad de la computadora donde se ejecuten estos.
+        En  esta seccion se presentan algunos algoritmos numéricos que son de gran ayuda a la hora de resolver sistemas de ecuaciones lineales.
+        
+        \subsection{Eliminacion Gaussiana con Pivoteo Parcial}
+        
+        \begin{algorithm}[H]
+            \caption{Algoritmo de Pivoteo Parcial}
+            Leer $A$, $b$, $n$, $k$ \\
+            $mayor \leftarrow |A_{kk}|$\\
+            $filaMayor \leftarrow k$\\
+            \For{$s \leftarrow k + 1$ \KwTo $n$}
+            {
+                \uIf{$|A_{sk}| > mayor $}
+                {
+                    $mayor \leftarrow |A_{sk}| $ \\
+                    $filaMayor \leftarrow s$\\
+                }
+            }
+            \uIf {$mayor = 0$}
+            {
+                El sistema no tiene solucion unica
+            } \uElseIf {$filaMayor \neq k$}
+            {
+                $temp \leftarrow A_{filaMayor}$\\
+                $A_{filaMayor} \leftarrow temp$\\
+                $A_{k} \leftarrow A_{filaMayor}$\\
+                $temp \leftarrow b_{filaMayor}$\\
+                $b_{filaMayor} \leftarrow b_{k}$\\
+                $b_{k} \leftarrow b_{filaMayor}$
+            }
+            Retornar($A$, $b$)
+        \end{algorithm}
+
+        \subsection{Eliminacion Gaussiana con Pivoteo Total}
+        
+        \begin{algorithm}[H]
+            \caption{Algoritmo de Pivoteo Total}
+            Leer $A$, $b$, $n$, $k$ \\
+            $mayor \leftarrow |A_{kk}|$\\
+            $filaMayor \leftarrow k$\\
+            $columnaMayor \leftarrow k$\\
+            \For{$r \leftarrow k$ \KwTo $n$}
+            {
+                \For{$s \leftarrow k$ \KwTo $n$}
+                {
+                    \uIf{$|A_{rs}| > mayor $}
+                    {
+                        $mayor \leftarrow |A_{rs}| $ \\
+                        $filaMayor \leftarrow r$\\
+                        $columnaMayor \leftarrow s$
+                    }
+                }
+            }
+            \uIf {$mayor = 0$}
+            {
+                El sistema no tiene solucion unica
+            } \uElse {
+                \uIf {$filaMayor \neq k$}
+                {
+                    $temp \leftarrow A_{k}$\\
+                    $A_{k} \leftarrow A_{filaMayor}$\\
+                    $A_{filaMayor} \leftarrow temp$\\
+                    $temp \leftarrow b_{k}$\\
+                    $b_{k} \leftarrow b_{filaMayor}$\\
+                    $b_{filaMayor} \leftarrow temp$\\
+                }
+                \uIf {$columnaMayor \neq k$}
+                {
+                    $temp \leftarrow A_{0 columnaMayor}$\\
+                    $A_{0 columnaMayor} \leftarrow A_{0k}$\\
+                    $A_{0k} \leftarrow temp$\\
+                    $temp \leftarrow b_{0 columnaMayor}$\\
+                    $b_{0 columnaMayor} \leftarrow b_{0k}$\\
+                    $b_{0k} \leftarrow temp$\\
+                    $temp \leftarrow marcas_{k}$\\
+                    $marcas_{k} \leftarrow marcas_{columnaMayor}$\\
+                    $marcas_{columnaMayor \leftarrow temp}$\\
+                }
+                Retornar($A$, $b$)\\
+            }
+            
+        \end{algorithm}
+
+
+        \section{Metodos de Factorizacion LU}
+        Dada una martiz cuadrada $A$ de orden $n x n$, se halla una matriz $L$
+        triangular inferior y una matriz $U$ triangular superior tal que $A = LU$
+        Este tipo de sistemas se resuelven de manera trivial haciendo uso de los ya conocidos
+        metodos de sustitucion regresiva y sustitucion progresiva, ya que las matrices son
+        triangulares.
+
+        \subsection{Factorizacion LU con Gaussiana Simple}
+        En este caso la matriz $U$ corresponde a la matriz $A$ en su forma escalonada. Y la matriz $L$ se forma ubicando 1's en la diagonal y los multiplicadores $M_{ij}$ en las entradas correspondientes.
+        
+        \begin{algorithm}[H]
+            \caption{Algoritmo de Factorizacion LU con Gaussiana Simple}
+            Leer $A$, $b$ \\
+            $(L, U) \leftarrow Escalonar(A, b)$\\ 
+            $z \leftarrow SustitucionProgresiva(L, b)$\\
+            $x \leftarrow SustitucionRegresiva(U, z)$\\
+            Retornar $x$\\
+        \end{algorithm}
+
+        \subsection{Factorizacion LU con Gaussiana y Pivoteo Parcial}
+        La matriz $L$ se construye con base en los multiplicadores ubicados segun sus respectivos indices y con 1's en la diagonal, y la matriz $U$ es la matriz resultante del oproceso de eliminacion 
+        
+        \begin{algorithm}[H]
+            \caption{Algoritmo de Factorizacion LU con Gaussiana y Pivoteo Parcial}
+            Leer $A$, $b$ \\
+            $(L, U) \leftarrow EscalonarParcial(A, b)$\\
+            $z \leftarrow SustitucionProgresiva(L, b)$\\
+            $x \leftarrow SustitucionRegresiva(U, z)$\\
+            Retornar $x$\\
+        \end{algorithm}
+
+
+        \subsection{Factorizacion de Doolittle}
+        
+        \begin{algorithm}[H]
+            \caption{Algoritmo de Factorizacion de Doolittle}
+            Leer $A$, $b$\\
+            \uIf{A no es cuadrada}
+            {
+                Retornar Matriz no cuadrada
+            }
+            {
+                $n = longitud(A_{0})$\\ 
+                $L \leftarrow MatrizIdentidad(n)$\\
+                $U \leftarrow MatrizIdentidad(n)$\\
+                \For{$i \leftarrow 0$ \KwTo $n$}
+                {
+                    \For{$k \leftarrow i$ \KwTo $n$}
+                    {
+                        $u \leftarrow A_{ik}$\\
+                        \For{$numero \leftarrow 0$ \KwTo $i$}
+                        {
+                            $u \leftarrow u - L_{i, numero} * U_{numero, k}$\\
+                        }
+                        $L_{ik} \leftarrow u/L_{ii}$\\
+                    }
+                    \For{$j \leftarrow i + 1$ \KwTo $n$}
+                    {
+                        $suma \leftarrow A_{ji}$\\
+                        \For{$numero \leftarrow 0$ \KwTo $j$}
+                        {
+                            $suma \leftarrow suma - L_{j, numero} * U_{numero, i}$\\
+                        }
+                        $L_{ji} \leftarrow \frac{suma}{U_{ii}}$\\
+                    }
+                }
+                $z \leftarrow SustitucionProgresiva(L, b)$\\
+                $x \leftarrow SustitucionRegresiva(U, z)$\\
+                Retornar $x$
+            }
+
+
+            
+        \end{algorithm}
+
+        \subsection{Factorizacion de Choletsky $A = LDL$}
+        
+        \begin{algorithm}[H]
+            \caption{Algoritmo de Factorizacion de Choletsky}
+            Leer $A$\\
+            $n \leftarrow longitud(A)$\\
+            $L[n][n] \leftarrow 0$\\
+            $U[n][n] \leftarrow 0$\\
+            \For{$k \leftarrow 0$ \KwTo $n$}
+            {
+                $suma_p \leftarrow 0.0$\\
+                \For{$p \leftarrow 0 $ \KwTo $k$}
+                {
+                    $suma1 \leftarrow L_{kp} * U_{pk}$\\
+                }
+                $L_{kk} \leftarrow (A_{kk} - suma1)^{0.5}$\\
+                $U_{kk} \leftarrow L_{kk}$\\
+                \For{$i \leftarrow k$ \KwTo $n$}
+                {
+                    $suma2 \leftarrow 0.0$\\
+                    \For{$p \leftarrow 0$ \KwTo $k$}
+                    {
+                        $suma2 \leftarrow suma2 + L_{ip} * U_{pk})$\\
+                    }
+                    $L_{ik} \leftarrow \frac{A_{ik} - suma2}{U_{kk}}$\\
+                }
+
+                \For{$j \leftarrow k + 1$ \KwTo $n$}
+                {
+                    $suma3 \leftarrow 0$\\
+                    \For{$p \leftarrow 0$ \KwTo $k$}
+                    {
+                        $suma3 \leftarrow suma3 + L_{kp} * U_{pj})$\\
+                    }
+                    $U_{kj} \leftarrow \frac{A_{kj} - suma3}{L_{kk}}$\\
+                }
+
+            }
+            Retornar $L, U$
+            
+        \end{algorithm}
+
+        \subsection{Factorizacion de Crout $A = LDU$}
+        
+        \begin{algorithm}[H]
+            \caption{Algoritmo de Factorizacion de Crout}
+            Leer $A$, $b$\\
+            \uIf{A no es cuadrada}
+            {
+                Retornar Matriz no cuadrada
+            }
+            {
+                $n = longitud(A_{0})$\\ 
+                $L \leftarrow 0$\\
+                $U \leftarrow MatrizIdentidad(n)$\\
+                \For{$i \leftarrow 0$ \KwTo $n$}
+                {
+                    \For{$j \leftarrow i$ \KwTo $n$}
+                    {
+                        $suma \leftarrow A_{ji}$\\
+                        \For{$numero \leftarrow 0$ \KwTo $j$}
+                        {
+                            $suma \leftarrow suma - L_{j, numero} * U_{numero, i}$\\
+                        }
+                        $L_{ji} \leftarrow suma$\\
+                    }
+                    \For{$k \leftarrow i + 1$ \KwTo $n$}
+                    {
+                        $u \leftarrow A_{ik}$\\
+                        \For{$numero \leftarrow 0$ \KwTo $i$}
+                        {
+                            $u \leftarrow u - L_{i, numero} * U_{numero, k}$\\
+                        }
+                        $L_{ik} \leftarrow \frac{u}{L_{ii}}$\\
+                    }
+                }
+                $z \leftarrow SustitucionProgresiva(L, b)$\\
+                $x \leftarrow SustitucionRegresiva(U, z)$\\
+                Retornar $x$
+            }
+
+        \end{algorithm}
+
+    
+        \begin{thebibliography}{9}
+            \bibitem{algebralineal}
+            Orlando García Jaimes, Jairo A. Villegas Gutiérrez, Jorge Iván. \textit{Álgebra Lineal}. Editorial EAFIT, Medellín 2012. 
+        \end{thebibliography}
+    \end{document}  
