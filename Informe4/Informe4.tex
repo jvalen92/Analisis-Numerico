@@ -353,7 +353,7 @@
 
             }
             Retornar $L, U$
-            
+
         \end{algorithm}
 
         \subsection{Factorizacion de Crout $A = LDU$}
@@ -396,6 +396,74 @@
             }
 
         \end{algorithm}
+
+        \section{Metodos Indirectos}
+        Para encontrar soluciones a un sistema de la forma $Ax = b$, encontraremos vectores $x^{(i)}$, aproximaciones a la solucion, a partir de un vector inicial $x^{(0)}$, hasta que se cumpla cierta tolerancia respecto a una norma establecida. Cada $x^{(i)}$ se genera a partir de una funcion analoga a la funcion de punto fijo $G(x) = x$. 
+
+        \subsection{Metodo de Jacobi}
+        
+        \begin{algorithm}[H]
+            \caption{Algoritmo del metodo de Jacobi}
+            
+        \end{algorithm}
+
+        \subsection{Metodo de Gauss-Seidel}
+        
+        
+        \begin{algorithm}[H]
+            \caption{Algoritmo del metodo de Gauss-Seidel}
+            
+        \end{algorithm}
+
+
+        \section{Metodos Iterativos de Forma Matricial}
+
+        \subsection{Gauss-Seidel con relajacion}
+        \begin{algorithm}[H]
+            \caption{Algoritmo del metodo de SOR Gauss-Seidel}
+            
+        \end{algorithm}
+
+        \section{Metodos de Interpolacion}
+
+        \subsection{Metodos basados en sistemas de ecuaciones}
+        \begin{theorem}
+            Dados $n + 1$ puntos con la condicion de que $x_{i} \neq x_{j}$ para todo $i, j$ tal que $0 <= i, j <= n$, entonces existe un polinomio $p(x)$ de grado a lo sumo $n$ tal que para todo $i$, $0 <= i <= n$, se cumple que $p(x_{i}) = y_{i}$
+        \end{theorem}
+
+        Dado un conjunto con $n + 1$ puntos conocidos, entonces por el teorema anterior, existe un unico polinomio interpolante $p(x)$ de grado a lo sumo $n$. Luego, se puede considerar que el polinomio tiene la forma
+    
+        \begin{center}
+            $p(x) = a_nx^n + a_{n-1}x^{n-1} + a_{n-2}x^{n-2} + ... + a_2x^2 + a_1x + a_0$\\
+        \end{center}
+            
+        
+        Para obtener el polinomio basta determinar el valor de todos los coeficientes
+        \begin{center}
+            $a_n, a_{n-1}, a_{n-2}, ..., a_2, a_1, a_0$\\
+        \end{center}
+        Esto genera un sistema de ecuaciones lineales que siempre es soluble.
+        
+        \begin{algorithm}[H]
+            \caption{Algoritmo para obtener el polinomio interpolante por medio de la matriz de Vandermonde}
+            Leer $puntos$\\
+            definir $A, b, auxA$\\
+            $n \leftarrow longitud(puntos)$\\
+            \For{$punto \leftarrow puntos$}
+            {
+                $b.add(punto_{1})$\\
+                \For{$i \leftarrow 1$ \KwTo $n + 1$}
+                {
+                    $auxA.add((punto_{0})^{n-i})$\\
+                }
+                $A.add(auxA)$\\
+            }
+            $Ab \leftarrow EscalonarMatriz(A, b)$\\
+            $x \leftarrow SustitucionRegresiva(A, b)$\\
+            Retornar $(A, b)$\\
+        \end{algorithm}
+
+        
 
     
         \begin{thebibliography}{9}
