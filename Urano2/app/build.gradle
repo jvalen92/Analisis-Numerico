@@ -42,6 +42,8 @@ dependencies {
     implementation 'io.github.kexanie.library:MathView:0.0.5'
     // Include this library to graph
     implementation 'com.jjoe64:graphview:4.2.0'
+    // Include this for math operations
+    implementation group: 'org.apache.commons', name: 'commons-math3', version: '3.6.1'
 
     // This dependency is found on compile classpath of this component and consumers.
     implementation 'com.google.guava:guava:25.0-android'
