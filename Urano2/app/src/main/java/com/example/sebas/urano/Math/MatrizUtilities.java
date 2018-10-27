@@ -4,7 +4,6 @@ import org.apache.commons.math3.linear.Array2DRowRealMatrix;
 import org.apache.commons.math3.linear.RealMatrix;
 
 import java.sql.SQLOutput;
-import java.util.ArrayList;
 
 public class MatrizUtilities {
     private static double det(double[][] A, int n) {
@@ -86,10 +85,9 @@ public class MatrizUtilities {
         return res;
     }
     public static void imprimir(double[][] A){
-        for(double[] _: A){
-            for(double __: _){
-                System.out.print(__);
-                System.out.print("\t");
+        for(double[] x: A){
+            for(double xx: x){
+                System.out.print(xx + " ");
             }
             System.out.println();
         }
@@ -100,7 +98,7 @@ public class MatrizUtilities {
         }
     }
     public static void imprimir(double[] x, boolean nl){
-        for(double _: x) System.out.print(_ + "\t");
+        for(double y: x) System.out.print(y + "\t");
         if(nl) System.out.println();
     }
     public static double[] restar(double[] x1, double[] x2){
