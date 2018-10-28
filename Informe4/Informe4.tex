@@ -401,27 +401,153 @@
         Para encontrar soluciones a un sistema de la forma $Ax = b$, encontraremos vectores $x^{(i)}$, aproximaciones a la solucion, a partir de un vector inicial $x^{(0)}$, hasta que se cumpla cierta tolerancia respecto a una norma establecida. Cada $x^{(i)}$ se genera a partir de una funcion analoga a la funcion de punto fijo $G(x) = x$. 
 
         \subsection{Metodo de Jacobi}
-        
+
         \begin{algorithm}[H]
             \caption{Algoritmo del metodo de Jacobi}
-            
+            Leer $A$, $b$, $tol$, $x0$, $niter$\\
+            $cont \leftarrow 1$\\
+            $dispersion \leftarrow tol + 1$\\
+            $solucion.add((0, x0))$\\
+            \While{$dispersion > tol AND cont < niter$}
+            {
+                $x1 \leftarrow calcularNuevoJacobi(A, b, x0)$\\
+                $dispersion \leftarrow normaCuadrada(x1, x0)$\\
+                $ss.add((cont, x1, dispersion))$\\
+                $x0 \leftarrow x1$\\
+                $solucion.add(ss)$\\
+                $cont \leftarrow cont + 1$\\
+            }
+            Retornar $solucion$\\
+        \end{algorithm}
+        
+        
+        \begin{algorithm}[H]
+            \caption{Algoritmo para calcular el nuevo Jacobi}
+            calcularNuevoJacobi($A$, $b$, $x0$)\\
+            Leer $A$, $b$, $x0$\\
+            $n \leftarrow longitud(x0)$\\
+            \For{$i \leftarrow 0$ \KwTo $n$}
+            {
+                $suma \leftarrow 0.0$\\
+                \For{$j \leftarrow 0 $ \KwTo $n$}
+                {
+                    \If{$j \neq i$}
+                    {
+                        $suma \leftarrow suma + A_{ij} * x0_j$\\
+                    }
+                }
+                $x_i \leftarrow \frac{b_i - suma}{A_{ii}}$\\
+            }
+            Retornar $x$\\
+        \end{algorithm}
+
+        \begin{algorithm}[H]
+            \caption{Algoritmo Norma Cuadrada}
+            normaCuadrada($x1$, $x0$)\\
+            Leer $x1$, $x0$\\
+            $suma1 \leftarrow 0.0$\\
+            $suma2 \leftarrow 0.0$\\
+            \For{$i \leftarrow 0 $ \KwTo $longitud(x1)$}
+            {
+                $suma1 \leftarrow suma1 + (x1_i - x0_i)^2$\\
+                $suma2 \leftarrow suma2 + x1_i^2$\\
+            }
+            Retornar $\sqrt{\frac{sum1}{sum2}}$\\
         \end{algorithm}
 
         \subsection{Metodo de Gauss-Seidel}
         
-        
         \begin{algorithm}[H]
             \caption{Algoritmo del metodo de Gauss-Seidel}
-            
+            Leer $A$, $b$, $tol$, $x0$, $niter$\\
+            $cont \leftarrow 1$\\
+            $dispersion \leftarrow tol + 1$\\
+            $solucion.add((0, x0))$\\
+            \While{$dispersion > tol AND cont < niter$}
+            {
+                $x1 \leftarrow calcularNuevoGaussSeidel(A, b, x0)$\\
+                $dispersion \leftarrow normaCuadrada(x1, x0)$\\
+                $ss.add((cont, x1, dispersion))$\\
+                $x0 \leftarrow x1$\\
+                $solucion.add(ss)$\\
+                $cont \leftarrow cont + 1$\\
+            }
+            Retornar $solucion$\\
         \end{algorithm}
 
+        \begin{algorithm}[H]
+            \caption{Algoritmo para calcular el nuevo GaussSeidel}
+            calcularNuevoGaussSeidel($A$, $b$, $x0$)\\
+            Leer $A$, $b$, $x0$\\
+            $n \leftarrow longitud(x0)$\\
+            $x \leftarrow x0$\\
+            \For{$i \leftarrow 0$ \KwTo $n$}
+            {
+                $suma \leftarrow 0.0$\\
+                \For{$j \leftarrow 0 $ \KwTo $n$}
+                {
+                    \If{$j \neq i$}
+                    {
+                        $suma \leftarrow suma + A_{ij} * x_j$\\
+                    }
+                }
+                $x_i \leftarrow \frac{b_i - suma}{A_{ii}}$\\
+            }
+            Retornar $x$\\
+        \end{algorithm}
 
         \section{Metodos Iterativos de Forma Matricial}
 
         \subsection{Gauss-Seidel con relajacion}
         \begin{algorithm}[H]
-            \caption{Algoritmo del metodo de SOR Gauss-Seidel}
-            
+            \caption{Algoritmo del metodo SOR Gauss-Seidel}
+            Leer $A$, $b$, $tol$, $x0$, $w$, $niter$\\
+            $cont \leftarrow 1$\\
+            $solucion.add((0))$\\
+            \While{$dispersion > tol AND cont < niter$}
+            {
+                $x1 \leftarrow calcularNuevoGaussSeidelSOR(A, b, x0, w)$\\
+                $dispersion \leftarrow normaMaximo(x1, x0)$\\
+                $x0 \leftarrow x1$\\
+                $solucion.add((cont, x1, dispersion))$\\
+                $cont \leftarrow cont + 1$\\
+            }
+            Retornar $solucion$\\
+        \end{algorithm}
+
+        \begin{algorithm}[H]
+            \caption{Algoritmo para calcular el nuevo Gauss-Seidel}
+            calcularNuevoGaussSeidelSOR($A$, $b$, $x0$, $w$)\\
+            Leer $A$, $b$, $x0$, $w$\\
+            $n \leftarrow longitud(x0)$\\
+            $x \leftarrow x0$\\
+            \For{$i \leftarrow 0$ \KwTo $n$}
+            {
+                $suma \leftarrow 0.0$\\
+                \For{$j \leftarrow 0 $ \KwTo $n$}
+                {
+                    \If{$j \neq i$}
+                    {
+                        $suma \leftarrow suma + A_{ij} * x_j$\\
+                    }
+                }
+                $x_i \leftarrow \frac{(1 - w) * (x_i + w) * (b_i - suma)}{A_{ii}}$\\
+            }
+            Retornar $x$\\
+        \end{algorithm}
+
+        \begin{algorithm}[H]
+            \caption{Algoritmo Norma Maximo}
+            normaMaximo($x1$, $x0$)\\
+            Leer $x1$, $x0$\\
+            $max1 \leftarrow 0.0$\\
+            $max2 \leftarrow 0.0$\\
+            \For{$i \leftarrow 0 $ \KwTo $longitud(x1)$}
+            {
+                $max1 \leftarrow max(|x1_i - x0_i|, mx1)$\\
+                $max2 \leftarrow max(|x1_i|, max2)$\\
+            }
+            Retornar $\frac{max1}{max2}$\\
         \end{algorithm}
 
         \section{Metodos de Interpolacion}
