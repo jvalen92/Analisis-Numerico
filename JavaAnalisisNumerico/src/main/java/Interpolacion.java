@@ -43,7 +43,6 @@ public class Interpolacion{
                 }
             }
             divisor = y[i]/divisor;
-            String divisorString = String.valueOf(divisor);
             termino += i!=0 && divisor > 0 ? " + ":"";
             termino += divisor + dividendo; 
         }
