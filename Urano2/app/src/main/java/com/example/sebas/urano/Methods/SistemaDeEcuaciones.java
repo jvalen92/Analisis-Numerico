@@ -4,6 +4,10 @@ import com.example.sebas.urano.Math.MatrizUtilities;
 
 import org.apache.commons.math3.complex.Complex;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class SistemaDeEcuaciones {
     public static double[] eliminacionGaussianaSimple(double[][] A, double[] b) {
         double[][] Ub = eliminacionSimple(A, b);
