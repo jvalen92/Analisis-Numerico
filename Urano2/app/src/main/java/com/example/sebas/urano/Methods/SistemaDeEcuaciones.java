@@ -4,6 +4,10 @@ import com.example.sebas.urano.Math.MatrizUtilities;
 
 import org.apache.commons.math3.complex.Complex;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class SistemaDeEcuaciones {
     public static double[] eliminacionGaussianaSimple(double[][] A, double[] b) {
         double[][] Ub = eliminacionSimple(A, b);
@@ -283,11 +287,139 @@ public class SistemaDeEcuaciones {
             return new Object[]{L, U};
         }
     }
+    static class MetodoIterativo{
+        public static ArrayList<String[]> gaussSeidel(double[][] A, double[] b, double tol, double[] x0, int niter) {
+            ArrayList<String[]> solucion = new ArrayList<>();
+            int cnt = 1;
+            double dispersion = tol + 1;
+            // cnt, x_1, x_2, ..., x_i, ..., x_n
+            ArrayList<String> ss = new ArrayList<>();
+            ss.add("0");
+            MatrizUtilities.adicionar(ss, x0);
+            solucion.add(ss.toArray(new String[]{}));
+            while (dispersion > tol && cnt < niter) {
+                ss.clear();
+                double[] x1 = calcularNuevoSeidel(A, b, x0);
+                ss.add(cnt + "");
+                MatrizUtilities.adicionar(ss, x1);
+                dispersion = norma_cuadrada(x1, x0);
+                ss.add(dispersion + "");
+                x0 = x1;
+                solucion.add(ss.toArray(new String[]{}));
+                cnt++;
+            }
+            return solucion;
+        }
+        public static ArrayList<String[]> jacobi(double[][] A, double[] b, double tol, double[] x0, int niter) {
+            ArrayList<String[]> solucion = new ArrayList<>();
+            int cnt = 1;
+            double dispersion = tol + 1;
+            // cnt, x_1, x_2, ..., x_i, ..., x_n
+            ArrayList<String> ss = new ArrayList<>();
+            ss.add("0");
+            MatrizUtilities.adicionar(ss, x0);
+            solucion.add(ss.toArray(new String[]{}));
+            while (dispersion > tol && cnt < niter) {
+                ss.clear();
+                //MatrizUtilities.imprimir(x0, true);
+                double[] x1 = calcularNuevoJacobi(A, b, x0);
+                ss.add(cnt + "");
+                MatrizUtilities.adicionar(ss, x1);
+                dispersion = norma_cuadrada(x1, x0);
+                ss.add(dispersion + "");
+                x0 = x1;
+                solucion.add(ss.toArray(new String[]{}));
+                cnt++;
+            }
+            return solucion;
+        }
 
-    public static void main(String[] args) {
-        double[][] A = {{1, -1, -1, -1, -1}, {-1, 2, 0, 0, 0}, {-1, 0, 3, 1, 1}, {-1, 0, 1, 4, 2}, {-1, 0, 1, 2, 5}};
-        Object[] obj = LU_Directo.choleskyReal(A);
-        MatrizUtilities.imprimir((double[][]) obj[0]);
-        MatrizUtilities.imprimir((double[][]) obj[1]);
+
+        private static double norma_cuadrada(double[] x1, double[] x0) {
+            double sum1 = 0.0, sum2 = 0.0;
+            for(int i = 0; i < x1.length; ++i){
+                sum1 += Math.pow(x1[i] - x0[i], 2);
+                sum2 += Math.pow(x1[i], 2);
+            }
+            return Math.sqrt(sum1) / Math.sqrt(sum2);
+        }
+
+        private static double[] calcularNuevoSeidel(double[][] A, double[] b, double[] x0){
+            int n = x0.length;
+            double[] x = new double[n];
+            for(int i = 0; i < n; ++i){
+                x[i] = x0[i];
+            }
+            for (int i = 0; i < n; i++) {
+                double suma = 0.0;
+                for (int j = 0; j < n; j++) {
+                    if(j == i) continue;
+                    suma += A[i][j] * x[j];
+                }
+                x[i] = (b[i] - suma) / A[i][i];
+            }
+            return x;
+        }
+        private static double[] calcularNuevoJacobi(double[][] A, double[] b, double[] x0){
+            int n = x0.length;
+            double[] x = new double[n];
+            for (int i = 0; i < n; i++) {
+                double suma = 0.0;
+                for (int j = 0; j < n; j++) {
+                    if(j == i) continue;
+                    suma += A[i][j] * x0[j];
+                }
+                x[i] = (b[i] - suma) / A[i][i];
+            }
+            return x;
+        }
+        public static ArrayList<String[]> SOR(double[][] A, double[] b, double tol, double[] x0, double w, int niter) {
+            ArrayList<String[]> solucion = new ArrayList<>();
+            int cnt = 1;
+            double dispersion = tol + 1;
+            // cnt, x_1, x_2, ..., x_i, ..., x_n
+            ArrayList<String> ss = new ArrayList<>();
+            ss.add("0");
+            MatrizUtilities.adicionar(ss, x0);
+            solucion.add(ss.toArray(new String[]{}));
+            while (dispersion > tol && cnt < niter) {
+                ss.clear();
+                double[] x1 = calcularNuevoSeidelSOR(A, b, x0, w);
+                ss.add(cnt + "");
+                MatrizUtilities.adicionar(ss, x1);
+                dispersion = norma_maximo(x1, x0);
+                ss.add(dispersion + "");
+                x0 = x1;
+                solucion.add(ss.toArray(new String[]{}));
+                cnt++;
+            }
+            return solucion;
+        }
+
+        private static double[] calcularNuevoSeidelSOR(double[][] A, double[] b, double[] x0, double w) {
+            int n = x0.length;
+            double[] x = new double[n];
+            for(int i = 0; i < n; ++i){
+                x[i] = x0[i];
+            }
+            for (int i = 0; i < n; i++) {
+                double suma = 0.0;
+                for (int j = 0; j < n; j++) {
+                    if(j == i) continue;
+                    suma += A[i][j] * x[j];
+                }
+                x[i] = (1. - w) * x[i] + w *(b[i] - suma) / A[i][i];
+            }
+            return x;
+        }
+
+        private static double norma_maximo(double[] x1, double[] x0){
+            double mx1 = 0.0, mx2 = 0.0;
+            for(int i = 0; i < x1.length; ++i){
+                mx1 = Math.max(Math.abs(x1[i] - x0[i]), mx1);
+                mx2 = Math.max(Math.abs(x1[i]), mx2);
+            }
+            return mx1 / mx2;
+        }
     }
 }

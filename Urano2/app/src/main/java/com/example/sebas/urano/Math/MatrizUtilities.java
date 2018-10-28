@@ -4,6 +4,7 @@ import org.apache.commons.math3.linear.Array2DRowRealMatrix;
 import org.apache.commons.math3.linear.RealMatrix;
 
 import java.sql.SQLOutput;
+import java.util.ArrayList;
 
 public class MatrizUtilities {
     private static double det(double[][] A, int n) {
@@ -87,10 +88,25 @@ public class MatrizUtilities {
     public static void imprimir(double[][] A){
         for(double[] _: A){
             for(double __: _){
-                System.out.print(__ + " ");
+                System.out.print(__);
+                System.out.print("\t");
             }
             System.out.println();
         }
+    }
+    public static void adicionar(ArrayList<String> a, double[] x){
+        for(int i = 0; i < x.length; ++i){
+            a.add(String.valueOf(x[i]));
+        }
+    }
+    public static void imprimir(double[] x, boolean nl){
+        for(double _: x) System.out.print(_ + "\t");
+        if(nl) System.out.println();
+    }
+    public static double[] restar(double[] x1, double[] x2){
+        double[] res = new double[x1.length];
+        for(int i = 0; i < x1.length; ++i) res[i] = x1[i] - x2[i];
+        return res;
     }
     public static void llenarDiagonal(double valor, double[][] A){
         for(int i = 0; i < A.length; ++i) A[i][i] = valor;
