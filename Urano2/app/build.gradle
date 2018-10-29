@@ -45,9 +45,10 @@ dependencies {
     // Include this for math operations
     implementation group: 'org.apache.commons', name: 'commons-math3', version: '3.6.1'
 
+    // Inlcude this for table views
+    implementation 'com.evrencoskun.library:tableview:0.8.4'
     // This dependency is found on compile classpath of this component and consumers.
     implementation 'com.google.guava:guava:25.0-android'
-
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
 }
