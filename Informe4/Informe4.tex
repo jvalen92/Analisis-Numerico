@@ -647,7 +647,41 @@
         A partir de esta tabla el polinomio se obtiene facilmente\\
         $p(x) = 0.6747 + 0.8723(x - 1) + 1.2218(x - 1)(x - 1.2) + 0.0160(x - 1)(x - 1.2)(x - 1.4) - 0.0368(x - 1)(x - 1.2)(x - 1.4)(x - 1.6) + 0.0195(x - 1)(x - 1.2)(x- 1.4)(x - 1.6)(x - 1.8)(x -2)$\\    
         
-        
+        \subsection{Polinomio de Lagrange}
+        Dados $n + 1$ puntos $(x_0, y_0), (x_1, y_1) , ..., (x_n, y_n)$ el polinomio de Lagrange tiene la siguiente forma:\\
+        \begin{center}
+            $\sum_{k=0}^{n} L_k(x)f(x_k)$\\ 
+        \end{center}
+        $donde$ \\ 
+        \begin{center}
+            $L_k(x) = \frac{(x-x_0)(x-x_1) ... (x-x_{k-1})(x-x_{k+1}) ... (x-x_n)}{(x_k-x_0)(x_k-x_1) ... (x_k-x_{k-1})(x_k-x_{k+1}) ... (x-x_n)}$\\
+        \end{center}
+
+        \begin{algorithm}[H]
+            \caption{Algoritmo para obtener el polinomio de Lagrange}
+            Leer $nPuntos, valor, x, y$\\
+            $resultado \leftarrow 0$\\
+            $pol \leftarrow 'P(x) = '$\\
+            \For{$k \leftarrow 0$ \KwTo $nPuntos$}
+            {
+                $mult \leftarrow nPuntos$\\
+                \For{$i \leftarrow 0$ \KwTo $nPuntos$}
+                {
+                    \If{$i \neq k$}
+                    {
+                        $mult \leftarrow mult * \frac{valor - x_i}{x_k - x_i}$\\
+                        $num \leftarrow (x - x_i)$\\
+                        $den \leftarrow x_k - x_i$\\
+                        $term \leftarrow term + '[( num / den)]'$\\
+                    }
+                }
+                Imprimir $'L_k = y_k * term'$\\
+                $pol \leftarrow pol + 'y_k * term'$\\
+                $resultado = resultado + mult * y_k$\\
+            }
+            Imprimir $pol$\\
+            Retornar $resultado$\\
+        \end{algorithm}
 
         \begin{thebibliography}{9}
             \bibitem{algebralineal}
