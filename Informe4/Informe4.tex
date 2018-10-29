@@ -563,7 +563,7 @@
             $p(x) = a_nx^n + a_{n-1}x^{n-1} + a_{n-2}x^{n-2} + ... + a_2x^2 + a_1x + a_0$\\
         \end{center}
             
-        
+
         Para obtener el polinomio basta determinar el valor de todos los coeficientes
         \begin{center}
             $a_n, a_{n-1}, a_{n-2}, ..., a_2, a_1, a_0$\\
@@ -589,9 +589,66 @@
             Retornar $(A, b)$\\
         \end{algorithm}
 
+        \subsection{Polinomio Interpolante de Newton con Diferencias Divididas}
+        Dados $n + 1$ puntos $(x_0, y_0), (x_1, y_1) , ..., (x_n, y_n)$ el polinomio del teorema de Interpolacion se puede escribir asi:  
+        \begin{center}
+            $p(x) = b_0 + b_1(x - x_0) + b_2(x - x_0)(x - x_1) + ... + b_n(x - x_0)(x - x_1) ... (x - x_{n-1})$\\
+        \end{center}
+        Asi para hallar el polinomio $p_n(x)$ basta con allar los $b_n$.
+        Supongamos que se conoce el siguiente conjunto de puntos ${(x_0, y_0), (x_1, y_1) , ..., (x_n, y_n)}$\\
         
 
-    
+        \begin{itemize}
+            \item Diferencia dividida de orden 0 \\
+                $f[x_k] = f(x_k)$\\
+                $b_0 = f[x_0]$\\
+            \item Primera diferencia dividida\\
+                $f[x_k, x_{k+1}] = \frac{f[x_{k+1}] - f[x_k]}{x_{k+1} - x_k}$\\
+                $b_1 = f[x_0, x_1]$\\
+            \item n-esima diferencia dividida \\ 
+                $f[x_k, ..., x_{k + n}] = \frac{f[x_{k+1}, x_{k+2}, ..., x_{k+n}] - f[x_k, x_{k+1}, ..., x_{k+n}]}{x_{k+n} - x_k}$\\
+                $b_n = f[x_0, x_1, ..., x_n]$\\
+        \end{itemize}
+        
+        \begin{algorithm}[H]
+            \caption{Algoritmo para obtener la tabla de diferencias divididas}
+            Leer $nPuntos, valor, x, y$\\
+            $tabla [nPuntos][nPuntos]$\\
+            \For{$i \leftarrow 0$ \KwTo $nPuntos$}
+            {
+                $tabla_i0 \leftarrow y_i$\\
+                \For{$j \leftarrow 1$ \KwTo $i + 1$}
+                {
+                    $tabla_{ij} \leftarrow \frac{tabla_{i,j-1} - tabla_{i-1, j-1}}{x_i - x_{i-j}}$\\
+                }
+            }
+            Retornar $tabla$\\
+        \end{algorithm}
+
+        \begin{center}
+            \begin{tabular}{|l|l|l|l|l|l|l|l} \hline
+            $n$ & $x_i$ & $f[x_i]$ & $1ra$ & $2da$ & $3ra$ & $4ta$ & $5ta$\\
+            \hline \hline
+            0 & 1 &  0.6747 & & & & & \\
+            \hline 
+            1 & 1.2 &  0.8491 & 0.8723 & & & & \\
+            \hline
+            2 & 1.4 &  1.1214 & 1.3610 & 1.2218 & & &\\
+            \hline 
+            3 & 1.6 &  1.4921 & 1.8536 & 1.2314 & 0.0160 & &\\
+            \hline
+            4 & 1.8 &  1.9607 & 2.3429 & 1.2233 & -0.0134 & -0.0368 &\\
+            \hline
+            5 & 2.0 &  2.5258 & 2.8258 & 1.2070 & -0.0272 & -0.0172 & 0.0195\\
+            \hline 
+            \end{tabular}
+        \end{center}
+
+        A partir de esta tabla el polinomio se obtiene facilmente\\
+        $p(x) = 0.6747 + 0.8723(x - 1) + 1.2218(x - 1)(x - 1.2) + 0.0160(x - 1)(x - 1.2)(x - 1.4) - 0.0368(x - 1)(x - 1.2)(x - 1.4)(x - 1.6) + 0.0195(x - 1)(x - 1.2)(x- 1.4)(x - 1.6)(x - 1.8)(x -2)$\\    
+        
+        
+
         \begin{thebibliography}{9}
             \bibitem{algebralineal}
             Orlando García Jaimes, Jairo A. Villegas Gutiérrez, Jorge Iván. \textit{Álgebra Lineal}. Editorial EAFIT, Medellín 2012. 
