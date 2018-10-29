@@ -43,12 +43,6 @@ public class MainActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }*/
 
-    public void abrirFuncionesGrafico(View view){
-
-        Intent nuevaActividad = new Intent(MainActivity.this, Grafico.class);
-        startActivity(nuevaActividad);
-
-    }
 
     public void tabs(){
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout);

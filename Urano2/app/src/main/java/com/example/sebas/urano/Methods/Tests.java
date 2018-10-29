@@ -36,7 +36,7 @@ public class Tests {
         //ArrayList<String[]> res =SistemaDeEcuaciones.MetodoIterativo.jacobi(mat,b,tol,x0,niter);
         //ArrayList<String[]> res =SistemaDeEcuaciones.MetodoIterativo.gaussSeidel(mat,b,tol,x0,niter);
 
-        ArrayList<String[]> res =SistemaDeEcuaciones.MetodoIterativo.SOR(mat,b,tol,x0,w,niter);
+        ArrayList<String[]> res =SistemaDeEcuaciones.SOR(mat,b,tol,x0,w,niter);
         /*
         for(String[] s: res){
             for(String r: s){

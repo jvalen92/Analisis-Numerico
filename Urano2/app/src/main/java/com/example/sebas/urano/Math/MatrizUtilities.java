@@ -88,7 +88,7 @@ public class MatrizUtilities {
     public static void imprimir(double[][] A){
         for(double[] x: A){
             for(double xx: x){
-                System.out.print(__);
+                System.out.print(xx);
                 System.out.print("\t");
             }
             System.out.println();
