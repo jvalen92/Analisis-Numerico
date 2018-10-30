@@ -72,4 +72,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(nuevaActividad);
 
     }
+
+    public void irMatriz(View view){
+        Intent irAMatriz = new Intent(MainActivity.this, Matriz.class);
+        startActivity(irAMatriz);
+    }
 }
