@@ -51,6 +51,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:background="@color/colorPrimary"
+        android:onClick="irMatriz"
         android:text="Home"
         android:textColor="@color/colorText" />
 
