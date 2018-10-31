@@ -46,7 +46,7 @@ dependencies {
     implementation group: 'org.apache.commons', name: 'commons-math3', version: '3.6.1'
 
     // Inlcude this for table views
-    implementation 'com.evrencoskun.library:tableview:0.8.4'
+    implementation 'de.codecrafters.tableview:tableview:2.8.0'
     // This dependency is found on compile classpath of this component and consumers.
     implementation 'com.google.guava:guava:25.0-android'
     // Use JUnit test framework
