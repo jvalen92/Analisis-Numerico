@@ -8,7 +8,7 @@ public class UnaVariable {
     public void UnaVariable(){
 
     }
-    public void newton(double tolerancia, double x0, int niter) {
+    public String newton(double tolerancia, double x0, int niter) {
         Utilities.Par<PrettyTable, PrintWriter> par = Utilities.iniciarArchivo("newton", "i", "x0", "fx", "error_abs", "error_rel");
         PrintWriter writer = par.getSegundo();
         PrettyTable tabla = par.getPrimero();
@@ -30,15 +30,19 @@ public class UnaVariable {
         }
         if (fx == 0) {
             System.out.printf("%.15f es raiz\n", x0);
+            return String.format("%.15f es raiz\n", x0);
         } else if (error < tolerancia) {
             System.out.printf("%.15f es una aproximacion con tolerancia=%.15f\n", x0, tolerancia);
+            return String.format("%.15f es una aproximacion con tolerancia=%.15f\n", x0, tolerancia);
         } else {
             System.out.printf("El metodo fracaso en %d iteraciones", niter);
+            return String.format("El metodo fracaso en %d iteraciones", niter);
         }
+        /*
         writer.println(tabla.toString());
-        writer.close();
+        writer.close();*/
     }
-    public void puntoFijo(double tolerancia, double xa, int niter) {
+    public String puntoFijo(double tolerancia, double xa, int niter) {
         Utilities.Par<PrettyTable, PrintWriter> par = Utilities.iniciarArchivo("punto_fijo", "i", "xn", "fx", "error_abs", "error_rel");
         PrintWriter writer = par.getSegundo();
         PrettyTable tabla = par.getPrimero();
@@ -58,13 +62,17 @@ public class UnaVariable {
         }
         if (fx == 0) {
             System.out.printf("%.15f es raiz\n", xa);
+            return String.format("\"%.15f es raiz\\n\", xa");
         } else if (error < tolerancia) {
             System.out.printf("%.15f es una aproximacion con tolerancia=%.15f\n", xa, tolerancia);
+            return String.format("%.15f es una aproximacion con tolerancia=%.15f\n", xa, tolerancia);
         } else {
             System.out.printf("El metodo fracaso en % iteraciones\n", niter);
+            return String.format("El metodo fracaso en % iteraciones\n", niter);
         }
+        /*
         writer.println(tabla.toString());
-        writer.close();
+        writer.close();*/
     }
 
     public String biseccion(double xi, double xs, double tolerancia, int niter) {
@@ -119,13 +127,14 @@ public class UnaVariable {
 
     }
 
-    public void busquedaIncremental(double x0, double delta, int niter) {
+    public String busquedaIncremental(double x0, double delta, int niter) {
         Utilities.Par<PrettyTable, PrintWriter> par = Utilities.iniciarArchivo("busqueda_incremental", "i", "xi", "fx");
         PrintWriter writer = par.getSegundo();
         PrettyTable tabla = par.getPrimero();
         double fx0 = Utilities.f(x0)[0];
         if (fx0 == 0) {
             System.out.printf("Hay raiz en %.15f\n", x0);
+            return String.format("Hay raiz en %.15f\n", x0);
         } else {
             tabla.addRow(Utilities.obtenerFila(0, x0, fx0));
             double x1 = x0 + delta;
@@ -142,14 +151,18 @@ public class UnaVariable {
             }
             if (fx1 == 0) {
                 System.out.printf("Hay raiz en %.15f\n", x0);
+                return String.format("Hay raiz en %.15f\n", x0);
             } else if (fx0 * fx1 < 0) {
                 System.out.printf("Hay raiz en (%.15f,%.15f)\n", x0, x1);
+                return String.format("Hay raiz en (%.15f,%.15f)\n", x0, x1);
             } else {
                 System.out.printf("Fracaso en %d iteraciones", niter);
+                return String.format("Fracaso en %d iteraciones", niter);
             }
         }
+        /*
         writer.println(tabla.toString());
-        writer.close();
+        writer.close();*/
     }
 
     public void raicesMultiples(double x0, double tolerancia, int niter) {
@@ -174,11 +187,12 @@ public class UnaVariable {
             contador++;
             tabla.addRow(Utilities.obtenerFila(contador, xn, fx, dfx, ddfx, error, error_rel));
         }
+        /*
         writer.println(tabla.toString());
-        writer.close();
+        writer.close();*/
     }
 
-    public void reglaFalsa(double xi, double xs, double tolerancia, int niter) {
+    public String reglaFalsa(double xi, double xs, double tolerancia, int niter) {
         Utilities.Par<PrettyTable, PrintWriter> par = Utilities.iniciarArchivo("regla_falsa", "i", "xi", "xs", "xm", "fxm", "error_abs", "error_rel");
         PrintWriter writer = par.getSegundo();
         PrettyTable tabla = par.getPrimero();
@@ -186,6 +200,7 @@ public class UnaVariable {
         double fxs = Utilities.f(xs)[0];
         if (fxi == 0 || fxs == 0) {
             System.out.printf("Hay raiz en %.15f\n", (fxi == 0 ? fxi : fxs));
+            return String.format("Hay raiz en %.15f\n", (fxi == 0 ? fxi : fxs));
         } else if (fxi * fxs < 0) {
             double xm =  xi - ((fxi * (xs - xi))) / (fxs - fxi);;
             double fxm = Utilities.f(xm)[0];
@@ -210,25 +225,31 @@ public class UnaVariable {
             }
             if (fxm == 0) {
                 System.out.printf("Raiz en %.15f\n", xm);
+                return String.format("Raiz en %.15f\n", xm);
             } else if (error < tolerancia) {
                 System.out.printf(" %.15f es una aproximacion a una raiz con una tolerancia = %.15f\n", xm, tolerancia);
+                return String.format(" %.15f es una aproximacion a una raiz con una tolerancia = %.15f\n", xm, tolerancia);
             } else {
                 System.out.printf("Fracaso en %d iteraciones", niter);
+                return String.format("Fracaso en %d iteraciones", niter);
             }
         } else {
             System.out.println("El intervalo es inadecuado");
+            return String.format("El intervalo es inadecuado");
         }
+        /*
         writer.println(tabla.toString());
-        writer.close();
+        writer.close();*/
     }
 
-    public void secante(double tolerancia, double x0, double x1, int niter) {
+    public String secante(double tolerancia, double x0, double x1, int niter) {
         Utilities.Par<PrettyTable, PrintWriter> par = Utilities.iniciarArchivo("secante", "i", "x0", "fx0", "error_abs", "error_rel");
         PrintWriter writer = par.getSegundo();
         PrettyTable tabla = par.getPrimero();
         double fx0 = Utilities.f(x0)[0];
         if (fx0 == 0) {
             System.out.printf("%.15f es raiz\n", x0);
+            return String.format("%.15f es raiz\n", x0);
         } else {
             double fx1 = Utilities.f(x1)[0];
             int contador = 0;
@@ -251,15 +272,20 @@ public class UnaVariable {
             }
             if (fx1 == 0) {
                 System.out.printf("%.15f es raiz\n", x1);
+                return String.format("%.15f es raiz\n", x1);
             } else if (error < tolerancia) {
                 System.out.printf("%.15f es una aproximacion  con una tolerancia = %.15f\n", x1, tolerancia);
+                return String.format("%.15f es una aproximacion  con una tolerancia = %.15f\n", x1, tolerancia);
             } else if (den == 0) {
                 System.out.println("Hay una posible raiz multiple");
+                return String.format("Hay una posible raiz multiple");
             } else {
                 System.out.printf("El metodo fracaso en %d iteraciones\n", niter);
+                return String.format ("El metodo fracaso en %d iteraciones\n", niter);
             }
         }
+        /*
         writer.println(tabla.toString());
-        writer.close();
+        writer.close();*/
     }
 }

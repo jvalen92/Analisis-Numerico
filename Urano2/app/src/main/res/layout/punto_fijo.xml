@@ -6,100 +6,129 @@
     tools:context=".Fragments.PuntoFijo">
 
     <!-- TODO: Update blank fragment layout -->
+
+
     <TextView
-        android:id="@+id/bx1"
+        android:id="@+id/pfx"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="23dp"
-        android:layout_marginTop="88dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="35dp"
+        android:text="f(x) = " />
+
+    <EditText
+        android:id="@+id/p_tfx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/pfx"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="57dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/px1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/p_tx1"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="26dp"
         android:text="Xi = " />
 
+    <EditText
+        android:id="@+id/p_tx1"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/pfx"
+        android:layout_marginTop="117dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="" />
+
+    <EditText
+        android:id="@+id/p_tniter"
+        android:layout_width="82dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/px1"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="34dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="" />
+
     <TextView
-        android:id="@+id/bx2"
+        android:id="@+id/pniter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/p_tx1"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="145dp"
+        android:text="Iteraciones = " />
+
+    <TextView
+        android:id="@+id/p_fprima"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/editText4"
+        android:layout_alignStart="@+id/pfx"
+        android:text="f'(x) = " />
+
+    <EditText
+        android:id="@+id/editText4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/p_tfx"
+        android:layout_below="@+id/p_tfx"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/ptol"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/bx1"
-        android:layout_marginTop="152dp"
-        android:text="Xs = " />
+        android:layout_alignStart="@+id/px1"
+        android:layout_marginTop="177dp"
+        android:text="Tolerancia = " />
+
+    <EditText
+        android:id="@+id/p_tol"
+        android:layout_width="57dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/p_tx1"
+        android:layout_toEndOf="@+id/pfx"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="" />
+
+    <Button
+        android:id="@+id/p_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/p_tol"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/colorText"
+        android:layout_centerHorizontal="true"
+        android:text="SUBMIT" />
 
     <TextView
-        android:id="@+id/btol"
+        android:id="@+id/p_out"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/bx1"
-        android:layout_marginEnd="162dp"
-        android:text="Tol = " />
+        android:layout_centerInParent="true"
+        android:text="" />
 
-    <TextView
-        android:id="@+id/bniter"
+    <Button
+        android:id="@+id/test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/btol"
-        android:layout_alignTop="@+id/bx2"
-        android:text="Niter = " />
-
-    <EditText
-        android:id="@+id/bt3"
-        android:layout_width="74dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/bx1"
-        android:layout_alignStart="@+id/bt4"
-        android:ems="10"
-        android:inputType="number"
-        android:text="" />
-
-    <EditText
-        android:id="@+id/bt4"
-        android:layout_width="74dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/bx2"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="52dp"
-        android:ems="10"
-        android:inputType="number"
-        android:text="" />
-
-    <EditText
-        android:id="@+id/bt2"
-        android:layout_width="74dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/bx2"
-        android:layout_alignStart="@+id/bt1"
-        android:ems="10"
-        android:inputType="number"
-        android:text="" />
-
-    <EditText
-        android:id="@+id/bt1"
-        android:layout_width="74dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/bx1"
-        android:layout_toStartOf="@+id/bt5"
-        android:ems="10"
-        android:inputType="number"
-        android:text="" />
-
-    <TextView
-        android:id="@+id/bfx"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/bt1"
-        android:layout_marginTop="28dp"
-        android:text="F(x) = " />
-
-    <EditText
-        android:id="@+id/bt5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/bfx"
-        android:layout_alignEnd="@+id/bt3"
-        android:ems="10"
-        android:inputType="number"
-        android:text="" />
+        android:layout_alignStart="@+id/p_tniter"
+        android:layout_below="@+id/p_tx1"
+        android:text="Button" />
 
 </RelativeLayout>
