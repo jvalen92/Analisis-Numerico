@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Grafico" />
-        <activity android:name=".Funciones"></activity>
+        <activity android:name=".Funciones" />
+        <activity android:name=".Matriz"></activity>
     </application>
 
 </manifest>
