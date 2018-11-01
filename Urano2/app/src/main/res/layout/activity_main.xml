@@ -69,5 +69,4 @@
         android:textColor="@color/colorText"
         android:text="Help" />
 
-
 </RelativeLayout>
