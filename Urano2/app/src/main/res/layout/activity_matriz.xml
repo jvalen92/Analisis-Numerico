@@ -13,9 +13,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="0dp"
-        android:onClick="crearTabla"
-        android:text="Crear Matriz"
+        android:layout_marginTop="358dp"
+        android:onClick="createTable"
+        android:text="crear Matriz"
         tools:layout_editor_absoluteX="139dp"
         tools:layout_editor_absoluteY="191dp" />
 
@@ -26,20 +26,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="169dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="46dp"
         android:ems="10"
         android:inputType="number" />
-
-
-    <de.codecrafters.tableview.TableView xmlns:table="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/miTabla"
-        android:layout_width="match_parent"
-        android:layout_height="423dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="144dp"
-        table:tableView_columnCount="2" />
 
     <Button
         android:id="@+id/submit"
@@ -47,8 +36,15 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="58dp"
+        android:layout_marginStart="254dp"
+        android:layout_marginTop="364dp"
         android:onClick="submit"
         android:text="Submit" />
 
+    <TableLayout
+        android:id="@+id/tableLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"/>
 </RelativeLayout>
