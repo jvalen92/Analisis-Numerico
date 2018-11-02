@@ -12,23 +12,25 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="358dp"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="462dp"
         android:onClick="createTable"
-        android:text="crear Matriz"
+        android:text="Crear Matriz"
         tools:layout_editor_absoluteX="139dp"
         tools:layout_editor_absoluteY="191dp" />
 
     <EditText
         android:id="@+id/numero"
-        android:layout_width="wrap_content"
+        android:layout_width="83dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="169dp"
-        android:layout_marginTop="46dp"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="402dp"
         android:ems="10"
-        android:inputType="number" />
+        android:inputType="number"/>
 
     <Button
         android:id="@+id/submit"
@@ -36,15 +38,30 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="254dp"
-        android:layout_marginTop="364dp"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="104dp"
+        android:layout_marginTop="404dp"
         android:onClick="submit"
         android:text="Submit" />
 
     <TableLayout
-        android:id="@+id/tableLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/A"
+        android:layout_width="213dp"
+        android:layout_height="213dp"
+        android:layout_centerInParent="true"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp"/>
+        android:layout_marginEnd="-195dp"
+        android:layout_marginBottom="8dp"
+        android:layout_toStartOf="@+id/prueba" />
+
+    <TableLayout
+        android:id="@+id/b"
+        android:layout_width="126dp"
+        android:layout_height="204dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="181dp"
+        android:layout_marginEnd="0dp">
+    </TableLayout>
+
 </RelativeLayout>
