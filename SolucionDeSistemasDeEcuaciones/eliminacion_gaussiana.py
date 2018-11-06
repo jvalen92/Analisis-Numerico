@@ -38,23 +38,26 @@ class EliminacionGaussiana:
                     j= j+1
                 if pivot == 0:
                     if j<n: #Sumarle a la fila K otra donde quite el cero de la columna K
-                        for p in range(k,n):
-                            A[k][p] = A[k][p] + A[j][p]
-                        b[k] = b[k] + b[j] 
+                        Aux = np.array(A[k])
+                        bAux = np.array(b[k])
+                        A[k] = A[j]
+                        b[k] = b[j]
+                        A[j] = Aux
+                        b[j] = bAux
                     else: #Si no hay valor que quite el 0 de la fila K significa que esta escalonada
                         continue
-                if pivot == 1:
-                    A = GaussUtilities().pivoteo_parcial(A, b, n, k)
-                if pivot == 2:
-                    A = GaussUtilities().pivoteo_total(A, b, self._marcas, n, k)
+            if pivot == 1:
+                A,b = GaussUtilities().pivoteo_parcial(A, b, n, k)
+            if pivot == 2:
+                A,b,marcas = GaussUtilities().pivoteo_total(A, b, self._marcas, n, k)
             for i in range(k+1,n): #Si es cero significa que no se requiere realizar ninguna operacion en la fila
+                multiplicador = A[i][k]/A[k][k]
                 if A[i][k] != 0:
-                    multiplicador = A[i][k]/A[k][k]
                     for p in range(k,n):
                         A[i][p] = A[i][p] - multiplicador * A[k][p]
                     b[i] = b[i] - multiplicador*b[k] 
-                    if l:
-                        inferior = np.append(inferior, multiplicador)
+                if l:
+                    inferior = np.append(inferior, multiplicador)
         gauss_utilities = GaussUtilities()
         if (l and u):
             L = gauss_utilities.obtener_L(inferior, n)           
@@ -87,13 +90,13 @@ class GaussUtilities:
         if marcs != None encuentra la solucion
         teniendo en cuenta los cambios de columna.
         """
-        n = len(A)-1
-        x = np.zeros(n+1,dtype=float)
-        x[n] = b[n]/A[n][n]
-        for i in range(n-1,-1,-1):
+        n = len(A)
+        x = np.zeros(n,dtype=float)
+        x[n-1] = b[n-1]/A[n-1][n-1]
+        for i in range(n-2,-1,-1):
             sumatoria = 0
-            for p in range(i+1,n+1):
-                sumatoria = sumatoria + A[i][p]*x[p]
+            for p in range(i+1,n):
+                sumatoria += A[i][p]*x[p]
             x[i] = (b[i] - sumatoria)/A[i][i]
         if type(marcs) != type(None):
             marcas = np.zeros(len(A))
@@ -107,10 +110,10 @@ class GaussUtilities:
         Retorna x, en la solucion de Ax=b,
         usando sustitucion progresiva.
         """
-        n = len(A)-1
-        x = np.zeros(n+1,dtype=float)
+        n = len(A)
+        x = np.zeros(n,dtype=float)
         x[0] = b[0]/A[0][0]
-        for i in range(1, n + 1):
+        for i in range(1, n):
             sumatoria = 0
             for p in range(0,i):
                 sumatoria = sumatoria + A[i][p]*x[p]
@@ -128,12 +131,12 @@ class GaussUtilities:
             print("El sistema no tiene solución única")
         else:
             if filaMayor != k:
-                temp = A[filaMayor]
-                A[filaMayor] = temp1
-                A[k] = A[filaMayor]
-                temp = b[filaMayor]
+                temp = np.array(A[k])
+                A[k] = A[filaMayor] 
+                A[filaMayor] = temp
+                temp = np.array(b[filaMayor])
                 b[filaMayor] = b[k]
-                b[k] = b[filaMayor]
+                b[k] = temp
             return (A, b)
     
     def pivoteo_total(self, A, b, marcas, n, k):
@@ -151,36 +154,20 @@ class GaussUtilities:
         else:
             temp = 0
             if filaMayor != k:
-                temp = A[k]
+                temp = np.array(A[k])
                 A[k] = A[filaMayor]
                 A[filaMayor] = temp
-                temp = b[k]
+                temp = np.array(b[k])
                 b[k] = b[filaMayor]
                 b[filaMayor] = temp
             if columnaMayor != k:
-                temp = A[:, columnaMayor]
-                A[:,columnaMayor] = A[:, k]
+                temp = np.array(A[:,columnaMayor])
+                A[:,columnaMayor] = A[:,k]
                 A[:, k] = temp
-                temp = b[:, columnaMayor]
-                b[:, columnaMayor] = b[:, k]
-                b[:, k] = temp
-                temp = marcas[k]
+                temp = np.array(marcas[k])
                 marcas[k] = marcas[columnaMayor]
                 marcas[columnaMayor] = temp
             return (A, b, marcas)
-    
-    def intercambiar(M, i, j):
-        temp = M[i]
-        M[i] = M[j]
-        M[j] = temp
-        return M
-
-    def intercol(M, i, j):
-        for k in range(0, len(M)):
-            temp = M[k][i]
-            M[k][i] = M[k][j]
-            M[k][j] = temp
-        return M
     
     def obtener_L(self, v, n):
         """
@@ -189,12 +176,11 @@ class GaussUtilities:
         """
         if len(v) == 0:
             return None
-        print(v)
         L = np.zeros((n, n))
         k = n-1
         for i in range(0, n):
             L[i][i] = 1
-            L[i+1:, i] = _v[0:k]
-            _v = _v[k:]
+            L[i+1: i] = v[0:k]
+            v = v[k:]
             k -= 1
         return L
