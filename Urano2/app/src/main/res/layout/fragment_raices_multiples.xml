@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.RaicesMultiples">
+
+    <TextView
+        android:id="@+id/rmx1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/rm_niter"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="29dp"
+        android:text="Xi = " />
+
+
+
+    <TextView
+        android:id="@+id/rmtol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/rmx1"
+        android:layout_marginEnd="120dp"
+        android:text="Tol = " />
+
+    <TextView
+        android:id="@+id/rmniter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/rmx1"
+        android:layout_marginTop="176dp"
+        android:text="Niter = " />
+
+    <EditText
+        android:id="@+id/rm_tol"
+        android:layout_width="74dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/rmx1"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="26dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="" />
+
+    <EditText
+        android:id="@+id/rm_niter"
+        android:layout_width="74dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/rmniter"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="82dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="" />
+
+
+    <EditText
+        android:id="@+id/rm_x1"
+        android:layout_width="74dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/rmx1"
+        android:layout_alignStart="@+id/rm_niter"
+        android:ems="10"
+        android:inputType="text"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/rmfx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/rmx1"
+        android:layout_marginTop="30dp"
+        android:text="F(x) = " />
+
+    <EditText
+        android:id="@+id/rm_fx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/rmfx"
+        android:layout_alignStart="@+id/rm_submit"
+        android:ems="10"
+        android:inputType="text"
+        android:text="" />
+
+    <Button
+        android:id="@+id/rm_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="103dp"
+        android:layout_marginTop="208dp"
+        android:background="@color/colorPrimary"
+        android:text="Submit"
+        android:textColor="@color/colorText" />
+
+    <de.codecrafters.tableview.TableView
+        xmlns:table="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/tableView"
+        android:layout_below="@+id/rm_submit"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        table:tableView_columnCount="4" />
+
+    <Button
+        android:id="@+id/rm_rand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/rm_submit"
+        android:layout_marginEnd="-103dp"
+        android:layout_toStartOf="@+id/rm_submit"
+        android:background="@color/colorPrimary"
+        android:text="random"
+        android:textColor="@color/colorText" />
+
+    <Button
+        android:id="@+id/rm_graf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/rm_submit"
+        android:layout_toEndOf="@+id/rm_submit"
+
+        android:background="@color/colorPrimary"
+        android:text="Graficar"
+        android:textColor="@color/colorText" />
+
+    <Button
+        android:id="@+id/rm_borrar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/rm_tol"
+        android:layout_alignTop="@+id/rm_submit"
+        android:layout_toStartOf="@id/rm_graf"
+        android:layout_toEndOf="@id/rm_graf"
+        android:background="@color/colorPrimary"
+        android:text="Borrar"
+        android:textColor="@color/colorText" />
+
+    <TextView
+        android:id="@+id/rmdf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/rm_df"
+        android:layout_alignStart="@+id/rmx1"
+        android:text="df(x) = " />
+
+    <EditText
+        android:id="@+id/rm_df"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/rm_fx"
+        android:layout_below="@+id/rmfx"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/rmddf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/rm_ddf"
+        android:layout_alignStart="@+id/rmx1"
+        android:text="ddf(x) = " />
+
+    <EditText
+        android:id="@+id/rm_ddf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/rm_fx"
+        android:layout_below="@+id/rm_df"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="" />
+
+
+
+</RelativeLayout>

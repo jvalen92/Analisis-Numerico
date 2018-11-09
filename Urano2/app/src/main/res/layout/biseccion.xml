@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/bx1"
-        android:layout_marginEnd="162dp"
+        android:layout_marginEnd="120dp"
         android:text="Tol = " />
 
     <TextView
@@ -47,10 +47,11 @@
         android:id="@+id/bt3"
         android:layout_width="74dp"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/bx1"
-        android:layout_alignStart="@+id/bt4"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="80dp"
+        android:layout_toEndOf="@+id/bt5"
         android:ems="10"
-        android:inputType="text "
+        android:inputType="text"
         android:text="" />
 
     <EditText
@@ -58,8 +59,7 @@
         android:layout_width="74dp"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/bx2"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="52dp"
+        android:layout_alignStart="@+id/bt3"
         android:ems="10"
         android:inputType="text"
         android:text="" />
@@ -79,7 +79,8 @@
         android:layout_width="74dp"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/bx1"
-        android:layout_toStartOf="@+id/bt5"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="74dp"
         android:ems="10"
         android:inputType="text"
         android:text="" />
@@ -88,9 +89,10 @@
         android:id="@+id/bfx"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/bt1"
-        android:layout_marginTop="28dp"
+        android:layout_alignStart="@+id/bx1"
+        android:layout_marginTop="26dp"
         android:text="F(x) = " />
 
     <EditText
@@ -98,7 +100,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/bfx"
-        android:layout_alignEnd="@+id/bt3"
+        android:layout_centerHorizontal="true"
         android:ems="10"
         android:inputType="text"
         android:text="" />
@@ -107,11 +109,55 @@
         android:id="@+id/b_submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/btol"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="217dp"
+        android:layout_marginStart="103dp"
+        android:layout_marginTop="208dp"
         android:background="@color/colorPrimary"
-        android:textColor="@color/colorText"
-        android:text="Button" />
+        android:text="Submit"
+        android:textColor="@color/colorText" />
+
+    <de.codecrafters.tableview.TableView
+        xmlns:table="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/tableView"
+        android:layout_below="@+id/b_submit"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        table:tableView_columnCount="4" />
+
+    <Button
+        android:id="@+id/b_rand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/b_submit"
+        android:layout_marginEnd="-103dp"
+        android:layout_toStartOf="@+id/b_submit"
+        android:background="@color/colorPrimary"
+        android:text="random"
+        android:textColor="@color/colorText" />
+
+    <Button
+        android:id="@+id/b_graf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/b_submit"
+        android:layout_toEndOf="@+id/b_submit"
+
+        android:background="@color/colorPrimary"
+        android:text="Graficar"
+        android:textColor="@color/colorText" />
+
+    <Button
+        android:id="@+id/b_borrar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/bt3"
+        android:layout_alignTop="@+id/b_submit"
+        android:layout_toStartOf="@id/b_graf"
+        android:layout_toEndOf="@id/b_graf"
+        android:background="@color/colorPrimary"
+        android:text="Borrar"
+        android:textColor="@color/colorText" />
+
 
 </RelativeLayout>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.Secante">
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+    <TextView
+        android:id="@+id/sx1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="88dp"
+        android:text="Xi = " />
+
+    <TextView
+        android:id="@+id/sx2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/sx1"
+        android:layout_marginTop="152dp"
+        android:text="Xs = " />
+
+    <TextView
+        android:id="@+id/stol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/sx1"
+        android:layout_marginEnd="120dp"
+        android:text="Tol = " />
+
+    <TextView
+        android:id="@+id/sniter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/stol"
+        android:layout_alignTop="@+id/sx2"
+        android:text="Niter = " />
+
+    <EditText
+        android:id="@+id/s_tol"
+        android:layout_width="74dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="80dp"
+        android:layout_toEndOf="@+id/s_fx"
+        android:ems="10"
+        android:inputType="text"
+        android:text="" />
+
+    <EditText
+        android:id="@+id/s_niter"
+        android:layout_width="74dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/sx2"
+        android:layout_alignStart="@+id/s_tol"
+        android:ems="10"
+        android:inputType="text"
+        android:text="" />
+
+    <EditText
+        android:id="@+id/s_x2"
+        android:layout_width="74dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/sx2"
+        android:layout_alignStart="@+id/s_x1"
+        android:ems="10"
+        android:inputType="text"
+        android:text="" />
+
+    <EditText
+        android:id="@+id/s_x1"
+        android:layout_width="74dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/sx1"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="74dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/sfx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/sx1"
+        android:layout_marginTop="26dp"
+        android:text="F(x) = " />
+
+    <EditText
+        android:id="@+id/s_fx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/sfx"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:inputType="text"
+        android:text="" />
+
+    <Button
+        android:id="@+id/s_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="103dp"
+        android:layout_marginTop="208dp"
+        android:background="@color/colorPrimary"
+        android:text="Submit"
+        android:textColor="@color/colorText" />
+
+    <de.codecrafters.tableview.TableView
+        xmlns:table="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/tableView"
+        android:layout_below="@+id/s_submit"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        table:tableView_columnCount="4" />
+
+    <Button
+        android:id="@+id/s_rand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/s_submit"
+        android:layout_marginEnd="-103dp"
+        android:layout_toStartOf="@+id/s_submit"
+        android:background="@color/colorPrimary"
+        android:text="random"
+        android:textColor="@color/colorText" />
+
+    <Button
+        android:id="@+id/s_graf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/s_submit"
+        android:layout_toEndOf="@+id/s_submit"
+
+        android:background="@color/colorPrimary"
+        android:text="Graficar"
+        android:textColor="@color/colorText" />
+
+    <Button
+        android:id="@+id/s_borrar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/s_tol"
+        android:layout_alignTop="@+id/s_submit"
+        android:layout_toStartOf="@id/s_graf"
+        android:layout_toEndOf="@id/s_graf"
+        android:background="@color/colorPrimary"
+        android:text="Borrar"
+        android:textColor="@color/colorText" />
+
+</RelativeLayout>
