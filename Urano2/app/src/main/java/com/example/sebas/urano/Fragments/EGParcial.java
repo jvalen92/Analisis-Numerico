@@ -8,6 +8,7 @@ import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -23,6 +24,7 @@ import com.google.common.collect.Table;
  * A simple {@link Fragment} subclass.
  */
 public class EGParcial extends Fragment {
+    View view;
 
     public EGParcial() {
         // Required empty public constructor
@@ -33,14 +35,23 @@ public class EGParcial extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_egparcial, container, false);
+        final View inflaterView = inflater.inflate(R.layout.fragment_egparcial,
+                container, false);
+        Button matrizBtn = (Button) inflaterView.findViewById(R.id.CrearMatriz);
+        matrizBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createTable();
+            }
+        });
+        return inflaterView;
     }
 
     /**
      * Captura los datos ingresados en la matriz
      * y ejecuta el metodo
      */
-    public void submit(View view) {
+    public void submit() {
         try {
             int n = Integer.parseInt(((EditText) view.findViewById(R.id.numero)).getText().toString());
             double A[][] = new double[n][n];
@@ -66,9 +77,12 @@ public class EGParcial extends Fragment {
      * Este metodo se encarga de obtener la tabla de la vista y reconstruirla segun los parametros
      * definidos por el usuario
     */
-    public void createTable(View view) {
+
+    public void createTable() {
         try {
             int n = Integer.parseInt(((EditText) view.findViewById(R.id.numero)).getText().toString());
+            Toast.makeText(this.getContext(), n,
+                  Toast.LENGTH_LONG).show();
             TableLayout A = (TableLayout) view.findViewById(R.id.matrizA);
             A.removeAllViews();
             TableLayout B = crearB(view, n);
@@ -85,8 +99,8 @@ public class EGParcial extends Fragment {
                 A.addView(row);
             }
         } catch (Exception e) {
-            Toast.makeText(this.getContext(), "Por favor ingresa un numero",
-                    Toast.LENGTH_LONG).show();
+            //Toast.makeText(this.getContext(), "Por favor ingresa un numero",
+              //      Toast.LENGTH_LONG).show();
         }
     }
 
