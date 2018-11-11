@@ -17,15 +17,12 @@ import android.widget.Toast;
 import com.example.sebas.urano.Matriz;
 import com.example.sebas.urano.Methods.SistemaDeEcuaciones;
 import com.example.sebas.urano.R;
+import com.google.common.collect.Table;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class EGParcial extends Fragment {
-    private TableLayout A;
-    private TableLayout B;
-    private TableLayout X;
-    private TableLayout matrixAb;
 
     public EGParcial() {
         // Required empty public constructor
@@ -36,14 +33,7 @@ public class EGParcial extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View inflaterView = inflater.inflate(R.layout.fragment_egparcial,
-                container, false);
-        A = (TableLayout) inflaterView.findViewById(R.id.matrizA);
-        B = (TableLayout) inflaterView.findViewById(R.id.vectorB);
-        X = (TableLayout) inflaterView.findViewById(R.id.vectorX);
-        matrixAb = (TableLayout) inflaterView.findViewById(R.id.matrixAb);
-        createTable(inflaterView);
-        return inflaterView;
+        return inflater.inflate(R.layout.fragment_egparcial, container, false);
     }
 
     /**
@@ -79,8 +69,9 @@ public class EGParcial extends Fragment {
     public void createTable(View view) {
         try {
             int n = Integer.parseInt(((EditText) view.findViewById(R.id.numero)).getText().toString());
+            TableLayout A = (TableLayout) view.findViewById(R.id.matrizA);
             A.removeAllViews();
-            crearB(view, n);
+            TableLayout B = crearB(view, n);
             for (int i = 0; i < n; i++) {
                 TableRow row = new TableRow(this.getContext());
                 row.setId(i);
@@ -103,6 +94,7 @@ public class EGParcial extends Fragment {
      * Crea la matriz b y la muestra al usuario
      */
     TableLayout crearB(View view, int n) {
+        TableLayout B = (TableLayout) view.findViewById(R.id.vectorB);
         B.removeAllViews();
         for (int i = 0; i < n; i++) {
             EditText ed = new EditText(this.getContext());
