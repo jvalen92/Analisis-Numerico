@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.text.InputType;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +25,7 @@ import com.google.common.collect.Table;
  * A simple {@link Fragment} subclass.
  */
 public class EGParcial extends Fragment {
-    View view;
+    View inflaterView;
 
     public EGParcial() {
         // Required empty public constructor
@@ -35,8 +36,9 @@ public class EGParcial extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View inflaterView = inflater.inflate(R.layout.fragment_egparcial,
+        inflaterView = inflater.inflate(R.layout.fragment_egparcial,
                 container, false);
+        /*Boton Crear Matriz*/
         Button matrizBtn = (Button) inflaterView.findViewById(R.id.CrearMatriz);
         matrizBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,6 +46,15 @@ public class EGParcial extends Fragment {
                 createTable();
             }
         });
+        /*Boton ejecutar metodo*/
+        Button calcBtn = (Button) inflaterView.findViewById(R.id.ejecutar);
+        calcBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                submit();
+            }
+        });
+
         return inflaterView;
     }
 
@@ -53,20 +64,32 @@ public class EGParcial extends Fragment {
      */
     public void submit() {
         try {
-            int n = Integer.parseInt(((EditText) view.findViewById(R.id.numero)).getText().toString());
+            int n = Integer.parseInt(((EditText)
+                    inflaterView.findViewById(R.id.numero)).getText().toString());
             double A[][] = new double[n][n];
-            TableLayout tb = (TableLayout) view.findViewById(R.id.vectorB);
+            TableLayout tb = (TableLayout) inflaterView.findViewById(R.id.vectorB);
             double b[] = new double[n];
             for (int i = 0; i < n; i++) {
                 EditText ed1 = (EditText) tb.findViewById(i);
                 b[i] = Double.parseDouble(ed1.getText().toString());
-                TableRow row = (TableRow) view.findViewById(i);
+                TableRow row = (TableRow) inflaterView.findViewById(i);
                 for (int j = 0; j < n; j++) {
                     EditText ed = (EditText)(row.findViewById(n + j));
                     A[i][j] = Double.parseDouble(ed.getText().toString());
                 }
             }
             double solucion [] = SistemaDeEcuaciones.eliminacionGaussianaParcial(A, b);
+
+            TableLayout x = (TableLayout) inflaterView.findViewById(R.id.matrixAb);
+            x.removeAllViews();
+            TableRow sol = new TableRow(this.getContext());
+            for(int i = 0; i < n; i++) {
+                TextView textView = new TextView(this.getContext());
+                textView.setText(String.format("%f", solucion[i]));
+                textView.setGravity(Gravity.CENTER_HORIZONTAL);
+                sol.addView(textView, i);
+            }
+            x.addView(sol, 0);
         } catch (Exception e) {
             Toast.makeText(this.getContext(), e.getMessage(),
                     Toast.LENGTH_LONG).show();
@@ -80,43 +103,56 @@ public class EGParcial extends Fragment {
 
     public void createTable() {
         try {
-            int n = Integer.parseInt(((EditText) view.findViewById(R.id.numero)).getText().toString());
-            Toast.makeText(this.getContext(), n,
-                  Toast.LENGTH_LONG).show();
-            TableLayout A = (TableLayout) view.findViewById(R.id.matrizA);
+            int n = Integer.parseInt(((EditText) inflaterView.findViewById(R.id.numero)).getText().toString());
+            TableLayout A = (TableLayout) inflaterView.findViewById(R.id.matrizA);
             A.removeAllViews();
-            TableLayout B = crearB(view, n);
+            TableLayout B = crearB(n);
             for (int i = 0; i < n; i++) {
                 TableRow row = new TableRow(this.getContext());
                 row.setId(i);
                 for (int j = 0; j < n; j++) {
                     EditText editText = new EditText(this.getContext());
                     editText.setId(n + j);
-                    editText.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
-                    editText.setText("0");
+                    editText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+                    editText.setGravity(Gravity.CENTER_HORIZONTAL);
+                    editText.setText("  0  ");
                     row.addView(editText);
                 }
                 A.addView(row);
             }
         } catch (Exception e) {
-            //Toast.makeText(this.getContext(), "Por favor ingresa un numero",
-              //      Toast.LENGTH_LONG).show();
+            Toast.makeText(this.getContext(), "Por favor ingresa un numero",
+                 Toast.LENGTH_LONG).show();
         }
     }
 
     /**
      * Crea la matriz b y la muestra al usuario
      */
-    TableLayout crearB(View view, int n) {
-        TableLayout B = (TableLayout) view.findViewById(R.id.vectorB);
+    TableLayout crearB(int n) {
+        TableLayout B = (TableLayout) inflaterView.findViewById(R.id.vectorB);
         B.removeAllViews();
         for (int i = 0; i < n; i++) {
             EditText ed = new EditText(this.getContext());
             ed.setId(i);
-            ed.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
-            ed.setText("0");
+            ed.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+            ed.setGravity(Gravity.CENTER_HORIZONTAL);
+            ed.setText("  0  ");
             B.addView(ed);
         }
         return B;
+    }
+
+    /** Solo para efectos de desarrollo y testing de la aplicacion. No debe ser usado
+     en produccion.
+     */
+    void imprimirMatriz(double [][] A, int n) {
+        System.out.println("Matriz Ingresada fue: ");
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                System.out.print(A[i][j] + " ");
+            }
+            System.out.println();
+        }
     }
 }
