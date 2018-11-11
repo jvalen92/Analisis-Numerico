@@ -21,23 +21,13 @@
         android:id="@+id/b"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/button3"
+        android:layout_alignStart="@+id/equal"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="320dp"
+        android:layout_marginStart="39dp"
         android:layout_marginTop="0dp"
         android:text="b"
         android:textSize="30sp" />
 
-    <TextView
-        android:id="@+id/x"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/ejecutar"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="0dp"
-        android:layout_marginEnd="22dp"
-        android:text="x"
-        android:textSize="30sp" />
 
     <TextView
         android:id="@+id/equal"
@@ -45,8 +35,8 @@
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/ejecutar"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="116dp"
-        android:layout_marginEnd="-33dp"
+        android:layout_marginTop="115dp"
+        android:layout_marginEnd="-41dp"
         android:text="="
         android:textSize="30sp" />
 
@@ -57,8 +47,8 @@
         android:layout_alignParentStart="false"
         android:layout_alignParentTop="false"
         android:layout_centerInParent="false"
-        android:layout_marginStart="7dp"
-        android:layout_marginTop="469dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="377dp"
         android:ems="10"
         android:hint="4"
         android:inputType="number"
@@ -67,8 +57,8 @@
 
     <ScrollView
         android:id="@+id/scrollViewA"
-        android:layout_width="220dp"
-        android:layout_height="213dp"
+        android:layout_width="285dp"
+        android:layout_height="229dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="40dp">
 
@@ -88,12 +78,12 @@
     <ScrollView
         android:id="@+id/scrollViewB"
         android:layout_width="60dp"
-        android:layout_height="200dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
+        android:layout_height="229dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginLeft="17dp"
         android:layout_marginTop="40dp"
-        android:layout_toEndOf="@+id/scrollViewX"
-        android:layout_toRightOf="@+id/scrollViewX">
+        android:layout_toEndOf="@+id/scrollViewA"
+        android:layout_toRightOf="@+id/scrollViewA">
 
         <HorizontalScrollView
             android:layout_width="wrap_content"
@@ -109,14 +99,13 @@
     </ScrollView>
 
     <ScrollView
-        android:id="@+id/scrollViewX"
-        android:layout_width="60dp"
-        android:layout_height="200dp"
-        android:layout_marginStart="14dp"
-        android:layout_marginLeft="14dp"
-        android:layout_marginTop="40dp"
-        android:layout_toEndOf="@+id/scrollViewA"
-        android:layout_toRightOf="@+id/scrollViewA">
+        android:id="@+id/scrollView4"
+        android:layout_width="350dp"
+        android:layout_height="63dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="290dp">
 
         <HorizontalScrollView
             android:layout_width="wrap_content"
@@ -124,28 +113,6 @@
 
             <TableLayout
                 android:id="@+id/vectorX"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-            </TableLayout>
-        </HorizontalScrollView>
-    </ScrollView>
-
-    <ScrollView
-        android:id="@+id/scrollView4"
-        android:layout_width="350dp"
-        android:layout_height="63dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="15dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="259dp">
-
-        <HorizontalScrollView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TableLayout
-                android:id="@+id/matrixAb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -163,9 +130,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="55dp"
-        android:layout_marginLeft="55dp"
-        android:layout_marginTop="465dp"
+        android:layout_marginStart="61dp"
+        android:layout_marginLeft="61dp"
+        android:layout_marginTop="376dp"
         android:onClick="createTable"
         android:text="CrearMatriz"
         android:textColor="@android:color/white" />
@@ -177,9 +144,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="188dp"
-        android:layout_marginLeft="188dp"
-        android:layout_marginTop="465dp"
+        android:layout_marginStart="187dp"
+        android:layout_marginLeft="187dp"
+        android:layout_marginTop="373dp"
         android:onClick="createTable"
         android:text="Ejecutar"
         android:textColor="@android:color/white" />

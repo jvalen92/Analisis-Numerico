@@ -1,6 +1,7 @@
 package com.example.sebas.urano.Fragments;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -35,6 +36,7 @@ public class EGParcial extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Activity a = getActivity();
         // Inflate the layout for this fragment
         inflaterView = inflater.inflate(R.layout.fragment_egparcial,
                 container, false);
@@ -78,18 +80,27 @@ public class EGParcial extends Fragment {
                     A[i][j] = Double.parseDouble(ed.getText().toString());
                 }
             }
+
             double solucion [] = SistemaDeEcuaciones.eliminacionGaussianaParcial(A, b);
 
-            TableLayout x = (TableLayout) inflaterView.findViewById(R.id.matrixAb);
+            //Mostrar Solucion
+            TableLayout x = (TableLayout) inflaterView.findViewById(R.id.vectorX);
             x.removeAllViews();
             TableRow sol = new TableRow(this.getContext());
+            TableRow xs = new TableRow(this.getContext());
             for(int i = 0; i < n; i++) {
+                TextView xi = new TextView(this.getContext());
+                xi.setText(String.format("X%d    ", i));
+                x.setGravity(Gravity.CENTER_HORIZONTAL);
+                xs.addView(xi, i);
+
                 TextView textView = new TextView(this.getContext());
-                textView.setText(String.format("%f", solucion[i]));
+                textView.setText(String.format("%f    ", solucion[i]));
                 textView.setGravity(Gravity.CENTER_HORIZONTAL);
                 sol.addView(textView, i);
             }
-            x.addView(sol, 0);
+            x.addView(xs, 0);
+            x.addView(sol, 1);
         } catch (Exception e) {
             Toast.makeText(this.getContext(), e.getMessage(),
                     Toast.LENGTH_LONG).show();
