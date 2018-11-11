@@ -66,6 +66,7 @@ public class EGParcial extends Fragment {
      */
     public void submit() {
         try {
+            //Obtener Datos
             int n = Integer.parseInt(((EditText)
                     inflaterView.findViewById(R.id.numero)).getText().toString());
             double A[][] = new double[n][n];
@@ -81,26 +82,26 @@ public class EGParcial extends Fragment {
                 }
             }
 
-            double solucion [] = SistemaDeEcuaciones.eliminacionGaussianaParcial(A, b);
+            //Ejecutar Metodo
+            Object retVal[] = SistemaDeEcuaciones.eliminacionGaussianaParcial(A, b);
+            double etapa[][] = (double[][]) retVal[0];
+            double solucion[] = (double[]) retVal[1];
 
             //Mostrar Solucion
             TableLayout x = (TableLayout) inflaterView.findViewById(R.id.vectorX);
             x.removeAllViews();
-            TableRow sol = new TableRow(this.getContext());
-            TableRow xs = new TableRow(this.getContext());
             for(int i = 0; i < n; i++) {
+                TableRow sol = new TableRow(this.getContext());
                 TextView xi = new TextView(this.getContext());
                 xi.setText(String.format("X%d    ", i));
-                x.setGravity(Gravity.CENTER_HORIZONTAL);
-                xs.addView(xi, i);
+                sol.addView(xi, 0);
 
-                TextView textView = new TextView(this.getContext());
-                textView.setText(String.format("%f    ", solucion[i]));
-                textView.setGravity(Gravity.CENTER_HORIZONTAL);
-                sol.addView(textView, i);
+                TextView number = new TextView(this.getContext());
+                number.setText(String.format("%f", solucion[i]));
+                number.setGravity(Gravity.CENTER_HORIZONTAL);
+                sol.addView(number, 1);
+                x.addView(sol, i);
             }
-            x.addView(xs, 0);
-            x.addView(sol, 1);
         } catch (Exception e) {
             Toast.makeText(this.getContext(), e.getMessage(),
                     Toast.LENGTH_LONG).show();

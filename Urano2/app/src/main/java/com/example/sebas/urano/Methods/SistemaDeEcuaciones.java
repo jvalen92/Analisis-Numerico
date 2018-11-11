@@ -15,10 +15,10 @@ public class SistemaDeEcuaciones {
         return x;
     }
 
-    public static double[] eliminacionGaussianaParcial(double[][] A, double[] b) {
+    public static Object[] eliminacionGaussianaParcial(double[][] A, double[] b) {
         double[][] Ub = eliminacionGaussianaPivoteoParcial(A, b);
         double[] x = sustitucionRegresiva(Ub, A.length);
-        return x;
+        return new Object[]{Ub, x};
     }
 
     public static double[] eliminacionGaussianaTotal(double[][] A, double[] b) {
