@@ -19,6 +19,7 @@ import com.example.sebas.urano.R;
 import java.util.ArrayList;
 
 import de.codecrafters.tableview.TableView;
+import de.codecrafters.tableview.model.TableColumnDpWidthModel;
 import de.codecrafters.tableview.toolkit.SimpleTableDataAdapter;
 import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
 
@@ -87,16 +88,31 @@ public class Secante extends Fragment {
                     ArrayList<String[]> solucion = UnaVariable.secante(fx,x1,x2,tol,niter);
 
 
-                    //Activity activity = getActivity();
+                    //TableView
                     Context context = getContext();
                     TableView<String[]> tableView = (TableView<String[]>) vista.findViewById(R.id.tableView);
                     tableView.setColumnCount(solucion.get(0).length);
-                    tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(context,"i","xm","fx","EA"));
+
+                    //Lenar tabla
+                    int n_columns=solucion.get(0).length;
+                    tableView.setColumnCount(n_columns);
+                    String headers[]={"i","xm","fx","Error Absoluto", "Error Relativo"};
+                    tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(context,headers));
+
+
                     //tableView.setDataAdapter(new SimpleTableDataAdapter(context, DATA_TO_SHOW));
+
+                    //Ajustar tamaño de las columnas
+                    TableColumnDpWidthModel columnModel = new TableColumnDpWidthModel(context, n_columns, 125);
+                    columnModel.setColumnWidth(0, 50);
+                    columnModel.setColumnWidth(n_columns-2, 170);
+                    columnModel.setColumnWidth(n_columns-1, 160);
+                    tableView.setColumnModel(columnModel);
+
                     tableView.setDataAdapter(new SimpleTableDataAdapter(context, solucion));
 
                     //cambiar el color de la tabla para que se vea mas kawai
-                    tableView.setHeaderBackground(R.color.colorAccent);
+                    tableView.setHeaderBackground(R.color.colorPrimary);
 
                 }catch (Exception e) {
                     Toast.makeText(getContext(),"Llene todos los campos y verifique lso datos",Toast.LENGTH_LONG).show();

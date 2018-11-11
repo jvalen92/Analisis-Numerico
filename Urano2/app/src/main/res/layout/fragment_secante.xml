@@ -118,13 +118,20 @@
         android:text="Submit"
         android:textColor="@color/colorText" />
 
-    <de.codecrafters.tableview.TableView
-        xmlns:table="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/tableView"
-        android:layout_below="@+id/s_submit"
-        android:layout_width="match_parent"
+    <HorizontalScrollView
+        android:layout_width="700dp"
         android:layout_height="match_parent"
-        table:tableView_columnCount="4" />
+        android:layout_below="@+id/s_submit">
+
+        <de.codecrafters.tableview.TableView
+            xmlns:table="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/tableView"
+
+            android:layout_width="550dp"
+            android:layout_height="match_parent"
+            table:tableView_columnCount="4" />
+
+    </HorizontalScrollView>
 
     <Button
         android:id="@+id/s_rand"
