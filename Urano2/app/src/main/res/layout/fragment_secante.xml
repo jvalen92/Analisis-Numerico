@@ -31,9 +31,8 @@
         android:id="@+id/stol"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/sx1"
-        android:layout_marginEnd="120dp"
+        android:layout_centerHorizontal="true"
         android:text="Tol = " />
 
     <TextView
@@ -48,9 +47,8 @@
         android:id="@+id/s_tol"
         android:layout_width="74dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="80dp"
-        android:layout_toEndOf="@+id/s_fx"
+        android:layout_alignBaseline="@+id/sx1"
+        android:layout_toEndOf="@+id/sniter"
         android:ems="10"
         android:inputType="text"
         android:text="" />
@@ -62,8 +60,8 @@
         android:layout_alignBaseline="@+id/sx2"
         android:layout_alignStart="@+id/s_tol"
         android:ems="10"
-        android:inputType="text"
-        android:text="" />
+        android:inputType="number"
+        android:text="80" />
 
     <EditText
         android:id="@+id/s_x2"
@@ -163,5 +161,22 @@
         android:background="@color/colorPrimary"
         android:src="@drawable/ic_clean"
         android:textColor="@color/colorText" />
+
+    <ImageButton
+        android:id="@+id/s_help"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/s_fx"
+        android:layout_marginEnd="20dp"
+        android:background="@color/colorText"
+        android:src="@drawable/ic_help" />
+
+    <Spinner
+        android:id="@+id/s_spinner"
+        android:layout_width="65dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/sx1"
+        android:layout_toEndOf="@+id/s_fx" />
 
 </RelativeLayout>

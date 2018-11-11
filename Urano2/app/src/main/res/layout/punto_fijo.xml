@@ -56,8 +56,8 @@
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="34dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="" />
+        android:inputType="number"
+        android:text="80" />
 
     <TextView
         android:id="@+id/pniter"
@@ -160,20 +160,31 @@
         android:layout_width="700dp"
         android:layout_height="match_parent"
         android:layout_below="@+id/p_submit">
-
         <de.codecrafters.tableview.TableView
             xmlns:table="http://schemas.android.com/apk/res-auto"
             android:id="@+id/tableView"
-
             android:layout_width="550dp"
             android:layout_height="match_parent"
-
             table:tableView_columnCount="4" />
-
-
     </HorizontalScrollView>
 
+    <ImageButton
+        android:id="@+id/pf_help"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignTop="@+id/p_tfx"
+        android:layout_marginStart="-57dp"
+        android:layout_toEndOf="@+id/p_tfx"
+        android:background="@color/colorText"
+        android:src="@drawable/ic_help" />
 
+    <Spinner
+        android:id="@+id/pf_spinner"
+        android:layout_width="65dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/ptol"
+        android:layout_toEndOf="@+id/p_rand"
+        android:text="TextView" />
 
 
 </RelativeLayout>

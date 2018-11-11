@@ -29,9 +29,8 @@
         android:id="@+id/rtol"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/rx1"
-        android:layout_marginEnd="120dp"
+        android:layout_toEndOf="@+id/rf_rand"
         android:text="Tol = " />
 
     <TextView
@@ -46,9 +45,8 @@
         android:id="@+id/rf_tol"
         android:layout_width="74dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="80dp"
-        android:layout_toEndOf="@+id/rf_fx"
+        android:layout_alignBaseline="@+id/rx1"
+        android:layout_toStartOf="@+id/rf_help"
         android:ems="10"
         android:inputType="text"
         android:text="" />
@@ -58,10 +56,11 @@
         android:layout_width="74dp"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/rx2"
-        android:layout_alignStart="@+id/rf_tol"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="55dp"
         android:ems="10"
-        android:inputType="text"
-        android:text="" />
+        android:inputType="number"
+        android:text="80" />
 
     <EditText
         android:id="@+id/rf_x2"
@@ -146,9 +145,8 @@
         android:layout_width="96dp"
         android:layout_height="50dp"
 
-        android:layout_alignEnd="@+id/rniter"
         android:layout_alignTop="@+id/rf_submit"
-        android:layout_marginEnd="-6dp"
+        android:layout_toStartOf="@+id/rf_borrar"
         android:background="@color/colorPrimary"
         android:src="@drawable/ic_graph"
         android:textColor="@color/colorText" />
@@ -162,5 +160,23 @@
         android:background="@color/colorPrimary"
         android:src="@drawable/ic_clean"
         android:textColor="@color/colorText" />
+
+    <ImageButton
+        android:id="@+id/rf_help"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/rf_fx"
+        android:layout_marginEnd="17dp"
+        android:background="@color/colorText"
+        android:src="@drawable/ic_help" />
+
+    <Spinner
+        android:id="@+id/rf_spinner"
+        android:layout_width="65dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/rx1"
+        android:text="TextView" />
 
 </RelativeLayout>

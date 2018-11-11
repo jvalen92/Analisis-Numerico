@@ -16,14 +16,12 @@
         android:text="Xi = " />
 
 
-
     <TextView
         android:id="@+id/ntol"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/nx1"
-        android:layout_marginEnd="120dp"
+        android:layout_toEndOf="@+id/n_rand"
         android:text="Tol = " />
 
     <TextView
@@ -39,9 +37,9 @@
         android:id="@+id/n_tol"
         android:layout_width="74dp"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/nx1"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="26dp"
+        android:layout_above="@+id/Nniter"
+        android:layout_alignEnd="@+id/n_fx"
+        android:layout_marginBottom="-176dp"
         android:ems="10"
         android:inputType="text"
         android:text="" />
@@ -54,8 +52,8 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="82dp"
         android:ems="10"
-        android:inputType="text"
-        android:text="" />
+        android:inputType="number"
+        android:text="80" />
 
 
     <EditText
@@ -83,7 +81,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/nfx"
-        android:layout_alignEnd="@+id/n_tol"
+        android:layout_centerHorizontal="true"
         android:ems="10"
         android:inputType="text"
         android:text="" />
@@ -131,7 +129,6 @@
         android:layout_height="50dp"
         android:layout_alignStart="@+id/ntol"
         android:layout_below="@+id/n_niter"
-        android:layout_marginStart="-50dp"
         android:background="@color/colorPrimary"
         android:src="@drawable/ic_graph"
         android:textColor="@color/colorText" />
@@ -165,5 +162,23 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="" />
+
+    <ImageButton
+        android:id="@+id/n_help"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/n_fx"
+        android:layout_marginEnd="16dp"
+        android:background="@color/colorText"
+        android:src="@drawable/ic_help" />
+
+    <Spinner
+        android:id="@+id/n_spinner"
+        android:layout_width="65dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/Nniter"
+        android:layout_alignStart="@+id/n_help"
+        android:layout_marginBottom="-176dp" />
 
 </RelativeLayout>

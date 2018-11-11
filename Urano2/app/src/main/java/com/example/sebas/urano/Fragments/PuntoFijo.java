@@ -8,9 +8,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,8 +61,10 @@ public class PuntoFijo extends Fragment {
         vista = inflater.inflate(R.layout.punto_fijo, container, false);
         random();
         borrar();
+        spinner();
         submit();
         graficar();
+        help();
         return vista;
     }
 
@@ -196,10 +201,60 @@ public class PuntoFijo extends Fragment {
         });
     }
 
-    public void setTable(ArrayList<String> solucion,String [] header){
+    //Metodo para ejecutar las acciones necesarias para mostrar las ayudas
+    public void help(){
+        ImageButton btn= (ImageButton) vista.findViewById(R.id.pf_help);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Aqui haces lo que quieras para mostrar las ayudas
+                Toast.makeText(getContext(),"Ayudas",Toast.LENGTH_LONG).show();
+            }
+        });
+    }
 
+    // Lista despleglable para escoger la tolerancia del metodo
+    public void spinner(){
+        Spinner spinner;
+        final String datos[]={"0.5e-6","1e-5","0.5e-8"};
 
+        spinner = (Spinner) vista.findViewById(R.id.pf_spinner);
+        Context context=getContext();
+        ArrayAdapter<String> adapter =new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item,datos);
+        spinner.setAdapter(adapter);
 
+        //seleccionar un elemento de la lista y escribir en el campo de tol
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                EditText tol =(EditText) vista.findViewById(R.id.p_tol);
+                switch (position){
+
+                    case 0:
+                        tol.setText("");
+                        tol.setText(datos[position]);
+                        //Toast.makeText(getContext(),datos[position],Toast.LENGTH_LONG).show();
+
+                    case 1:
+                        tol.setText("");
+                        tol.setText(datos[position]);
+                        //Toast.makeText(getContext(),datos[position],Toast.LENGTH_LONG).show();
+
+                    case 2:
+                        borrar();
+                        tol.setText("");
+                        tol.setText(datos[position]);
+                        //Toast.makeText(getContext(),datos[position],Toast.LENGTH_LONG).show();
+                        break;
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
 
