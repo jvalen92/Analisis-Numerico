@@ -1,20 +1,14 @@
 package com.example.sebas.urano;
-
-import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.Toast;
 
 import com.example.sebas.urano.Methods.SistemaDeEcuaciones;
-
-import org.matheclipse.core.builtin.function.Do;
-
 
 public class Matriz extends AppCompatActivity {
     @Override

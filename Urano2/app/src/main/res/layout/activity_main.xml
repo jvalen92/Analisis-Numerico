@@ -67,6 +67,7 @@
         android:layout_alignParentStart="true"
         android:background="@color/colorPrimary"
         android:textColor="@color/colorText"
-        android:text="Help" />
+        android:onClick="irSistemaEcuaciones"
+        android:text="SistemasDeEcuaciones" />
 
 </RelativeLayout>

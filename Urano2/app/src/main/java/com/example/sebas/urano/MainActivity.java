@@ -66,15 +66,20 @@ public class MainActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    public void abrirFuncionesGrafico(View view){
+    public void abrirFuncionesGrafico(View view) {
 
         Intent nuevaActividad = new Intent(MainActivity.this, Grafico.class);
         startActivity(nuevaActividad);
 
     }
 
-    public void irMatriz(View view){
+    public void irMatriz(View view) {
         Intent irAMatriz = new Intent(MainActivity.this, Matriz.class);
         startActivity(irAMatriz);
+    }
+
+    public void irSistemaEcuaciones(View view) {
+        Intent irSistemaEq = new Intent(MainActivity.this, SistemasDeEcuaciones.class);
+        startActivity(irSistemaEq);
     }
 }

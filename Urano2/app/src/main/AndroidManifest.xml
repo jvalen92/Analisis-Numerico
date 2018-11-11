@@ -18,7 +18,8 @@
         </activity>
         <activity android:name=".Grafico" />
         <activity android:name=".Funciones" />
-        <activity android:name=".Matriz"></activity>
+        <activity android:name=".Matriz" />
+        <activity android:name=".SistemasDeEcuaciones"></activity>
     </application>
 
 </manifest>
