@@ -36,7 +36,7 @@ public class Matriz extends AppCompatActivity {
                     A[i][j] = Double.parseDouble(ed.getText().toString());
                 }
             }
-            double solucion [] = SistemaDeEcuaciones.eliminacionGaussianaParcial(A, b);
+            //double solucion [] = SistemaDeEcuaciones.eliminacionGaussianaParcial(A, b);
         } catch (Exception e) {
             Toast.makeText(Matriz.this, e.getMessage(),
                     Toast.LENGTH_LONG).show();

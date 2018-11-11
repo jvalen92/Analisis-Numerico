@@ -18,6 +18,17 @@
         android:textSize="30sp" />
 
     <TextView
+        android:id="@+id/x"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/scrollViewX"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="0dp"
+        android:text="x"
+        android:textSize="30sp" />
+
+    <TextView
         android:id="@+id/b"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -33,10 +44,11 @@
         android:id="@+id/equal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/ejecutar"
+        android:layout_alignStart="@+id/ejecutar"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="115dp"
-        android:layout_marginEnd="-41dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="125dp"
+        android:layout_marginEnd="14dp"
         android:text="="
         android:textSize="30sp" />
 
@@ -47,18 +59,29 @@
         android:layout_alignParentStart="false"
         android:layout_alignParentTop="false"
         android:layout_centerInParent="false"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="377dp"
+        android:layout_marginStart="334dp"
+        android:layout_marginTop="305dp"
         android:ems="10"
-        android:hint="4"
+        android:hint="  4  "
         android:inputType="number"
         android:selectAllOnFocus="false"
         android:singleLine="false" />
 
+    <ImageButton
+        android:id="@+id/b_help"
+        android:layout_width="73dp"
+        android:layout_height="69dp"
+        android:layout_alignTop="@+id/CrearMatriz"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="140dp"
+        android:layout_marginEnd="39dp"
+        android:background="@color/colorText"
+        android:src="@drawable/ic_help" />
+
     <ScrollView
         android:id="@+id/scrollViewA"
-        android:layout_width="285dp"
-        android:layout_height="229dp"
+        android:layout_width="215dp"
+        android:layout_height="230dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="40dp">
 
@@ -79,10 +102,10 @@
         android:id="@+id/scrollViewB"
         android:layout_width="60dp"
         android:layout_height="229dp"
-        android:layout_marginStart="17dp"
-        android:layout_marginLeft="17dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginLeft="88dp"
         android:layout_marginTop="40dp"
-        android:layout_toEndOf="@+id/scrollViewA"
+        android:layout_toEndOf="@+id/scrollViewX"
         android:layout_toRightOf="@+id/scrollViewA">
 
         <HorizontalScrollView
@@ -99,13 +122,14 @@
     </ScrollView>
 
     <ScrollView
-        android:id="@+id/scrollView4"
-        android:layout_width="350dp"
-        android:layout_height="63dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="15dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="290dp">
+        android:id="@+id/scrollViewX"
+        android:layout_width="60dp"
+        android:layout_height="229dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginLeft="9dp"
+        android:layout_marginTop="40dp"
+        android:layout_toEndOf="@+id/scrollViewA"
+        android:layout_toRightOf="@+id/scrollViewA">
 
         <HorizontalScrollView
             android:layout_width="wrap_content"
@@ -122,31 +146,53 @@
         </HorizontalScrollView>
     </ScrollView>
 
+    <ScrollView
+        android:id="@+id/scrollView4"
+        android:layout_width="215dp"
+        android:layout_height="230dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="290dp">
+
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TableLayout
+                android:id="@+id/vectorEtapa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </TableLayout>
+        </HorizontalScrollView>
+    </ScrollView>
+
 
     <Button
         android:id="@+id/CrearMatriz"
-        android:layout_width="wrap_content"
+        android:layout_width="78dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="61dp"
-        android:layout_marginLeft="61dp"
-        android:layout_marginTop="376dp"
+        android:layout_marginStart="239dp"
+        android:layout_marginLeft="239dp"
+        android:layout_marginTop="300dp"
         android:onClick="createTable"
         android:text="CrearMatriz"
         android:textColor="@android:color/white" />
 
     <Button
         android:id="@+id/ejecutar"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="187dp"
-        android:layout_marginLeft="187dp"
-        android:layout_marginTop="373dp"
+        android:layout_marginStart="234dp"
+        android:layout_marginLeft="234dp"
+        android:layout_marginTop="378dp"
         android:onClick="createTable"
         android:text="Ejecutar"
         android:textColor="@android:color/white" />
