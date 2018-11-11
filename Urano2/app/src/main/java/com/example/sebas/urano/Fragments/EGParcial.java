@@ -22,6 +22,9 @@ import com.example.sebas.urano.Methods.SistemaDeEcuaciones;
 import com.example.sebas.urano.R;
 import com.google.common.collect.Table;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -88,22 +91,38 @@ public class EGParcial extends Fragment {
             double solucion[] = (double[]) retVal[1];
 
             //Mostrar Solucion
+            TableLayout ultimaEtapa = (TableLayout) inflaterView.findViewById(R.id.vectorEtapa);
             TableLayout x = (TableLayout) inflaterView.findViewById(R.id.vectorX);
+            ultimaEtapa.removeAllViews();
             x.removeAllViews();
             for(int i = 0; i < n; i++) {
                 TableRow sol = new TableRow(this.getContext());
-                TextView xi = new TextView(this.getContext());
-                xi.setText(String.format("X%d    ", i));
+                EditText xi = new EditText(this.getContext());
+                xi.setText(String.format("X%d  ", i));
+                xi.setEnabled(false);
+                xi.setGravity(Gravity.CENTER_HORIZONTAL);
                 sol.addView(xi, 0);
 
-                TextView number = new TextView(this.getContext());
-                number.setText(String.format("%f", solucion[i]));
+                EditText number = new EditText(this.getContext());
+                number.setText(String.format("%.2f", solucion[i]));
                 number.setGravity(Gravity.CENTER_HORIZONTAL);
+                number.setEnabled(false);
                 sol.addView(number, 1);
                 x.addView(sol, i);
+
+                TableRow tr = new TableRow(this.getContext());
+                for(int j = 0; j < n; j++) {
+                    EditText tv = new EditText(this.getContext());
+                    tv.setText(String.format("%.2f", etapa[i][j]));
+                    tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                    tv.setEnabled(false);
+                    tr.addView(tv, j);
+                }
+                ultimaEtapa.addView(tr, i);
+                inflaterView.findViewById(R.id.textView).setVisibility(View.VISIBLE);
             }
         } catch (Exception e) {
-            Toast.makeText(this.getContext(), e.getMessage(),
+            Toast.makeText(this.getContext(), "Por favor ingresa datos validos (?)",
                     Toast.LENGTH_LONG).show();
         }
     }
@@ -117,6 +136,8 @@ public class EGParcial extends Fragment {
         try {
             int n = Integer.parseInt(((EditText) inflaterView.findViewById(R.id.numero)).getText().toString());
             TableLayout A = (TableLayout) inflaterView.findViewById(R.id.matrizA);
+            TableLayout x = (TableLayout) inflaterView.findViewById(R.id.vectorX);
+            x.removeAllViews();
             A.removeAllViews();
             TableLayout B = crearB(n);
             for (int i = 0; i < n; i++) {
@@ -125,9 +146,10 @@ public class EGParcial extends Fragment {
                 for (int j = 0; j < n; j++) {
                     EditText editText = new EditText(this.getContext());
                     editText.setId(n + j);
-                    editText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+                    editText.setInputType(InputType.TYPE_NUMBER_FLAG_SIGNED
+                            | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_CLASS_NUMBER);
                     editText.setGravity(Gravity.CENTER_HORIZONTAL);
-                    editText.setText("  0  ");
+                    editText.setHint("  0  ");
                     row.addView(editText);
                 }
                 A.addView(row);
@@ -147,9 +169,10 @@ public class EGParcial extends Fragment {
         for (int i = 0; i < n; i++) {
             EditText ed = new EditText(this.getContext());
             ed.setId(i);
-            ed.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+            ed.setInputType(InputType.TYPE_NUMBER_FLAG_SIGNED
+                    | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_CLASS_NUMBER);
             ed.setGravity(Gravity.CENTER_HORIZONTAL);
-            ed.setText("  0  ");
+            ed.setHint("  0  ");
             B.addView(ed);
         }
         return B;
