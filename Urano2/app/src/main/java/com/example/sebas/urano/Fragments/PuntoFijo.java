@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,7 +36,7 @@ public class PuntoFijo extends Fragment {
     final String tol[] = {"0.5e-6","0"};
 
     UnaVariable uv;
-    Button btn;
+    //Button btn;
     View vista;
     TextView out;
     EditText in1;
@@ -63,7 +64,7 @@ public class PuntoFijo extends Fragment {
     }
 
     public void submit(){
-        btn= (Button) vista.findViewById(R.id.p_submit);
+        ImageButton btn= (ImageButton) vista.findViewById(R.id.p_submit);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,7 +118,7 @@ public class PuntoFijo extends Fragment {
 
     public void random(){
 
-        Button btn_ran = (Button) vista.findViewById(R.id.p_rand);
+        ImageButton btn_ran = (ImageButton) vista.findViewById(R.id.p_rand);
         btn_ran.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -154,7 +155,7 @@ public class PuntoFijo extends Fragment {
 
     public void borrar(){
         //borrar los datos de los campos de texto
-        Button btn_clean = (Button) vista.findViewById(R.id.p_borrar);
+        ImageButton btn_clean = (ImageButton) vista.findViewById(R.id.p_borrar);
         btn_clean.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -174,7 +175,7 @@ public class PuntoFijo extends Fragment {
     }
 
     public void graficar(){
-        Button btn_graf = (Button) vista.findViewById(R.id.p_graf);
+        ImageButton btn_graf = (ImageButton) vista.findViewById(R.id.p_graf);
         btn_graf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

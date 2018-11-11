@@ -104,16 +104,15 @@
         android:inputType="text"
         android:text="" />
 
-    <Button
+    <ImageButton
         android:id="@+id/rf_submit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="96dp"
+        android:layout_height="50dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="103dp"
-        android:layout_marginTop="208dp"
+        android:layout_marginTop="211dp"
         android:background="@color/colorPrimary"
-        android:text="Submit"
+        android:src="@drawable/ic_donde"
         android:textColor="@color/colorText" />
 
     <HorizontalScrollView
@@ -131,39 +130,37 @@
     </HorizontalScrollView>
 
 
-
-    <Button
+    <ImageButton
         android:id="@+id/rf_rand"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="92dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
         android:layout_alignTop="@+id/rf_submit"
-        android:layout_marginEnd="-103dp"
-        android:layout_toStartOf="@+id/rf_submit"
+        android:layout_marginStart="94dp"
         android:background="@color/colorPrimary"
-        android:text="random"
+        android:src="@drawable/ic_rand"
         android:textColor="@color/colorText" />
 
-    <Button
+    <ImageButton
         android:id="@+id/rf_graf"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/rf_submit"
-        android:layout_toEndOf="@+id/rf_submit"
+        android:layout_width="96dp"
+        android:layout_height="50dp"
 
+        android:layout_alignEnd="@+id/rniter"
+        android:layout_alignTop="@+id/rf_submit"
+        android:layout_marginEnd="-6dp"
         android:background="@color/colorPrimary"
-        android:text="Graficar"
+        android:src="@drawable/ic_graph"
         android:textColor="@color/colorText" />
 
-    <Button
+    <ImageButton
         android:id="@+id/rf_borrar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/rf_tol"
+        android:layout_width="106dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/rf_submit"
-        android:layout_toStartOf="@id/rf_graf"
-        android:layout_toEndOf="@id/rf_graf"
         android:background="@color/colorPrimary"
-        android:text="Borrar"
+        android:src="@drawable/ic_clean"
         android:textColor="@color/colorText" />
 
 </RelativeLayout>

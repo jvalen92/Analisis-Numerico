@@ -83,21 +83,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/nfx"
-        android:layout_alignStart="@+id/n_submit"
+        android:layout_alignEnd="@+id/n_tol"
         android:ems="10"
         android:inputType="text"
         android:text="" />
 
-    <Button
+    <ImageButton
         android:id="@+id/n_submit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="92dp"
+        android:layout_height="50dp"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="103dp"
-        android:layout_marginTop="208dp"
+        android:layout_below="@+id/n_niter"
         android:background="@color/colorPrimary"
-        android:text="Submit"
+        android:src="@drawable/ic_donde"
         android:textColor="@color/colorText" />
 
     <HorizontalScrollView
@@ -116,38 +114,36 @@
 
     </HorizontalScrollView>
 
-    <Button
+    <ImageButton
         android:id="@+id/n_rand"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/n_submit"
-        android:layout_marginEnd="-103dp"
-        android:layout_toStartOf="@+id/n_submit"
+        android:layout_width="93dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/n_niter"
+        android:layout_marginStart="89dp"
         android:background="@color/colorPrimary"
-        android:text="random"
+        android:src="@drawable/ic_rand"
         android:textColor="@color/colorText" />
 
-    <Button
+    <ImageButton
         android:id="@+id/n_graf"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/n_submit"
-        android:layout_toEndOf="@+id/n_submit"
-
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_alignStart="@+id/ntol"
+        android:layout_below="@+id/n_niter"
+        android:layout_marginStart="-50dp"
         android:background="@color/colorPrimary"
-        android:text="Graficar"
+        android:src="@drawable/ic_graph"
         android:textColor="@color/colorText" />
 
-    <Button
+    <ImageButton
         android:id="@+id/n_borrar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/n_tol"
-        android:layout_alignTop="@+id/n_submit"
-        android:layout_toStartOf="@id/n_graf"
-        android:layout_toEndOf="@id/n_graf"
+        android:layout_width="106dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/n_niter"
         android:background="@color/colorPrimary"
-        android:text="Borrar"
+        android:src="@drawable/ic_clean"
         android:textColor="@color/colorText" />
 
     <TextView

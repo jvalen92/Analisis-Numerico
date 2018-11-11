@@ -105,14 +105,15 @@
         android:inputType="textPersonName"
         android:text="" />
 
-    <Button
+    <ImageButton
         android:id="@+id/p_submit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="103dp"
+        android:layout_height="50dp"
         android:layout_above="@+id/p_out"
-        android:layout_alignStart="@+id/p_tfx"
+        android:layout_alignParentStart="true"
+
         android:background="@color/colorPrimary"
-        android:text="SUBMIT"
+        android:src="@drawable/ic_donde"
         android:textColor="@color/colorText" />
 
     <TextView
@@ -122,36 +123,37 @@
         android:layout_centerInParent="true"
         android:text="" />
 
-    <Button
+    <ImageButton
         android:id="@+id/p_rand"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/p_submit"
-        android:layout_toStartOf="@+id/p_tfx"
-        android:background="@color/colorPrimary"
-        android:text="random"
-        android:textColor="@color/colorText" />
-
-    <Button
-        android:id="@+id/p_graf"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
+        android:layout_width="100dp"
+        android:layout_height="50dp"
         android:layout_alignTop="@+id/p_submit"
         android:layout_toEndOf="@+id/p_submit"
         android:background="@color/colorPrimary"
-        android:text="Graficar"
+        android:src="@drawable/ic_rand"
         android:textColor="@color/colorText" />
 
-    <Button
-        android:id="@+id/p_borrar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageButton
+        android:id="@+id/p_graf"
+        android:layout_width="93dp"
+        android:layout_height="50dp"
 
+        android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/p_submit"
-        android:layout_toEndOf="@+id/p_graf"
+        android:layout_marginEnd="91dp"
         android:background="@color/colorPrimary"
-        android:text="Borrar"
+        android:src="@drawable/ic_graph"
+        android:textColor="@color/colorText" />
+
+    <ImageButton
+        android:id="@+id/p_borrar"
+        android:layout_width="92dp"
+        android:layout_height="50dp"
+
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/p_submit"
+        android:background="@color/colorPrimary"
+        android:src="@drawable/ic_clean"
         android:textColor="@color/colorText" />
 
     <HorizontalScrollView

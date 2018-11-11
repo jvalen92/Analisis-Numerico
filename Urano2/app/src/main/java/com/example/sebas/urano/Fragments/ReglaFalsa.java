@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.sebas.urano.Funciones;
@@ -36,7 +37,7 @@ public class ReglaFalsa extends Fragment {
     final String tol[] = {"0.5e-6","0"};
 
     View vista;
-    Button btn;
+    ImageButton btn;
     EditText in1;
     EditText in2;
     EditText in3;
@@ -68,7 +69,7 @@ public class ReglaFalsa extends Fragment {
 
     //apretar boton
     public void submit(){
-        btn = (Button) vista.findViewById(R.id.rf_submit);
+        btn = (ImageButton ) vista.findViewById(R.id.rf_submit);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,7 +123,7 @@ public class ReglaFalsa extends Fragment {
     }
     public void random(){
 
-        Button btn_ran = (Button) vista.findViewById(R.id.rf_rand);
+        ImageButton btn_ran = (ImageButton) vista.findViewById(R.id.rf_rand);
         btn_ran.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -157,7 +158,7 @@ public class ReglaFalsa extends Fragment {
 
     public void borrar(){
         //borrar los datos de los campos de texto
-        Button btn_clean = (Button) vista.findViewById(R.id.rf_borrar);
+        ImageButton btn_clean = (ImageButton) vista.findViewById(R.id.rf_borrar);
         btn_clean.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -174,7 +175,7 @@ public class ReglaFalsa extends Fragment {
     }
 
     public void graficar(){
-        Button btn_graf = (Button) vista.findViewById(R.id.rf_graf);
+        ImageButton btn_graf = (ImageButton) vista.findViewById(R.id.rf_graf);
         btn_graf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
