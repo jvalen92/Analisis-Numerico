@@ -44,8 +44,8 @@ public class SistemaDeEcuaciones {
         return new Object[]{L, U, x};
     }
 
-    public static double[] eliminacionGaussianaParcialLU(double[][] A, double[] b) {
-        Object[] obj = factorizacionLU_GaussSimple(A);
+    public static Object[] eliminacionGaussianaParcialLU(double[][] A, double[] b) {
+        Object[] obj = factorizacionLU_GaussParcial(A);
         double[][] L = (double[][]) obj[0];
         double[][] U = (double[][]) obj[1];
         double[][] P = (double[][]) obj[2];
@@ -54,7 +54,7 @@ public class SistemaDeEcuaciones {
         double[] z = sustitucionProgresiva(Lb, L.length);
         double[][] Uz = MatrizUtilities.aumentar(U, z);
         double[] x = sustitucionRegresiva(Uz, U.length);
-        return x;
+        return new Object[]{L, U, x};
     }
 
     public static double[][] eliminacionGaussianaPivoteoParcial(double[][] A, double[] b) {
@@ -226,7 +226,7 @@ public class SistemaDeEcuaciones {
         return x;
     }
 
-    static class LU_Directo {
+
         private static Complex[][] ceros(int n) {
             Complex[][] mat = new Complex[n][n];
             for (int i = 0; i < mat.length; ++i) {
@@ -237,56 +237,136 @@ public class SistemaDeEcuaciones {
             return mat;
         }
 
-        private static Object[] cholesky(Complex[][] A) {
-            int n = A.length;
-            Complex[][] L = ceros(n);
-            Complex[][] U = ceros(n);
-            for (int k = 0; k < n; ++k) {
-                Complex sum1 = new Complex(0, 0);
+    private static Object[] cholesky(Complex[][] A) {
+        int n = A.length;
+        Complex[][] L = ceros(n);
+        Complex[][] U = ceros(n);
+        for (int k = 0; k < n; ++k) {
+            Complex sum1 = new Complex(0, 0);
+            for (int p = 0; p < k; ++p) {
+                sum1 = sum1.add(L[k][p].multiply(U[p][k]));
+            }
+            L[k][k] = (A[k][k].subtract(sum1)).pow(0.5);
+            U[k][k] = L[k][k];
+            for (int i = k; i < n; ++i) {
+                Complex sum2 = new Complex(0, 0);
                 for (int p = 0; p < k; ++p) {
-                    sum1 = sum1.add(L[k][p].multiply(U[p][k]));
+                    sum2 = sum2.add(L[i][p].multiply(U[p][k]));
                 }
-                L[k][k] = (A[k][k].subtract(sum1)).pow(0.5);
-                U[k][k] = L[k][k];
-                for (int i = k; i < n; ++i) {
-                    Complex sum2 = new Complex(0, 0);
-                    for (int p = 0; p < k; ++p) {
-                        sum2 = sum2.add(L[i][p].multiply(U[p][k]));
-                    }
-                    L[i][k] = (A[i][k].subtract(sum2)).divide(U[k][k]);
-                }
-                for (int j = k + 1; j < n; ++j) {
-                    Complex sum3 = new Complex(0, 0);
-                    for (int p = 0; p < k; ++p) {
-                        sum3 = sum3.add(L[k][p].multiply(U[p][j]));
-                    }
-                    U[k][j] = (A[k][j].subtract(sum3)).divide(L[k][k]);
-                }
+                L[i][k] = (A[i][k].subtract(sum2)).divide(U[k][k]);
             }
-            return new Object[]{L, U};
+            for (int j = k + 1; j < n; ++j) {
+                Complex sum3 = new Complex(0, 0);
+                for (int p = 0; p < k; ++p) {
+                    sum3 = sum3.add(L[k][p].multiply(U[p][j]));
+                }
+                U[k][j] = (A[k][j].subtract(sum3)).divide(L[k][k]);
+            }
         }
-
-        public static Object[] choleskyReal(double[][] A) {
-            Complex[][] A_ = new Complex[A.length][A.length];
-            for (int i = 0; i < A.length; ++i) {
-                for (int j = 0; j < A.length; ++j) {
-                    A_[i][j] = new Complex(A[i][j], 0);
-                }
-            }
-            Object[] obj = cholesky(A_);
-            Complex[][] L_ = (Complex[][]) obj[0];
-            Complex[][] U_ = (Complex[][]) obj[1];
-            double[][] L = new double[A_.length][A_.length];
-            double[][] U = new double[A_.length][A_.length];
-            for (int i = 0; i < L_.length; ++i) {
-                for (int j = 0; j < L_.length; ++j) {
-                    L[i][j] = L_[i][j].getReal();
-                    U[i][j] = U_[i][j].getReal();
-                }
-            }
-            return new Object[]{L, U};
-        }
+        return new Object[]{L, U};
     }
+
+    private static Object[] choleskyReal(double[][] A) {
+        Complex[][] A_ = new Complex[A.length][A.length];
+        for (int i = 0; i < A.length; ++i) {
+            for (int j = 0; j < A.length; ++j) {
+                A_[i][j] = new Complex(A[i][j], 0);
+            }
+        }
+        Object[] obj = cholesky(A_);
+        Complex[][] L_ = (Complex[][]) obj[0];
+        Complex[][] U_ = (Complex[][]) obj[1];
+        double[][] L = new double[A_.length][A_.length];
+        double[][] U = new double[A_.length][A_.length];
+        for (int i = 0; i < L_.length; ++i) {
+            for (int j = 0; j < L_.length; ++j) {
+                L[i][j] = L_[i][j].getReal();
+                U[i][j] = U_[i][j].getReal();
+            }
+        }
+        return new Object[]{L, U};
+    }
+
+    public static Object[] choleskySolver(double [][] A, double[] b) {
+        Object LU [] = choleskyReal(A);
+        double L [][] = (double [][]) LU[0];
+        double U [][] = (double [][]) LU[1];
+        double[][] Lb = MatrizUtilities.aumentar(L, b);
+        double z [] = sustitucionProgresiva(Lb, L.length);
+        double[][] Uz = MatrizUtilities.aumentar(U, z);
+        double x[] = sustitucionRegresiva(U, z.length);
+        return new Object[]{L, U, x};
+    }
+
+    public static Object[] crout(double[][] A) {
+        int n = A.length;
+        double[][] L = new double[n][n];
+        double[][] U = new double[n][n];
+        for (int i=0; i<n; i++){
+            for (int j=i; j<n;j++){
+                double suma = A[i][j];
+                for(int numero = 0; numero<i; numero++){
+                    suma -= L[i][numero]*U[numero][j];
+                }
+                L[j][i] = suma;
+            }
+            for (int l=i+1; l<n; l++){
+                double u = A[i][l];
+                for(int numero = 0; numero<i; numero++){
+                    u -= L[i][numero]*U[numero][l];
+                }
+                U[i][l] = u/L[i][i];
+            }
+        }
+        return new Object[]{L, U};
+    }
+
+    public static Object[] croutSolver(double [][] A, double[] b) {
+        Object LU [] = crout(A);
+        double L [][] = (double [][]) LU[0];
+        double U [][] = (double [][]) LU[1];
+        double[][] Lb = MatrizUtilities.aumentar(L, b);
+        double z [] = sustitucionProgresiva(Lb, L.length);
+        double[][] Uz = MatrizUtilities.aumentar(U, z);
+        double x[] = sustitucionRegresiva(U, z.length);
+        return new Object[]{L, U, x};
+    }
+
+    public static Object[] doolitle(double[][] A) {
+        int n = A.length;
+        double[][] L = new double[n][n];
+        double[][] U = new double[n][n];
+        for (int i=0; i<n; i++){
+            for (int j=i; j<n;j++){
+                double suma = A[i][j];
+                for(int numero = 0; numero<j; numero++){
+                    suma -= L[i][numero]*U[numero][j];
+                }
+                L[j][i] = suma/U[j][j];
+            }
+            for (int l=i+1; l<n; l++){
+                double u = A[i][l];
+                for(int numero = 0; numero<i; numero++){
+                    u -= L[i][numero]*U[numero][l];
+                }
+                U[i][l] = u;
+            }
+        }
+        return new Object[]{L, U};
+    }
+
+    public static Object[] doolittleSolver(double [][] A, double[] b) {
+        Object LU [] = doolitle(A);
+        double L [][] = (double [][]) LU[0];
+        double U [][] = (double [][]) LU[1];
+        double[][] Lb = MatrizUtilities.aumentar(L, b);
+        double z [] = sustitucionProgresiva(Lb, L.length);
+        double[][] Uz = MatrizUtilities.aumentar(U, z);
+        double x[] = sustitucionRegresiva(U, z.length);
+        return new Object[]{L, U, x};
+    }
+
+
     public static ArrayList<String[]> gaussSeidel(double[][] A, double[] b, double tol, double[] x0, int niter) {
         ArrayList<String[]> solucion = new ArrayList<>();
         int cnt = 1;
@@ -420,4 +500,5 @@ public class SistemaDeEcuaciones {
         }
         return mx1 / mx2;
     }
+
 }
