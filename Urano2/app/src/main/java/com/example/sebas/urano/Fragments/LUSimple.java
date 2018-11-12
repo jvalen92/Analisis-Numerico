@@ -29,7 +29,7 @@ public class LUSimple extends Fragment {
 
     private View inflaterView;
     private double[][] L, U;
-    private boolean l = true;
+    private boolean u = true;
     public LUSimple() {
         // Required empty public constructor
     }
@@ -187,9 +187,9 @@ public class LUSimple extends Fragment {
         Button luBtn = (Button) inflaterView.findViewById(R.id.luBtn);
         TableLayout LU = (TableLayout) inflaterView.findViewById(R.id.LU);
         LU.removeAllViews();
-        l = !l;
+        u = !u;
         int n = L.length;
-        double mat[][] = l ? L : U;
+        double mat[][] = u ? L : U;
 
         for(int i = 0; i < n; i++) {
             TableRow tr = new TableRow(this.getContext());
@@ -203,12 +203,12 @@ public class LUSimple extends Fragment {
             LU.addView(tr, i);
         }
         TextView tv = (TextView) inflaterView.findViewById(R.id.textViewLU);
-        if(l) {
-            tv.setText("Matriz L");
-            luBtn.setText("Ver U");
-        } else {
+        if(u) {
             tv.setText("Matriz U");
             luBtn.setText("Ver L");
+        } else {
+            tv.setText("Matriz L");
+            luBtn.setText("Ver U");
         }
         tv.setVisibility(View.VISIBLE);
         luBtn.setVisibility(View.VISIBLE);
