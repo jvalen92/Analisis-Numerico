@@ -34,7 +34,7 @@ public class Crout extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        inflaterView = inflater.inflate(R.layout.fragment_luparcial,
+        inflaterView = inflater.inflate(R.layout.fragment_crout,
                 container, false);
 
         /*Boton Crear Matriz*/
