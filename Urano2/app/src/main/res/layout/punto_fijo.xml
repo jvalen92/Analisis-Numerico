@@ -176,7 +176,7 @@
         android:layout_marginStart="-57dp"
         android:layout_toEndOf="@+id/p_tfx"
         android:background="@color/colorText"
-        android:src="@drawable/ic_help" />
+        android:src="@drawable/ic_help_mat" />
 
     <Spinner
         android:id="@+id/pf_spinner"

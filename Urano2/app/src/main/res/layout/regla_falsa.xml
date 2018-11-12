@@ -169,7 +169,7 @@
         android:layout_alignTop="@+id/rf_fx"
         android:layout_marginEnd="17dp"
         android:background="@color/colorText"
-        android:src="@drawable/ic_help" />
+        android:src="@drawable/ic_help_mat" />
 
     <Spinner
         android:id="@+id/rf_spinner"

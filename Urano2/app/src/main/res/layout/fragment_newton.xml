@@ -171,7 +171,7 @@
         android:layout_alignTop="@+id/n_fx"
         android:layout_marginEnd="16dp"
         android:background="@color/colorText"
-        android:src="@drawable/ic_help" />
+        android:src="@drawable/ic_help_mat" />
 
     <Spinner
         android:id="@+id/n_spinner"
