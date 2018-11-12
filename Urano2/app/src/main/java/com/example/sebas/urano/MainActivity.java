@@ -7,7 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 
 import com.example.sebas.urano.Adapters.P_Adapter;
@@ -82,6 +84,31 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        switch (id){
+
+            case R.id.interpolacion:
+                //salto a Interpolacion
+
+
+            case R.id.sis_ecuaciones:
+                //Toast.makeText(this,"me tocaste wey",Toast.LENGTH_LONG).show();
+                Intent irSistemaEq = new Intent(MainActivity.this, SistemasDeEcuaciones.class);
+                startActivity(irSistemaEq);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void abrirFuncionesGrafico(View view) {

@@ -2,30 +2,27 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 <item
-    android:id="@+id/menu"
-    android:title="Biseccion"
+    android:id="@+id/sis_unaVariable"
+    android:title="Una variable"
     app:showAsAction="never"
     ></item>
     <item
-        android:title="Regla Falsa"
-        app:showAsAction="never">
-    </item>
-    <item
-        android:title="Punto Fijo"
-        app:showAsAction="never">
-    </item>
-    <item
-        android:title="Newton"
-        app:showAsAction="never">
-    </item>
-    <item
-        android:title="Secante"
+        android:id="@+id/sis_ecuaciones"
+        android:title="Sistemas de Ecuaciones"
         app:showAsAction="never">
     </item>
 
     <item
-        android:title="Raices multiples"
+        android:id="@+id/interpolacion"
+        android:title="Interpolacion"
         app:showAsAction="never">
     </item>
+
+    <item
+        android:id="@+id/home"
+        android:title="Home"
+        app:showAsAction="never">
+    </item>
+
 
 </menu>
