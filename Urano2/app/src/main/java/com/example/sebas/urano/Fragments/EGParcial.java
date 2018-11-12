@@ -1,9 +1,7 @@
 package com.example.sebas.urano.Fragments;
 
-
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.text.InputType;
 import android.view.Gravity;
@@ -14,16 +12,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import com.example.sebas.urano.Matriz;
 import com.example.sebas.urano.Methods.SistemaDeEcuaciones;
 import com.example.sebas.urano.R;
-import com.google.common.collect.Table;
-
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,7 +30,6 @@ public class EGParcial extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Activity a = getActivity();
         // Inflate the layout for this fragment
         inflaterView = inflater.inflate(R.layout.fragment_egparcial,
                 container, false);
@@ -176,18 +166,5 @@ public class EGParcial extends Fragment {
             B.addView(ed);
         }
         return B;
-    }
-
-    /** Solo para efectos de desarrollo y testing de la aplicacion. No debe ser usado
-     en produccion.
-     */
-    void imprimirMatriz(double [][] A, int n) {
-        System.out.println("Matriz Ingresada fue: ");
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                System.out.print(A[i][j] + " ");
-            }
-            System.out.println();
-        }
     }
 }

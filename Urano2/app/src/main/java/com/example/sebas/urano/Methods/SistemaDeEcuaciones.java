@@ -21,7 +21,7 @@ public class SistemaDeEcuaciones {
         return new Object[]{Ub, x};
     }
 
-    public static double[] eliminacionGaussianaTotal(double[][] A, double[] b) {
+    public static Object[] eliminacionGaussianaTotal(double[][] A, double[] b) {
         int[] marcas = MatrizUtilities.organizar(A.length);
         double[][] Ub = eliminacionGaussianaPivoteoTotal(A, marcas, b);
         for (int i = 0; i < marcas.length; ++i) System.out.print(marcas[i] + " ");
@@ -30,10 +30,10 @@ public class SistemaDeEcuaciones {
         for (int i = 0; i < A.length; ++i) {
             x[i] = xp[marcas[i]];
         }
-        return xp;
+        return new Object[]{Ub, xp};
     }
 
-    public static double[] eliminacionGaussianaSimpleLU(double[][] A, double[] b) {
+    public static Object[] eliminacionGaussianaSimpleLU(double[][] A, double[] b) {
         Object[] obj = factorizacionLU_GaussSimple(A);
         double[][] L = (double[][]) obj[0];
         double[][] U = (double[][]) obj[1];
@@ -41,7 +41,7 @@ public class SistemaDeEcuaciones {
         double[] z = sustitucionProgresiva(Lb, L.length);
         double[][] Uz = MatrizUtilities.aumentar(U, z);
         double[] x = sustitucionRegresiva(Uz, U.length);
-        return x;
+        return new Object[]{L, U, x};
     }
 
     public static double[] eliminacionGaussianaParcialLU(double[][] A, double[] b) {
