@@ -80,8 +80,8 @@
 
     <ScrollView
         android:id="@+id/scrollViewA"
-        android:layout_width="215dp"
-        android:layout_height="230dp"
+        android:layout_width="218dp"
+        android:layout_height="232dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="40dp">
 
@@ -155,7 +155,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="15dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="317dp">
+        android:layout_marginTop="331dp">
 
         <HorizontalScrollView
             android:layout_width="wrap_content"
@@ -205,8 +205,9 @@
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/scrollView4"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="260dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginBottom="239dp"
         android:text="Ultima Etapa"
         android:textSize="24dp"
-        android:visibility="invisible"/>
+        android:visibility="invisible" />
 </RelativeLayout>
