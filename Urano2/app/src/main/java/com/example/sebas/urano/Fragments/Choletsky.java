@@ -95,8 +95,6 @@ public class Choletsky extends Fragment {
             L = (double[][]) retVal[0];
             U = (double[][]) retVal[1];
             double solucion[] = (double[]) retVal[2];
-            Toast.makeText(this.getContext(), "Holi",
-                    Toast.LENGTH_LONG).show();
             //Mostrar Solucion
             inflaterView.findViewById(R.id.textViewLU).setVisibility(View.VISIBLE);
             inflaterView.findViewById(R.id.luBtn).setVisibility(View.VISIBLE);
