@@ -36,17 +36,44 @@ public class Tests {
         //ArrayList<String[]> res =SistemaDeEcuaciones.MetodoIterativo.jacobi(mat,b,tol,x0,niter);
         //ArrayList<String[]> res =SistemaDeEcuaciones.MetodoIterativo.gaussSeidel(mat,b,tol,x0,niter);
 
-        ArrayList<String[]> res =SistemaDeEcuaciones.SOR(mat,b,tol,x0,w,niter);
-        /*
+        //ArrayList<String[]> res = SistemaDeEcuaciones.SOR(mat,b,tol,x0,w,niter);
+        double x [] = {-2, 1, -2, 3};
+        double y [] = {12.14, 6.37, -4.61, 2.09};
+        try {
+            String vande = Interpolacion.vandermonde(x, y);
+            String div = Interpolacion.diferenciasDivididas(x, y);
+            String lag = Interpolacion.lagrange(x, y);
+            String[][] lin = Trazadores.trazadoresLineales(x, y);
+            String [][] cuad = Trazadores.trazadoresCuadraticos(x, y);
+            String [][] cub = Trazadores.trazadoresCubicos(x, y);
+
+            System.out.println(vande);
+            System.out.println(div);
+            System.out.println(lag);
+
+            imprimir(lin);
+            imprimir(cuad);
+            imprimir(cub);
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    static void imprimir(String[][] res) {
         for(String[] s: res){
             for(String r: s){
                 System.out.print(r + " | ");
             }
             System.out.println();
         }
+    }
 
-
-
-        */
+    static void imprimir(double [][] res) {
+        for(double[] s: res){
+            for(double r: s){
+                System.out.print(r + " | ");
+            }
+            System.out.println();
+        }
     }
 }

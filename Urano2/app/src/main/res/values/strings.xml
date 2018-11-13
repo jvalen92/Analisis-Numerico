@@ -8,4 +8,11 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="polyVander">Hello blank fragment</string>
+    <string name="polyNew">Hello blank fragment</string>
+    <string name="polyLag">Hello blank fragment</string>
+    <string name="polyLin">Hello blank fragment</string>
+    <string name="polyCua">Hello blank fragment</string>
+    <string name="polyCub">Hello blank fragment</string>
 </resources>
