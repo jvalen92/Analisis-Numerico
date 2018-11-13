@@ -3,77 +3,20 @@ package com.example.sebas.urano.Methods;
 import java.util.ArrayList;
 
 public class Tests {
-    private static final double Tol = 1e-7;
-    private static final int N = 100;
     public static void main(String[] args) {
-        /*String f = "ln((sin(x))^2 + 1) - 1/2";
-        String f = "ln((sin(x))^2 + 1) - 1/2";
-        String fp = "(2*Cos(x)*Sin(x))/(1+Sin(x)^2)";
-        String g = "ln((sin(x))^2+1)   -1/2";
-        String h = "exp(x) - x -1";
-        String hp = "exp(x) - 1";
-        String hpp = "exp(x)";
-        ArrayList<String[]> res = UnaVariable.biseccion(f, 0, 1, Tol, N);
-        //ArrayList<String[]> res = UnaVariable.biseccion(f, 0, 1, Tol, N);
-        //ArrayList<String[]> res = UnaVariable.reglaFalsa(f, 0, 1, Tol, N);
-        //ArrayList<String[]> res = UnaVariable.newton(f,"", false, Tol, 0.5, N);
-        //ArrayList<String[]> res = UnaVariable.newton(f,fp, true, Tol, 0.5, N);
-        //ArrayList<String[]> res = UnaVariable.puntoFijo(f, g, Tol, -0.5, N);
-        //ArrayList<String[]> res = UnaVariable.secante(f, Tol, 0.5, 1, N);
-        //ArrayList<String[]> res = UnaVariable.raicesMultiples(h, "", "", false, 1, Tol, N);
-        //ArrayList<String[]> res = UnaVariable.raicesMultiples(h, hp, hpp, true, 1, Tol, N);
-        //ArrayList<String[]> res = OptimizacionUnaVariable.steffensen(f, -0.5, N, Tol);
-        //ArrayList<String[]> res = OptimizacionUnaVariable.muller(f, 0.5, 1, 1.5, Tol, N);
+        SingletonMensaje singletonMensaje = SingletonMensaje.getInstance();
+        ArrayList<String[]> res1 = UnaVariable.biseccion("x^2-3", -1, 5, 1e-8, 100);
+        System.out.println(singletonMensaje.getMensajeActual());
+        System.out.println(singletonMensaje.getError());
+        ArrayList<String[]> res2 = UnaVariable.newton("x^2-3", "2x", 1e-8, 0.5, 100);
+        System.out.println(singletonMensaje.getMensajeActual());
+        System.out.println(singletonMensaje.getError());
+        ArrayList<String[]> res3 = UnaVariable.busquedaIncremental("x^2-3", -5, 0.5,  100);
+        System.out.println(singletonMensaje.getMensajeActual());
+        System.out.println(singletonMensaje.getError());
+        ArrayList<String[]> res4 = UnaVariable.raicesMultiples("x^2-3", "2x", "2", -0.5, 1e-8,  100);
+        System.out.println(singletonMensaje.getMensajeActual());
+        System.out.println(singletonMensaje.getError());
 
-
-        */
-        double mat [][]={{14.0,-2.0,1.0,4.0},{0.0,3.0,5.0,2.0},{4.0,-1.0,8.0,0.5},{0.0,0.0,-3.0,6.0}};
-        double b [] = {1.0,-4.0,0.0,1.0};
-        double tol = 10e-4;
-        double x0 []= {0.0,0.0,0.0,0.0};
-        int niter =80;
-        double w=1.22;
-        //ArrayList<String[]> res =SistemaDeEcuaciones.MetodoIterativo.jacobi(mat,b,tol,x0,niter);
-        //ArrayList<String[]> res =SistemaDeEcuaciones.MetodoIterativo.gaussSeidel(mat,b,tol,x0,niter);
-
-        //ArrayList<String[]> res = SistemaDeEcuaciones.SOR(mat,b,tol,x0,w,niter);
-        double x [] = {-2, 1, -2, 3};
-        double y [] = {12.14, 6.37, -4.61, 2.09};
-        try {
-            String vande = Interpolacion.vandermonde(x, y);
-            String div = Interpolacion.diferenciasDivididas(x, y);
-            String lag = Interpolacion.lagrange(x, y);
-            String[][] lin = Trazadores.trazadoresLineales(x, y);
-            String [][] cuad = Trazadores.trazadoresCuadraticos(x, y);
-            String [][] cub = Trazadores.trazadoresCubicos(x, y);
-
-            System.out.println(vande);
-            System.out.println(div);
-            System.out.println(lag);
-
-            imprimir(lin);
-            imprimir(cuad);
-            imprimir(cub);
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-        }
-    }
-
-    static void imprimir(String[][] res) {
-        for(String[] s: res){
-            for(String r: s){
-                System.out.print(r + " | ");
-            }
-            System.out.println();
-        }
-    }
-
-    static void imprimir(double [][] res) {
-        for(double[] s: res){
-            for(double r: s){
-                System.out.print(r + " | ");
-            }
-            System.out.println();
-        }
     }
 }

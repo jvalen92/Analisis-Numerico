@@ -92,7 +92,7 @@ public class Newton extends Fragment {
                     Integer niter = Integer.valueOf(in4.getText().toString());
 
                     //ejecutar el metodo
-                    ArrayList<String[]> solucion = UnaVariable.newton(fx, df, false, x1, tol, niter);
+                    ArrayList<String[]> solucion = UnaVariable.newton(fx, df,x1, tol, niter);
 
 
                     //Activity activity = getActivity();
