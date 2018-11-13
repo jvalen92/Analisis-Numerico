@@ -16,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.sebas.urano.Ayudas.AyudaReglaFalsa;
 import com.example.sebas.urano.Funciones;
 import com.example.sebas.urano.Methods.UnaVariable;
 import com.example.sebas.urano.R;
@@ -208,7 +209,8 @@ public class ReglaFalsa extends Fragment {
             @Override
             public void onClick(View v) {
                 // Aqui haces lo que quieras para mostrar las ayudas
-                Toast.makeText(getContext(),"Ayudas",Toast.LENGTH_LONG).show();
+                // Toast.makeText(getContext(),"Ayudas",Toast.LENGTH_LONG).show();
+                startActivity(new Intent(getActivity(), AyudaReglaFalsa.class));
             }
         });
     }

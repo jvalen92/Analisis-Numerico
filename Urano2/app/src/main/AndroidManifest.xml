@@ -20,6 +20,12 @@
         <activity android:name=".Funciones" />
         <activity android:name=".Matriz" />
         <activity android:name=".SistemasDeEcuaciones"></activity>
+        <activity android:name=".Ayudas.AyudaBiseccion" android:theme="@style/AppTheme.PopusTheme"/>
+        <activity android:name=".Ayudas.AyudaReglaFalsa" android:theme="@style/AppTheme.PopusTheme"/>
+        <activity android:name=".Ayudas.AyudaPuntoFijo" android:theme="@style/AppTheme.PopusTheme"/>
+        <activity android:name=".Ayudas.AyudaNewton" android:theme="@style/AppTheme.PopusTheme"/>
+        <activity android:name=".Ayudas.AyudaSecante" android:theme="@style/AppTheme.PopusTheme"/>
+        <activity android:name=".Ayudas.AyudaRaicesMultiples" android:theme="@style/AppTheme.PopusTheme"/>
     </application>
 
 </manifest>

@@ -5,4 +5,5 @@
     <color name="colorAccent">#E91E63</color>
     <color name="colorPrimaryText">#212121</color>
     <color name="colorText">#ffffff</color>
+    <color name="popusColor">#ffffff</color>
 </resources>
