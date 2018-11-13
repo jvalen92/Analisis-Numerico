@@ -35,6 +35,12 @@
         <activity android:name=".Ayudas.AyudaCrout" android:theme="@style/AppTheme.PopusTheme"/>
         <activity android:name=".Ayudas.AyudaJacobi" android:theme="@style/AppTheme.PopusTheme"/>
         <activity android:name=".Ayudas.AyudaSOR" android:theme="@style/AppTheme.PopusTheme"/>
+        <activity android:name=".Ayudas.AyudaLagrange" android:theme="@style/AppTheme.PopusTheme"/>
+        <activity android:name=".Ayudas.AyudaVandermonde" android:theme="@style/AppTheme.PopusTheme"/>
+        <activity android:name=".Ayudas.AyudaDiferenciasDivididas" android:theme="@style/AppTheme.PopusTheme"/>
+        <activity android:name=".Ayudas.AyudaTrazadorLineal" android:theme="@style/AppTheme.PopusTheme"/>
+        <activity android:name=".Ayudas.AyudaTrazadorCuadratico" android:theme="@style/AppTheme.PopusTheme"/>
+        <activity android:name=".Ayudas.AyudaTrazadorCubico" android:theme="@style/AppTheme.PopusTheme"/>
 
     </application>
 
