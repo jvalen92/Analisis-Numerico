@@ -113,23 +113,42 @@
         o \\(\\rho(T) &lt; 1\\), donde \\(\\rho(T) = \\max\\limits_{i}(|\\lambda_i|)\\).
     </string>
     <string name="_lagrange_help">
-
+        El método de lagrange busca encontrar un polinomio \\(p(x)\\) que interpole los puntos \\((x_0, y_0),
+        (x_1, y_1), \\cdots , (x_n, y_n)\\). La idea como tal es encontrar un polinomio de grado \\(n\\) que pase
+        por dichos punto con el fin de evaluar el polinomio en otro punto desconocido \\(x_k, y_k)\\). La idea es
+        encontrar un polinomio \\(L_k(x)\\) tal que \\(y_iL(x) = p(x)\\).
     </string>
     <string name="_vandermonde_help">
-
+        El método de vandermonde busca encontrar un polinomio \\(p(x)\\) que interpole los puntos \\((x_0, y_0),
+        (x_1, y_1), \\cdots , (x_n, y_n)\\). La idea como tal es encontrar un polinomio de grado \\(n\\) que pase
+        por dichos punto con el fin de evaluar el polinomio en otro punto desconocido \\(x_k, y_k)\\). La idea es
+        definir una matriz \\(A\\) de \\(n + 1 \\times n + 1\\) que represente el polinomio a interpolar y luego se resuelve
+        el sistema \\(Ax = y\\) para encontrar el polinomio interpolante.
     </string>
     <string name="_diferencias_divididas_help">
-
+        El método de vandermonde busca encontrar un polinomio \\(p(x)\\) que interpole los puntos \\((x_0, y_0),
+        (x_1, y_1), \\cdots , (x_n, y_n)\\). La idea como tal es encontrar un polinomio de grado \\(n\\) que pase
+        por dichos punto con el fin de evaluar el polinomio en otro punto desconocido \\(x_k, y_k)\\). La idea es
+        definir las diferencias divididas \\(f[x_i, x_{i + 1}, \\cots, x_n]\\) tal que el \\(p(x) = f[x_0] + f[x_0, x_1](x - x_0) +
+        \\ddots f[x_0, x_1, ..., x_n](x-x_0)(x-x_1)(...)(x-x_{n - 1)} = p(x)\\).
     </string>
     <string name="_spline_lineal_help">
-
+        La idea del spline lineal es definir una función lineal \\(f(x)\\) por tramos que interpole \\(n\\) puntos y que el se
+        cumpla que el polinomio interpolante sea igual a la función, \\(p(x) = f(x)\\). En este tipo de trazadores,
+        para conectar los diferentes tramos se usan líneas rectas.
     </string>
-
     <string name="_spline_cuadratico_help">
-
+        La idea del spline lineal es definir una función cuadrática \\(f(x)\\) por tramos que interpole \\(n\\) puntos y que el se
+        cumpla que el polinomio interpolante sea igual a la función, \\(p(x) = f(x)\\). En este tipo de trazadores,
+        para conectar los diferentes tramos se usan polinomios de la forma \\(ax^2 + bx + c\\). En el trazador cuadrático
+        se debe garantizar que la función en los empalmes en la primera derivada sea correcta.
     </string>
 
     <string name="_spline_cubico_help">
 
+        La idea del spline lineal es definir una función cúbica \\(f(x)\\) por tramos que interpole \\(n\\) puntos y que el se
+        cumpla que el polinomio interpolante sea igual a la función, \\(p(x) = f(x)\\). En este tipo de trazadores,
+        para conectar los diferentes tramos se usan polinomios de la forma \\(ax^3 + bx^2 + cx + d\\). En el trazador cúbico
+        se debe garantizar que la función en los empalmes en la primera y segunda derivada sea correcta.
     </string>
 </resources>
