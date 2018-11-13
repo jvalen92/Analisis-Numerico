@@ -28,12 +28,13 @@ public class NumericalUtilities {
 
     public static double evaluarDerivada(String funcion, double valor) {
         EvalUtilities util = new EvalUtilities(false, true);
-        IExpr der = util.evaluate("y = D(" + funcion + ", x);x="+valor+";y");
+        IExpr der = util.evaluate("y = D(" + funcion + ", x);x=" + valor + ";y");
         return der.evalDouble();
     }
-    public static double evaluarSegundaDerivada(String funcion, double valor){
+
+    public static double evaluarSegundaDerivada(String funcion, double valor) {
         EvalUtilities util = new EvalUtilities(false, true);
-        IExpr exp = util.evaluate("y="+funcion+";z=D(y, x); w = D(z, x); x = " + valor + ";w");
+        IExpr exp = util.evaluate("y=" + funcion + ";z=D(y, x); w = D(z, x); x = " + valor + ";w");
         return exp.evalDouble();
     }
 
@@ -48,14 +49,48 @@ public class NumericalUtilities {
         return new int[]{rand.nextInt(MOD), rand.nextInt(MOD), rand.nextInt(MOD)};
     }
 
-    /*public static void main(String[] args) {
-        EvalUtilities util = new EvalUtilities(false, true);
-        String f = "ln((sin(x))^2 + 1) - 1/2";
-
-        IExpr der = util.evaluate("y = D(" + f + ", x);y");
-        System.out.println(der.toString());
-
+    /**
+     * Devuelve el número d con k decimales
+     *
+     * @param d
+     * @return
+     */
+    public static double fd(double d, int k) {
+        if(d < 1e-14) return 0.0;
+        return Double.parseDouble(String.format("%." + k + "f", d).replace(',', '.'));
     }
-    */
+    /**
+     * Devuelve el error con k decimales
+     *
+     * @param e
+     * @return
+     */
+    public static double fe(double e) {
+        if(e < 1e-14){
+            return 0.0;
+        }
+        String value = String.valueOf(e);
+        String new_val = "";
+        int idx = value.indexOf('e');
+        if(idx == -1){
+            idx = value.indexOf('E');
+            if(idx == -1){
+                new_val = String.format("%.4f", e);
+            }else{
+                new_val = String.format("%.2f", Double.parseDouble(value.substring(0, idx)));
+                new_val += "E";
+                new_val += value.substring(idx + 1, value.length());
+            }
+        }else{
+            new_val = String.format("%.2f", Double.parseDouble(value.substring(0, idx)));
+            new_val += "E";
+            new_val += value.substring(idx + 1, value.length());
+        }
+        new_val = new_val.replace(',', '.');
+        return Double.parseDouble(new_val);
+    }
+    public static String format(String s, Object ... params){
+        return String.format(s, params).replace(',', '.');
+    }
 
 }

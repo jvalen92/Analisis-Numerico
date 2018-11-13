@@ -93,7 +93,7 @@ public class RaicesMultiples extends Fragment {
                     Integer niter = Integer.valueOf(in6.getText().toString());
 
                     //ejecutar el metodo
-                    ArrayList<String[]> solucion = UnaVariable.raicesMultiples(fx, df, ddf, true, x1, tol, niter);
+                    ArrayList<String[]> solucion = UnaVariable.raicesMultiples(fx, df, ddf, x1, tol, niter);
 
 
                     //TableView
