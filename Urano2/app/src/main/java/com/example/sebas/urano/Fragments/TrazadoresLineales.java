@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sebas.urano.Methods.Trazadores;
@@ -84,7 +85,7 @@ public class TrazadoresLineales extends Fragment {
             String[][] solucion = Trazadores.trazadoresLineales(x, y);
 
             //Mostrar Solucion
-            MathView mv = (MathView) inflaterView.findViewById(R.id.poly);
+            TextView mv = (TextView) inflaterView.findViewById(R.id.poly);
             String polinomio = "";
             for (String [] poly : solucion) {
                 for(String  term: poly) {
@@ -95,7 +96,7 @@ public class TrazadoresLineales extends Fragment {
             mv.setText(polinomio);
 
         } catch (Exception e) {
-            Toast.makeText(this.getContext(), "Ingresa datos validos. (?)",
+            Toast.makeText(this.getContext(), "Por favor ingresa datos validos. (?)",
                     Toast.LENGTH_LONG).show();
         }
     }
