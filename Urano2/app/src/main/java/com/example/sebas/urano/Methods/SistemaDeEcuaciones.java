@@ -294,7 +294,7 @@ public class SistemaDeEcuaciones {
         double[][] Lb = MatrizUtilities.aumentar(L, b);
         double z [] = sustitucionProgresiva(Lb, L.length);
         double[][] Uz = MatrizUtilities.aumentar(U, z);
-        double x[] = sustitucionRegresiva(U, z.length);
+        double x[] = sustitucionRegresiva(Uz, Uz.length);
         return new Object[]{L, U, x};
     }
 
@@ -328,7 +328,7 @@ public class SistemaDeEcuaciones {
         double[][] Lb = MatrizUtilities.aumentar(L, b);
         double z [] = sustitucionProgresiva(Lb, L.length);
         double[][] Uz = MatrizUtilities.aumentar(U, z);
-        double x[] = sustitucionRegresiva(U, z.length);
+        double x[] = sustitucionRegresiva(Uz, z.length);
         return new Object[]{L, U, x};
     }
 
@@ -362,7 +362,7 @@ public class SistemaDeEcuaciones {
         double[][] Lb = MatrizUtilities.aumentar(L, b);
         double z [] = sustitucionProgresiva(Lb, L.length);
         double[][] Uz = MatrizUtilities.aumentar(U, z);
-        double x[] = sustitucionRegresiva(U, z.length);
+        double x[] = sustitucionRegresiva(Uz, z.length);
         return new Object[]{L, U, x};
     }
 

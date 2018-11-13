@@ -9,6 +9,12 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="polyVander">Hello blank fragment</string>
+    <string name="polyNew">Hello blank fragment</string>
+    <string name="polyLag">Hello blank fragment</string>
+    <string name="polyLin">Hello blank fragment</string>
+    <string name="polyCua">Hello blank fragment</string>
+    <string name="polyCub">Hello blank fragment</string>
     <string name="_bis_help">
         El método de la bisección asume que la función \\(f = F(x)\\) es contínua en el intervalo \\([xi, xs]\\) y que hay
         un cambio de signo en el mismo intervalo. También se asume que el número de iteraciones \\(Niter\\) es un número natural

@@ -28,7 +28,7 @@ import com.example.sebas.urano.R;
 public class Crout extends Fragment {
     private View inflaterView;
     private double[][] L, U;
-    private boolean u = true;
+    private boolean l = true;
 
     public Crout() {
         // Required empty public constructor
@@ -189,9 +189,9 @@ public class Crout extends Fragment {
         Button luBtn = (Button) inflaterView.findViewById(R.id.luBtn);
         TableLayout LU = (TableLayout) inflaterView.findViewById(R.id.LU);
         LU.removeAllViews();
-        u = !u;
+        l = !l;
         int n = L.length;
-        double mat[][] = u ? L : U;
+        double mat[][] = l ? L : U;
 
         for(int i = 0; i < n; i++) {
             TableRow tr = new TableRow(this.getContext());
@@ -205,12 +205,12 @@ public class Crout extends Fragment {
             LU.addView(tr, i);
         }
         TextView tv = (TextView) inflaterView.findViewById(R.id.textViewLU);
-        if(u) {
-            tv.setText("Matriz U");
-            luBtn.setText("Ver L");
-        } else {
+        if(l) {
             tv.setText("Matriz L");
             luBtn.setText("Ver U");
+        } else {
+            tv.setText("Matriz U");
+            luBtn.setText("Ver L");
         }
         tv.setVisibility(View.VISIBLE);
         luBtn.setVisibility(View.VISIBLE);
