@@ -8,4 +8,122 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="_bis_help">
+        El método de la bisección asume que la función \\(f = F(x)\\) es contínua en el intervalo \\([xi, xs]\\) y que hay
+        un cambio de signo en el mismo intervalo. También se asume que el número de iteraciones \\(Niter\\) es un número natural
+        positivo (\\(Niter > 0\\)). Finalmente, el intervalo entregado debe ser un intervalo cerrado con \\(xs > xi\\).
+    </string>
+    <string name="_reg_falsa_help">
+        El método de la regla falsa asume que la función \\(f = F(x)\\) es contínua en el intervalo \\([xi, xs]\\) y que hay
+        un cambio de signo en el mismo intervalo. También se asume que el número de iteraciones \\(Niter\\) es un número natural
+        positivo (\\(Niter > 0\\)). Finalmente, el intervalo entregado debe ser un intervalo cerrado con \\(xs > xi\\).
+    </string>
+    <string name="_punto_fijo_help" >
+        El método de punto fijo asume que la función \\(f = F(x)\\) es una función contínua. Igualmente, también se asume
+        que \\(g(x)\\) es una función contínua. La aproximación inicial \\(x_0\\) debe ser un número real desde donde se empieza
+        a ejecutar el método. Es importante que el numero \\(x_0\\) escogido sea una buena aproximación inicial, ya que la rapidez
+        del método depende en gran medida de este factor. El número de iteraciones \\(iteraciones\\) debe ser un número natural positivo.
+    </string>
+    <string name="_metodo_de_newton_help">
+        El método de Newton por su rapidez y efectividad, es uno de los métodos más utilizados. Para poder usar
+        este método es necesario verificar la continuidad de la función \\(f(x)\\). En este método se parte de
+        una aproximación inicial \\(x_0 \\in \\Re\\) que si es lo suficientemente buena, conlleva a converger a
+        converger a una raiz \\(x_v\\) en muy pocas iteraciones. Igualmente se debe proporcionar un número natural de iteraciones y
+        la derivada \\(f\'(x)\\) de la función. Finalmente, se proporciona una toleracia para el método que es un número real menor que 1.
+    </string>
+    <string name="_metodo_de_scante_help">
+        El método de la secante se puede ver como una variante del método de Newton donde se suprime el uso de la derivada para
+        calcular la siguiente iteración. Al igual que el método de Newton, se debe verificar la continuidad de la función \\(f(x)\\).
+        De igual manera, se debe proporcionar un número natural de iteraciones y una tolerancia que es un numero real menor que 1.
+        Como en este método se empieza por trazar una secante a la función entre dos puntos iniciales, es necesario entregar las
+        dos aproximaciones iniciales \\(x_i\\) y \\(\x_s\\).
+    </string>
+    <string name="_metodo_de_raices_multiples_help">
+        El método de las raices múltiples trata de mejorar la convergencia de tanto el método de Newton como el de la secante cuando
+        en estos se está aproximando a una raíz multiple, donde se empiezan a ver lentos. Este método
+        asume que la función es contínua y que posee segunda derivada. Este método requiere que se proporcione además de la función \\(f(x)\\),
+        la primera y segunda derivada de \\(f\\)(\\(f\'(x), f\'\'(x)\\)). También se espera un número natural de iteraciones,
+        una aproximación inicial \\(x_i\\) y una toleracia menor que 1.
+    </string>
+    <string name="_eliminacion_simple_help">
+        El método de la eliminacion gaussiana requiere que se le ingrese una matriz \\(A \\in \\Re^{n\\times n}\\) y
+        un vector \\(b \\in \\Re^n\\). Con estos datos, el computa la solución del sistema \\(Ax = b\\).
+        Si en el proceso de eliminación hay un cero en la diagonal, este termina el proceso.
+    </string>
+    <string name="_eliminacion_parcial_help">
+        El método de la eliminación gaussiana con pivoteo parcial requiere que se le ingrese una matriz \\(A \\in \\Re^{n\\times n}\\) y
+        un vector \\(b \\in \\Re^n\\). Con estos datos, el método computa la solución del sistema \\(Ax = b\\).
+        Si en el proceso de eliminación hay un cero en la diagonal, este termina el proceso.
+    </string>
+    <string name="_eliminacion_total_help">
+        El método de la eliminación gaussiana con pivoteo total requiere que se le ingrese una matriz \\(A \\in \\Re^{n\\times n}\\) y
+        un vector \\(b \\in \\Re^n\\). Con estos datos, el computa la solución del sistema \\(Ax = b\\).
+        Si en el proceso de eliminación hay un cero en la diagonal, este termina el proceso.
+    </string>
+    <string name="_eliminacion_lu_simple_help">
+        El proceso de factorización \\(LU\\) encuentra dos matrices \\((L, U) \\in R^{n \\times n}\\) que son la factorización
+        de la matriz \\(A, A = LU\\), esto aplicando eliminación gaussiana simple. Una vez terminado esto, se computa la solución de la ecuación \\(Ax = b\\) de esta manera:
+        \\(Lz = b, Ux = z\\). Hay que tener en cuenta que si durante el proceso de eliminación hay un cero en la diagonal de la matriz \\(A\\), el proceso se termina.
+    </string>
+    <string name="_eliminacion_lu_parcial_help">
+        El proceso de factorización \\(PLU\\) encuentra tres matrices \\((P, L, U) \\in R^{n \\times n}\\) que son la factorización
+        de la matriz \\(A, A = PLU\\), esto aplicando eliminación gaussiana parcial. Una vez terminado esto, se computa la solución de la ecuación \\(Ax = b\\) de esta manera:
+        \\(Lz = Pb, Ux = z\\). Hay que tener en cuenta que si durante el proceso de eliminación hay un cero en la diagonal de la matriz \\(A\\), el proceso se termina.
+    </string>
+    <string name="_cholesky_help">
+        En este método se computa la factorización de la matriz \\(A \\in \\Re^{n \\times n}\\). La matriz \\(A\\) debe ser una matriz
+        Hermitiana y Definida Positiva. Una vez las condiciones se cumplan para la matriz \\(A\\), se puede determinar la factorización
+        \\(A = LU\\) y posteriormente resolver el sistema de ecuaciones de la forma \\(Lz = Pb, Ux = z\\). En este método se cumple
+        que \\(L_{ii} = U_{ii}, 1 \\leq i \\leq n\\).
+    </string>
+    <string name="_crout_help">
+        En este método se computa la factorización de la matriz \\(A \\in \\Re^{n \\times n}\\).Una vez las condiciones se cumplan para la matriz \\(A\\), se puede determinar la factorización
+        \\(A = LU\\) y posteriormente resolver el sistema de ecuaciones de la forma \\(Lz = Pb, Ux = z\\). En este método se cumple
+        que \\(U_{ii} = 1, 1 \\leq i \\leq n\\).
+    </string>
+    <string name="_doolittle_help">
+        En este método se computa la factorización de la matriz \\(A \\in \\Re^{n \\times n}\\).Una vez las condiciones se cumplan para la matriz \\(A\\), se puede determinar la factorización
+        \\(A = LU\\) y posteriormente resolver el sistema de ecuaciones de la forma \\(Lz = Pb, Ux = z\\). En este método se cumple
+        que \\(L_{ii} = 1, 1 \\leq i \\leq n\\).
+    </string>
+    <string name="_gauss_seidel_help">
+        Este método funciona con la idea planteada en punto fijo, es decir, se despejan las \\(x_i\\) del sistema de ecuaciones
+        y luego se aplica la función \\(x\'_k = Tx\'_{k-1} + C\\) donde \\(T\\) es la matriz de transición y \\(C\\) es la constante de
+        transición. Se sabe que el método converge si la matriz de transición está definida estrictamente diagonalmente dominante
+        o \\(\\rho(T) &lt; 1\\), donde \\(\\rho(T) = \\max\\limits_{i}(|\\lambda_i|)\\).
+    </string>
+    <string name="_jacobi_help">
+        Este método funciona con la idea planteada en punto fijo, es decir, se despejan las \\(x_i\\) del sistema de ecuaciones
+        y luego se aplica la función \\(x\'_k = Tx\'_{k-1} + C\\) donde \\(T\\) es la matriz de transición y \\(C\\) es la constante de
+        transición. Se sabe que el método converge si la matriz de transición está definida estrictamente diagonalmente dominante
+        o \\(\\rho(T) &lt; 1\\), donde \\(\\rho(T) = \\max\\limits_{i}(|\\lambda_i|)\\).
+    </string>
+    <string name="_sor_help">
+        Este método funciona con la idea planteada en punto fijo, es decir, se despejan las \\(x_i\\) del sistema de ecuaciones
+        y luego se aplica la función \\(x\'_k = Tx\'_k + C\\) donde \\(T\\) es la matriz de transición y \\(C\\) es la constante de
+        transición. Para mejorar la convergencia del método de Gauss-Seidel, lo que se hace es ponderar la matriz de transición de
+        la siguiente manera: \\(x\'_k = T_wx\'_{k - 1} + C_w\\). Se sabe que el método converge si la matriz de transición está definida estrictamente diagonalmente dominante
+        o \\(\\rho(T) &lt; 1\\), donde \\(\\rho(T) = \\max\\limits_{i}(|\\lambda_i|)\\).
+    </string>
+    <string name="_lagrange_help">
+
+    </string>
+    <string name="_vandermonde_help">
+
+    </string>
+    <string name="_diferencias_divididas_help">
+
+    </string>
+    <string name="_spline_lineal_help">
+
+    </string>
+
+    <string name="_spline_cuadratico_help">
+
+    </string>
+
+    <string name="_spline_cubico_help">
+
+    </string>
 </resources>
