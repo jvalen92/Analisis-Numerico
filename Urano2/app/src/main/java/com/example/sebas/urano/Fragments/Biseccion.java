@@ -21,6 +21,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 
+import com.example.sebas.urano.Ayudas.AyudaBiseccion;
 import com.example.sebas.urano.Funciones;
 import com.example.sebas.urano.MainActivity;
 import com.example.sebas.urano.Methods.UnaVariable;
@@ -217,7 +218,8 @@ public class Biseccion extends Fragment {
             @Override
             public void onClick(View v) {
                 // Aqui haces lo que quieras para mostrar las ayudas
-                Toast.makeText(getContext(),"Ayudas",Toast.LENGTH_LONG).show();
+                //Toast.makeText(getContext(),"Ayudas",Toast.LENGTH_LONG).show();
+                startActivity(new Intent(getActivity(), AyudaBiseccion.class));
             }
         });
     }

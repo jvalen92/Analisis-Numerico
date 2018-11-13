@@ -1,6 +1,7 @@
 package com.example.sebas.urano.Fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.InputType;
@@ -10,11 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.sebas.urano.Ayudas.AyudaCrout;
+import com.example.sebas.urano.Ayudas.AyudaEGParcial;
 import com.example.sebas.urano.Methods.SistemaDeEcuaciones;
 import com.example.sebas.urano.R;
 
@@ -24,7 +28,7 @@ import com.example.sebas.urano.R;
 public class Crout extends Fragment {
     private View inflaterView;
     private double[][] L, U;
-    private boolean u = true;
+    private boolean l = true;
 
     public Crout() {
         // Required empty public constructor
@@ -34,7 +38,7 @@ public class Crout extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        inflaterView = inflater.inflate(R.layout.fragment_luparcial,
+        inflaterView = inflater.inflate(R.layout.fragment_crout,
                 container, false);
 
         /*Boton Crear Matriz*/
@@ -63,6 +67,8 @@ public class Crout extends Fragment {
                 mostrarLU();
             }
         });
+
+        help();
         return inflaterView;
     }
 
@@ -183,9 +189,9 @@ public class Crout extends Fragment {
         Button luBtn = (Button) inflaterView.findViewById(R.id.luBtn);
         TableLayout LU = (TableLayout) inflaterView.findViewById(R.id.LU);
         LU.removeAllViews();
-        u = !u;
+        l = !l;
         int n = L.length;
-        double mat[][] = u ? L : U;
+        double mat[][] = l ? L : U;
 
         for(int i = 0; i < n; i++) {
             TableRow tr = new TableRow(this.getContext());
@@ -199,15 +205,27 @@ public class Crout extends Fragment {
             LU.addView(tr, i);
         }
         TextView tv = (TextView) inflaterView.findViewById(R.id.textViewLU);
-        if(u) {
-            tv.setText("Matriz U");
-            luBtn.setText("Ver L");
-        } else {
+        if(l) {
             tv.setText("Matriz L");
             luBtn.setText("Ver U");
+        } else {
+            tv.setText("Matriz U");
+            luBtn.setText("Ver L");
         }
         tv.setVisibility(View.VISIBLE);
         luBtn.setVisibility(View.VISIBLE);
+    }
+
+    public void help(){
+        ImageButton btn= (ImageButton) inflaterView.findViewById(R.id.b_help);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Aqui haces lo que quieras para mostrar las ayudas
+                //Toast.makeText(getContext(),"Ayudas",Toast.LENGTH_LONG).show();
+                startActivity(new Intent(getActivity(), AyudaCrout.class));
+            }
+        });
     }
 
 }

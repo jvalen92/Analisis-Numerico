@@ -16,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.sebas.urano.Ayudas.AyudaNewton;
 import com.example.sebas.urano.Funciones;
 import com.example.sebas.urano.Methods.UnaVariable;
 import com.example.sebas.urano.R;
@@ -32,11 +33,11 @@ import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
  */
 public class Newton extends Fragment {
 
-    int cont =0;
-    final String funciones[] = {"x^3 + 4*(x^2) - 10","0"};
-    final String x1[] = {"1.5","0"};
-    final String dfx[] = {"3*x^2 + 8*x","0"};
-    final String tol[] = {"0.5e-9","0"};
+    int cont = 0;
+    final String funciones[] = {"x^3 + 4*(x^2) - 10", "0"};
+    final String x1[] = {"1.5", "0"};
+    final String dfx[] = {"3*x^2 + 8*x", "0"};
+    final String tol[] = {"0.5e-9", "0"};
 
     View vista;
     ImageButton btn;
@@ -68,7 +69,7 @@ public class Newton extends Fragment {
     }
 
     //apretar boton
-    public void submit(){
+    public void submit() {
         btn = (ImageButton) vista.findViewById(R.id.n_submit);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,7 +92,7 @@ public class Newton extends Fragment {
                     Integer niter = Integer.valueOf(in4.getText().toString());
 
                     //ejecutar el metodo
-                    ArrayList<String[]> solucion = UnaVariable.newton(fx,df,false,x1,tol,niter);
+                    ArrayList<String[]> solucion = UnaVariable.newton(fx, df, false, x1, tol, niter);
 
 
                     //Activity activity = getActivity();
@@ -101,36 +102,37 @@ public class Newton extends Fragment {
                     TableView<String[]> tableView = (TableView<String[]>) vista.findViewById(R.id.tableView);
 
                     //Lenar tabla
-                    int n_columns=solucion.get(0).length;
+                    int n_columns = solucion.get(0).length;
                     tableView.setColumnCount(n_columns);
-                    String headers[]={"i","xm","fx","Error Absoluto", "Error Relativo"};
-                    tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(context,"i","xi","xs","xm","fx","Error Absoluto","Error Relativo"));
+                    String headers[] = {"i", "xm", "fx", "Error Absoluto", "Error Relativo"};
+                    tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(context, "i", "xi", "xs", "xm", "fx", "Error Absoluto", "Error Relativo"));
 
 
-                    tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(context,headers));
+                    tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(context, headers));
                     //tableView.setDataAdapter(new SimpleTableDataAdapter(context, DATA_TO_SHOW));
                     tableView.setDataAdapter(new SimpleTableDataAdapter(context, solucion));
 
                     //Ajustar tamaño de las columnas
                     TableColumnDpWidthModel columnModel = new TableColumnDpWidthModel(context, n_columns, 125);
                     columnModel.setColumnWidth(0, 50);
-                    columnModel.setColumnWidth(n_columns-2, 170);
-                    columnModel.setColumnWidth(n_columns-1, 160);
+                    columnModel.setColumnWidth(n_columns - 2, 170);
+                    columnModel.setColumnWidth(n_columns - 1, 160);
                     tableView.setColumnModel(columnModel);
                     tableView.setDataAdapter(new SimpleTableDataAdapter(context, solucion));
 
                     //cambiar el color de la tabla para que se vea mas kawai
                     tableView.setHeaderBackground(R.color.colorPrimary);
 
-                }catch (Exception e) {
-                    Toast.makeText(getContext(),"Llene todos los campos y verifique los datos",Toast.LENGTH_LONG).show();
+                } catch (Exception e) {
+                    Toast.makeText(getContext(), "Llene todos los campos y verifique los datos", Toast.LENGTH_LONG).show();
                 }
 
 
             }
         });
     }
-    public void random(){
+
+    public void random() {
 
         ImageButton btn_ran = (ImageButton) vista.findViewById(R.id.n_rand);
         btn_ran.setOnClickListener(new View.OnClickListener() {
@@ -146,9 +148,9 @@ public class Newton extends Fragment {
                 in3.setText(tol[cont]);
                 in4.setText("80");
 
-                if (cont >= funciones.length -1){
-                    cont=0;
-                }else {
+                if (cont >= funciones.length - 1) {
+                    cont = 0;
+                } else {
                     cont++;
                 }
 
@@ -156,7 +158,7 @@ public class Newton extends Fragment {
         });
     }
 
-    public void obtDatos(){
+    public void obtDatos() {
         //obtener valores de la interfaz
         in1 = (EditText) vista.findViewById(R.id.n_x1); //x1
         in2 = (EditText) vista.findViewById(R.id.n_df); //dfx
@@ -165,7 +167,7 @@ public class Newton extends Fragment {
         in5 = (EditText) vista.findViewById(R.id.n_fx); //fx
     }
 
-    public void borrar(){
+    public void borrar() {
         //borrar los datos de los campos de texto
         ImageButton btn_clean = (ImageButton) vista.findViewById(R.id.n_borrar);
         btn_clean.setOnClickListener(new View.OnClickListener() {
@@ -177,28 +179,28 @@ public class Newton extends Fragment {
                 in2.setText(null);
                 in3.setText(null);
                 in4.setText(null);
-                cont=0;
+                cont = 0;
             }
         });
 
     }
 
-    public void graficar(){
+    public void graficar() {
         ImageButton btn_graf = (ImageButton) vista.findViewById(R.id.n_graf);
         btn_graf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 try {
-                    if (in5.getText().toString() != null){
+                    if (in5.getText().toString() != null) {
                         Intent fun = new Intent(getActivity(), Funciones.class);
-                        fun.putExtra("funcion",in5.getText().toString());
+                        fun.putExtra("funcion", in5.getText().toString());
                         startActivity(fun);
-                    }else {
-                        Toast.makeText(getContext(),"Ingresa la funcion a graficar",Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getContext(), "Ingresa la funcion a graficar", Toast.LENGTH_LONG).show();
                     }
-                }catch (Exception e){
-                    Toast.makeText(getContext(),"Llene todos los campos y verifique los datos",Toast.LENGTH_LONG).show();
+                } catch (Exception e) {
+                    Toast.makeText(getContext(), "Llene todos los campos y verifique los datos", Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -206,34 +208,35 @@ public class Newton extends Fragment {
     }
 
     //Metodo para ejecutar las acciones necesarias para mostrar las ayudas
-    public void help(){
-        ImageButton btn= (ImageButton) vista.findViewById(R.id.n_help);
+    public void help() {
+        ImageButton btn = (ImageButton) vista.findViewById(R.id.n_help);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Aqui haces lo que quieras para mostrar las ayudas
-                Toast.makeText(getContext(),"Ayudas",Toast.LENGTH_LONG).show();
+                // Toast.makeText(getContext(),"Ayudas",Toast.LENGTH_LONG).show();
+                startActivity(new Intent(getActivity(), AyudaNewton.class));
             }
         });
     }
 
 
     // Lista despleglable para escoger la tolerancia del metodo
-    public void spinner(){
+    public void spinner() {
         Spinner spinner;
-        final String datos[]={"0.5e-6","1e-5","0.5e-8"};
+        final String datos[] = {"0.5e-6", "1e-5", "0.5e-8"};
 
         spinner = (Spinner) vista.findViewById(R.id.n_spinner);
-        Context context=getContext();
-        ArrayAdapter<String> adapter =new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item,datos);
+        Context context = getContext();
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, datos);
         spinner.setAdapter(adapter);
 
         //seleccionar un elemento de la lista y escribir en el campo de tol
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                EditText tol =(EditText) vista.findViewById(R.id.n_tol);
-                switch (position){
+                EditText tol = (EditText) vista.findViewById(R.id.n_tol);
+                switch (position) {
 
                     case 0:
                         tol.setText("");

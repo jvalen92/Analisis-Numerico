@@ -1,14 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.DiferenciasDivididas">
+    android:id="@+id/frame"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/x"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="0dp"
+        android:text="x"
+        android:textSize="30sp" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/y"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="46dp"
+        android:text="y"
+        android:textSize="30sp" />
+
+    <EditText
+        android:id="@+id/numero"
+        android:layout_width="37dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentTop="false"
+        android:layout_centerInParent="false"
+        android:layout_marginStart="95dp"
+        android:layout_marginTop="99dp"
+        android:ems="10"
+        android:hint="  4  "
+        android:inputType="number"
+        android:selectAllOnFocus="false"
+        android:singleLine="false" />
+
+    <ImageButton
+        android:id="@+id/b_help"
+        android:layout_width="61dp"
+        android:layout_height="64dp"
+        android:layout_alignTop="@+id/CrearMatriz"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="-5dp"
+        android:layout_marginEnd="0dp"
+        android:background="@color/colorText"
+        android:src="@drawable/ic_help_mat" />
+
+
+    <Button
+        android:id="@+id/CrearMatriz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="97dp"
+        android:onClick="createTable"
+        android:text="Puntos"
+        android:textColor="@android:color/white" />
+
+    <Button
+        android:id="@+id/ejecutar"
+        android:layout_width="165dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="143dp"
+        android:layout_marginLeft="143dp"
+        android:layout_marginTop="97dp"
+        android:onClick="createTable"
+        android:text="Ejecutar"
+        android:textColor="@android:color/white" />
+
+    <ScrollView
+        android:id="@+id/scrollViewA"
+        android:layout_width="334dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="48dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="0dp">
+
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TableLayout
+                android:id="@+id/matrizA"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </TableLayout>
+        </HorizontalScrollView>
+    </ScrollView>
+
+    <ScrollView
+        android:id="@+id/scrollViewPoly"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="170dp"
+        android:layout_marginRight="0dp">
+
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <io.github.kexanie.library.MathView
+                android:id="@+id/poly"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
+                android:layout_marginTop="0dp"
+                android:text="@string/polyNew">
+
+            </io.github.kexanie.library.MathView>
+
+        </HorizontalScrollView>
+    </ScrollView>
+
+</RelativeLayout>
