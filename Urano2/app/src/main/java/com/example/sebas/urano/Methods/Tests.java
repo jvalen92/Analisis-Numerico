@@ -33,11 +33,11 @@ public class Tests {
         double x0 []= {0.0,0.0,0.0,0.0};
         int niter =80;
         double w=1.22;
-        //ArrayList<String[]> res =SistemaDeEcuaciones.MetodoIterativo.jacobi(mat,b,tol,x0,niter);
+        ArrayList<String[]> res =SistemaDeEcuaciones.jacobi(mat,b,tol,x0,niter);
         //ArrayList<String[]> res =SistemaDeEcuaciones.MetodoIterativo.gaussSeidel(mat,b,tol,x0,niter);
 
-        ArrayList<String[]> res =SistemaDeEcuaciones.SOR(mat,b,tol,x0,w,niter);
-        /*
+        //ArrayList<String[]> res =SistemaDeEcuaciones.SOR(mat,b,tol,x0,w,niter);
+
         for(String[] s: res){
             for(String r: s){
                 System.out.print(r + " | ");
@@ -47,6 +47,6 @@ public class Tests {
 
 
 
-        */
+
     }
 }
