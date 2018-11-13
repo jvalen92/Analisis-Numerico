@@ -1,6 +1,7 @@
 package com.example.sebas.urano.Fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.InputType;
@@ -10,10 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.sebas.urano.Ayudas.AyudaTrazadorLineal;
 import com.example.sebas.urano.Methods.Trazadores;
 import com.example.sebas.urano.R;
 
@@ -53,6 +57,7 @@ public class TrazadoresLineales extends Fragment {
             }
         });
 
+        help();
         return inflaterView;
     }
 
@@ -84,7 +89,7 @@ public class TrazadoresLineales extends Fragment {
             String[][] solucion = Trazadores.trazadoresLineales(x, y);
 
             //Mostrar Solucion
-            MathView mv = (MathView) inflaterView.findViewById(R.id.poly);
+            TextView mv = (TextView) inflaterView.findViewById(R.id.poly);
             String polinomio = "";
             for (String [] poly : solucion) {
                 for(String  term: poly) {
@@ -95,7 +100,7 @@ public class TrazadoresLineales extends Fragment {
             mv.setText(polinomio);
 
         } catch (Exception e) {
-            Toast.makeText(this.getContext(), "Ingresa datos validos. (?)",
+            Toast.makeText(this.getContext(), "Por favor ingresa datos validos. (?)",
                     Toast.LENGTH_LONG).show();
         }
     }
@@ -138,6 +143,18 @@ public class TrazadoresLineales extends Fragment {
             Toast.makeText(this.getContext(), "Por favor ingresa un numero",
                     Toast.LENGTH_LONG).show();
         }
+    }
+
+    public void help(){
+        ImageButton btn= (ImageButton) inflaterView.findViewById(R.id.b_help);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Aqui haces lo que quieras para mostrar las ayudas
+                //Toast.makeText(getContext(),"Ayudas",Toast.LENGTH_LONG).show();
+                startActivity(new Intent(getActivity(), AyudaTrazadorLineal.class));
+            }
+        });
     }
 
 }
