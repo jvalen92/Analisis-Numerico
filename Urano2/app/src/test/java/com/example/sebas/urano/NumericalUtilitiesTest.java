@@ -23,4 +23,12 @@ public class NumericalUtilitiesTest {
         assertEquals(NumericalUtilities.fd(1.23123E-13, 2), 1.23E-13, delta);
         assertEquals(NumericalUtilities.fd(0.23123E-14, 3), 0, delta);
     }
+
+    @Test
+    public void evaluateFunction_isCorrect(){
+        assertEquals(NumericalUtilities.evaluarFuncion("2x", 0.5), 1.0, delta);
+        assertEquals(NumericalUtilities.evaluarFuncion("x^2", 0.5), 0.25, delta);
+        assertEquals(NumericalUtilities.evaluarFuncion("Ln(x)", 1), 0, delta);
+        assertEquals(NumericalUtilities.evaluarFuncion("sin(x)", 6), -0.27941549819, delta);
+    }
 }
