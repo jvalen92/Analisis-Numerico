@@ -25,7 +25,7 @@
         un cambio de signo en el mismo intervalo. También se asume que el número de iteraciones \\(Niter\\) es un número natural
         positivo (\\(Niter > 0\\)). Finalmente, el intervalo entregado debe ser un intervalo cerrado con \\(xs > xi\\).
     </string>
-    <string name="_punto_fijo_help" >
+    <string name="_punto_fijo_help">
         El método de punto fijo asume que la función \\(f = F(x)\\) es una función contínua. Igualmente, también se asume
         que \\(g(x)\\) es una función contínua. La aproximación inicial \\(x_0\\) debe ser un número real desde donde se empieza
         a ejecutar el método. Es importante que el numero \\(x_0\\) escogido sea una buena aproximación inicial, ya que la rapidez

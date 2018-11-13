@@ -20,10 +20,10 @@
         android:id="@+id/x"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/CrearMatriz"
-        android:text="X0"
-  />
+        android:layout_marginEnd="117dp"
+        android:text="X0" />
 
     <TextView
         android:id="@+id/b"
@@ -61,10 +61,8 @@
         android:id="@+id/btol"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="-105dp"
-        android:layout_marginTop="325dp"
-        android:layout_toEndOf="@+id/A"
+        android:layout_alignStart="@+id/bniter"
+        android:layout_below="@+id/j_numero"
         android:text="Tol = " />
 
     <TextView
@@ -79,10 +77,10 @@
 
     <EditText
         android:id="@+id/j_tol"
-        android:layout_width="143dp"
+        android:layout_width="68dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="300dp"
+        android:layout_alignBaseline="@+id/btol"
+        android:layout_toEndOf="@+id/bniter"
         android:ems="10"
         android:inputType="number" />
 
@@ -182,17 +180,19 @@
         android:layout_centerVertical="true"
         android:layout_marginEnd="71dp"
         android:onClick="createTable"
-        android:text="NuevaMatriz"
+        android:text="Nueva Matriz"
+        android:background="@color/colorPrimary"
         android:textColor="@android:color/white" />
 
     <Button
         android:id="@+id/ejecutar"
-        android:layout_width="120dp"
+        android:layout_width="103dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/j_numero"
-        android:layout_marginTop="-1dp"
         android:layout_marginEnd="-11dp"
+        android:layout_marginTop="-1dp"
         android:layout_toStartOf="@+id/b"
+        android:background="@color/colorPrimary"
         android:onClick="createTable"
         android:text="Ejecutar"
         android:textColor="@android:color/white" />
@@ -211,14 +211,5 @@
 
 
     </HorizontalScrollView>
-
-    <Spinner
-        android:id="@+id/spinnerJacobi"
-        android:layout_width="64dp"
-        android:layout_height="37dp"
-        android:layout_above="@+id/b_help"
-        android:layout_alignEnd="@+id/b_help"
-        android:layout_marginEnd="269dp"
-        android:layout_marginBottom="-44dp" />
 
 </RelativeLayout>

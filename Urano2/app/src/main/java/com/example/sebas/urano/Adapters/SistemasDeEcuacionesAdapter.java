@@ -39,18 +39,7 @@ public class SistemasDeEcuacionesAdapter extends FragmentStatePagerAdapter{
                 return new SOR();
             case 9:
                 return new GaussSeidel();
-            case 10:
-                return new Vandermonde();
-            case 11:
-                return new DiferenciasDivididas();
-            case 12:
-                return new Lagrange();
-            case 13:
-                return new TrazadoresLineales();
-            case 14:
-                return new TrazadoresCuadraticos();
-            case 15:
-                return new TrazadoresCubicos();
+
             default:
                 return null;
         }

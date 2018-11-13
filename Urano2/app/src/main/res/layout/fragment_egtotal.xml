@@ -42,13 +42,12 @@
 
     <TextView
         android:id="@+id/equal"
-        android:layout_width="wrap_content"
+        android:layout_width="26dp"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/ejecutar"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="81dp"
+        android:layout_marginEnd="-332dp"
         android:layout_marginTop="127dp"
-        android:layout_marginEnd="14dp"
+        android:layout_toStartOf="@+id/numero"
         android:text="="
         android:textSize="30sp" />
 
@@ -102,11 +101,8 @@
         android:id="@+id/scrollViewB"
         android:layout_width="60dp"
         android:layout_height="229dp"
-        android:layout_marginStart="88dp"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="40dp"
-        android:layout_toEndOf="@+id/scrollViewX"
-        android:layout_toRightOf="@+id/scrollViewA">
+        android:layout_alignEnd="@+id/numero"
+        android:layout_below="@+id/A">
 
         <HorizontalScrollView
             android:layout_width="wrap_content"
@@ -124,10 +120,10 @@
 
     <ScrollView
         android:id="@+id/scrollViewX"
-        android:layout_width="94dp"
+        android:layout_width="58dp"
         android:layout_height="229dp"
-        android:layout_marginStart="2dp"
         android:layout_marginLeft="2dp"
+        android:layout_marginStart="2dp"
         android:layout_marginTop="40dp"
         android:layout_toEndOf="@+id/scrollViewA"
         android:layout_toRightOf="@+id/scrollViewA">
@@ -141,8 +137,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:gravity="center_horizontal"
-                android:layout_marginLeft="0dp">
+                android:layout_marginLeft="0dp"
+                android:gravity="center_horizontal">
 
             </TableLayout>
         </HorizontalScrollView>
@@ -183,6 +179,7 @@
         android:layout_marginTop="326dp"
         android:onClick="createTable"
         android:text="NuevaMatriz"
+        android:background="@color/colorPrimary"
         android:textColor="@android:color/white" />
 
     <Button
@@ -197,6 +194,7 @@
         android:layout_marginTop="410dp"
         android:onClick="createTable"
         android:text="Ejecutar"
+        android:background="@color/colorPrimary"
         android:textColor="@android:color/white" />
 
     <TextView

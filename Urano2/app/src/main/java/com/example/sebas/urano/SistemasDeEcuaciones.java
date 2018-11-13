@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.sebas.urano.Adapters.SistemasDeEcuacionesAdapter;
+import com.example.sebas.urano.Methods.SistemaDeEcuaciones;
 
 public class SistemasDeEcuaciones extends AppCompatActivity {
     private Toolbar toolbar;
@@ -37,12 +38,7 @@ public class SistemasDeEcuaciones extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("Jacobi"));
         tabLayout.addTab(tabLayout.newTab().setText("SOR"));
         tabLayout.addTab(tabLayout.newTab().setText("Gauss-Seidel"));
-        tabLayout.addTab(tabLayout.newTab().setText("Vandermonde"));
-        tabLayout.addTab(tabLayout.newTab().setText("Diferencias Divididas"));
-        tabLayout.addTab(tabLayout.newTab().setText("Lagrange"));
-        tabLayout.addTab(tabLayout.newTab().setText("Trazadores Lineales"));
-        tabLayout.addTab(tabLayout.newTab().setText("Trazadores Cuadraticos"));
-        tabLayout.addTab(tabLayout.newTab().setText("Trazadores Cubicos"));
+
 
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
@@ -89,6 +85,9 @@ public class SistemasDeEcuaciones extends AppCompatActivity {
 
             case R.id.interpolacion:
                 //Añadir salto a interpolacion
+                Intent inter = new Intent(this,InterpolacionFinal.class);
+                startActivity(inter);
+                return true;
 
             case  R.id.sis_unaVariable:
                 Intent sis_uv = new Intent(this,MainActivity.class);

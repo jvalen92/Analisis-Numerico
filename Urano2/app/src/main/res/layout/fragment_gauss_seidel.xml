@@ -21,15 +21,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/CrearMatriz"
-        android:text="X0"
-        />
+        android:layout_toStartOf="@+id/equal"
+        android:text="X0" />
 
     <TextView
         android:id="@+id/b"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/CrearMatriz"
+        android:layout_alignEnd="@+id/scrollViewB"
         android:layout_alignParentTop="true"
         android:text="b" />
 
@@ -61,10 +60,8 @@
         android:id="@+id/btol"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="-105dp"
-        android:layout_marginTop="325dp"
-        android:layout_toEndOf="@+id/A"
+        android:layout_alignBaseline="@+id/j_tol"
+        android:layout_alignStart="@+id/bniter"
         android:text="Tol = " />
 
     <TextView
@@ -79,10 +76,10 @@
 
     <EditText
         android:id="@+id/j_tol"
-        android:layout_width="143dp"
+        android:layout_width="74dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="300dp"
+        android:layout_below="@+id/j_numero"
+        android:layout_toEndOf="@+id/bniter"
         android:ems="10"
         android:inputType="number" />
 
@@ -103,7 +100,7 @@
         android:id="@+id/b_help"
         android:layout_width="66dp"
         android:layout_height="37dp"
-        android:layout_alignStart="@+id/b"
+        android:layout_alignStart="@+id/j_numero"
         android:layout_below="@+id/j_numero"
         android:background="@color/colorText"
         android:src="@drawable/ic_help_mat" />
@@ -174,25 +171,25 @@
 
     <Button
         android:id="@+id/CrearMatriz"
-        android:layout_width="wrap_content"
+        android:layout_width="113dp"
         android:layout_height="wrap_content"
 
 
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:layout_marginEnd="71dp"
+        android:background="@color/colorPrimary"
         android:onClick="createTable"
-        android:text="NuevaMatriz"
+        android:text="Nueva Matriz"
         android:textColor="@android:color/white" />
 
     <Button
         android:id="@+id/ejecutar"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/CrearMatriz"
         android:layout_below="@+id/j_numero"
-        android:layout_marginTop="-1dp"
-        android:layout_marginEnd="-11dp"
-        android:layout_toStartOf="@+id/b"
+        android:background="@color/colorPrimary"
         android:onClick="createTable"
         android:text="Ejecutar"
         android:textColor="@android:color/white" />
@@ -211,14 +208,5 @@
 
 
     </HorizontalScrollView>
-
-    <Spinner
-        android:id="@+id/spinnerJacobi"
-        android:layout_width="64dp"
-        android:layout_height="37dp"
-        android:layout_above="@+id/b_help"
-        android:layout_alignEnd="@+id/b_help"
-        android:layout_marginEnd="269dp"
-        android:layout_marginBottom="-44dp" />
 
 </RelativeLayout>

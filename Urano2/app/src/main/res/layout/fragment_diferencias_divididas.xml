@@ -65,6 +65,7 @@
         android:layout_marginTop="97dp"
         android:onClick="createTable"
         android:text="Puntos"
+        android:background="@color/colorPrimary"
         android:textColor="@android:color/white" />
 
     <Button
@@ -78,6 +79,7 @@
         android:layout_marginLeft="143dp"
         android:layout_marginTop="97dp"
         android:onClick="createTable"
+        android:background="@color/colorPrimary"
         android:text="Ejecutar"
         android:textColor="@android:color/white" />
 

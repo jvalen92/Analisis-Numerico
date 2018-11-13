@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.example.sebas.urano.Fragments.Biseccion;
+import com.example.sebas.urano.Fragments.EGParcial;
 import com.example.sebas.urano.Fragments.Newton;
 import com.example.sebas.urano.Fragments.RaicesMultiples;
 import com.example.sebas.urano.Fragments.ReglaFalsa;
@@ -39,9 +40,7 @@ public class P_Adapter extends FragmentStatePagerAdapter{
             case 5:
                 return new RaicesMultiples();
 
-
-
-            default:
+                default:
                     return null;
 
         }

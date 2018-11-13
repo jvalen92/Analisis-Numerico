@@ -10,10 +10,9 @@
         android:id="@+id/A"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/scrollViewA"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="86dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginStart="63dp"
         android:text="A"
         android:textSize="25sp" />
 
@@ -44,11 +43,10 @@
         android:id="@+id/equal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/ejecutar"
+
         android:layout_alignParentTop="true"
-        android:layout_marginStart="81dp"
-        android:layout_marginTop="127dp"
-        android:layout_marginEnd="14dp"
+        android:layout_alignStart="@+id/scrollViewB"
+        android:layout_marginTop="115dp"
         android:text="="
         android:textSize="30sp" />
 
@@ -82,8 +80,8 @@
         android:id="@+id/scrollViewA"
         android:layout_width="215dp"
         android:layout_height="230dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="29dp">
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/x">
 
         <HorizontalScrollView
             android:layout_width="wrap_content"
@@ -102,11 +100,8 @@
         android:id="@+id/scrollViewB"
         android:layout_width="60dp"
         android:layout_height="229dp"
-        android:layout_marginStart="88dp"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="40dp"
-        android:layout_toEndOf="@+id/scrollViewX"
-        android:layout_toRightOf="@+id/scrollViewA">
+        android:layout_alignEnd="@+id/b_help"
+        android:layout_below="@+id/x">
 
         <HorizontalScrollView
             android:layout_width="wrap_content"
@@ -124,10 +119,10 @@
 
     <ScrollView
         android:id="@+id/scrollViewX"
-        android:layout_width="94dp"
+        android:layout_width="53dp"
         android:layout_height="229dp"
-        android:layout_marginStart="2dp"
         android:layout_marginLeft="2dp"
+        android:layout_marginStart="2dp"
         android:layout_marginTop="40dp"
         android:layout_toEndOf="@+id/scrollViewA"
         android:layout_toRightOf="@+id/scrollViewA">
@@ -141,8 +136,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:gravity="center_horizontal"
-                android:layout_marginLeft="0dp">
+                android:layout_marginLeft="0dp"
+                android:gravity="center_horizontal">
 
             </TableLayout>
         </HorizontalScrollView>
@@ -182,6 +177,7 @@
         android:layout_marginLeft="239dp"
         android:layout_marginTop="326dp"
         android:onClick="createTable"
+        android:background="@color/colorPrimary"
         android:text="NuevaMatriz"
         android:textColor="@android:color/white" />
 
@@ -196,6 +192,7 @@
         android:layout_marginLeft="234dp"
         android:layout_marginTop="410dp"
         android:onClick="createTable"
+        android:background="@color/colorPrimary"
         android:text="Ejecutar"
         android:textColor="@android:color/white" />
 

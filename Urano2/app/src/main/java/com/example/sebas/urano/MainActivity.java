@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("Newton"));
         tabLayout.addTab(tabLayout.newTab().setText("Raices multiples"));
 
+
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         //Bloque de codigo para la gestion de los tabs ¡¡NO TOCAR!!
@@ -100,6 +101,9 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.interpolacion:
                 //salto a Interpolacion
+                Intent inter = new Intent(MainActivity.this,InterpolacionFinal.class);
+                startActivity(inter);
+                return true;
 
 
             case R.id.sis_ecuaciones:

@@ -64,6 +64,7 @@
         android:layout_marginLeft="0dp"
         android:layout_marginTop="97dp"
         android:onClick="createTable"
+        android:background="@color/colorPrimary"
         android:text="Puntos"
         android:textColor="@android:color/white" />
 
@@ -79,6 +80,7 @@
         android:layout_marginTop="97dp"
         android:onClick="createTable"
         android:text="Ejecutar"
+        android:background="@color/colorPrimary"
         android:textColor="@android:color/white" />
 
     <ScrollView

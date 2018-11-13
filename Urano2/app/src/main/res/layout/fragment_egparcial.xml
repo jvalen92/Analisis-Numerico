@@ -21,10 +21,8 @@
         android:id="@+id/x"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/scrollViewX"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="0dp"
+        android:layout_toStartOf="@+id/b_help"
         android:text="x"
         android:textSize="30sp" />
 
@@ -44,11 +42,10 @@
         android:id="@+id/equal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/ejecutar"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="81dp"
+        android:layout_marginEnd="83dp"
         android:layout_marginTop="127dp"
-        android:layout_marginEnd="14dp"
         android:text="="
         android:textSize="30sp" />
 
@@ -99,35 +96,11 @@
     </ScrollView>
 
     <ScrollView
-        android:id="@+id/scrollViewB"
-        android:layout_width="60dp"
-        android:layout_height="229dp"
-        android:layout_marginStart="88dp"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="40dp"
-        android:layout_toEndOf="@+id/scrollViewX"
-        android:layout_toRightOf="@+id/scrollViewA">
-
-        <HorizontalScrollView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TableLayout
-                android:id="@+id/vectorB"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp">
-
-            </TableLayout>
-        </HorizontalScrollView>
-    </ScrollView>
-
-    <ScrollView
         android:id="@+id/scrollViewX"
-        android:layout_width="94dp"
+        android:layout_width="55dp"
         android:layout_height="229dp"
-        android:layout_marginStart="2dp"
         android:layout_marginLeft="2dp"
+        android:layout_marginStart="2dp"
         android:layout_marginTop="40dp"
         android:layout_toEndOf="@+id/scrollViewA"
         android:layout_toRightOf="@+id/scrollViewA">
@@ -141,8 +114,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:gravity="center_horizontal"
-                android:layout_marginLeft="0dp">
+                android:layout_marginLeft="0dp"
+                android:gravity="center_horizontal">
 
             </TableLayout>
         </HorizontalScrollView>
@@ -183,6 +156,7 @@
         android:layout_marginTop="326dp"
         android:onClick="createTable"
         android:text="NuevaMatriz"
+        android:background="@color/colorPrimary"
         android:textColor="@android:color/white" />
 
     <Button
@@ -197,6 +171,7 @@
         android:layout_marginTop="410dp"
         android:onClick="createTable"
         android:text="Ejecutar"
+        android:background="@color/colorPrimary"
         android:textColor="@android:color/white" />
 
     <TextView
@@ -210,4 +185,26 @@
         android:text="Ultima Etapa"
         android:textSize="24dp"
         android:visibility="invisible" />
+
+    <ScrollView
+        android:id="@+id/scrollViewB"
+        android:layout_width="59dp"
+        android:layout_height="229dp"
+        android:layout_below="@+id/A"
+        android:layout_marginStart="-83dp"
+        android:layout_toEndOf="@+id/equal">
+
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TableLayout
+                android:id="@+id/vectorB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp">
+
+            </TableLayout>
+        </HorizontalScrollView>
+    </ScrollView>
 </RelativeLayout>
