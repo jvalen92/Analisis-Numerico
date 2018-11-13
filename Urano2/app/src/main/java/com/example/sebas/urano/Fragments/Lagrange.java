@@ -1,6 +1,7 @@
 package com.example.sebas.urano.Fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.InputType;
@@ -10,10 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.Toast;
 
+import com.example.sebas.urano.Ayudas.AyudaLagrange;
 import com.example.sebas.urano.Methods.Interpolacion;
 import com.example.sebas.urano.R;
 
@@ -52,7 +55,7 @@ public class Lagrange extends Fragment {
                 submit();
             }
         });
-
+        help();
         return inflaterView;
     }
 
@@ -84,8 +87,8 @@ public class Lagrange extends Fragment {
             String solucion = Interpolacion.lagrange(x, y);
 
             //Mostrar Solucion
-            MathView mv = (MathView) inflaterView.findViewById(R.id.poly);
-            mv.setText(solucion);
+            MathView mv = (MathView) inflaterView.findViewById(R.id.poly3);
+            mv.setText("\\(" + solucion + "\\)");
 
         } catch (Exception e) {
             Toast.makeText(this.getContext(), "Ingresa datos validos. (?)",
@@ -131,6 +134,18 @@ public class Lagrange extends Fragment {
             Toast.makeText(this.getContext(), "Por favor ingresa un numero",
                     Toast.LENGTH_LONG).show();
         }
+    }
+
+    public void help(){
+        ImageButton btn= (ImageButton) inflaterView.findViewById(R.id.b_help);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Aqui haces lo que quieras para mostrar las ayudas
+                //Toast.makeText(getContext(),"Ayudas",Toast.LENGTH_LONG).show();
+                startActivity(new Intent(getActivity(), AyudaLagrange.class));
+            }
+        });
     }
 
 }

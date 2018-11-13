@@ -114,12 +114,6 @@
         android:ems="10"
         android:inputType="number"
         android:text="80" />
-
-
-
-
-
-
     <ImageButton
         android:id="@+id/b_help"
         android:layout_width="66dp"
