@@ -1,6 +1,7 @@
 package com.example.sebas.urano.Fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.InputType;
@@ -10,10 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.Toast;
 
+import com.example.sebas.urano.Ayudas.AyudaJacobi;
 import com.example.sebas.urano.Methods.SistemaDeEcuaciones;
 import com.example.sebas.urano.R;
 
@@ -53,6 +56,7 @@ public class Jacobi extends Fragment {
             }
         });
 
+        help();
         return inflaterView;
     }
 
@@ -155,5 +159,17 @@ public class Jacobi extends Fragment {
             x.addView(edb);
         }
         return B;
+    }
+
+    public void help(){
+        ImageButton btn= (ImageButton) inflaterView.findViewById(R.id.b_help);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Aqui haces lo que quieras para mostrar las ayudas
+                //Toast.makeText(getContext(),"Ayudas",Toast.LENGTH_LONG).show();
+                startActivity(new Intent(getActivity(), AyudaJacobi.class));
+            }
+        });
     }
 }

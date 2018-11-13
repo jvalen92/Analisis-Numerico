@@ -26,6 +26,16 @@
         <activity android:name=".Ayudas.AyudaNewton" android:theme="@style/AppTheme.PopusTheme"/>
         <activity android:name=".Ayudas.AyudaSecante" android:theme="@style/AppTheme.PopusTheme"/>
         <activity android:name=".Ayudas.AyudaRaicesMultiples" android:theme="@style/AppTheme.PopusTheme"/>
+        <activity android:name=".Ayudas.AyudaEGParcial" android:theme="@style/AppTheme.PopusTheme"/>
+        <activity android:name=".Ayudas.AyudaEGTotal" android:theme="@style/AppTheme.PopusTheme"/>
+        <activity android:name=".Ayudas.AyudaLUSimple" android:theme="@style/AppTheme.PopusTheme"/>
+        <activity android:name=".Ayudas.AyudaLUParcial" android:theme="@style/AppTheme.PopusTheme"/>
+        <activity android:name=".Ayudas.AyudaCholesky" android:theme="@style/AppTheme.PopusTheme"/>
+        <activity android:name=".Ayudas.AyudaDoolittle" android:theme="@style/AppTheme.PopusTheme"/>
+        <activity android:name=".Ayudas.AyudaCrout" android:theme="@style/AppTheme.PopusTheme"/>
+        <activity android:name=".Ayudas.AyudaJacobi" android:theme="@style/AppTheme.PopusTheme"/>
+        <activity android:name=".Ayudas.AyudaSOR" android:theme="@style/AppTheme.PopusTheme"/>
+
     </application>
 
 </manifest>

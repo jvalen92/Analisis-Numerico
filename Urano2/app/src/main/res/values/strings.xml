@@ -48,17 +48,17 @@
     </string>
     <string name="_eliminacion_simple_help">
         El método de la eliminacion gaussiana requiere que se le ingrese una matriz \\(A \\in \\Re^{n\\times n}\\) y
-        un vector \\(b \in \\Re^n\\). Con estos datos, el computa la solución del sistema \\(Ax = b\\).
+        un vector \\(b \\in \\Re^n\\). Con estos datos, el computa la solución del sistema \\(Ax = b\\).
         Si en el proceso de eliminación hay un cero en la diagonal, este termina el proceso.
     </string>
     <string name="_eliminacion_parcial_help">
         El método de la eliminación gaussiana con pivoteo parcial requiere que se le ingrese una matriz \\(A \\in \\Re^{n\\times n}\\) y
-        un vector \\(b \in \\Re^n\\). Con estos datos, el computa la solución del sistema \\(Ax = b\\).
+        un vector \\(b \\in \\Re^n\\). Con estos datos, el método computa la solución del sistema \\(Ax = b\\).
         Si en el proceso de eliminación hay un cero en la diagonal, este termina el proceso.
     </string>
     <string name="_eliminacion_total_help">
         El método de la eliminación gaussiana con pivoteo total requiere que se le ingrese una matriz \\(A \\in \\Re^{n\\times n}\\) y
-        un vector \\(b \in \\Re^n\\). Con estos datos, el computa la solución del sistema \\(Ax = b\\).
+        un vector \\(b \\in \\Re^n\\). Con estos datos, el computa la solución del sistema \\(Ax = b\\).
         Si en el proceso de eliminación hay un cero en la diagonal, este termina el proceso.
     </string>
     <string name="_eliminacion_lu_simple_help">
@@ -89,14 +89,22 @@
     </string>
     <string name="_gauss_seidel_help">
         Este método funciona con la idea planteada en punto fijo, es decir, se despejan las \\(x_i\\) del sistema de ecuaciones
-        y luego se aplica la función \\(x\'_k = Tx\'_k + C\\) donde \\(T\\) es la matriz de transición y \\(C\\) es la constante de
-        transición.
+        y luego se aplica la función \\(x\'_k = Tx\'_{k-1} + C\\) donde \\(T\\) es la matriz de transición y \\(C\\) es la constante de
+        transición. Se sabe que el método converge si la matriz de transición está definida estrictamente diagonalmente dominante
+        o \\(\\rho(T) &lt; 1\\), donde \\(\\rho(T) = \\max\\limits_{i}(|\\lambda_i|)\\).
     </string>
     <string name="_jacobi_help">
-
+        Este método funciona con la idea planteada en punto fijo, es decir, se despejan las \\(x_i\\) del sistema de ecuaciones
+        y luego se aplica la función \\(x\'_k = Tx\'_{k-1} + C\\) donde \\(T\\) es la matriz de transición y \\(C\\) es la constante de
+        transición. Se sabe que el método converge si la matriz de transición está definida estrictamente diagonalmente dominante
+        o \\(\\rho(T) &lt; 1\\), donde \\(\\rho(T) = \\max\\limits_{i}(|\\lambda_i|)\\).
     </string>
     <string name="_sor_help">
-
+        Este método funciona con la idea planteada en punto fijo, es decir, se despejan las \\(x_i\\) del sistema de ecuaciones
+        y luego se aplica la función \\(x\'_k = Tx\'_k + C\\) donde \\(T\\) es la matriz de transición y \\(C\\) es la constante de
+        transición. Para mejorar la convergencia del método de Gauss-Seidel, lo que se hace es ponderar la matriz de transición de
+        la siguiente manera: \\(x\'_k = T_wx\'_{k - 1} + C_w\\). Se sabe que el método converge si la matriz de transición está definida estrictamente diagonalmente dominante
+        o \\(\\rho(T) &lt; 1\\), donde \\(\\rho(T) = \\max\\limits_{i}(|\\lambda_i|)\\).
     </string>
     <string name="_lagrange_help">
 
