@@ -17,6 +17,7 @@ import android.widget.TableRow;
 import android.widget.Toast;
 
 import com.example.sebas.urano.Ayudas.AyudaEGTotal;
+import com.example.sebas.urano.Methods.SingletonMensaje;
 import com.example.sebas.urano.Methods.SistemaDeEcuaciones;
 import com.example.sebas.urano.R;
 
