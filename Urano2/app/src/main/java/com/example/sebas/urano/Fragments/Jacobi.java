@@ -10,9 +10,12 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.Toast;
@@ -75,12 +78,16 @@ public class Jacobi extends Fragment {
             //Obtener Datos
             int n = Integer.parseInt(((EditText)
                     inflaterView.findViewById(R.id.j_numero)).getText().toString());
+
             TableLayout ta = (TableLayout) inflaterView.findViewById(R.id.j_matrizA);
             double A[][] = new double[n][n];
+
             TableLayout tb = (TableLayout) inflaterView.findViewById(R.id.j_vectorB);
             double b[] = new double[n];
+
             double x0[] = new double[n];
             TableLayout x = (TableLayout) inflaterView.findViewById(R.id.j_vectorX);
+
             for (int i = 0; i < n; i++) {
                 EditText ed1 = (EditText) tb.findViewById(i);
                 b[i] = Double.parseDouble(ed1.getText().toString());
@@ -90,14 +97,18 @@ public class Jacobi extends Fragment {
                 x0[i] = Double.parseDouble(ed2.getText().toString());
 
 
+
                 TableRow row = (TableRow) ta.findViewById(i);
                 for (int j = 0; j < n; j++) {
                     EditText ed = (EditText)(row.findViewById(n + j));
                     A[i][j] = Double.parseDouble(ed.getText().toString());
                 }
             }
-            double tol = Double.parseDouble(inflaterView.findViewById(R.id.j_tol).toString());
-            int niter = Integer.parseInt(inflaterView.findViewById(R.id.j_niter).toString());
+            EditText e = (EditText) inflaterView.findViewById(R.id.j_tol);
+            double tol = Double.parseDouble(e.getText().toString());
+
+            EditText f = (EditText) inflaterView.findViewById(R.id.j_niter);
+            int niter = Integer.parseInt(f.getText().toString());
 
             //Ejecutar Metodo
 
@@ -113,7 +124,7 @@ public class Jacobi extends Fragment {
             //Lenar tabla
             int n_columns=solucion.get(0).length;
             tableView.setColumnCount(n_columns);
-            //tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(context,"i","xi","xs","xm","fx","Error Absoluto","Error Relativo"));
+            tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(context,"i","xi","xs","xm","fx","Error Absoluto","Error Relativo"));
 
             //Ajustar tamaño de las columnas
             TableColumnDpWidthModel columnModel = new TableColumnDpWidthModel(context, n_columns, 125);
@@ -129,7 +140,7 @@ public class Jacobi extends Fragment {
 
 
         } catch (Exception e) {
-            Toast.makeText(this.getContext(), e.getMessage(),
+            Toast.makeText(this.getContext(), "Por favor ingresa datos validos. (?)",
                     Toast.LENGTH_LONG).show();
         }
     }
@@ -184,11 +195,11 @@ public class Jacobi extends Fragment {
 
             EditText edx = new EditText(this.getContext());
             //edb.setId(i*10);
-            edb.setId(i);
-            edb.setInputType(InputType.TYPE_NUMBER_FLAG_SIGNED
+            edx.setId(i);
+            edx.setInputType(InputType.TYPE_NUMBER_FLAG_SIGNED
                     | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_CLASS_NUMBER);
-            edb.setGravity(Gravity.CENTER_HORIZONTAL);
-            edb.setHint("  0  ");
+            edx.setGravity(Gravity.CENTER_HORIZONTAL);
+            edx.setHint("  0  ");
             x.addView(edx);
         }
         return B;
@@ -202,6 +213,49 @@ public class Jacobi extends Fragment {
                 // Aqui haces lo que quieras para mostrar las ayudas
                 //Toast.makeText(getContext(),"Ayudas",Toast.LENGTH_LONG).show();
                 startActivity(new Intent(getActivity(), AyudaJacobi.class));
+            }
+        });
+    }
+
+    // Lista despleglable para escoger la tolerancia del metodo
+    public void spinner(){
+        Spinner spinner;
+        final String datos[]={"0.5e-6","1e-5","0.5e-8"};
+
+        spinner = (Spinner) inflaterView.findViewById(R.id.spinnerJacobi);
+        Context context=getContext();
+        ArrayAdapter<String> adapter =new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item,datos);
+        spinner.setAdapter(adapter);
+
+        //seleccionar un elemento de la lista y escribir en el campo de tol
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                EditText tol =(EditText) inflaterView.findViewById(R.id.j_tol);
+                switch (position){
+
+                    case 0:
+                        tol.setText("");
+                        tol.setText(datos[position]);
+                        //Toast.makeText(getContext(),datos[position],Toast.LENGTH_LONG).show();
+
+                    case 1:
+                        tol.setText("");
+                        tol.setText(datos[position]);
+                        //Toast.makeText(getContext(),datos[position],Toast.LENGTH_LONG).show();
+
+                    case 2:
+                        tol.setText("");
+                        tol.setText(datos[position]);
+                        //Toast.makeText(getContext(),datos[position],Toast.LENGTH_LONG).show();
+                        break;
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
     }
