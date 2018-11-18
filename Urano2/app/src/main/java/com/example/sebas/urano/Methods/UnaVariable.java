@@ -373,8 +373,8 @@ public class UnaVariable {
             double error = tolerancia + 1;
             double error_rel = tolerancia + 1;
             double den = fx1 - fx0;
-            solucion.add(new String[]{"i", x0 + "", fx0 + "", "No existe", "No existe"});
-            solucion.add(new String[]{"u", x1 + "", fx1 + "", "No existe", "No existe"});
+            solucion.add(new String[]{"i", NumericalUtilities.fd(x0, 4) + "", NumericalUtilities.fd(fx0, 4) + "", "No existe", "No existe"});
+            solucion.add(new String[]{"u", NumericalUtilities.fd(x1, 4) + "", NumericalUtilities.fd(fx1, 4) + "", "No existe", "No existe"});
             while (error > tolerancia && fx1 != 0 && den != 0 && contador < niter) {
                 double x2 = x1 - fx1 * (x1 - x0) / den;
                 error = Math.abs(x2 - x1);
@@ -388,7 +388,11 @@ public class UnaVariable {
                 }
                 den = fx1 - fx0;
                 contador++;
-                solucion.add(new String[]{contador + "", x1 + "", fx1 + "", error + "", error_rel + ""});
+                double px1 = NumericalUtilities.fd(x1, 4);
+                double pfx1 = NumericalUtilities.fd(fx1, 4);
+                double ea = NumericalUtilities.fe(error);
+                double er = NumericalUtilities.fe(error_rel);
+                solucion.add(new String[]{contador + "", px1 + "", pfx1 + "", ea + "", er + ""});
             }
             if (fx1 == 0) {
                 mensaje = NumericalUtilities.format("%.4f es una raíz encontrada %d iteraciones.", x1, contador);

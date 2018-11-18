@@ -67,6 +67,13 @@ public class UnaVariableTest {
         ArrayList<String[]> res = UnaVariable.secante(f1, Tol, x0, x1, NMAX);
         assertEquals(singletonMensaje.getError(), false);
         System.out.print(singletonMensaje.getError() ? singletonMensaje.getMensajeActual() + "\n": "No hay error\n");
+        res = UnaVariable.secante("exp(x) - 5x + 2", 10e-5, 0.5, 1, 80);
+        for(String[] r: res){
+            for(String s: r){
+                System.out.print(s + " ");
+            }
+            System.out.println();
+        }
     }
     @Test
     public void testPuntoFijo() {
