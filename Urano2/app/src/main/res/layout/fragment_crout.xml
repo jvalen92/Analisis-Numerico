@@ -76,10 +76,10 @@
 
     <ScrollView
         android:id="@+id/scrollViewA"
-        android:layout_width="215dp"
-        android:layout_height="230dp"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/x">
+        android:layout_width="181dp"
+        android:layout_height="231dp"
+        android:layout_below="@+id/x"
+        android:layout_alignParentStart="true">
 
         <HorizontalScrollView
             android:layout_width="wrap_content"
@@ -117,10 +117,10 @@
 
     <ScrollView
         android:id="@+id/scrollViewX"
-        android:layout_width="60dp"
-        android:layout_height="229dp"
-        android:layout_marginLeft="2dp"
+        android:layout_width="109dp"
+        android:layout_height="232dp"
         android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
         android:layout_marginTop="40dp"
         android:layout_toEndOf="@+id/scrollViewA"
         android:layout_toRightOf="@+id/scrollViewA">
