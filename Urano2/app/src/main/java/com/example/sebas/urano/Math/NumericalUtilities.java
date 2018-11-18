@@ -1,6 +1,7 @@
 package com.example.sebas.urano.Math;
 
 import com.example.sebas.urano.MainActivity;
+import com.example.sebas.urano.Methods.SingletonMensaje;
 import com.jjoe64.graphview.series.DataPoint;
 
 import org.matheclipse.core.eval.EvalUtilities;
@@ -23,7 +24,15 @@ public class NumericalUtilities {
 
     public static double evaluarFuncion(String funcion, double valor) {
         EvalUtilities util = new EvalUtilities(false, true);
-        return util.evaluate("x=" + valor + ";" + funcion).evalDouble();
+        IExpr der = util.evaluate("x=" + valor + ";" + funcion);
+        SingletonMensaje singletonMensaje = SingletonMensaje.getInstance();
+        if(der.evalComplex().getImaginary() > 0){
+            singletonMensaje.setError(true);
+            singletonMensaje.setMensajeActual("Durante la ejecución del método, al evaluar la función en " + valor + "" +
+                    "el resultado no está en el conjunto de los reales.");
+            return der.evalComplex().getReal();
+        }
+        return der.evalDouble();
     }
 
     public static double evaluarDerivada(String funcion, double valor) {
