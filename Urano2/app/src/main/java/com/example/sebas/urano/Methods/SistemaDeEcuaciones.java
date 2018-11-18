@@ -1,9 +1,11 @@
 package com.example.sebas.urano.Methods;
 
 import com.example.sebas.urano.Math.MatrizUtilities;
+import com.example.sebas.urano.Matriz;
 
 import org.apache.commons.math3.complex.Complex;
 import org.apache.commons.math3.linear.Array2DRowRealMatrix;
+import org.apache.commons.math3.linear.DiagonalMatrix;
 import org.apache.commons.math3.linear.LUDecomposition;
 import org.apache.commons.math3.linear.RealMatrix;
 
@@ -13,10 +15,10 @@ import java.util.Collections;
 
 public class SistemaDeEcuaciones {
 
+    static final SingletonMensaje singletonMensaje = SingletonMensaje.getInstance();
     public static Object[] eliminacionGaussianaSimple(double[][] A, double[] b) {
         RealMatrix realMatrix = new Array2DRowRealMatrix(A);
         LUDecomposition luDecomposition = new LUDecomposition(realMatrix);
-        SingletonMensaje singletonMensaje = SingletonMensaje.getInstance();
         singletonMensaje.setError(false);
         if (luDecomposition.getDeterminant() == 0) {
             singletonMensaje.setMensajeActual("El sistema no es invertible.");
@@ -34,7 +36,6 @@ public class SistemaDeEcuaciones {
     public static Object[] eliminacionGaussianaParcial(double[][] A, double[] b) {
         RealMatrix realMatrix = new Array2DRowRealMatrix(A);
         LUDecomposition luDecomposition = new LUDecomposition(realMatrix);
-        SingletonMensaje singletonMensaje = SingletonMensaje.getInstance();
         singletonMensaje.setError(false);
         if (luDecomposition.getDeterminant() == 0) {
             singletonMensaje.setMensajeActual("El sistema no es invertible.");
@@ -52,7 +53,6 @@ public class SistemaDeEcuaciones {
     public static Object[] eliminacionGaussianaTotal(double[][] A, double[] b) {
         RealMatrix realMatrix = new Array2DRowRealMatrix(A);
         LUDecomposition luDecomposition = new LUDecomposition(realMatrix);
-        SingletonMensaje singletonMensaje = SingletonMensaje.getInstance();
         singletonMensaje.setError(false);
         if (luDecomposition.getDeterminant() == 0) {
             singletonMensaje.setMensajeActual("El sistema no es invertible.");
@@ -76,7 +76,6 @@ public class SistemaDeEcuaciones {
     public static Object[] eliminacionGaussianaSimpleLU(double[][] A, double[] b) {
         RealMatrix realMatrix = new Array2DRowRealMatrix(A);
         LUDecomposition luDecomposition = new LUDecomposition(realMatrix);
-        SingletonMensaje singletonMensaje = SingletonMensaje.getInstance();
         singletonMensaje.setError(false);
         if (luDecomposition.getDeterminant() == 0) {
             singletonMensaje.setMensajeActual("El sistema no es invertible.");
@@ -99,7 +98,6 @@ public class SistemaDeEcuaciones {
     public static Object[] eliminacionGaussianaParcialLU(double[][] A, double[] b) {
         RealMatrix realMatrix = new Array2DRowRealMatrix(A);
         LUDecomposition luDecomposition = new LUDecomposition(realMatrix);
-        SingletonMensaje singletonMensaje = SingletonMensaje.getInstance();
         singletonMensaje.setError(false);
         if (luDecomposition.getDeterminant() == 0) {
             singletonMensaje.setMensajeActual("El sistema no es invertible.");
@@ -125,7 +123,6 @@ public class SistemaDeEcuaciones {
     }
 
     public static double[][] eliminacionGaussianaPivoteoParcial(double[][] A, double[] b) {
-        SingletonMensaje singletonMensaje = SingletonMensaje.getInstance();
         singletonMensaje.setMensajeActual("");
         singletonMensaje.setError(false);
         int n = A.length;
@@ -148,7 +145,6 @@ public class SistemaDeEcuaciones {
     }
 
     public static double[][] eliminacionGaussianaPivoteoTotal(double[][] A, int[] marcas, double[] b) {
-        SingletonMensaje singletonMensaje = SingletonMensaje.getInstance();
         singletonMensaje.setMensajeActual("");
         singletonMensaje.setError(false);
         int n = A.length;
@@ -207,7 +203,6 @@ public class SistemaDeEcuaciones {
     }
 
     private static double[][] eliminacionSimple(double[][] A, double[] b) {
-        SingletonMensaje singletonMensaje = SingletonMensaje.getInstance();
         singletonMensaje.setMensajeActual("");
         singletonMensaje.setError(false);
         int n = A.length;
@@ -235,7 +230,6 @@ public class SistemaDeEcuaciones {
     }
 
     public static Object[] factorizacionLU_GaussSimple(double[][] A) {
-        SingletonMensaje singletonMensaje = SingletonMensaje.getInstance();
         singletonMensaje.setError(false);
         int n = A.length;
         double[][] L = new double[n][n];
@@ -268,7 +262,6 @@ public class SistemaDeEcuaciones {
     }
 
     public static Object[] factorizacionLU_GaussParcial(double[][] A) {
-        SingletonMensaje singletonMensaje = SingletonMensaje.getInstance();
         singletonMensaje.setError(false);
         int n = A.length;
         double[][] Ab = A;
@@ -324,7 +317,6 @@ public class SistemaDeEcuaciones {
     }
 
     public static double[] sustitucionProgresiva(double[][] Ab, int n) {
-        SingletonMensaje singletonMensaje = SingletonMensaje.getInstance();
         singletonMensaje.setError(false);
         singletonMensaje.setMensajeActual("");
         double[] x = new double[n];
@@ -354,7 +346,7 @@ public class SistemaDeEcuaciones {
         int n = A.length;
         Complex[][] L = ceros(n);
         Complex[][] U = ceros(n);
-        
+
         for (int k = 0; k < n; ++k) {
             Complex sum1 = new Complex(0, 0);
             for (int p = 0; p < k; ++p) {
@@ -436,6 +428,14 @@ public class SistemaDeEcuaciones {
     }
 
     public static Object[] croutSolver(double[][] A, double[] b) {
+        singletonMensaje.setError(false);
+        RealMatrix realMatrix = new Array2DRowRealMatrix(A);
+        LUDecomposition luDecomposition = new LUDecomposition(realMatrix);
+        if(luDecomposition.getDeterminant() == 0){
+            singletonMensaje.setError(true);
+            singletonMensaje.setMensajeActual("La matriz tiene determinante 0 y no se puede factorizar");
+            return new Object[]{A, b};
+        }
         Object LU[] = crout(A);
         double L[][] = (double[][]) LU[0];
         double U[][] = (double[][]) LU[1];
@@ -470,6 +470,14 @@ public class SistemaDeEcuaciones {
     }
 
     public static Object[] doolittleSolver(double[][] A, double[] b) {
+        singletonMensaje.setError(false);
+        RealMatrix realMatrix = new Array2DRowRealMatrix(A);
+        LUDecomposition luDecomposition = new LUDecomposition(realMatrix);
+        if(luDecomposition.getDeterminant() == 0){
+            singletonMensaje.setError(true);
+            singletonMensaje.setMensajeActual("La matriz tiene determinante 0 y no se puede factorizar");
+            return new Object[]{A, b};
+        }
         Object LU[] = doolitle(A);
         double L[][] = (double[][]) LU[0];
         double U[][] = (double[][]) LU[1];
@@ -506,6 +514,8 @@ public class SistemaDeEcuaciones {
 
     public static ArrayList<String[]> jacobi(double[][] A, double[] b, double tol, double[] x0, int niter) {
         ArrayList<String[]> solucion = new ArrayList<>();
+        RealMatrix realMatrix = new Array2DRowRealMatrix(A);
+        DiagonalMatrix D = new DiagonalMatrix(MatrizUtilities.diag(realMatrix.getData()));
         int cnt = 1;
         double dispersion = tol + 1;
         // cnt, x_1, x_2, ..., x_i, ..., x_n

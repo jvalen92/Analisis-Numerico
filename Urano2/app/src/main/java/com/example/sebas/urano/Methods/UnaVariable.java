@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 public class UnaVariable {
 
+    static final SingletonMensaje singletonMensaje = SingletonMensaje.getInstance();
     /**
      * Devuelve una tabla con la ejecucon del metodo de newton: los campos son iter, xi, f(x), df(x), error_abs, error_rel
      *
@@ -18,7 +19,6 @@ public class UnaVariable {
      * @return
      */
     public static ArrayList<String[]> newton(String f, String df, double tolerancia, double x0, int niter) {
-        SingletonMensaje singletonMensaje = SingletonMensaje.getInstance();
         singletonMensaje.setMensajeActual("");
         singletonMensaje.setError(false);
         ArrayList<String[]> solucion = new ArrayList<>();
@@ -26,12 +26,21 @@ public class UnaVariable {
         double error = tolerancia + 1.0;
         double error_rel = Double.MIN_VALUE;
         double fx = NumericalUtilities.evaluarFuncion(f, x0);
+        if(singletonMensaje.getError()){
+            return null;
+        }
         double dfx = NumericalUtilities.evaluarFuncion(f, x0);
+        if(singletonMensaje.getError()){
+            return null;
+        }
         double x1 = x0;
         solucion.add(new String[]{contador + "", x0 + "", fx + "", dfx + "", "No existe", "No existe"});
         while (fx != 0.0 && dfx != 0.0 && error > tolerancia && contador < niter) {
             x1 = x0 - (fx / dfx);
             fx = NumericalUtilities.evaluarFuncion(f, x1);
+            if(singletonMensaje.getError()){
+                return null;
+            }
             error = Math.abs(x1 - x0);
             error_rel = Math.abs(error / x1);
             x0 = x1;
@@ -58,7 +67,6 @@ public class UnaVariable {
     }
 
     public static ArrayList<String[]> puntoFijo(String f, String g, double tolerancia, double xa, int niter) {
-        SingletonMensaje singletonMensaje = SingletonMensaje.getInstance();
         singletonMensaje.setMensajeActual("");
         singletonMensaje.setError(false);
         ArrayList<String[]> solucion = new ArrayList<>();
@@ -66,11 +74,20 @@ public class UnaVariable {
         double error = tolerancia + 1.0;
         double error_rel = (tolerancia + 1.0) / tolerancia;
         double fx = NumericalUtilities.evaluarFuncion(f, xa);
+        if(singletonMensaje.getError()){
+            return null;
+        }
         double xn = xa;
         solucion.add(new String[]{contador + "", xa + "", fx + "", "No existe", "No existe"});
         while (fx != 0 && error > tolerancia && contador < niter) {
             xn = NumericalUtilities.evaluarFuncion(g, xa);
+            if(singletonMensaje.getError()){
+                return null;
+            }
             fx = NumericalUtilities.evaluarFuncion(f, xn);
+            if(singletonMensaje.getError()){
+                return null;
+            }
             error = Math.abs(xn - xa);
             error_rel = Math.abs(error / xn);
             xa = xn;
@@ -94,12 +111,17 @@ public class UnaVariable {
     }
 
     public static ArrayList<String[]> biseccion(String f, double xi, double xs, double tolerancia, int niter) {
-        SingletonMensaje singletonMensaje = SingletonMensaje.getInstance();
         singletonMensaje.setMensajeActual("");
         singletonMensaje.setError(false);
         ArrayList<String[]> solucion = new ArrayList<>();
         double fxi = NumericalUtilities.evaluarFuncion(f, xi);
+        if(singletonMensaje.getError()){
+            return null;
+        }
         double fxs = NumericalUtilities.evaluarFuncion(f, xs);
+        if(singletonMensaje.getError()){
+            return null;
+        }
         String mensaje = "";
         if (fxi == 0) {
             mensaje = NumericalUtilities.format("%.4f es una raíz encontrada %d iteraciones.", xi, 0);
@@ -110,6 +132,9 @@ public class UnaVariable {
         } else if (fxi * fxs < 0) {
             double xm = (xi + xs) / 2;
             double fxm = NumericalUtilities.evaluarFuncion(f, xm);
+            if(singletonMensaje.getError()){
+                return null;
+            }
             int contador = 1;
             solucion.add(new String[]{contador + "", xi + "", xs + "", xm + "", fxm + "", "No existe", "No existe"});
             double error = tolerancia + 1;
@@ -124,6 +149,9 @@ public class UnaVariable {
                 double xaux = xm;
                 xm = (xi + xs) / 2;
                 fxm = NumericalUtilities.evaluarFuncion(f, xm);
+                if(singletonMensaje.getError()){
+                    return null;
+                }
                 error = Math.abs(xm - xaux);
                 double error_rel = Math.abs(error / xm);
                 contador++;
@@ -151,11 +179,13 @@ public class UnaVariable {
     }
 
     public static ArrayList<String[]> busquedaIncremental(String f, double x0, double delta, int niter) {
-        SingletonMensaje singletonMensaje = SingletonMensaje.getInstance();
         singletonMensaje.setError(false);
         singletonMensaje.setMensajeActual("");
         ArrayList<String[]> solucion = new ArrayList<>();
         double fx0 = NumericalUtilities.evaluarFuncion(f, x0);
+        if(singletonMensaje.getError()){
+            return null;
+        }
         String mensaje = "";
         if (fx0 == 0) {
             solucion.add(new String[]{"0", x0 + "", fx0 + ""});
@@ -165,12 +195,18 @@ public class UnaVariable {
             double x1 = x0 + delta;
             int contador = 1;
             double fx1 = NumericalUtilities.evaluarFuncion(f, x1);
+            if(singletonMensaje.getError()){
+                return null;
+            }
             solucion.add(new String[]{contador + "", x1 + "", fx1 + ""});
             while (fx0 * fx1 > 0 && contador < niter) {
                 x0 = x1;
                 fx0 = fx1;
                 x1 = x0 + delta;
                 fx1 = NumericalUtilities.evaluarFuncion(f, x1);
+                if(singletonMensaje.getError()){
+                    return null;
+                }
                 contador++;
                 double px1 = NumericalUtilities.fd(x1, 4);
                 double pfx1 = NumericalUtilities.fd(fx1, 4);
@@ -189,15 +225,23 @@ public class UnaVariable {
     }
 
     public static ArrayList<String[]> raicesMultiples(String f, String df, String ddf, double x0, double tolerancia, int niter) {
-        SingletonMensaje singletonMensaje = SingletonMensaje.getInstance();
         singletonMensaje.setMensajeActual("");
         singletonMensaje.setError(false);
         ArrayList<String[]> solucion = new ArrayList<>();
         double fx = NumericalUtilities.evaluarFuncion(f, x0);
+        if(singletonMensaje.getError()){
+            return null;
+        }
         double dfx;
         double ddfx;
         dfx = NumericalUtilities.evaluarFuncion(df, x0);
+        if(singletonMensaje.getError()){
+            return null;
+        }
         ddfx = NumericalUtilities.evaluarFuncion(ddf, x0);
+        if(singletonMensaje.getError()){
+            return null;
+        }
         double xn = x0;
         int contador = 0;
         double error = tolerancia + 1.0;
@@ -207,8 +251,17 @@ public class UnaVariable {
             error = Math.abs(xn - xnn);
             xn = xnn;
             fx = NumericalUtilities.evaluarFuncion(f, xn);
+            if(singletonMensaje.getError()){
+                return null;
+            }
             dfx = NumericalUtilities.evaluarFuncion(df, xn);
+            if(singletonMensaje.getError()){
+                return null;
+            }
             ddfx = NumericalUtilities.evaluarFuncion(ddf, xn);
+            if(singletonMensaje.getError()){
+                return null;
+            }
             double error_rel = Math.abs(error / xn);
             contador++;
             double pxn = NumericalUtilities.fd(xn, 4);
@@ -232,12 +285,17 @@ public class UnaVariable {
     }
 
     public static ArrayList<String[]> reglaFalsa(String f, double xi, double xs, double tolerancia, int niter) {
-        SingletonMensaje singletonMensaje = SingletonMensaje.getInstance();
         singletonMensaje.setMensajeActual("");
         singletonMensaje.setError(false);
         ArrayList<String[]> solucion = new ArrayList<>();
         double fxi = NumericalUtilities.evaluarFuncion(f, xi);
+        if(singletonMensaje.getError()){
+            return null;
+        }
         double fxs = NumericalUtilities.evaluarFuncion(f, xs);
+        if(singletonMensaje.getError()){
+            return null;
+        }
         String mensaje = "";
         if (fxi == 0) {
             solucion.add(new String[]{"0", xi + "", xs + "", xi + "", fxi + "", "No existe", "No existe"});
@@ -248,6 +306,9 @@ public class UnaVariable {
         } else if (fxi * fxs < 0) {
             double xm = xi - ((fxi * (xs - xi))) / (fxs - fxi);
             double fxm = NumericalUtilities.evaluarFuncion(f, xm);
+            if(singletonMensaje.getError()){
+                return null;
+            }
             int contador = 1;
             solucion.add(new String[]{contador + "", xi + "", xs + "", xm + "", fxm + "", "No existe", "No existe"});
             double error = tolerancia + 1;
@@ -262,6 +323,9 @@ public class UnaVariable {
                 double xaux = xm;
                 xm = xi - ((fxi * (xs - xi))) / (fxs - fxi);
                 fxm = NumericalUtilities.evaluarFuncion(f, xm);
+                if(singletonMensaje.getError()){
+                    return null;
+                }
                 error = Math.abs(xm - xaux);
                 double error_rel = Math.abs(error / xm);
                 contador++;
@@ -289,17 +353,22 @@ public class UnaVariable {
     }
 
     public static ArrayList<String[]> secante(String f, double tolerancia, double x0, double x1, int niter) {
-        SingletonMensaje singletonMensaje = SingletonMensaje.getInstance();
         singletonMensaje.setMensajeActual("");
         singletonMensaje.setError(false);
         ArrayList<String[]> solucion = new ArrayList<>();
         double fx0 = NumericalUtilities.evaluarFuncion(f, x0);
+        if(singletonMensaje.getError()){
+            return null;
+        }
         String mensaje = "";
         if (fx0 == 0) {
             mensaje = NumericalUtilities.format("%.4f es una raíz encontrada %d iteraciones.", x0, 0);
             solucion.add(new String[]{"0", NumericalUtilities.fd(x0, 4) + "", NumericalUtilities.fd(fx0, 4) + "", "No existe", "No existe"});
         } else {
             double fx1 = NumericalUtilities.evaluarFuncion(f, x1);
+            if(singletonMensaje.getError()){
+                return null;
+            }
             int contador = 0;
             double error = tolerancia + 1;
             double error_rel = tolerancia + 1;
@@ -314,6 +383,9 @@ public class UnaVariable {
                 fx0 = fx1;
                 x1 = x2;
                 fx1 = NumericalUtilities.evaluarFuncion(f, x1);
+                if(singletonMensaje.getError()){
+                    return null;
+                }
                 den = fx1 - fx0;
                 contador++;
                 solucion.add(new String[]{contador + "", x1 + "", fx1 + "", error + "", error_rel + ""});
