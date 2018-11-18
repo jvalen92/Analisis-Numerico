@@ -30,5 +30,6 @@ public class NumericalUtilitiesTest {
         assertEquals(NumericalUtilities.evaluarFuncion("x^2", 0.5), 0.25, delta);
         assertEquals(NumericalUtilities.evaluarFuncion("Ln(x)", 1), 0, delta);
         assertEquals(NumericalUtilities.evaluarFuncion("sin(x)", 6), -0.27941549819, delta);
+        assertEquals(NumericalUtilities.evaluarFuncion("3*x", 3), 9.0, delta);
     }
 }
