@@ -4,6 +4,7 @@ import com.example.sebas.urano.MainActivity;
 import com.example.sebas.urano.Methods.SingletonMensaje;
 import com.jjoe64.graphview.series.DataPoint;
 
+import org.matheclipse.core.builtin.function.Do;
 import org.matheclipse.core.eval.EvalUtilities;
 import org.matheclipse.core.interfaces.IExpr;
 
@@ -17,7 +18,7 @@ public class NumericalUtilities {
         DataPoint[] puntos = new DataPoint[linspace.length];
         for (int i = 0; i < linspace.length; i++) {
             IExpr result = util.evaluate("x=" + linspace[i] + ";" + expresion);
-            puntos[i] = new DataPoint(linspace[i], result.evalDouble());
+            puntos[i] = new DataPoint(linspace[i], result.evalComplex().getReal());
         }
         return puntos;
     }
@@ -26,11 +27,25 @@ public class NumericalUtilities {
         EvalUtilities util = new EvalUtilities(false, true);
         IExpr der = util.evaluate("x=" + valor + ";" + funcion);
         SingletonMensaje singletonMensaje = SingletonMensaje.getInstance();
-        if(der.evalComplex().getImaginary() > 0){
+        singletonMensaje.setError(false);
+        if (Double.isNaN(valor) || valor == Double.POSITIVE_INFINITY || valor == Double.NEGATIVE_INFINITY) {
             singletonMensaje.setError(true);
-            singletonMensaje.setMensajeActual("Durante la ejecución del método, al evaluar la función en " + valor + "" +
-                    "el resultado no está en el conjunto de los reales.");
-            return der.evalComplex().getReal();
+            singletonMensaje.setMensajeActual("Durante la ejecución del método, al evaluar la función en " + valor +
+                    " el resultado no está en el conjunto de los reales.");
+            return 0;
+        }
+        try {
+            if (der.evalComplex().getImaginary() > 0) {
+                singletonMensaje.setError(true);
+                singletonMensaje.setMensajeActual("Durante la ejecución del método, al evaluar la función en " + valor +
+                        " el resultado no está en el conjunto de los reales.");
+                return der.evalComplex().getReal();
+            }
+        } catch (Exception ex) {
+            singletonMensaje.setError(true);
+            singletonMensaje.setMensajeActual("Durante la ejecución del método, al evaluar la función en " + valor +
+                    " el resultado no está en el conjunto de los reales.");
+            return 0;
         }
         return der.evalDouble();
     }
@@ -38,13 +53,55 @@ public class NumericalUtilities {
     public static double evaluarDerivada(String funcion, double valor) {
         EvalUtilities util = new EvalUtilities(false, true);
         IExpr der = util.evaluate("y = D(" + funcion + ", x);x=" + valor + ";y");
-        return der.evalDouble();
+        SingletonMensaje singletonMensaje = SingletonMensaje.getInstance();
+        singletonMensaje.setError(false);
+        if (Double.isNaN(valor) || valor == Double.POSITIVE_INFINITY || valor == Double.NEGATIVE_INFINITY) {
+            singletonMensaje.setError(true);
+            singletonMensaje.setMensajeActual("Durante la ejecución del método, al evaluar la función en " + valor +
+                    " el resultado no está en el conjunto de los reales.");
+            return 0;
+        }
+        try {
+            if (der.evalComplex().getImaginary() > 0) {
+                singletonMensaje.setError(true);
+                singletonMensaje.setMensajeActual("Durante la ejecución del método, al evaluar la función en " + valor +
+                        " el resultado no está en el conjunto de los reales.");
+                return der.evalComplex().getReal();
+            }
+        } catch (Exception ex) {
+            singletonMensaje.setError(true);
+            singletonMensaje.setMensajeActual("Durante la ejecución del método, al evaluar la función en " + valor +
+                    " el resultado no está en el conjunto de los reales.");
+            return 0;
+        }
+        return der.evalComplex().getReal();
     }
 
     public static double evaluarSegundaDerivada(String funcion, double valor) {
         EvalUtilities util = new EvalUtilities(false, true);
-        IExpr exp = util.evaluate("y=" + funcion + ";z=D(y, x); w = D(z, x); x = " + valor + ";w");
-        return exp.evalDouble();
+        IExpr der = util.evaluate("y=" + funcion + ";z=D(y, x); w = D(z, x); x = " + valor + ";w");
+        SingletonMensaje singletonMensaje = SingletonMensaje.getInstance();
+        singletonMensaje.setError(false);
+        if (Double.isNaN(valor) || valor == Double.POSITIVE_INFINITY || valor == Double.NEGATIVE_INFINITY) {
+            singletonMensaje.setError(true);
+            singletonMensaje.setMensajeActual("Durante la ejecución del método, al evaluar la función en " + valor +
+                    " el resultado no está en el conjunto de los reales.");
+            return 0;
+        }
+        try {
+            if (der.evalComplex().getImaginary() > 0) {
+                singletonMensaje.setError(true);
+                singletonMensaje.setMensajeActual("Durante la ejecución del método, al evaluar la función en " + valor +
+                        " el resultado no está en el conjunto de los reales.");
+                return der.evalComplex().getReal();
+            }
+        } catch (Exception ex) {
+            singletonMensaje.setError(true);
+            singletonMensaje.setMensajeActual("Durante la ejecución del método, al evaluar la función en " + valor +
+                    " el resultado no está en el conjunto de los reales.");
+            return 0;
+        }
+        return der.evalDouble();
     }
 
     /**
@@ -65,9 +122,10 @@ public class NumericalUtilities {
      * @return
      */
     public static double fd(double d, int k) {
-        if(d < 1e-14) return 0.0;
+        if (d < 1e-14) return 0.0;
         return Double.parseDouble(String.format("%." + k + "f", d).replace(',', '.'));
     }
+
     /**
      * Devuelve el error con k decimales
      *
@@ -75,22 +133,22 @@ public class NumericalUtilities {
      * @return
      */
     public static double fe(double e) {
-        if(e < 1e-14){
+        if (e < 1e-14) {
             return 0.0;
         }
         String value = String.valueOf(e);
         String new_val = "";
         int idx = value.indexOf('e');
-        if(idx == -1){
+        if (idx == -1) {
             idx = value.indexOf('E');
-            if(idx == -1){
+            if (idx == -1) {
                 new_val = String.format("%.4f", e);
-            }else{
+            } else {
                 new_val = String.format("%.2f", Double.parseDouble(value.substring(0, idx)));
                 new_val += "E";
                 new_val += value.substring(idx + 1, value.length());
             }
-        }else{
+        } else {
             new_val = String.format("%.2f", Double.parseDouble(value.substring(0, idx)));
             new_val += "E";
             new_val += value.substring(idx + 1, value.length());
@@ -98,7 +156,8 @@ public class NumericalUtilities {
         new_val = new_val.replace(',', '.');
         return Double.parseDouble(new_val);
     }
-    public static String format(String s, Object ... params){
+
+    public static String format(String s, Object... params) {
         return String.format(s, params).replace(',', '.');
     }
 

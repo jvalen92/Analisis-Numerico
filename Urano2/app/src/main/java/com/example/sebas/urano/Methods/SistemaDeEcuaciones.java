@@ -16,6 +16,7 @@ import java.util.Collections;
 public class SistemaDeEcuaciones {
 
     static final SingletonMensaje singletonMensaje = SingletonMensaje.getInstance();
+
     public static Object[] eliminacionGaussianaSimple(double[][] A, double[] b) {
         RealMatrix realMatrix = new Array2DRowRealMatrix(A);
         LUDecomposition luDecomposition = new LUDecomposition(realMatrix);
@@ -394,6 +395,11 @@ public class SistemaDeEcuaciones {
     }
 
     public static Object[] choleskySolver(double[][] A, double[] b) {
+        if (!MatrizUtilities.definidaPositiva(A)) {
+            singletonMensaje.setError(true);
+            singletonMensaje.setMensajeActual("La matriz debe ser definidad positiva.");
+            return new Object[]{A, b};
+        }
         Object LU[] = choleskyReal(A);
         double L[][] = (double[][]) LU[0];
         double U[][] = (double[][]) LU[1];
@@ -428,10 +434,14 @@ public class SistemaDeEcuaciones {
     }
 
     public static Object[] croutSolver(double[][] A, double[] b) {
-        singletonMensaje.setError(false);
+        if(MatrizUtilities.contieneZero(A)){
+            singletonMensaje.setError(true);
+            singletonMensaje.setMensajeActual("La matriz contiene almenos un cero en la diagonal.");
+            return new Object[]{A, b};
+        }
         RealMatrix realMatrix = new Array2DRowRealMatrix(A);
         LUDecomposition luDecomposition = new LUDecomposition(realMatrix);
-        if(luDecomposition.getDeterminant() == 0){
+        if (luDecomposition.getDeterminant() == 0) {
             singletonMensaje.setError(true);
             singletonMensaje.setMensajeActual("La matriz tiene determinante 0 y no se puede factorizar");
             return new Object[]{A, b};
@@ -470,10 +480,14 @@ public class SistemaDeEcuaciones {
     }
 
     public static Object[] doolittleSolver(double[][] A, double[] b) {
-        singletonMensaje.setError(false);
+        if(MatrizUtilities.contieneZero(A)){
+            singletonMensaje.setError(true);
+            singletonMensaje.setMensajeActual("La matriz contiene almenos un cero en la diagonal.");
+            return new Object[]{A, b};
+        }
         RealMatrix realMatrix = new Array2DRowRealMatrix(A);
         LUDecomposition luDecomposition = new LUDecomposition(realMatrix);
-        if(luDecomposition.getDeterminant() == 0){
+        if (luDecomposition.getDeterminant() == 0) {
             singletonMensaje.setError(true);
             singletonMensaje.setMensajeActual("La matriz tiene determinante 0 y no se puede factorizar");
             return new Object[]{A, b};
@@ -490,6 +504,11 @@ public class SistemaDeEcuaciones {
 
 
     public static ArrayList<String[]> gaussSeidel(double[][] A, double[] b, double tol, double[] x0, int niter) {
+        if(MatrizUtilities.contieneZero(A)){
+            singletonMensaje.setError(true);
+            singletonMensaje.setMensajeActual("La matriz contiene almenos un cero en la diagonal.");
+            return null;
+        }
         ArrayList<String[]> solucion = new ArrayList<>();
         int cnt = 1;
         double dispersion = tol + 1;
@@ -627,5 +646,4 @@ public class SistemaDeEcuaciones {
         }
         return mx1 / mx2;
     }
-
 }
