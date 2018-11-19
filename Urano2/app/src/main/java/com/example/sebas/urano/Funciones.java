@@ -1,5 +1,6 @@
 package com.example.sebas.urano;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.sebas.urano.Data.Funcion;
 import com.jjoe64.graphview.GraphView;
@@ -28,6 +30,14 @@ public class Funciones extends AppCompatActivity {
         // Fill all the spaces whilst there are functions
         llenarFunciones();
 
+        //limbiar el campo del editText en caso que hayan funciones
+        EditText funcion = (EditText) findViewById(R.id.txtFuncion1);
+        funcion.setText(null);
+
+        //valor de la funcion ingresada por el usuario
+        String fun = getIntent().getExtras().getString("funcion");
+        //Toast.makeText(this,fun,Toast.LENGTH_LONG).show();
+        funcion.setText(fun);
     }
 
     public void obtenerFunciones(View view) {

@@ -24,5 +24,11 @@
         app:showAsAction="never">
     </item>
 
+    <item
+        android:id="@+id/graficar"
+        android:title="Graficar"
+        app:showAsAction="never">
+    </item>
+
 
 </menu>

@@ -63,7 +63,6 @@ public class InterpolacionFinal extends AppCompatActivity {
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
             }
         });
     }
@@ -77,10 +76,14 @@ public class InterpolacionFinal extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         int id = item.getItemId();
-
         switch (id){
+            case R.id.graficar:
+                //Abrir las funcionalidades del gráfico
+                Intent grafico = new Intent(this,Funciones.class);
+                grafico.putExtra("funcion","x^2+5x-10");
+                startActivity(grafico);
+                return true;
 
             case R.id.sis_ecuaciones:
                 Intent sis_ec = new Intent(this,SistemaDeEcuaciones.class);
@@ -97,10 +100,6 @@ public class InterpolacionFinal extends AppCompatActivity {
                 startActivity(home);
                 return true;
         }
-
-
         return super.onOptionsItemSelected(item);
     }
-
-
 }
