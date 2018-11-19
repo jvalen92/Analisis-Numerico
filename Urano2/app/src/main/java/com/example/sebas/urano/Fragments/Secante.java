@@ -92,7 +92,7 @@ public class Secante extends Fragment {
                     Integer niter = Integer.valueOf(in4.getText().toString());
 
                     //ejecutar el metodo
-                    ArrayList<String[]> solucion = UnaVariable.secante(fx,x1,x2,tol,niter);
+                    ArrayList<String[]> solucion = UnaVariable.secante(fx,tol,x1,x2,niter);
 
 
                     //TableView
