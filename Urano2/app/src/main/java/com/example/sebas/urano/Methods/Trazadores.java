@@ -1,11 +1,20 @@
 package com.example.sebas.urano.Methods;
 
-import java.io.FileWriter;
-import java.io.File;
 import java.io.IOException;
 
 public class Trazadores {
-    public static String[][] trazadoresLineales(double[] x, double[] y) throws IOException {
+    static final SingletonMensaje singletonMensaje = SingletonMensaje.getInstance();
+    /**
+     * Devuelve una tabla con la ejecucon del metodo de newton: los campos son iter, xi, f(x), df(x), error_abs, error_rel
+     *
+     * @param x
+     * @param y
+     * @param xp
+     * @return
+     */
+    public static String[][] trazadoresLineales(double[] x, double[] y, double xp, boolean evaluar){
+        singletonMensaje.setMensajeActual("");
+        singletonMensaje.setError(false);
         int n = x.length - 1;
         double[][] A = new double[n * 2][n * 2];
         double[] b = new double[n * 2];
@@ -22,6 +31,10 @@ public class Trazadores {
             b[j + 1] = y[i + 1];
         }
         Object retVal[] = SistemaDeEcuaciones.eliminacionGaussianaTotal(A, b);
+        if(singletonMensaje.getError()){
+            singletonMensaje.setMensajeActual("Los puntos ingresados generar una matriz no invertible");
+            return null;
+        }
         double[] ab = (double[]) retVal[1];
         l = 0;
         for (int i = 0; i < ab.length; i += 2) {
@@ -36,7 +49,9 @@ public class Trazadores {
         return polinomios;
     }
 
-    public static String[][] trazadoresCuadraticos(double[] x, double[] y) throws IOException {
+    public static String[][] trazadoresCuadraticos(double[] x, double[] y, double xp, boolean evaluar){
+        singletonMensaje.setMensajeActual("");
+        singletonMensaje.setError(false);
         int n = x.length - 1;
         double[][] A = new double[n * 3][n * 3];
         double[] b = new double[n * 3];
@@ -67,6 +82,10 @@ public class Trazadores {
         }
         A[(3 * n) - 1][0] = 1;
         Object retVal[] = SistemaDeEcuaciones.eliminacionGaussianaTotal(A, b);
+        if(singletonMensaje.getError()){
+            singletonMensaje.setMensajeActual("Los puntos ingresados generar una matriz no invertible");
+            return null;
+        }
         double[] abc = (double[]) retVal[1];
         l = 0;
         for (int i = 0; i < abc.length; i += 3) {
@@ -83,7 +102,9 @@ public class Trazadores {
         return polinomios;
     }
 
-    public static String[][] trazadoresCubicos(double[] x, double[] y) throws IOException {
+    public static String[][] trazadoresCubicos(double[] x, double[] y,double xp, boolean evaluar){
+        singletonMensaje.setMensajeActual("");
+        singletonMensaje.setError(false);
         int n = x.length - 1;
         double[][] A = new double[n * 4][n * 4];
         double[] b = new double[n * 4];
@@ -131,6 +152,10 @@ public class Trazadores {
         A[(4 * n) - 1][4 * (n - 1)] = 6 * x[n];
         A[(4 * n) - 1][4 * (n - 1) + 1] = 2;
         Object retVal[] = SistemaDeEcuaciones.eliminacionGaussianaTotal(A, b);
+        if(singletonMensaje.getError()){
+            singletonMensaje.setMensajeActual("Los puntos ingresados generar una matriz no invertible");
+            return null;
+        }
         double[] abc = (double[]) retVal[1];
         l = 0;
         for (int i = 0; i < abc.length; i += 4) {

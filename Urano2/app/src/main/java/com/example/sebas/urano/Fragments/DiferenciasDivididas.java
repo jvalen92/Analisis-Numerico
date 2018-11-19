@@ -83,7 +83,7 @@ public class DiferenciasDivididas extends Fragment {
             }
 
             //Ejecutar Metodo
-            String solucion = Interpolacion.diferenciasDivididas(x, y);
+            String solucion =Interpolacion.diferenciasDivididas(x, y);
 
             //Mostrar Solucion
             MathView mv = (MathView) inflaterView.findViewById(R.id.poly2);
