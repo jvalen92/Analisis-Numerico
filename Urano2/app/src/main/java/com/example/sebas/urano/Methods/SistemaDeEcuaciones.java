@@ -31,6 +31,7 @@ public class SistemaDeEcuaciones {
             return new Object[]{A, b};
         }
         double[] x = sustitucionRegresiva(Ub, A.length);
+        singletonMensaje.setMensajeActual("Sistema solucionado");
         return new Object[]{Ub, x};
     }
 
@@ -48,6 +49,7 @@ public class SistemaDeEcuaciones {
             return new Object[]{A, b};
         }
         double[] x = sustitucionRegresiva(Ub, A.length);
+        singletonMensaje.setMensajeActual("Sistema solucionado");
         return new Object[]{Ub, x};
     }
 
@@ -65,12 +67,13 @@ public class SistemaDeEcuaciones {
         if (singletonMensaje.getError()) {
             return new Object[]{A, b};
         }
-        for (int i = 0; i < marcas.length; ++i) System.out.print(marcas[i] + " ");
+        //for (int i = 0; i < marcas.length; ++i) System.out.print(marcas[i] + " ");
         double[] xp = sustitucionRegresiva(Ub, A.length);
         double[] x = new double[xp.length];
         for (int i = 0; i < A.length; ++i) {
             x[i] = xp[marcas[i]];
         }
+        singletonMensaje.setMensajeActual("Sistema solucionado");
         return new Object[]{Ub, x};
     }
 
@@ -93,6 +96,7 @@ public class SistemaDeEcuaciones {
         double[] z = sustitucionProgresiva(Lb, L.length);
         double[][] Uz = MatrizUtilities.aumentar(U, z);
         double[] x = sustitucionRegresiva(Uz, U.length);
+        singletonMensaje.setMensajeActual("Sistema solucionado");
         return new Object[]{L, U, x};
     }
 
@@ -120,6 +124,7 @@ public class SistemaDeEcuaciones {
         if (singletonMensaje.getError()) {
             return new Object[]{A, b};
         }
+        singletonMensaje.setMensajeActual("Sistema solucionado");
         return new Object[]{L, U, x};
     }
 
@@ -397,7 +402,12 @@ public class SistemaDeEcuaciones {
     public static Object[] choleskySolver(double[][] A, double[] b) {
         if (!MatrizUtilities.definidaPositiva(A)) {
             singletonMensaje.setError(true);
-            singletonMensaje.setMensajeActual("La matriz debe ser definidad positiva.");
+            singletonMensaje.setMensajeActual("La matriz debe ser definida positiva.");
+            return new Object[]{A, b};
+        }
+        if(MatrizUtilities.det(A) == 0){
+            singletonMensaje.setError(true);
+            singletonMensaje.setMensajeActual("La matriz debe ser invertible.");
             return new Object[]{A, b};
         }
         Object LU[] = choleskyReal(A);
@@ -407,6 +417,7 @@ public class SistemaDeEcuaciones {
         double z[] = sustitucionProgresiva(Lb, L.length);
         double[][] Uz = MatrizUtilities.aumentar(U, z);
         double x[] = sustitucionRegresiva(Uz, Uz.length);
+        singletonMensaje.setMensajeActual("Sistema solucionado");
         return new Object[]{L, U, x};
     }
 
@@ -453,6 +464,7 @@ public class SistemaDeEcuaciones {
         double z[] = sustitucionProgresiva(Lb, L.length);
         double[][] Uz = MatrizUtilities.aumentar(U, z);
         double x[] = sustitucionRegresiva(Uz, z.length);
+        singletonMensaje.setMensajeActual("Sistema solucionado");
         return new Object[]{L, U, x};
     }
 
@@ -499,11 +511,14 @@ public class SistemaDeEcuaciones {
         double z[] = sustitucionProgresiva(Lb, L.length);
         double[][] Uz = MatrizUtilities.aumentar(U, z);
         double x[] = sustitucionRegresiva(Uz, z.length);
+        singletonMensaje.setMensajeActual("Sistema solucionado");
         return new Object[]{L, U, x};
     }
 
 
     public static ArrayList<String[]> gaussSeidel(double[][] A, double[] b, double tol, double[] x0, int niter) {
+        singletonMensaje.setMensajeActual("");
+        singletonMensaje.setError(false);
         if(MatrizUtilities.contieneZero(A)){
             singletonMensaje.setError(true);
             singletonMensaje.setMensajeActual("La matriz contiene almenos un cero en la diagonal.");
@@ -520,6 +535,9 @@ public class SistemaDeEcuaciones {
         while (dispersion > tol && cnt < niter) {
             ss.clear();
             double[] x1 = calcularNuevoSeidel(A, b, x0);
+            if(singletonMensaje.getError()){
+                return null;
+            }
             ss.add(cnt + "");
             MatrizUtilities.adicionar(ss, x1);
             dispersion = norma_cuadrada(x1, x0);
@@ -528,10 +546,18 @@ public class SistemaDeEcuaciones {
             solucion.add(ss.toArray(new String[]{}));
             cnt++;
         }
+        singletonMensaje.setMensajeActual("Sistema solucionado correctamente.");
         return solucion;
     }
 
     public static ArrayList<String[]> jacobi(double[][] A, double[] b, double tol, double[] x0, int niter) {
+        singletonMensaje.setMensajeActual("");
+        singletonMensaje.setError(false);
+        if(MatrizUtilities.contieneZero(A)){
+            singletonMensaje.setError(true);
+            singletonMensaje.setMensajeActual("La matriz contiene almenos un cero en la diagonal.");
+            return null;
+        }
         ArrayList<String[]> solucion = new ArrayList<>();
         RealMatrix realMatrix = new Array2DRowRealMatrix(A);
         DiagonalMatrix D = new DiagonalMatrix(MatrizUtilities.diag(realMatrix.getData()));
@@ -546,6 +572,9 @@ public class SistemaDeEcuaciones {
             ss.clear();
             //MatrizUtilities.imprimir(x0, true);
             double[] x1 = calcularNuevoJacobi(A, b, x0);
+            if(singletonMensaje.getError()){
+                return null;
+            }
             ss.add(cnt + "");
             MatrizUtilities.adicionar(ss, x1);
             dispersion = norma_cuadrada(x1, x0);
@@ -554,6 +583,7 @@ public class SistemaDeEcuaciones {
             solucion.add(ss.toArray(new String[]{}));
             cnt++;
         }
+        singletonMensaje.setMensajeActual("Sistema solucionado correctamente.");
         return solucion;
     }
 
@@ -579,6 +609,12 @@ public class SistemaDeEcuaciones {
                 if (j == i) continue;
                 suma += A[i][j] * x[j];
             }
+
+            if(A[i][i] == 0){
+                singletonMensaje.setMensajeActual("Se ha encontrado una división por cero durante el proceso.");
+                singletonMensaje.setError(true);
+                return null;
+            }
             x[i] = (b[i] - suma) / A[i][i];
         }
         return x;
@@ -593,12 +629,24 @@ public class SistemaDeEcuaciones {
                 if (j == i) continue;
                 suma += A[i][j] * x0[j];
             }
+            if(A[i][i] == 0){
+                singletonMensaje.setMensajeActual("Se ha encontrado una división por cero durante el proceso.");
+                singletonMensaje.setError(true);
+                return null;
+            }
             x[i] = (b[i] - suma) / A[i][i];
         }
         return x;
     }
 
     public static ArrayList<String[]> SOR(double[][] A, double[] b, double tol, double[] x0, double w, int niter) {
+        singletonMensaje.setMensajeActual("");
+        singletonMensaje.setError(false);
+        if(MatrizUtilities.contieneZero(A)){
+            singletonMensaje.setError(true);
+            singletonMensaje.setMensajeActual("La matriz contiene almenos un cero en la diagonal.");
+            return null;
+        }
         ArrayList<String[]> solucion = new ArrayList<>();
         int cnt = 1;
         double dispersion = tol + 1;
@@ -610,6 +658,9 @@ public class SistemaDeEcuaciones {
         while (dispersion > tol && cnt < niter) {
             ss.clear();
             double[] x1 = calcularNuevoSeidelSOR(A, b, x0, w);
+            if(singletonMensaje.getError()){
+                return null;
+            }
             ss.add(cnt + "");
             MatrizUtilities.adicionar(ss, x1);
             dispersion = norma_maximo(x1, x0);
@@ -618,6 +669,7 @@ public class SistemaDeEcuaciones {
             solucion.add(ss.toArray(new String[]{}));
             cnt++;
         }
+        singletonMensaje.setMensajeActual("Sistema solucionado correctamente.");
         return solucion;
     }
 
@@ -632,6 +684,11 @@ public class SistemaDeEcuaciones {
             for (int j = 0; j < n; j++) {
                 if (j == i) continue;
                 suma += A[i][j] * x[j];
+            }
+            if(A[i][i] == 0){
+                singletonMensaje.setMensajeActual("Se ha encontrado una división por cero durante el proceso.");
+                singletonMensaje.setError(true);
+                return null;
             }
             x[i] = (1. - w) * x[i] + w * (b[i] - suma) / A[i][i];
         }

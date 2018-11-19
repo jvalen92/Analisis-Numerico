@@ -54,7 +54,6 @@ public class MatrizUtilities {
 
     public static double[][] aumentar(double[][] A, double[] b) {
         double[][] nA = new double[A.length][A.length + 1];
-        System.out.println(shape(nA)[0] + " " + shape(nA)[1]);
         for (int i = 0; i < A.length; ++i) {
             for (int j = 0; j < A.length; ++j) {
                 nA[i][j] = A[i][j];
@@ -92,9 +91,9 @@ public class MatrizUtilities {
         return res;
     }
 
-    public static void imprimir(double[][] A) {
-        for (double[] x : A) {
-            for (double xx : x) {
+    public static void imprimir(Object[][] A) {
+        for (Object[] x : A) {
+            for (Object xx : x) {
                 System.out.print(xx);
                 System.out.print("\t");
             }
@@ -207,6 +206,42 @@ public class MatrizUtilities {
             if(x[i] == 0) return false;
         }
         return true;
+    }
+
+    public static String[][] format(double[][] A){
+        String[][] k = new String[A.length][A[0].length];
+        for (int i = 0; i < k.length; i++) {
+            for (int j = 0; j < k[i].length; j++) {
+                k[i][j] = String.format("%.4f", A[i][j]).replace(',', '.');
+            }
+        }
+        return k;
+    }
+    public static double[][] formatDouble(double[][] A){
+        double[][] k = new double[A.length][A[0].length];
+        for (int i = 0; i < k.length; i++) {
+            for (int j = 0; j < k[i].length; j++) {
+                k[i][j] = Double.parseDouble(String.format("%.4f", A[i][j]).replace(',', '.'));
+            }
+        }
+        return k;
+    }
+    public ArrayList<String[]> formatArray(ArrayList<String[]> to){
+        ArrayList<String[]> res = new ArrayList<>();
+        for(String[] s: to){
+            String[] pk = fformat(s);
+            res.add(pk);
+        }
+        return res;
+    }
+    private static String[] fformat(String[] to){
+        String[] res = new String[to.length];
+        int cnt = 0;
+        for(String s: to){
+            double it = Double.parseDouble(s);
+            res[cnt++] = String.format("%.4f", it).replace(',', '.');
+        }
+        return res;
     }
 
 
