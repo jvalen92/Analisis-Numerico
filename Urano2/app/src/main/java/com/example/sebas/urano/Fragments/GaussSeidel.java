@@ -21,6 +21,7 @@ import android.widget.TableRow;
 import android.widget.Toast;
 
 import com.example.sebas.urano.Ayudas.AyudaJacobi;
+import com.example.sebas.urano.CuadroDialogo;
 import com.example.sebas.urano.Methods.SingletonMensaje;
 import com.example.sebas.urano.Methods.SistemaDeEcuaciones;
 import com.example.sebas.urano.R;
@@ -115,6 +116,8 @@ public class GaussSeidel extends Fragment {
             ArrayList<String[]> solucion = SistemaDeEcuaciones.gaussSeidel(A, b, tol, x0, niter);
             if(singletonMensaje.getError()) {
                 Toast.makeText(getContext(), singletonMensaje.getMensajeActual(), Toast.LENGTH_LONG).show();
+                String err = singletonMensaje.getMensajeActual();
+                openDialog("Error",err);
             } else {
                 //Mostrar Solucion
 
@@ -144,6 +147,14 @@ public class GaussSeidel extends Fragment {
                     Toast.LENGTH_LONG).show();
         }
     }
+
+    public void openDialog(String tittle,String msg){
+        CuadroDialogo dialogo = new CuadroDialogo();
+        dialogo.setText(msg);
+        dialogo.setTittle(tittle);
+        dialogo.show(getFragmentManager(),"Biseccion");
+    }
+
 
     /**
      * Este metodo se encarga de obtener la tabla de la vista y reconstruirla segun los parametros

@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.sebas.urano.Ayudas.AyudaCrout;
 import com.example.sebas.urano.Ayudas.AyudaEGParcial;
+import com.example.sebas.urano.CuadroDialogo;
 import com.example.sebas.urano.Methods.SingletonMensaje;
 import com.example.sebas.urano.Methods.SistemaDeEcuaciones;
 import com.example.sebas.urano.R;
@@ -99,6 +100,8 @@ public class Crout extends Fragment {
             Object retVal[] = SistemaDeEcuaciones.croutSolver(A, b);
             if(singletonMensaje.getError()) {
                 Toast.makeText(getContext(), singletonMensaje.getMensajeActual(), Toast.LENGTH_LONG).show();
+                String err = singletonMensaje.getMensajeActual();
+                openDialog("Error",err);
             } else {
                 L = (double[][]) retVal[0];
                 U = (double[][]) retVal[1];
@@ -133,6 +136,14 @@ public class Crout extends Fragment {
                     Toast.LENGTH_LONG).show();
         }
     }
+
+    public void openDialog(String tittle,String msg){
+        CuadroDialogo dialogo = new CuadroDialogo();
+        dialogo.setText(msg);
+        dialogo.setTittle(tittle);
+        dialogo.show(getFragmentManager(),"Biseccion");
+    }
+
 
     /**
      * Este metodo se encarga de obtener la tabla de la vista y reconstruirla segun los parametros

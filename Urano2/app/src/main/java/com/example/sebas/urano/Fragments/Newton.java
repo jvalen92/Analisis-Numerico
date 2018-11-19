@@ -17,6 +17,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.sebas.urano.Ayudas.AyudaNewton;
+import com.example.sebas.urano.CuadroDialogo;
 import com.example.sebas.urano.Funciones;
 import com.example.sebas.urano.Methods.SingletonMensaje;
 import com.example.sebas.urano.Methods.UnaVariable;
@@ -95,11 +96,10 @@ public class Newton extends Fragment {
                     //ejecutar el metodo
                     ArrayList<String[]> solucion = UnaVariable.newton(fx,df,tol,x1,niter);
                     //Toast.makeText(getContext(),in5.getText().toString(),Toast.LENGTH_LONG).show();
-
-                    //Activity activity = getActivity();
-
                     if(singletonMensaje.getError()) {
                         Toast.makeText(getContext(), singletonMensaje.getMensajeActual(), Toast.LENGTH_LONG).show();
+                        String err = singletonMensaje.getMensajeActual();
+                        openDialog("Error",err);
                     } else {
                         Context context = getContext();
                         TableView<String[]> tableView = (TableView<String[]>) vista.findViewById(R.id.tableView);
@@ -107,8 +107,8 @@ public class Newton extends Fragment {
                         //Lenar tabla
                         int n_columns = solucion.get(0).length;
                         tableView.setColumnCount(n_columns);
-                        String headers[] = {"i", "xm", "fx", "Error Absoluto", "Error Relativo"};
-                        tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(context, "i", "xi", "xs", "xm", "fx", "Error Absoluto", "Error Relativo"));
+                        String headers[] = {"i", "x0", "fx","dfx", "Error Absoluto", "Error Relativo"};
+                        //tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(context, "i", "xi", "xs", "xm", "fx", "Error Absoluto", "Error Relativo"));
 
 
                         tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(context, headers));
@@ -126,12 +126,23 @@ public class Newton extends Fragment {
                         //cambiar el color de la tabla para que se vea mas kawai
                         tableView.setHeaderBackground(R.color.colorPrimary);
                         Toast.makeText(getContext(), singletonMensaje.getMensajeActual(), Toast.LENGTH_LONG).show();
+
+
+                        String err = singletonMensaje.getMensajeActual();
+                        openDialog("Solucion",err);
                     }
                 } catch (Exception e) {
                     Toast.makeText(getContext(), "Llene todos los campos y verifique los datos", Toast.LENGTH_LONG).show();
                 }
             }
         });
+    }
+
+    public void openDialog(String tittle,String msg){
+        CuadroDialogo dialogo = new CuadroDialogo();
+        dialogo.setText(msg);
+        dialogo.setTittle(tittle);
+        dialogo.show(getFragmentManager(),"Biseccion");
     }
 
     public void random() {
