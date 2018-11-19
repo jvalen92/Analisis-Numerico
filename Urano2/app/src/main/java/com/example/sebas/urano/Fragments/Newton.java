@@ -95,21 +95,6 @@ public class Newton extends Fragment {
                     //ejecutar el metodo
                     ArrayList<String[]> solucion = UnaVariable.newton(fx,df,tol,x1,niter);
                     //Toast.makeText(getContext(),in5.getText().toString(),Toast.LENGTH_LONG).show();
-
-                    //Activity activity = getActivity();
-
-
-                    Context context = getContext();
-                    TableView<String[]> tableView = (TableView<String[]>) vista.findViewById(R.id.tableView);
-
-                    //Lenar tabla
-                    int n_columns = solucion.get(0).length;
-                    tableView.setColumnCount(n_columns);
-                    String headers[] = {"i", "x0", "fx","dfx", "Error Absoluto", "Error Relativo"};
-                    tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(context, "i", "xi", "xs", "xm", "fx", "Error Absoluto", "Error Relativo"));
-
-
-
                     if(singletonMensaje.getError()) {
                         Toast.makeText(getContext(), singletonMensaje.getMensajeActual(), Toast.LENGTH_LONG).show();
                     } else {
@@ -119,8 +104,8 @@ public class Newton extends Fragment {
                         //Lenar tabla
                         int n_columns = solucion.get(0).length;
                         tableView.setColumnCount(n_columns);
-                        String headers[] = {"i", "xm", "fx", "Error Absoluto", "Error Relativo"};
-                        tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(context, "i", "xi", "xs", "xm", "fx", "Error Absoluto", "Error Relativo"));
+                        String headers[] = {"i", "x0", "fx","dfx", "Error Absoluto", "Error Relativo"};
+                        //tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(context, "i", "xi", "xs", "xm", "fx", "Error Absoluto", "Error Relativo"));
 
 
                         tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(context, headers));
