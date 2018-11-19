@@ -220,7 +220,7 @@ public class RaicesMultiples extends Fragment {
     // Lista despleglable para escoger la tolerancia del metodo
     public void spinner() {
         Spinner spinner;
-        final String datos[] = {"0.5e-6", "1e-5", "0.5e-8"};
+        final String datos[]={"10e-7","0.5e-6","1e-5","0.5e-8"};
 
         spinner = (Spinner) vista.findViewById(R.id.rm_spinner);
         Context context = getContext();

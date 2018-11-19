@@ -83,6 +83,13 @@ public class SistemasDeEcuaciones extends AppCompatActivity {
 
         switch (id){
 
+            case R.id.graficar:
+                //Abrir las funcionalidades del gráfico
+                Intent grafico = new Intent(this,Funciones.class);
+                grafico.putExtra("funcion","x^2+5x-10");
+                startActivity(grafico);
+                return true;
+
             case R.id.interpolacion:
                 //Añadir salto a interpolacion
                 Intent inter = new Intent(this,InterpolacionFinal.class);

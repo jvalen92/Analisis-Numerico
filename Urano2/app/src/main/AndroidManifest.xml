@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:windowSoftInputMode="adjustPan" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,7 +20,8 @@
         <activity android:name=".Grafico" />
         <activity android:name=".Funciones" />
         <activity android:name=".Matriz" />
-        <activity android:name=".SistemasDeEcuaciones" />
+        <activity android:name=".SistemasDeEcuaciones"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Ayudas.AyudaBiseccion"
             android:theme="@style/AppTheme.PopusTheme" />
@@ -65,7 +67,9 @@
         <activity
             android:name=".Ayudas.AyudaSOR"
             android:theme="@style/AppTheme.PopusTheme" />
-        <activity android:name=".InterpolacionFinal"></activity>
+        <activity android:name=".InterpolacionFinal"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
         <activity android:name=".Ayudas.AyudaLagrange" android:theme="@style/AppTheme.PopusTheme"/>
         <activity android:name=".Ayudas.AyudaVandermonde" android:theme="@style/AppTheme.PopusTheme"/>
         <activity android:name=".Ayudas.AyudaDiferenciasDivididas" android:theme="@style/AppTheme.PopusTheme"/>

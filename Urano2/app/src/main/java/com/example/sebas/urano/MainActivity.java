@@ -18,7 +18,7 @@ import de.codecrafters.tableview.TableView;
 import de.codecrafters.tableview.toolkit.SimpleTableDataAdapter;
 import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
 
 
@@ -99,6 +99,13 @@ public class MainActivity extends AppCompatActivity {
 
         switch (id){
 
+            case R.id.graficar:
+                //Abrir las funcionalidades del gráfico
+                Intent grafico = new Intent(MainActivity.this,Funciones.class);
+                grafico.putExtra("funcion","x^2+5x-10");
+                startActivity(grafico);
+                return true;
+
             case R.id.interpolacion:
                 //salto a Interpolacion
                 Intent inter = new Intent(MainActivity.this,InterpolacionFinal.class);
@@ -116,10 +123,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void abrirFuncionesGrafico(View view) {
-
         Intent nuevaActividad = new Intent(MainActivity.this, Grafico.class);
         startActivity(nuevaActividad);
-
     }
 
     public void irMatriz(View view) {

@@ -120,7 +120,7 @@ public class ReglaFalsa extends Fragment {
                     tableView.setHeaderBackground(R.color.colorPrimary);
 
                 }catch (Exception e) {
-                    Toast.makeText(getContext(),"Llene todos los campos y verifique lso datos",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_LONG).show();
                 }
 
 
@@ -218,7 +218,7 @@ public class ReglaFalsa extends Fragment {
     // Lista despleglable para escoger la tolerancia del metodo
     public void spinner(){
         Spinner spinner;
-        final String datos[]={"0.5e-6","1e-5","0.5e-8"};
+        final String datos[]={"10e-7","0.5e-6","1e-5","0.5e-8"};
 
         spinner = (Spinner) vista.findViewById(R.id.rf_spinner);
         Context context=getContext();

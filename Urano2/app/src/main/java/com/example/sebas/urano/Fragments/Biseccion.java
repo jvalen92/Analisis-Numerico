@@ -5,10 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.TabItem;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.WindowDecorActionBar;
-import android.text.GetChars;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +20,6 @@ import android.widget.Toast;
 
 import com.example.sebas.urano.Ayudas.AyudaBiseccion;
 import com.example.sebas.urano.Funciones;
-import com.example.sebas.urano.MainActivity;
 import com.example.sebas.urano.Methods.UnaVariable;
 import com.example.sebas.urano.R;
 
@@ -53,6 +49,7 @@ public class Biseccion extends Fragment {
     EditText in3;
     EditText in4;
     EditText in5;
+
 
     UnaVariable uv;
 
@@ -107,7 +104,6 @@ public class Biseccion extends Fragment {
                     //ejecutar el metodo
                     ArrayList<String[]> solucion =UnaVariable.biseccion(fx,x1,x2,tol,niter);
 
-
                     //TableView
                     Context context = getContext();
                     TableView<String[]> tableView = (TableView<String[]>) vista.findViewById(R.id.tableView);
@@ -129,10 +125,8 @@ public class Biseccion extends Fragment {
                     tableView.setHeaderBackground(R.color.colorPrimary);
 
                 }catch (Exception e) {
-                    Toast.makeText(getContext(),"Llene todos los campos y verifique lso datos",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_LONG).show();
                 }
-
-
             }
         });
     }
@@ -178,7 +172,7 @@ public class Biseccion extends Fragment {
             @Override
             public void onClick(View v) {
                 obtDatos();
-                in5.setText("");
+                in5.setText(null);
                 in1.setText("");
                 in2.setText("");
                 in3.setText("");
@@ -194,7 +188,6 @@ public class Biseccion extends Fragment {
         btn_graf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 try {
                     if (in5.getText().toString() != null){
                         Intent fun = new Intent(getActivity(), Funciones.class);
@@ -206,6 +199,8 @@ public class Biseccion extends Fragment {
                 }catch (Exception e){
                     Toast.makeText(getContext(),"Llene todos los campos y verifique los datos",Toast.LENGTH_LONG).show();
                 }
+
+
 
             }
         });
@@ -227,7 +222,7 @@ public class Biseccion extends Fragment {
     // Lista despleglable para escoger la tolerancia del metodo
     public void spinner(){
         Spinner spinner;
-        final String datos[]={"0.5e-6","1e-5","0.5e-8"};
+        final String datos[]={"10e-7","0.5e-6","1e-5","0.5e-8"};
 
         spinner = (Spinner) vista.findViewById(R.id.b_spinner);
         Context context=getContext();
@@ -267,6 +262,4 @@ public class Biseccion extends Fragment {
             }
         });
     }
-
-
 }
