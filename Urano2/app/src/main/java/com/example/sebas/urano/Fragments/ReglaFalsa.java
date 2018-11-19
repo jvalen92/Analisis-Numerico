@@ -112,7 +112,7 @@ public class ReglaFalsa extends Fragment {
 
                         int n_columns=solucion.get(0).length;
                         tableView.setColumnCount(n_columns);
-                        tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(context,"i","xm","fx","Error Absoluto","Error Relativo"));
+                        tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(context,"i","xi","xs","xm","fx","Error Absoluto","Error Relativo"));
 
                         //Ajustar tamaño de las columnas
                         TableColumnDpWidthModel columnModel = new TableColumnDpWidthModel(context, n_columns, 125);

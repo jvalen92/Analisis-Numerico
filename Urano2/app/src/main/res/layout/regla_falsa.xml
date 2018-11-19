@@ -123,7 +123,7 @@
             xmlns:table="http://schemas.android.com/apk/res-auto"
             android:id="@+id/tableView"
 
-            android:layout_width="550dp"
+            android:layout_width="790dp"
             android:layout_height="match_parent"
             table:tableView_columnCount="4" />
     </HorizontalScrollView>
