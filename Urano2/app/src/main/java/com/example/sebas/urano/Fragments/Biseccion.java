@@ -130,6 +130,7 @@ public class Biseccion extends Fragment {
 
                         //cambiar el color de la tabla para que se vea mas kawai
                         tableView.setHeaderBackground(R.color.colorPrimary);
+                        Toast.makeText(getContext(), singletonMensaje.getMensajeActual(), Toast.LENGTH_LONG).show();
                     }
                 }catch (Exception e) {
                     Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_LONG).show();
