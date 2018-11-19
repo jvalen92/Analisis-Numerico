@@ -17,6 +17,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.sebas.urano.Ayudas.AyudaReglaFalsa;
+import com.example.sebas.urano.CuadroDialogo;
 import com.example.sebas.urano.Funciones;
 import com.example.sebas.urano.Methods.SingletonMensaje;
 import com.example.sebas.urano.Methods.UnaVariable;
@@ -105,6 +106,9 @@ public class ReglaFalsa extends Fragment {
 
                     if(singletonMensaje.getError()) {
                         Toast.makeText(getContext(), singletonMensaje.getMensajeActual(), Toast.LENGTH_LONG).show();
+                        String err = singletonMensaje.getMensajeActual();
+                        openDialog("Error",err);
+
                     } else {
                         //TableView
                         Context context = getContext();
@@ -125,6 +129,8 @@ public class ReglaFalsa extends Fragment {
                         //cambiar el color de la tabla para que se vea mas kawai
                         tableView.setHeaderBackground(R.color.colorPrimary);
                         Toast.makeText(getContext(), singletonMensaje.getMensajeActual(), Toast.LENGTH_LONG).show();
+                        String err = singletonMensaje.getMensajeActual();
+                        openDialog("solucion",err);
                     }
 
                 }catch (Exception e) {
@@ -135,6 +141,14 @@ public class ReglaFalsa extends Fragment {
             }
         });
     }
+
+    public void openDialog(String tittle,String msg){
+        CuadroDialogo dialogo = new CuadroDialogo();
+        dialogo.setText(msg);
+        dialogo.setTittle(tittle);
+        dialogo.show(getFragmentManager(),"Biseccion");
+    }
+
     public void random(){
 
         ImageButton btn_ran = (ImageButton) vista.findViewById(R.id.rf_rand);

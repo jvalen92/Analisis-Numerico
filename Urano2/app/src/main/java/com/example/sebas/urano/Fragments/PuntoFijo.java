@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sebas.urano.Ayudas.AyudaPuntoFijo;
+import com.example.sebas.urano.CuadroDialogo;
 import com.example.sebas.urano.Funciones;
 import com.example.sebas.urano.Methods.SingletonMensaje;
 import com.example.sebas.urano.Methods.UnaVariable;
@@ -93,6 +94,8 @@ public class PuntoFijo extends Fragment {
 
                     if(singletonMensaje.getError()) {
                         Toast.makeText(getContext(), singletonMensaje.getMensajeActual(), Toast.LENGTH_LONG).show();
+                        String err = singletonMensaje.getMensajeActual();
+                        openDialog("Error",err);
                     } else {
                         //TableView
                         Context context = getContext();
@@ -115,6 +118,8 @@ public class PuntoFijo extends Fragment {
                         //cambiar el color de la tabla para que se vea mas kawai
                         tableView.setHeaderBackground(R.color.colorPrimary);
                         Toast.makeText(getContext(), singletonMensaje.getMensajeActual(), Toast.LENGTH_LONG).show();
+                        String err = singletonMensaje.getMensajeActual();
+                        openDialog("Solucion",err);
                     }
                 }catch (Exception e) {
                     Toast.makeText(getContext(),"Llene todos los campos y verifique lso datos",Toast.LENGTH_LONG).show();
@@ -126,7 +131,12 @@ public class PuntoFijo extends Fragment {
     }
 
 
-
+    public void openDialog(String tittle,String msg){
+        CuadroDialogo dialogo = new CuadroDialogo();
+        dialogo.setText(msg);
+        dialogo.setTittle(tittle);
+        dialogo.show(getFragmentManager(),"Biseccion");
+    }
 
     public void random(){
 

@@ -17,6 +17,7 @@ import android.widget.TableRow;
 import android.widget.Toast;
 
 import com.example.sebas.urano.Ayudas.AyudaEGTotal;
+import com.example.sebas.urano.CuadroDialogo;
 import com.example.sebas.urano.Methods.SingletonMensaje;
 import com.example.sebas.urano.Methods.SistemaDeEcuaciones;
 import com.example.sebas.urano.R;
@@ -84,6 +85,8 @@ public class EGTotal extends Fragment {
             Object retVal[] = SistemaDeEcuaciones.eliminacionGaussianaTotal(A, b);
             if(singletonMensaje.getError()) {
                 Toast.makeText(getContext(), singletonMensaje.getMensajeActual(), Toast.LENGTH_LONG).show();
+                String err = singletonMensaje.getMensajeActual();
+                openDialog("Error",err);
             } else {
                 double etapa[][] = (double[][]) retVal[0];
                 double solucion[] = (double[]) retVal[1];
@@ -125,6 +128,13 @@ public class EGTotal extends Fragment {
             Toast.makeText(this.getContext(), "Por favor ingresa datos validos (?)",
                     Toast.LENGTH_LONG).show();
         }
+    }
+
+    public void openDialog(String tittle,String msg){
+        CuadroDialogo dialogo = new CuadroDialogo();
+        dialogo.setText(msg);
+        dialogo.setTittle(tittle);
+        dialogo.show(getFragmentManager(),"Biseccion");
     }
 
     /**

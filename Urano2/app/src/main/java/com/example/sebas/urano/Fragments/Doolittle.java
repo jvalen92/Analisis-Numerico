@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sebas.urano.Ayudas.AyudaDoolittle;
+import com.example.sebas.urano.CuadroDialogo;
 import com.example.sebas.urano.Methods.SingletonMensaje;
 import com.example.sebas.urano.Methods.SistemaDeEcuaciones;
 import com.example.sebas.urano.R;
@@ -98,6 +99,8 @@ public class Doolittle extends Fragment {
             Object retVal[] = SistemaDeEcuaciones.doolittleSolver(A, b);
             if(singletonMensaje.getError()) {
                 Toast.makeText(getContext(), singletonMensaje.getMensajeActual(), Toast.LENGTH_LONG).show();
+                String err = singletonMensaje.getMensajeActual();
+                openDialog("Error",err);
             } else {
                 L = (double[][]) retVal[0];
                 U = (double[][]) retVal[1];
@@ -131,6 +134,14 @@ public class Doolittle extends Fragment {
             Toast.makeText(this.getContext(), "Por favor ingresa datos validos. (?)",
                     Toast.LENGTH_LONG).show();
         }
+    }
+
+
+    public void openDialog(String tittle,String msg){
+        CuadroDialogo dialogo = new CuadroDialogo();
+        dialogo.setText(msg);
+        dialogo.setTittle(tittle);
+        dialogo.show(getFragmentManager(),"Biseccion");
     }
 
     /**

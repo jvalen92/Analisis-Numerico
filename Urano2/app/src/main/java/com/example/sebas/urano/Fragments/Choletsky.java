@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.sebas.urano.Ayudas.AyudaCholesky;
 import com.example.sebas.urano.Ayudas.AyudaEGParcial;
+import com.example.sebas.urano.CuadroDialogo;
 import com.example.sebas.urano.Methods.SingletonMensaje;
 import com.example.sebas.urano.Methods.SistemaDeEcuaciones;
 import com.example.sebas.urano.R;
@@ -99,6 +100,8 @@ public class Choletsky extends Fragment {
             Object retVal[] = SistemaDeEcuaciones.choleskySolver(A, b);
             if(singletonMensaje.getError()) {
                 Toast.makeText(getContext(), singletonMensaje.getMensajeActual(), Toast.LENGTH_LONG).show();
+                String err = singletonMensaje.getMensajeActual();
+                openDialog("Error",err);
             } else {
                 L = (double[][]) retVal[0];
                 U = (double[][]) retVal[1];
@@ -126,6 +129,8 @@ public class Choletsky extends Fragment {
                     x.addView(sol, i);
                 }
                 Toast.makeText(getContext(), singletonMensaje.getMensajeActual(), Toast.LENGTH_LONG).show();
+                String err = singletonMensaje.getMensajeActual();
+                //openDialog("Solucion",err);
             }
         } catch (Exception e) {
             Toast.makeText(this.getContext(), e.getMessage(),
@@ -137,6 +142,12 @@ public class Choletsky extends Fragment {
      * Este metodo se encarga de obtener la tabla de la vista y reconstruirla segun los parametros
      * definidos por el usuario
      */
+    public void openDialog(String tittle,String msg){
+        CuadroDialogo dialogo = new CuadroDialogo();
+        dialogo.setText(msg);
+        dialogo.setTittle(tittle);
+        dialogo.show(getFragmentManager(),"Biseccion");
+    }
 
     public void createTable() {
         try {

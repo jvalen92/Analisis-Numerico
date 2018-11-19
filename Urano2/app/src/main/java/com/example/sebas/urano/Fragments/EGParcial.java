@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.example.sebas.urano.Ayudas.AyudaBiseccion;
 import com.example.sebas.urano.Ayudas.AyudaEGParcial;
 import com.example.sebas.urano.Ayudas.AyudaPuntoFijo;
+import com.example.sebas.urano.CuadroDialogo;
 import com.example.sebas.urano.Methods.SingletonMensaje;
 import com.example.sebas.urano.Methods.SistemaDeEcuaciones;
 import com.example.sebas.urano.R;
@@ -86,6 +87,9 @@ public class EGParcial extends Fragment {
             Object retVal[] = SistemaDeEcuaciones.eliminacionGaussianaParcial(A, b);
             if(singletonMensaje.getError()) {
                 Toast.makeText(getContext(), singletonMensaje.getMensajeActual(), Toast.LENGTH_LONG).show();
+
+                String err = singletonMensaje.getMensajeActual();
+                openDialog("Error",err);
             } else {
                 double etapa[][] = (double[][]) retVal[0];
                 double solucion[] = (double[]) retVal[1];
@@ -127,6 +131,14 @@ public class EGParcial extends Fragment {
             Toast.makeText(this.getContext(), "Por favor ingresa datos validos (?)",
                     Toast.LENGTH_LONG).show();
         }
+    }
+
+
+    public void openDialog(String tittle,String msg){
+        CuadroDialogo dialogo = new CuadroDialogo();
+        dialogo.setText(msg);
+        dialogo.setTittle(tittle);
+        dialogo.show(getFragmentManager(),"Biseccion");
     }
 
     /**

@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 
 import com.example.sebas.urano.Ayudas.AyudaBiseccion;
+import com.example.sebas.urano.CuadroDialogo;
 import com.example.sebas.urano.Funciones;
 import com.example.sebas.urano.MainActivity;
 import com.example.sebas.urano.Methods.SingletonMensaje;
@@ -110,6 +111,8 @@ public class Biseccion extends Fragment {
 
                     if(singletonMensaje.getError()) {
                         Toast.makeText(getContext(), singletonMensaje.getMensajeActual(), Toast.LENGTH_LONG).show();
+                        String err = singletonMensaje.getMensajeActual();
+                        openDialog("Error",err);
                     } else {
                         //TableView
                         Context context = getContext();
@@ -131,13 +134,25 @@ public class Biseccion extends Fragment {
                         //cambiar el color de la tabla para que se vea mas kawai
                         tableView.setHeaderBackground(R.color.colorPrimary);
                         Toast.makeText(getContext(), singletonMensaje.getMensajeActual(), Toast.LENGTH_LONG).show();
+                        String err = singletonMensaje.getMensajeActual();
+                        openDialog("Solucion",err);
                     }
                 }catch (Exception e) {
                     Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_LONG).show();
                 }
+
+                //cuadro de texto
+                //openDialog();
             }
         });
     }
+    public void openDialog(String tittle,String msg){
+        CuadroDialogo dialogo = new CuadroDialogo();
+        dialogo.setText(msg);
+        dialogo.setTittle(tittle);
+        dialogo.show(getFragmentManager(),"Biseccion");
+    }
+
     public void random(){
 
         ImageButton btn_ran = (ImageButton) vista.findViewById(R.id.b_rand);

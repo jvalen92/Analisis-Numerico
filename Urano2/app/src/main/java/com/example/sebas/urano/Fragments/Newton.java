@@ -17,6 +17,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.sebas.urano.Ayudas.AyudaNewton;
+import com.example.sebas.urano.CuadroDialogo;
 import com.example.sebas.urano.Funciones;
 import com.example.sebas.urano.Methods.SingletonMensaje;
 import com.example.sebas.urano.Methods.UnaVariable;
@@ -97,6 +98,8 @@ public class Newton extends Fragment {
                     //Toast.makeText(getContext(),in5.getText().toString(),Toast.LENGTH_LONG).show();
                     if(singletonMensaje.getError()) {
                         Toast.makeText(getContext(), singletonMensaje.getMensajeActual(), Toast.LENGTH_LONG).show();
+                        String err = singletonMensaje.getMensajeActual();
+                        openDialog("Error",err);
                     } else {
                         Context context = getContext();
                         TableView<String[]> tableView = (TableView<String[]>) vista.findViewById(R.id.tableView);
@@ -123,12 +126,23 @@ public class Newton extends Fragment {
                         //cambiar el color de la tabla para que se vea mas kawai
                         tableView.setHeaderBackground(R.color.colorPrimary);
                         Toast.makeText(getContext(), singletonMensaje.getMensajeActual(), Toast.LENGTH_LONG).show();
+
+
+                        String err = singletonMensaje.getMensajeActual();
+                        openDialog("Solucion",err);
                     }
                 } catch (Exception e) {
                     Toast.makeText(getContext(), "Llene todos los campos y verifique los datos", Toast.LENGTH_LONG).show();
                 }
             }
         });
+    }
+
+    public void openDialog(String tittle,String msg){
+        CuadroDialogo dialogo = new CuadroDialogo();
+        dialogo.setText(msg);
+        dialogo.setTittle(tittle);
+        dialogo.show(getFragmentManager(),"Biseccion");
     }
 
     public void random() {

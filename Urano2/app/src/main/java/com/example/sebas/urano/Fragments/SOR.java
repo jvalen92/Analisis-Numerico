@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.example.sebas.urano.Ayudas.AyudaJacobi;
 import com.example.sebas.urano.Ayudas.AyudaSOR;
+import com.example.sebas.urano.CuadroDialogo;
 import com.example.sebas.urano.Methods.SingletonMensaje;
 import com.example.sebas.urano.Methods.SistemaDeEcuaciones;
 import com.example.sebas.urano.R;
@@ -121,6 +122,8 @@ public class SOR extends Fragment {
             ArrayList<String[]> solucion = SistemaDeEcuaciones.SOR(A, b, tol, x0, w, niter);
             if(singletonMensaje.getError()) {
                 Toast.makeText(getContext(), singletonMensaje.getMensajeActual(), Toast.LENGTH_LONG).show();
+                String err = singletonMensaje.getMensajeActual();
+                openDialog("Error",err);
             } else {
                 //Mostrar Solucion
 
@@ -144,11 +147,20 @@ public class SOR extends Fragment {
                 //cambiar el color de la tabla para que se vea mas kawai
                 tableView.setHeaderBackground(R.color.colorPrimary);
                 Toast.makeText(getContext(), singletonMensaje.getMensajeActual(), Toast.LENGTH_LONG).show();
+
             }
         } catch (Exception e) {
             Toast.makeText(this.getContext(), "Por favor ingresa datos validos. (?)",
                     Toast.LENGTH_LONG).show();
         }
+    }
+
+
+    public void openDialog(String tittle,String msg){
+        CuadroDialogo dialogo = new CuadroDialogo();
+        dialogo.setText(msg);
+        dialogo.setTittle(tittle);
+        dialogo.show(getFragmentManager(),"Biseccion");
     }
 
     /**
