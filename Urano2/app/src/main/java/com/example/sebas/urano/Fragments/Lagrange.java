@@ -17,7 +17,9 @@ import android.widget.TableRow;
 import android.widget.Toast;
 
 import com.example.sebas.urano.Ayudas.AyudaLagrange;
+import com.example.sebas.urano.CuadroDialogo;
 import com.example.sebas.urano.Methods.Interpolacion;
+import com.example.sebas.urano.Methods.SingletonMensaje;
 import com.example.sebas.urano.R;
 
 import io.github.kexanie.library.MathView;
@@ -28,7 +30,7 @@ import io.github.kexanie.library.MathView;
 public class Lagrange extends Fragment {
 
     View inflaterView;
-
+    SingletonMensaje singletonMensaje = SingletonMensaje.getInstance();
     public Lagrange() {
         // Required empty public constructor
     }
@@ -74,7 +76,9 @@ public class Lagrange extends Fragment {
             double y[] = new double[n];
             TableRow X = (TableRow) A.findViewById(300);
             TableRow Y = (TableRow) A.findViewById(301);
-
+            EditText xpEditText = (EditText) inflaterView.findViewById(R.id.xp);
+            double xp = 0.0;
+            boolean evaluar = false;
             for (int i = 0; i < n; i++) {
                 EditText xi = (EditText) X.findViewById(n + i);
                 x[i] = Double.parseDouble(xi.getText().toString());
@@ -82,14 +86,22 @@ public class Lagrange extends Fragment {
                 EditText yi = (EditText) Y.findViewById(n + i * 10);
                 y[i] = Double.parseDouble(yi.getText().toString());
             }
-
+            if(xpEditText.getText().toString().length() != 0) {
+                xp = Double.parseDouble(xpEditText.getText().toString());
+                evaluar = true;
+            }
             //Ejecutar Metodo
-            String solucion = Interpolacion.lagrange(x, y);
-
-            //Mostrar Solucion
-            MathView mv = (MathView) inflaterView.findViewById(R.id.poly3);
-            mv.setText("\\(" + solucion + "\\)");
-
+            String solucion = Interpolacion.lagrange(x, y, xp, evaluar);
+            if(singletonMensaje.getError()) {
+                Toast.makeText(getContext(), singletonMensaje.getMensajeActual(), Toast.LENGTH_LONG).show();
+                openDialog("Error", singletonMensaje.getMensajeActual());
+            } else {
+                //Mostrar Solucion
+                MathView mv = (MathView) inflaterView.findViewById(R.id.poly3);
+                mv.setText("\\(" + solucion + "\\)");
+                Toast.makeText(getContext(), singletonMensaje.getMensajeActual(), Toast.LENGTH_LONG).show();
+                openDialog("Solucion", singletonMensaje.getMensajeActual());
+            }
         } catch (Exception e) {
             Toast.makeText(this.getContext(), "Ingresa datos validos. (?)",
                     Toast.LENGTH_LONG).show();
@@ -146,6 +158,13 @@ public class Lagrange extends Fragment {
                 startActivity(new Intent(getActivity(), AyudaLagrange.class));
             }
         });
+    }
+
+    public void openDialog(String tittle, String msg){
+        CuadroDialogo dialogo = new CuadroDialogo();
+        dialogo.setText(msg);
+        dialogo.setTittle(tittle);
+        dialogo.show(getFragmentManager(),"Biseccion");
     }
 
 }

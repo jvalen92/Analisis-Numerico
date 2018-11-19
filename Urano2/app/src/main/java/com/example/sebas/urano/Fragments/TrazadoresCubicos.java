@@ -14,9 +14,12 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sebas.urano.Ayudas.AyudaTrazadorCubico;
+import com.example.sebas.urano.CuadroDialogo;
+import com.example.sebas.urano.Methods.SingletonMensaje;
 import com.example.sebas.urano.Methods.Trazadores;
 import com.example.sebas.urano.R;
 
@@ -28,7 +31,7 @@ import io.github.kexanie.library.MathView;
 public class TrazadoresCubicos extends Fragment {
 
     View inflaterView;
-
+    SingletonMensaje singletonMensaje = SingletonMensaje.getInstance();
     public TrazadoresCubicos() {
         // Required empty public constructor
     }
@@ -73,9 +76,12 @@ public class TrazadoresCubicos extends Fragment {
 
             double x[] = new double[n];
             double y[] = new double[n];
+
             TableRow X = (TableRow) A.findViewById(300);
             TableRow Y = (TableRow) A.findViewById(301);
-
+            EditText xpEditText = (EditText) inflaterView.findViewById(R.id.xp);
+            double xp = 0.0;
+            boolean evaluar = false;
             for (int i = 0; i < n; i++) {
                 EditText xi = (EditText) X.findViewById(n + i);
                 x[i] = Double.parseDouble(xi.getText().toString());
@@ -83,20 +89,29 @@ public class TrazadoresCubicos extends Fragment {
                 EditText yi = (EditText) Y.findViewById(n + i * 10);
                 y[i] = Double.parseDouble(yi.getText().toString());
             }
-
-            ///Ejecutar Metodo
-            String[][] solucion = Trazadores.trazadoresCubicos(x, y);
-
-            //Mostrar Solucion
-            MathView mv = (MathView) inflaterView.findViewById(R.id.poly);
-            String polinomio = "";
-            for (String [] poly : solucion) {
-                for(String  term: poly) {
-                    polinomio += term;
-                }
-                polinomio += '\n';
+            if(xpEditText.getText().toString().length() != 0) {
+                xp = Double.parseDouble(xpEditText.getText().toString());
+                evaluar = true;
             }
-            mv.setText(polinomio);
+            ///Ejecutar Metodo
+            String[][] solucion = Trazadores.trazadoresCubicos(x, y, xp, evaluar);
+            if(singletonMensaje.getError()) {
+                Toast.makeText(getContext(), singletonMensaje.getMensajeActual(), Toast.LENGTH_LONG).show();
+                openDialog("Error", singletonMensaje.getMensajeActual());
+            } else {
+                //Mostrar Solucion
+                TextView mv = (TextView) inflaterView.findViewById(R.id.poly);
+                String polinomio = "";
+                for (String [] poly : solucion) {
+                    for(String  term: poly) {
+                        polinomio += term;
+                    }
+                    polinomio += '\n';
+                }
+                mv.setText(polinomio);
+                Toast.makeText(getContext(), singletonMensaje.getMensajeActual(), Toast.LENGTH_LONG).show();
+                openDialog("Solucion", singletonMensaje.getMensajeActual());
+            }
 
         } catch (Exception e) {
             Toast.makeText(this.getContext(), "Ingresa datos validos. (?)",
@@ -155,5 +170,13 @@ public class TrazadoresCubicos extends Fragment {
             }
         });
     }
+
+    public void openDialog(String tittle, String msg){
+        CuadroDialogo dialogo = new CuadroDialogo();
+        dialogo.setText(msg);
+        dialogo.setTittle(tittle);
+        dialogo.show(getFragmentManager(),"Biseccion");
+    }
+
 
 }

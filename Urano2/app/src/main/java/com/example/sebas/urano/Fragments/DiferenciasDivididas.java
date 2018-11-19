@@ -17,7 +17,9 @@ import android.widget.TableRow;
 import android.widget.Toast;
 
 import com.example.sebas.urano.Ayudas.AyudaDiferenciasDivididas;
+import com.example.sebas.urano.CuadroDialogo;
 import com.example.sebas.urano.Methods.Interpolacion;
+import com.example.sebas.urano.Methods.SingletonMensaje;
 import com.example.sebas.urano.R;
 
 import io.github.kexanie.library.MathView;
@@ -27,7 +29,7 @@ import io.github.kexanie.library.MathView;
  */
 public class DiferenciasDivididas extends Fragment {
     View inflaterView;
-
+    SingletonMensaje singletonMensaje = SingletonMensaje.getInstance();
     public DiferenciasDivididas() {
         // Required empty public constructor
     }
@@ -73,7 +75,9 @@ public class DiferenciasDivididas extends Fragment {
             double y[] = new double[n];
             TableRow X = (TableRow) A.findViewById(300);
             TableRow Y = (TableRow) A.findViewById(301);
-
+            EditText xpEditText = (EditText) inflaterView.findViewById(R.id.xp);
+            double xp = 0.0;
+            boolean evaluar = false;
             for (int i = 0; i < n; i++) {
                 EditText xi = (EditText) X.findViewById(n + i);
                 x[i] = Double.parseDouble(xi.getText().toString());
@@ -81,16 +85,24 @@ public class DiferenciasDivididas extends Fragment {
                 EditText yi = (EditText) Y.findViewById(n + i * 10);
                 y[i] = Double.parseDouble(yi.getText().toString());
             }
-
+            if(xpEditText.getText().toString().length() != 0) {
+                xp = Double.parseDouble(xpEditText.getText().toString());
+                evaluar = true;
+            }
             //Ejecutar Metodo
-            String solucion = Interpolacion.diferenciasDivididas(x, y);
-
-            //Mostrar Solucion
-            MathView mv = (MathView) inflaterView.findViewById(R.id.poly2);
-            mv.setText("\\(" + solucion + "\\)");
-
+            String solucion = Interpolacion.diferenciasDivididas(x, y, xp, evaluar);
+            if(singletonMensaje.getError()) {
+                Toast.makeText(getContext(), singletonMensaje.getMensajeActual(), Toast.LENGTH_LONG).show();
+                openDialog("Error", singletonMensaje.getMensajeActual());
+            } else {
+                //Mostrar Solucion
+                MathView mv = (MathView) inflaterView.findViewById(R.id.poly2);
+                mv.setText("\\(" + solucion + "\\)");
+                Toast.makeText(getContext(), singletonMensaje.getMensajeActual(), Toast.LENGTH_LONG).show();
+                openDialog("Solucion", singletonMensaje.getMensajeActual());
+            }
         } catch (Exception e) {
-            Toast.makeText(this.getContext(), "Ingresa datos validos. (?)",
+            Toast.makeText(this.getContext(), "Por favor ingrese datos validos. Ver ayudas",
                     Toast.LENGTH_LONG).show();
         }
     }
@@ -146,4 +158,13 @@ public class DiferenciasDivididas extends Fragment {
             }
         });
     }
+
+    public void openDialog(String tittle, String msg){
+        CuadroDialogo dialogo = new CuadroDialogo();
+        dialogo.setText(msg);
+        dialogo.setTittle(tittle);
+        dialogo.show(getFragmentManager(),"Biseccion");
+    }
+
+
 }

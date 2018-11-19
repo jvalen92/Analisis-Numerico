@@ -1,14 +1,26 @@
 package com.example.sebas.urano.Methods;
 
-import java.io.FileWriter;
-import java.io.File;
+import com.example.sebas.urano.Math.NumericalUtilities;
+
 import java.io.IOException;
 
 public class Trazadores {
-    public static String[][] trazadoresLineales(double[] x, double[] y) throws IOException {
+    static final SingletonMensaje singletonMensaje = SingletonMensaje.getInstance();
+    /**
+     * Devuelve una tabla con la ejecucon del metodo de newton: los campos son iter, xi, f(x), df(x), error_abs, error_rel
+     *
+     * @param x
+     * @param y
+     * @param xp
+     * @return
+     */
+    public static String[][] trazadoresLineales(double[] x, double[] y, double xp, boolean evaluar){
+        singletonMensaje.setMensajeActual("");
+        singletonMensaje.setError(false);
         int n = x.length - 1;
         double[][] A = new double[n * 2][n * 2];
         double[] b = new double[n * 2];
+        double[][] intervalos = new double[n][2];
         String[][] polinomios = new String[n][n];
         String polinomio, intervalo;
         int j, l;
@@ -22,6 +34,10 @@ public class Trazadores {
             b[j + 1] = y[i + 1];
         }
         Object retVal[] = SistemaDeEcuaciones.eliminacionGaussianaTotal(A, b);
+        if(singletonMensaje.getError()){
+            //singletonMensaje.setMensajeActual("Los puntos ingresados generar una matriz no invertible");
+            return null;
+        }
         double[] ab = (double[]) retVal[1];
         l = 0;
         for (int i = 0; i < ab.length; i += 2) {
@@ -29,17 +45,33 @@ public class Trazadores {
             polinomio = ab[i + 1] > 0 ? polinomio + "+" : polinomio;
             polinomio += String.valueOf(ab[i + 1]);
             polinomios[l][0] = polinomio;
+            intervalos[l][0] = x[l];
+            intervalos[l][1] = x[l+1];
             intervalo = String.valueOf(x[l]) + "<= x >= " + String.valueOf(x[l + 1]);
             polinomios[l][1] = intervalo;
             l += 1;
         }
+        if(evaluar){
+            String solucion = evaluarTrazadores(polinomios,intervalos,xp);
+            if(solucion == null){
+                singletonMensaje.setError(true);
+                singletonMensaje.setMensajeActual("El valor ingresado no se encuentra en ningun intervalo");
+                return  null;
+            }
+            String[][] retonar_solucion = new String[1][1];
+            retonar_solucion[0][0] = solucion;
+            return retonar_solucion;
+        }
         return polinomios;
     }
 
-    public static String[][] trazadoresCuadraticos(double[] x, double[] y) throws IOException {
+    public static String[][] trazadoresCuadraticos(double[] x, double[] y, double xp, boolean evaluar){
+        singletonMensaje.setMensajeActual("");
+        singletonMensaje.setError(false);
         int n = x.length - 1;
         double[][] A = new double[n * 3][n * 3];
         double[] b = new double[n * 3];
+        double[][] intervalos = new double[n][2];
         String[][] polinomios = new String[n][n];
         String polinomio, intervalo;
         int j, l;
@@ -67,6 +99,10 @@ public class Trazadores {
         }
         A[(3 * n) - 1][0] = 1;
         Object retVal[] = SistemaDeEcuaciones.eliminacionGaussianaTotal(A, b);
+        if(singletonMensaje.getError()){
+            singletonMensaje.setMensajeActual("Los puntos ingresados generar una matriz no invertible");
+            return null;
+        }
         double[] abc = (double[]) retVal[1];
         l = 0;
         for (int i = 0; i < abc.length; i += 3) {
@@ -76,15 +112,31 @@ public class Trazadores {
             polinomio = abc[i + 2] > 0 ? polinomio + "+" : polinomio;
             polinomio += String.valueOf(abc[i + 2]);
             polinomios[l][0] = polinomio;
+            intervalos[l][0] = x[l];
+            intervalos[l][1] = x[l+1];
             intervalo = String.valueOf(x[l]) + "<= x >= " + String.valueOf(x[l + 1]);
             polinomios[l][1] = intervalo;
             l += 1;
         }
+        if(evaluar){
+            String solucion = evaluarTrazadores(polinomios,intervalos,xp);
+            if(solucion == null){
+                singletonMensaje.setError(true);
+                singletonMensaje.setMensajeActual("El valor ingresado no se encuentra en ningun intervalo");
+                return  null;
+            }
+            String[][] retonar_solucion = new String[1][1];
+            retonar_solucion[0][0] = solucion;
+            return retonar_solucion;
+        }
         return polinomios;
     }
 
-    public static String[][] trazadoresCubicos(double[] x, double[] y) throws IOException {
+    public static String[][] trazadoresCubicos(double[] x, double[] y,double xp, boolean evaluar){
+        singletonMensaje.setMensajeActual("");
+        singletonMensaje.setError(false);
         int n = x.length - 1;
+        double[][] intervalos = new double[n][2];
         double[][] A = new double[n * 4][n * 4];
         double[] b = new double[n * 4];
         String[][] polinomios = new String[n][n];
@@ -131,6 +183,10 @@ public class Trazadores {
         A[(4 * n) - 1][4 * (n - 1)] = 6 * x[n];
         A[(4 * n) - 1][4 * (n - 1) + 1] = 2;
         Object retVal[] = SistemaDeEcuaciones.eliminacionGaussianaTotal(A, b);
+        if(singletonMensaje.getError()){
+            singletonMensaje.setMensajeActual("Los puntos ingresados generar una matriz no invertible");
+            return null;
+        }
         double[] abc = (double[]) retVal[1];
         l = 0;
         for (int i = 0; i < abc.length; i += 4) {
@@ -142,10 +198,39 @@ public class Trazadores {
             polinomio = abc[i + 3] > 0 ? polinomio + "+" : polinomio;
             polinomio += String.valueOf(abc[i + 3]);
             polinomios[l][0] = polinomio;
+            intervalos[l][0] = x[l];
+            intervalos[l][1] = x[l+1];
             intervalo = String.valueOf(x[l]) + "<= x >= " + String.valueOf(x[l + 1]);
             polinomios[l][1] = intervalo;
             l += 1;
         }
+        if(evaluar){
+            String solucion = evaluarTrazadores(polinomios,intervalos,xp);
+            if(solucion == null){
+                singletonMensaje.setError(true);
+                singletonMensaje.setMensajeActual("El valor ingresado no se encuentra en ningun intervalo");
+                return  null;
+            }
+            String[][] retonar_solucion = new String[1][1];
+            retonar_solucion[0][0] = solucion;
+            return retonar_solucion;
+        }
         return polinomios;
+    }
+
+    public static String evaluarTrazadores(String[][] polinomios, double[][] intervalos, double xp){
+        int i = -1;
+        for(int j = 0; j<intervalos.length; j++){
+            if(xp>intervalos[j][0] && xp<intervalos[j][1]){
+                i = j;
+                break;
+            }
+        }
+        if(i > -1){
+            return  String.valueOf(NumericalUtilities.evaluarFuncion(polinomios[i][0],xp));
+        }
+        else{
+            return null;
+        }
     }
 }
