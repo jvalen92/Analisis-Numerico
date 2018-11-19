@@ -21,6 +21,7 @@ import android.widget.TableRow;
 import android.widget.Toast;
 
 import com.example.sebas.urano.Ayudas.AyudaJacobi;
+import com.example.sebas.urano.Methods.SingletonMensaje;
 import com.example.sebas.urano.Methods.SistemaDeEcuaciones;
 import com.example.sebas.urano.R;
 
@@ -37,7 +38,7 @@ import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
 public class GaussSeidel extends Fragment {
 
     View inflaterView;
-
+    SingletonMensaje singletonMensaje = SingletonMensaje.getInstance();
     public GaussSeidel() {
         // Required empty public constructor
     }
@@ -111,34 +112,33 @@ public class GaussSeidel extends Fragment {
             int niter = Integer.parseInt(f.getText().toString());
 
             //Ejecutar Metodo
-
-
             ArrayList<String[]> solucion = SistemaDeEcuaciones.gaussSeidel(A, b, tol, x0, niter);
+            if(singletonMensaje.getError()) {
+                Toast.makeText(getContext(), singletonMensaje.getMensajeActual(), Toast.LENGTH_LONG).show();
+            } else {
+                //Mostrar Solucion
 
-            //Mostrar Solucion
+                //TableView
+                Context context = getContext();
+                TableView<String[]> tableView = (TableView<String[]>) inflaterView.findViewById(R.id.tableView);
 
-            //TableView
-            Context context = getContext();
-            TableView<String[]> tableView = (TableView<String[]>) inflaterView.findViewById(R.id.tableView);
+                //Lenar tabla
+                int n_columns=solucion.get(0).length;
+                tableView.setColumnCount(n_columns);
+                tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(context,"i","xi","xs","xm","fx","Error Absoluto","Error Relativo"));
 
-            //Lenar tabla
-            int n_columns=solucion.get(0).length;
-            tableView.setColumnCount(n_columns);
-            tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(context,"i","xi","xs","xm","fx","Error Absoluto","Error Relativo"));
+                //Ajustar tamaño de las columnas
+                TableColumnDpWidthModel columnModel = new TableColumnDpWidthModel(context, n_columns, 125);
+                columnModel.setColumnWidth(0, 50);
+                columnModel.setColumnWidth(n_columns-2, 170);
+                columnModel.setColumnWidth(n_columns-1, 160);
+                tableView.setColumnModel(columnModel);
+                tableView.setDataAdapter(new SimpleTableDataAdapter(context, solucion));
 
-            //Ajustar tamaño de las columnas
-            TableColumnDpWidthModel columnModel = new TableColumnDpWidthModel(context, n_columns, 125);
-            columnModel.setColumnWidth(0, 50);
-            columnModel.setColumnWidth(n_columns-2, 170);
-            columnModel.setColumnWidth(n_columns-1, 160);
-            tableView.setColumnModel(columnModel);
-            tableView.setDataAdapter(new SimpleTableDataAdapter(context, solucion));
-
-            //cambiar el color de la tabla para que se vea mas kawai
-            tableView.setHeaderBackground(R.color.colorPrimary);
-
-
-
+                //cambiar el color de la tabla para que se vea mas kawai
+                tableView.setHeaderBackground(R.color.colorPrimary);
+                Toast.makeText(getContext(), singletonMensaje.getMensajeActual(), Toast.LENGTH_LONG).show();
+            }
         } catch (Exception e) {
             Toast.makeText(this.getContext(), "Por favor ingresa datos validos. (?)",
                     Toast.LENGTH_LONG).show();

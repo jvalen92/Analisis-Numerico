@@ -82,7 +82,7 @@
         android:layout_alignBaseline="@+id/btol"
         android:layout_toEndOf="@+id/bniter"
         android:ems="10"
-        android:inputType="number" />
+        android:inputType="text" />
 
     <EditText
         android:id="@+id/j_niter"

@@ -74,7 +74,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/p_gx"
         android:layout_alignStart="@+id/pfx"
-        android:text="f'(x) = " />
+        android:text="g(x) = " />
 
     <EditText
         android:id="@+id/p_gx"

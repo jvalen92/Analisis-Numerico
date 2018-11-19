@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.sebas.urano.Ayudas.AyudaSecante;
 import com.example.sebas.urano.Funciones;
+import com.example.sebas.urano.Methods.SingletonMensaje;
 import com.example.sebas.urano.Methods.UnaVariable;
 import com.example.sebas.urano.R;
 
@@ -47,6 +48,8 @@ public class Secante extends Fragment {
     EditText in3;
     EditText in4;
     EditText in5;
+
+    SingletonMensaje singletonMensaje = SingletonMensaje.getInstance();
 
     public Secante() {
         // Required empty public constructor
@@ -94,33 +97,36 @@ public class Secante extends Fragment {
                     //ejecutar el metodo
                     ArrayList<String[]> solucion = UnaVariable.secante(fx,x1,x2,tol,niter);
 
+                    if(singletonMensaje.getError()) {
+                        Toast.makeText(getContext(), singletonMensaje.getMensajeActual(), Toast.LENGTH_LONG).show();
+                    } else {
+                        //TableView
+                        Context context = getContext();
+                        TableView<String[]> tableView = (TableView<String[]>) vista.findViewById(R.id.tableView);
+                        tableView.setColumnCount(solucion.get(0).length);
 
-                    //TableView
-                    Context context = getContext();
-                    TableView<String[]> tableView = (TableView<String[]>) vista.findViewById(R.id.tableView);
-                    tableView.setColumnCount(solucion.get(0).length);
-
-                    //Lenar tabla
-                    int n_columns=solucion.get(0).length;
-                    tableView.setColumnCount(n_columns);
-                    String headers[]={"i","xm","fx","Error Absoluto", "Error Relativo"};
-                    tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(context,headers));
+                        //Lenar tabla
+                        int n_columns=solucion.get(0).length;
+                        tableView.setColumnCount(n_columns);
+                        String headers[]={"i","xm","fx","Error Absoluto", "Error Relativo"};
+                        tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(context,headers));
 
 
-                    //tableView.setDataAdapter(new SimpleTableDataAdapter(context, DATA_TO_SHOW));
+                        //tableView.setDataAdapter(new SimpleTableDataAdapter(context, DATA_TO_SHOW));
 
-                    //Ajustar tamaño de las columnas
-                    TableColumnDpWidthModel columnModel = new TableColumnDpWidthModel(context, n_columns, 125);
-                    columnModel.setColumnWidth(0, 50);
-                    columnModel.setColumnWidth(n_columns-2, 170);
-                    columnModel.setColumnWidth(n_columns-1, 160);
-                    tableView.setColumnModel(columnModel);
+                        //Ajustar tamaño de las columnas
+                        TableColumnDpWidthModel columnModel = new TableColumnDpWidthModel(context, n_columns, 125);
+                        columnModel.setColumnWidth(0, 50);
+                        columnModel.setColumnWidth(n_columns-2, 170);
+                        columnModel.setColumnWidth(n_columns-1, 160);
+                        tableView.setColumnModel(columnModel);
 
-                    tableView.setDataAdapter(new SimpleTableDataAdapter(context, solucion));
+                        tableView.setDataAdapter(new SimpleTableDataAdapter(context, solucion));
 
-                    //cambiar el color de la tabla para que se vea mas kawai
-                    tableView.setHeaderBackground(R.color.colorPrimary);
-
+                        //cambiar el color de la tabla para que se vea mas kawai
+                        tableView.setHeaderBackground(R.color.colorPrimary);
+                        Toast.makeText(getContext(), singletonMensaje.getMensajeActual(), Toast.LENGTH_LONG).show();
+                    }
                 }catch (Exception e) {
                     Toast.makeText(getContext(),"Llene todos los campos y verifique lso datos",Toast.LENGTH_LONG).show();
                 }

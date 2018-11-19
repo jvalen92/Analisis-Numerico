@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.sebas.urano.Ayudas.AyudaLUSimple;
 import com.example.sebas.urano.Matriz;
+import com.example.sebas.urano.Methods.SingletonMensaje;
 import com.example.sebas.urano.Methods.SistemaDeEcuaciones;
 import com.example.sebas.urano.R;
 
@@ -33,6 +34,7 @@ public class LUSimple extends Fragment {
     private View inflaterView;
     private double[][] L, U;
     private boolean l = true;
+    SingletonMensaje singletonMensaje = SingletonMensaje.getInstance();
     public LUSimple() {
         // Required empty public constructor
     }
@@ -99,32 +101,37 @@ public class LUSimple extends Fragment {
 
             //Ejecutar Metodo
             Object retVal[] = SistemaDeEcuaciones.eliminacionGaussianaSimpleLU(A, b);
-            L = (double[][]) retVal[0];
-            U = (double[][]) retVal[1];
-            double solucion[] = (double[]) retVal[2];
+            if(singletonMensaje.getError()) {
+                Toast.makeText(getContext(), singletonMensaje.getMensajeActual(), Toast.LENGTH_LONG).show();
+            } else {
+                L = (double[][]) retVal[0];
+                U = (double[][]) retVal[1];
+                double solucion[] = (double[]) retVal[2];
 
-            //Mostrar Solucion
-            inflaterView.findViewById(R.id.textViewLU).setVisibility(View.VISIBLE);
-            inflaterView.findViewById(R.id.luBtn).setVisibility(View.VISIBLE);
-            inflaterView.findViewById(R.id.LU).setVisibility(View.VISIBLE);
-            mostrarLU();
-            TableLayout x = (TableLayout) inflaterView.findViewById(R.id.vectorX);
-            x.removeAllViews();
-            for(int i = 0; i < n; i++) {
-                TableRow sol = new TableRow(this.getContext());
-                EditText xi = new EditText(this.getContext());
-                xi.setText(String.format("X%d  ", i));
-                xi.setEnabled(false);
-                xi.setGravity(Gravity.CENTER_HORIZONTAL);
-                sol.addView(xi, 0);
+                //Mostrar Solucion
+                inflaterView.findViewById(R.id.textViewLU).setVisibility(View.VISIBLE);
+                inflaterView.findViewById(R.id.luBtn).setVisibility(View.VISIBLE);
+                inflaterView.findViewById(R.id.LU).setVisibility(View.VISIBLE);
+                mostrarLU();
+                TableLayout x = (TableLayout) inflaterView.findViewById(R.id.vectorX);
+                x.removeAllViews();
+                for(int i = 0; i < n; i++) {
+                    TableRow sol = new TableRow(this.getContext());
+                    EditText xi = new EditText(this.getContext());
+                    xi.setText(String.format("X%d  ", i));
+                    xi.setEnabled(false);
+                    xi.setGravity(Gravity.CENTER_HORIZONTAL);
+                    sol.addView(xi, 0);
 
-                EditText number = new EditText(this.getContext());
-                number.setText(String.format("%.2f", solucion[i]));
-                number.setGravity(Gravity.CENTER_HORIZONTAL);
-                number.setEnabled(false);
-                sol.addView(number, 1);
-                x.addView(sol, i);
+                    EditText number = new EditText(this.getContext());
+                    number.setText(String.format("%.2f", solucion[i]));
+                    number.setGravity(Gravity.CENTER_HORIZONTAL);
+                    number.setEnabled(false);
+                    sol.addView(number, 1);
+                    x.addView(sol, i);
+                }
             }
+            Toast.makeText(getContext(), singletonMensaje.getMensajeActual(), Toast.LENGTH_LONG).show();
         } catch (Exception e) {
             Toast.makeText(this.getContext(), "Por favor ingresa datos validos (?)",
                     Toast.LENGTH_LONG).show();

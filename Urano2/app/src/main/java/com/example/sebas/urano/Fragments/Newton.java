@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.sebas.urano.Ayudas.AyudaNewton;
 import com.example.sebas.urano.Funciones;
+import com.example.sebas.urano.Methods.SingletonMensaje;
 import com.example.sebas.urano.Methods.UnaVariable;
 import com.example.sebas.urano.R;
 
@@ -46,7 +47,7 @@ public class Newton extends Fragment {
     EditText in3;
     EditText in4;
     EditText in5;
-
+    SingletonMensaje singletonMensaje = SingletonMensaje.getInstance();
 
     public Newton() {
         // Required empty public constructor
@@ -92,42 +93,41 @@ public class Newton extends Fragment {
                     Integer niter = Integer.valueOf(in4.getText().toString());
 
                     //ejecutar el metodo
-                    ArrayList<String[]> solucion = UnaVariable.newton(fx, df,x1, tol, niter);
+                    ArrayList<String[]> solucion = UnaVariable.newton(fx, df,tol, x1, niter);
 
 
-                    //Activity activity = getActivity();
+                    if(singletonMensaje.getError()) {
+                        Toast.makeText(getContext(), singletonMensaje.getMensajeActual(), Toast.LENGTH_LONG).show();
+                    } else {
+                        Context context = getContext();
+                        TableView<String[]> tableView = (TableView<String[]>) vista.findViewById(R.id.tableView);
+
+                        //Lenar tabla
+                        int n_columns = solucion.get(0).length;
+                        tableView.setColumnCount(n_columns);
+                        String headers[] = {"i", "xm", "fx", "Error Absoluto", "Error Relativo"};
+                        tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(context, "i", "xi", "xs", "xm", "fx", "Error Absoluto", "Error Relativo"));
 
 
-                    Context context = getContext();
-                    TableView<String[]> tableView = (TableView<String[]>) vista.findViewById(R.id.tableView);
+                        tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(context, headers));
+                        //tableView.setDataAdapter(new SimpleTableDataAdapter(context, DATA_TO_SHOW));
+                        tableView.setDataAdapter(new SimpleTableDataAdapter(context, solucion));
 
-                    //Lenar tabla
-                    int n_columns = solucion.get(0).length;
-                    tableView.setColumnCount(n_columns);
-                    String headers[] = {"i", "xm", "fx", "Error Absoluto", "Error Relativo"};
-                    tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(context, "i", "xi", "xs", "xm", "fx", "Error Absoluto", "Error Relativo"));
+                        //Ajustar tamaño de las columnas
+                        TableColumnDpWidthModel columnModel = new TableColumnDpWidthModel(context, n_columns, 125);
+                        columnModel.setColumnWidth(0, 50);
+                        columnModel.setColumnWidth(n_columns - 2, 170);
+                        columnModel.setColumnWidth(n_columns - 1, 160);
+                        tableView.setColumnModel(columnModel);
+                        tableView.setDataAdapter(new SimpleTableDataAdapter(context, solucion));
 
-
-                    tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(context, headers));
-                    //tableView.setDataAdapter(new SimpleTableDataAdapter(context, DATA_TO_SHOW));
-                    tableView.setDataAdapter(new SimpleTableDataAdapter(context, solucion));
-
-                    //Ajustar tamaño de las columnas
-                    TableColumnDpWidthModel columnModel = new TableColumnDpWidthModel(context, n_columns, 125);
-                    columnModel.setColumnWidth(0, 50);
-                    columnModel.setColumnWidth(n_columns - 2, 170);
-                    columnModel.setColumnWidth(n_columns - 1, 160);
-                    tableView.setColumnModel(columnModel);
-                    tableView.setDataAdapter(new SimpleTableDataAdapter(context, solucion));
-
-                    //cambiar el color de la tabla para que se vea mas kawai
-                    tableView.setHeaderBackground(R.color.colorPrimary);
-
+                        //cambiar el color de la tabla para que se vea mas kawai
+                        tableView.setHeaderBackground(R.color.colorPrimary);
+                        Toast.makeText(getContext(), singletonMensaje.getMensajeActual(), Toast.LENGTH_LONG).show();
+                    }
                 } catch (Exception e) {
                     Toast.makeText(getContext(), "Llene todos los campos y verifique los datos", Toast.LENGTH_LONG).show();
                 }
-
-
             }
         });
     }

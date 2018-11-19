@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.example.sebas.urano.Ayudas.AyudaRaicesMultiples;
 import com.example.sebas.urano.Funciones;
 import com.example.sebas.urano.Grafico;
+import com.example.sebas.urano.Methods.SingletonMensaje;
 import com.example.sebas.urano.Methods.UnaVariable;
 import com.example.sebas.urano.R;
 
@@ -49,6 +50,9 @@ public class RaicesMultiples extends Fragment {
     EditText in4;
     EditText in5;
     EditText in6;
+
+    //Manejo de errores
+    SingletonMensaje singletonMensaje = SingletonMensaje.getInstance();
 
     public RaicesMultiples() {
         // Required empty public constructor
@@ -95,28 +99,32 @@ public class RaicesMultiples extends Fragment {
                     //ejecutar el metodo
                     ArrayList<String[]> solucion = UnaVariable.raicesMultiples(fx, df, ddf, x1, tol, niter);
 
+                    if(singletonMensaje.getError()) {
+                        Toast.makeText(getContext(), singletonMensaje.getMensajeActual(), Toast.LENGTH_LONG).show();
+                    } else {
+                        //TableView
+                        Context context = getContext();
+                        TableView<String[]> tableView = (TableView<String[]>) vista.findViewById(R.id.tableView);
 
-                    //TableView
-                    Context context = getContext();
-                    TableView<String[]> tableView = (TableView<String[]>) vista.findViewById(R.id.tableView);
+                        //Lenar tabla
+                        int n_columns = solucion.get(0).length;
+                        tableView.setColumnCount(n_columns);
+                        String headers[] = {"i", "xn", "fx", "dfx", "ddfx", "Error Absoluto", "Error Relativo"};
+                        tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(context, headers));
 
-                    //Lenar tabla
-                    int n_columns = solucion.get(0).length;
-                    tableView.setColumnCount(n_columns);
-                    String headers[] = {"i", "xn", "fx", "dfx", "ddfx", "Error Absoluto", "Error Relativo"};
-                    tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(context, headers));
+                        //Ajustar tamaño de las columnas
+                        TableColumnDpWidthModel columnModel = new TableColumnDpWidthModel(context, n_columns, 125);
+                        columnModel.setColumnWidth(0, 50);
+                        columnModel.setColumnWidth(n_columns - 2, 170);
+                        columnModel.setColumnWidth(n_columns - 1, 160);
+                        tableView.setColumnModel(columnModel);
 
-                    //Ajustar tamaño de las columnas
-                    TableColumnDpWidthModel columnModel = new TableColumnDpWidthModel(context, n_columns, 125);
-                    columnModel.setColumnWidth(0, 50);
-                    columnModel.setColumnWidth(n_columns - 2, 170);
-                    columnModel.setColumnWidth(n_columns - 1, 160);
-                    tableView.setColumnModel(columnModel);
+                        tableView.setDataAdapter(new SimpleTableDataAdapter(context, solucion));
 
-                    tableView.setDataAdapter(new SimpleTableDataAdapter(context, solucion));
-
-                    //cambiar el color de la tabla para que se vea mas kawai
-                    tableView.setHeaderBackground(R.color.colorPrimary);
+                        //cambiar el color de la tabla para que se vea mas kawai
+                        tableView.setHeaderBackground(R.color.colorPrimary);
+                        Toast.makeText(getContext(), singletonMensaje.getMensajeActual(), Toast.LENGTH_LONG).show();
+                    }
 
                 } catch (Exception e) {
                     Toast.makeText(getContext(), "Llene todos los campos y verifique lso datos", Toast.LENGTH_LONG).show();

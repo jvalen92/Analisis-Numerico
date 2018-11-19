@@ -26,7 +26,7 @@ import com.example.sebas.urano.R;
  */
 public class EGTotal extends Fragment {
     View inflaterView;
-
+    SingletonMensaje singletonMensaje = SingletonMensaje.getInstance();
     public EGTotal() {
         // Required empty public constructor
     }
@@ -82,39 +82,44 @@ public class EGTotal extends Fragment {
 
             //Ejecutar Metodo
             Object retVal[] = SistemaDeEcuaciones.eliminacionGaussianaTotal(A, b);
-            double etapa[][] = (double[][]) retVal[0];
-            double solucion[] = (double[]) retVal[1];
+            if(singletonMensaje.getError()) {
+                Toast.makeText(getContext(), singletonMensaje.getMensajeActual(), Toast.LENGTH_LONG).show();
+            } else {
+                double etapa[][] = (double[][]) retVal[0];
+                double solucion[] = (double[]) retVal[1];
 
-            //Mostrar Solucion
-            TableLayout ultimaEtapa = (TableLayout) inflaterView.findViewById(R.id.vectorEtapa);
-            TableLayout x = (TableLayout) inflaterView.findViewById(R.id.vectorX);
-            ultimaEtapa.removeAllViews();
-            x.removeAllViews();
-            for(int i = 0; i < n; i++) {
-                TableRow sol = new TableRow(this.getContext());
-                EditText xi = new EditText(this.getContext());
-                xi.setText(String.format("X%d  ", i));
-                xi.setEnabled(false);
-                xi.setGravity(Gravity.CENTER_HORIZONTAL);
-                sol.addView(xi, 0);
+                //Mostrar Solucion
+                TableLayout ultimaEtapa = (TableLayout) inflaterView.findViewById(R.id.vectorEtapa);
+                TableLayout x = (TableLayout) inflaterView.findViewById(R.id.vectorX);
+                ultimaEtapa.removeAllViews();
+                x.removeAllViews();
+                for(int i = 0; i < n; i++) {
+                    TableRow sol = new TableRow(this.getContext());
+                    EditText xi = new EditText(this.getContext());
+                    xi.setText(String.format("X%d  ", i));
+                    xi.setEnabled(false);
+                    xi.setGravity(Gravity.CENTER_HORIZONTAL);
+                    sol.addView(xi, 0);
 
-                EditText number = new EditText(this.getContext());
-                number.setText(String.format("%.2f", solucion[i]));
-                number.setGravity(Gravity.CENTER_HORIZONTAL);
-                number.setEnabled(false);
-                sol.addView(number, 1);
-                x.addView(sol, i);
+                    EditText number = new EditText(this.getContext());
+                    number.setText(String.format("%.2f", solucion[i]));
+                    number.setGravity(Gravity.CENTER_HORIZONTAL);
+                    number.setEnabled(false);
+                    sol.addView(number, 1);
+                    x.addView(sol, i);
 
-                TableRow tr = new TableRow(this.getContext());
-                for(int j = 0; j < n; j++) {
-                    EditText tv = new EditText(this.getContext());
-                    tv.setText(String.format("%.2f", etapa[i][j]));
-                    tv.setGravity(Gravity.CENTER_HORIZONTAL);
-                    tv.setEnabled(false);
-                    tr.addView(tv, j);
+                    TableRow tr = new TableRow(this.getContext());
+                    for(int j = 0; j < n; j++) {
+                        EditText tv = new EditText(this.getContext());
+                        tv.setText(String.format("%.2f", etapa[i][j]));
+                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                        tv.setEnabled(false);
+                        tr.addView(tv, j);
+                    }
+                    ultimaEtapa.addView(tr, i);
+                    inflaterView.findViewById(R.id.textView).setVisibility(View.VISIBLE);
                 }
-                ultimaEtapa.addView(tr, i);
-                inflaterView.findViewById(R.id.textView).setVisibility(View.VISIBLE);
+                Toast.makeText(getContext(), singletonMensaje.getMensajeActual(), Toast.LENGTH_LONG).show();
             }
         } catch (Exception e) {
             Toast.makeText(this.getContext(), "Por favor ingresa datos validos (?)",

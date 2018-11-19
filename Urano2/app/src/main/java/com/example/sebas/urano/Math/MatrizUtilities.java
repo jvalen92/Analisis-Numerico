@@ -181,11 +181,11 @@ public class MatrizUtilities {
     }
 
     public static boolean contieneZero(double[][] A) {
-        for (int i = 0; i < A.length; i++) {
+        //for (int i = 0; i < A.length; i++) {
             for (int j = 0; j < A.length; j++) {
-                if (A[i][j] == 0.0) return true;
+                if (A[j][j] == 0.0) return true;
             }
-        }
+        //}
         return false;
     }
 

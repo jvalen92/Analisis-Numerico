@@ -29,7 +29,7 @@ public class UnaVariable {
         if(singletonMensaje.getError()){
             return null;
         }
-        double dfx = NumericalUtilities.evaluarFuncion(f, x0);
+        double dfx = NumericalUtilities.evaluarFuncion(df, x0);
         if(singletonMensaje.getError()){
             return null;
         }
@@ -38,6 +38,7 @@ public class UnaVariable {
         while (fx != 0.0 && dfx != 0.0 && error > tolerancia && contador < niter) {
             x1 = x0 - (fx / dfx);
             fx = NumericalUtilities.evaluarFuncion(f, x1);
+            dfx = NumericalUtilities.evaluarFuncion(df, x1);
             if(singletonMensaje.getError()){
                 return null;
             }
