@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.example.sebas.urano.Ayudas.AyudaBiseccion;
 import com.example.sebas.urano.Funciones;
 import com.example.sebas.urano.MainActivity;
+import com.example.sebas.urano.Methods.SingletonMensaje;
 import com.example.sebas.urano.Methods.UnaVariable;
 import com.example.sebas.urano.R;
 
@@ -55,6 +56,8 @@ public class Biseccion extends Fragment {
     EditText in5;
 
     UnaVariable uv;
+    //Manejo de errores
+    SingletonMensaje singletonMensaje = SingletonMensaje.getInstance();
 
     public Biseccion() {
         // Required empty public constructor
@@ -107,27 +110,29 @@ public class Biseccion extends Fragment {
                     //ejecutar el metodo
                     ArrayList<String[]> solucion =UnaVariable.biseccion(fx,x1,x2,tol,niter);
 
+                    if(singletonMensaje.getError()) {
+                        Toast.makeText(getContext(), singletonMensaje.getMensajeActual(), Toast.LENGTH_LONG).show();
+                    } else {
+                        //TableView
+                        Context context = getContext();
+                        TableView<String[]> tableView = (TableView<String[]>) vista.findViewById(R.id.tableView);
 
-                    //TableView
-                    Context context = getContext();
-                    TableView<String[]> tableView = (TableView<String[]>) vista.findViewById(R.id.tableView);
+                        //Lenar tabla
+                        int n_columns=solucion.get(0).length;
+                        tableView.setColumnCount(n_columns);
+                        tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(context,"i","xi","xs","xm","fx","Error Absoluto","Error Relativo"));
 
-                    //Lenar tabla
-                    int n_columns=solucion.get(0).length;
-                    tableView.setColumnCount(n_columns);
-                    tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(context,"i","xi","xs","xm","fx","Error Absoluto","Error Relativo"));
+                        //Ajustar tamaño de las columnas
+                        TableColumnDpWidthModel columnModel = new TableColumnDpWidthModel(context, n_columns, 125);
+                        columnModel.setColumnWidth(0, 50);
+                        columnModel.setColumnWidth(n_columns-2, 170);
+                        columnModel.setColumnWidth(n_columns-1, 160);
+                        tableView.setColumnModel(columnModel);
+                        tableView.setDataAdapter(new SimpleTableDataAdapter(context, solucion));
 
-                    //Ajustar tamaño de las columnas
-                    TableColumnDpWidthModel columnModel = new TableColumnDpWidthModel(context, n_columns, 125);
-                    columnModel.setColumnWidth(0, 50);
-                    columnModel.setColumnWidth(n_columns-2, 170);
-                    columnModel.setColumnWidth(n_columns-1, 160);
-                    tableView.setColumnModel(columnModel);
-                    tableView.setDataAdapter(new SimpleTableDataAdapter(context, solucion));
-
-                    //cambiar el color de la tabla para que se vea mas kawai
-                    tableView.setHeaderBackground(R.color.colorPrimary);
-
+                        //cambiar el color de la tabla para que se vea mas kawai
+                        tableView.setHeaderBackground(R.color.colorPrimary);
+                    }
                 }catch (Exception e) {
                     Toast.makeText(getContext(),"Llene todos los campos y verifique lso datos",Toast.LENGTH_LONG).show();
                 }
