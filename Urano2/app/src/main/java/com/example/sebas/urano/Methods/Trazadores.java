@@ -33,7 +33,7 @@ public class Trazadores {
             A[j + 1][j + 1] = 1;
             b[j + 1] = y[i + 1];
         }
-        Object retVal[] = SistemaDeEcuaciones.eliminacionGaussianaTotal(A, b);
+        Object retVal[] = SistemaDeEcuaciones.eliminacionGaussianaParcial(A, b);
         if(singletonMensaje.getError()){
             //singletonMensaje.setMensajeActual("Los puntos ingresados generar una matriz no invertible");
             return null;
@@ -98,7 +98,7 @@ public class Trazadores {
             l += 1;
         }
         A[(3 * n) - 1][0] = 1;
-        Object retVal[] = SistemaDeEcuaciones.eliminacionGaussianaTotal(A, b);
+        Object retVal[] = SistemaDeEcuaciones.eliminacionGaussianaParcial(A, b);
         if(singletonMensaje.getError()){
             singletonMensaje.setMensajeActual("Los puntos ingresados generar una matriz no invertible");
             return null;
@@ -182,7 +182,7 @@ public class Trazadores {
         A[(4 * n) - 2][1] = 2;
         A[(4 * n) - 1][4 * (n - 1)] = 6 * x[n];
         A[(4 * n) - 1][4 * (n - 1) + 1] = 2;
-        Object retVal[] = SistemaDeEcuaciones.eliminacionGaussianaTotal(A, b);
+        Object retVal[] = SistemaDeEcuaciones.eliminacionGaussianaParcial(A, b);
         if(singletonMensaje.getError()){
             singletonMensaje.setMensajeActual("Los puntos ingresados generar una matriz no invertible");
             return null;
